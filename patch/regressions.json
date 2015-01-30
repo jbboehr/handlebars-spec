@@ -1,0 +1,40 @@
+{
+    "regressions-bug reported by @fat where lambdas weren't being properly resolved-00": {
+        "data": {
+            "thing": {
+                "php": "function() {\n        return \"blah\";\n      }"
+            },
+            "hasThings": {
+                "php": "function() {\n        return true;\n      }"
+            }
+        }
+    },
+    "regressions-can pass through an already-compiled ast via compile/precompile-00": null,
+    "regressions-gh-837: undefined values for helpers-00": {
+        "helpers": {
+            "str": {
+                "php": "function($value) { return (string) $value; }"
+            }
+        }
+    },
+    "regressions-gs-428: nested if else rendering-00": {
+        "helpers": {
+            "blk": {
+                "php": "function($block) { return $block['fn'](''); }"
+            },
+            "inverse": {
+                "php": "function($block) { return $block['inverse'](''); }"
+            }
+        }
+    },
+    "regressions-gs-428: nested if else rendering-01": {
+        "helpers": {
+            "blk": {
+                "php": "function($block) { return $block['fn'](''); }"
+            },
+            "inverse": {
+                "php": "function($block) { return $block['inverse'](''); }"
+            }
+        }
+    }
+}

@@ -6,9 +6,14 @@
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver",
 		"message": "String parameters output",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"wycats": {
-				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }"
+				"!code": true,
+				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }",
+				"php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
 			}
 		}
 	},
@@ -19,9 +24,14 @@
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
 		"message": "String parameters output",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"wycats": {
-				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }"
+				"!code": true,
+				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
+				"php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options['fn']($scope);\n      }"
 			}
 		}
 	},
@@ -35,12 +45,19 @@
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
 		"message": "Proper context variable output",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"tomdale": {
-				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }"
+				"!code": true,
+				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }",
+				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
 			},
 			"with": {
-				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
 			}
 		}
 	},
@@ -50,11 +67,18 @@
 		"template": "{{tomdale \"need\" dad.joke true false}}",
 		"data": {},
 		"expected": "Helper called",
+		"message": "the string type is passed",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"tomdale": {
-				"javascript": "function (desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'STRING', \"the string type is passed\");\n        equal(options.types[1], 'ID', \"the expression type is passed\");\n        equal(options.types[2], 'BOOLEAN', \"the expression type is passed\");\n        equal(desire, \"need\", \"the string form is passed for strings\");\n        equal(noun, \"dad.joke\", \"the string form is passed for expressions\");\n        equal(trueBool, true, \"raw booleans are passed through\");\n        equal(falseBool, false, \"raw booleans are passed through\");\n        return \"Helper called\";\n      }"
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -62,11 +86,17 @@
 		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
 		"data": {},
 		"expected": "Helper called",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"tomdale": {
-				"javascript": "function (exclamation, options) {\n        equal(exclamation, \"he.says\");\n        equal(options.types[0], \"ID\");\n\n        equal(options.hashTypes.desire, \"STRING\");\n        equal(options.hashTypes.noun, \"ID\");\n        equal(options.hashTypes.bool, \"BOOLEAN\");\n        equal(options.hash.desire, \"need\");\n        equal(options.hash.noun, \"dad.joke\");\n        equal(options.hash.bool, true);\n        return \"Helper called\";\n      }"
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -76,14 +106,22 @@
 			"dale": {}
 		},
 		"expected": "Helper called",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"tomdale": {
-				"javascript": "function (exclamation, options) {\n        equal(exclamation, \"he.says\");\n        equal(options.types[0], \"ID\");\n\n        equal(options.contexts.length, 1);\n        equal(options.hashContexts.noun, context);\n        equal(options.hash.desire, \"need\");\n        equal(options.hash.noun, \"dad.joke\");\n        equal(options.hash.bool, true);\n        return \"Helper called\";\n      }"
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
 			},
 			"with": {
-				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "string params mode",
@@ -95,12 +133,19 @@
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
 		"message": "Proper context variable output",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"tomdale": {
-				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }"
+				"!code": true,
+				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }",
+				"php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options['fn']($scope);\n      }"
 			},
 			"with": {
-				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }"
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
 			}
 		}
 	},
@@ -110,12 +155,19 @@
 		"template": "{{#with content}}{{#view}}{{firstName}} {{lastName}}{{/view}}{{/with}}",
 		"data": {},
 		"expected": "WITH",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"with": {
-				"javascript": "function (options) {\n        return \"WITH\";\n      }"
+				"!code": true,
+				"javascript": "function (options) {\n        return \"WITH\";\n      }",
+				"php": "function($options) {\n        return \"WITH\";\n      }"
 			},
 			"view": {
-				"javascript": "function () {\n        return \"VIEW\";\n      }"
+				"!code": true,
+				"javascript": "function () {\n        return \"VIEW\";\n      }",
+				"php": "function() {\n        return \"VIEW\";\n      }"
 			}
 		}
 	},
@@ -125,10 +177,16 @@
 		"template": "{{foo @bar}}",
 		"data": {},
 		"expected": "Foo!",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"foo": {
-				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }"
+				"!code": true,
+				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }",
+				"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	}
 ]

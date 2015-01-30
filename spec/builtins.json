@@ -85,6 +85,11 @@
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return true;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
+			},
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!"
@@ -94,6 +99,11 @@
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.world;}",
+				"php": "function($options, $scope) { return $scope['world']; }"
+			},
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!"
@@ -103,6 +113,11 @@
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return false;}",
+				"php": "function() { return false; }"
+			},
 			"world": "world"
 		},
 		"expected": "cruel world!"
@@ -112,6 +127,11 @@
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.foo;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
+			},
 			"world": "world"
 		},
 		"expected": "cruel world!"
@@ -132,8 +152,21 @@
 		"description": "#with",
 		"it": "with with function argument",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
-		"data": {},
+		"data": {
+			"person": {
+				"!code": true,
+				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}",
+				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
+			}
+		},
 		"expected": "Alan Johnson"
+	},
+	{
+		"description": "#with",
+		"it": "with with else",
+		"template": "{{#with person}}Person is present{{else}}Person is not present{{/with}}",
+		"data": {},
+		"expected": "Person is not present"
 	},
 	{
 		"description": "#each",
@@ -153,7 +186,14 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -163,7 +203,71 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without data",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without data",
+		"template": "{{#each .}}{{.}}{{/each}}",
+		"data": {
+			"goodbyes": "cruel",
+			"world": "world"
+		},
+		"expected": "cruelworld",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without context",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"expected": "cruel !",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -180,7 +284,12 @@
 			},
 			"world": "world"
 		},
-		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
+		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -190,7 +299,14 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -362,9 +478,21 @@
 		"it": "each with function argument",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}",
+				"php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
+			},
 			"world": "world"
 		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -374,7 +502,14 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -390,13 +525,10 @@
 		},
 		"expected": "a!b!c!",
 		"message": "should output data",
-		"options": {
-			"data": {
-				"exclaim": "!"
-			}
-		},
+		"options": {},
 		"helpers": {
 			"detectDataInsideEach": {
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
@@ -405,26 +537,8 @@
 		"description": "#each",
 		"it": "each on implicit context",
 		"template": "{{#each}}{{text}}! {{/each}}cruel world!",
-		"data": [
-			{
-				"text": "goodbye"
-			},
-			{
-				"text": "Goodbye"
-			},
-			{
-				"text": "GOODBYE"
-			}
-		],
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
-	},
-	{
-		"description": "#each",
-		"it": "#log",
-		"template": "{{log blah}}",
-		"data": {
-			"blah": "whee"
-		}
+		"exception": true,
+		"message": "Must pass iterator to #each"
 	},
 	{
 		"description": "#lookup",

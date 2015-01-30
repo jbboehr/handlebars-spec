@@ -1,0 +1,139 @@
+{
+    "data-data is inherited downstream-00": {
+        "helpers": {
+            "let": {
+                "php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options['fn']($scope, array(\"data\" => $frame));\n      }"
+            }
+        }
+    },
+    "data-deep @foo triggers automatic top-level data-00": {
+        "helpers": {
+            "helperMissing": null,
+            "blockHelperMissing": null,
+            "each": null,
+            "if": null,
+            "unless": null,
+            "with": null,
+            "log": null,
+            "lookup": null,
+            "let": {
+                "javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
+                "php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options['fn']($scope, array(\"data\" => $frame));\n      }"
+            }
+        }
+    },
+    "data-hash values can be looked up via @foo-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options) { return \"Hello \" . $options['hash']['noun']; }"
+            }
+        }
+    },
+    "data-nested parameter data can be looked up via @foo.bar-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($noun) { return \"Hello \" . $noun; }"
+            }
+        }
+    },
+    "data-nested parameter data does not fail with @world.bar-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($noun) { return \"Hello \" . $noun; }"
+            }
+        }
+    },
+    "data-parameter data can be looked up via @foo-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($noun) { return \"Hello \" . $noun; }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - data is passed to with block helpers where children use ..-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options) {\n        return $options['data']['accessData'] . \" \" . $options['fn'](array(\"exclaim\" => \"?\"));\n      }"
+            },
+            "world": {
+                "php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - works with block helpers that use ..-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\"));\n      }"
+            },
+            "world": {
+                "php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - works with block helpers-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options, $scope) {\n        return $options['fn']($scope);\n      }"
+            },
+            "world": {
+                "php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" world\" . ($scope['exclaim'] ? \"!\" : \"\");\n      }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - works with helpers and parameters-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($noun, $options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($scope['exclaim'] ? \"!\" : \"\");\n      }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - works with helpers in partials-00": {
+        "helpers": {
+            "helperMissing": null,
+            "blockHelperMissing": null,
+            "each": null,
+            "if": null,
+            "unless": null,
+            "with": null,
+            "log": null,
+            "lookup": null,
+            "hello": {
+                "php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $scope['noun'];\n      }"
+            }
+        }
+    },
+    "data-passing in data to a compiled function that expects data - works with helpers-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $scope['noun'];\n      }"
+            }
+        }
+    },
+    "data-you can override inherited data when invoking a helper with depth-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+            },
+            "world": {
+                "php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+            }
+        }
+    },
+    "data-you can override inherited data when invoking a helper-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\", \"zomg\" => \"world\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+            },
+            "world": {
+                "php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+            }
+        }
+    },
+    "nesting-the root context can be looked up via @root-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options['fn']($scope, array(\"data\" => $frame));\n          }"
+            }
+        }
+    }
+}

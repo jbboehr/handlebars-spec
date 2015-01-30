@@ -1,0 +1,340 @@
+[
+	{
+		"description": "parser",
+		"it": "parses simple mustaches",
+		"template": "{{foo}}",
+		"expected": "{{ ID:foo [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches",
+		"template": "{{foo?}}",
+		"expected": "{{ ID:foo? [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches",
+		"template": "{{foo_}}",
+		"expected": "{{ ID:foo_ [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches",
+		"template": "{{foo-}}",
+		"expected": "{{ ID:foo- [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches",
+		"template": "{{foo:}}",
+		"expected": "{{ ID:foo: [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches with data",
+		"template": "{{@foo}}",
+		"expected": "{{ @ID:foo [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses simple mustaches with data paths",
+		"template": "{{@../foo}}",
+		"expected": "{{ @ID:foo [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with paths",
+		"template": "{{foo/bar}}",
+		"expected": "{{ PATH:foo/bar [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with this/foo",
+		"template": "{{this/foo}}",
+		"expected": "{{ ID:foo [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with - in a path",
+		"template": "{{foo-bar}}",
+		"expected": "{{ ID:foo-bar [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with parameters",
+		"template": "{{foo bar}}",
+		"expected": "{{ ID:foo [ID:bar] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with string parameters",
+		"template": "{{foo bar \"baz\" }}",
+		"expected": "{{ ID:foo [ID:bar, \"baz\"] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with NUMBER parameters",
+		"template": "{{foo 1}}",
+		"expected": "{{ ID:foo [NUMBER{1}] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with BOOLEAN parameters",
+		"template": "{{foo true}}",
+		"expected": "{{ ID:foo [BOOLEAN{true}] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with BOOLEAN parameters",
+		"template": "{{foo false}}",
+		"expected": "{{ ID:foo [BOOLEAN{false}] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mutaches with DATA parameters",
+		"template": "{{foo @bar}}",
+		"expected": "{{ ID:foo [@ID:bar] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=baz}}",
+		"expected": "{{ ID:foo [] HASH{bar=ID:baz} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=1}}",
+		"expected": "{{ ID:foo [] HASH{bar=NUMBER{1}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=true}}",
+		"expected": "{{ ID:foo [] HASH{bar=BOOLEAN{true}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=false}}",
+		"expected": "{{ ID:foo [] HASH{bar=BOOLEAN{false}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=@baz}}",
+		"expected": "{{ ID:foo [] HASH{bar=@ID:baz} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=baz bat=bam}}",
+		"expected": "{{ ID:foo [] HASH{bar=ID:baz, bat=ID:bam} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bar=baz bat=\"bam\"}}",
+		"expected": "{{ ID:foo [] HASH{bar=ID:baz, bat=\"bam\"} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo bat='bam'}}",
+		"expected": "{{ ID:foo [] HASH{bat=\"bam\"} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\"}}",
+		"expected": "{{ ID:foo [ID:omg] HASH{bar=ID:baz, bat=\"bam\"} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\" baz=1}}",
+		"expected": "{{ ID:foo [ID:omg] HASH{bar=ID:baz, bat=\"bam\", baz=NUMBER{1}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\" baz=true}}",
+		"expected": "{{ ID:foo [ID:omg] HASH{bar=ID:baz, bat=\"bam\", baz=BOOLEAN{true}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses mustaches with hash arguments",
+		"template": "{{foo omg bar=baz bat=\"bam\" baz=false}}",
+		"expected": "{{ ID:foo [ID:omg] HASH{bar=ID:baz, bat=\"bam\", baz=BOOLEAN{false}} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses contents followed by a mustache",
+		"template": "foo bar {{baz}}",
+		"expected": "CONTENT[ 'foo bar ' ]\n{{ ID:baz [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a partial",
+		"template": "{{> foo }}",
+		"expected": "{{> PARTIAL:foo }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a partial with context",
+		"template": "{{> foo bar}}",
+		"expected": "{{> PARTIAL:foo ID:bar }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a partial with hash",
+		"template": "{{> foo bar=bat}}",
+		"expected": "{{> PARTIAL:foo HASH{bar=ID:bat} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a partial with context and hash",
+		"template": "{{> foo bar bat=baz}}",
+		"expected": "{{> PARTIAL:foo ID:bar HASH{bat=ID:baz} }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a partial with a complex name",
+		"template": "{{> shared/partial?.bar}}",
+		"expected": "{{> PARTIAL:shared/partial?.bar }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a comment",
+		"template": "{{! this is a comment }}",
+		"expected": "{{! ' this is a comment ' }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a multi-line comment",
+		"template": "{{!\nthis is a multi-line comment\n}}",
+		"expected": "{{! '\nthis is a multi-line comment\n' }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses an inverse section",
+		"template": "{{#foo}} bar {{^}} baz {{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n    CONTENT[ ' bar ' ]\n  {{^}}\n    CONTENT[ ' baz ' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses an inverse (else-style) section",
+		"template": "{{#foo}} bar {{else}} baz {{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n    CONTENT[ ' bar ' ]\n  {{^}}\n    CONTENT[ ' baz ' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses empty blocks",
+		"template": "{{#foo}}{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses empty blocks with empty inverse section",
+		"template": "{{#foo}}{{^}}{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n  {{^}}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses empty blocks with empty inverse (else-style) section",
+		"template": "{{#foo}}{{else}}{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n  {{^}}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses non-empty blocks with empty inverse section",
+		"template": "{{#foo}} bar {{^}}{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n    CONTENT[ ' bar ' ]\n  {{^}}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses non-empty blocks with empty inverse (else-style) section",
+		"template": "{{#foo}} bar {{else}}{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n    CONTENT[ ' bar ' ]\n  {{^}}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses empty blocks with non-empty inverse section",
+		"template": "{{#foo}}{{^}} bar {{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n  {{^}}\n    CONTENT[ ' bar ' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses empty blocks with non-empty inverse (else-style) section",
+		"template": "{{#foo}}{{else}} bar {{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  PROGRAM:\n  {{^}}\n    CONTENT[ ' bar ' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a standalone inverse section",
+		"template": "{{^foo}}bar{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  {{^}}\n    CONTENT[ 'bar' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses a standalone inverse section",
+		"template": "{{else foo}}bar{{/foo}}",
+		"expected": "BLOCK:\n  {{ ID:foo [] }}\n  {{^}}\n    CONTENT[ 'bar' ]\n"
+	},
+	{
+		"description": "parser",
+		"it": "raises if there's a Parse error",
+		"template": "foo{{^}}",
+		"exception": true,
+		"message": "/Parse error on line 1/"
+	},
+	{
+		"description": "parser",
+		"it": "raises if there's a Parse error",
+		"template": "{{foo}",
+		"exception": true,
+		"message": "/Parse error on line 1/"
+	},
+	{
+		"description": "parser",
+		"it": "raises if there's a Parse error",
+		"template": "{{foo &",
+		"exception": true,
+		"message": "/Parse error on line 1/"
+	},
+	{
+		"description": "parser",
+		"it": "raises if there's a Parse error",
+		"template": "{{#goodbyes}}{{/hellos}}",
+		"exception": true,
+		"message": "/goodbyes doesn't match hellos/"
+	},
+	{
+		"description": "parser",
+		"it": "raises if there's a Parse error",
+		"template": "{{{{goodbyes}}}} {{{{/hellos}}}}",
+		"exception": true,
+		"message": "/goodbyes doesn't match hellos/"
+	},
+	{
+		"description": "parser",
+		"it": "knows how to report the correct line number in errors",
+		"template": "hello\nmy\n{{foo}",
+		"exception": true,
+		"message": "/Parse error on line 3/"
+	},
+	{
+		"description": "parser",
+		"it": "knows how to report the correct line number in errors",
+		"template": "hello\n\nmy\n\n{{foo}",
+		"exception": true,
+		"message": "/Parse error on line 5/"
+	},
+	{
+		"description": "parser",
+		"it": "knows how to report the correct line number in errors when the first character is a newline",
+		"template": "\n\nhello\n\nmy\n\n{{foo}",
+		"exception": true,
+		"message": "/Parse error on line 7/"
+	}
+]

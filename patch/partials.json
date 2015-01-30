@@ -1,0 +1,10 @@
+{
+    "partials-global partials-01": null,
+    "partials-rendering function partial in vm mode-00": {
+        "partials": {
+            "dude": {
+                "php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
+            }
+        }
+    }
+}

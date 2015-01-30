@@ -1,0 +1,138 @@
+{
+    "#blockhelpermissing-should handle nesting-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#blockhelpermissing-should track contextpath for arrays-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#blockhelpermissing-should track contextpath for keys-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#each-should handle nesting-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#each-should track contextpath for arrays-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#each-should track contextpath for keys-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#with-should handle nesting-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "#with-should track contextpath-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+            }
+        }
+    },
+    "track ids-should include argument ids-00": {
+        "expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should include argument ids-01": null,
+    "track ids-should include argument ids-02": null,
+    "track ids-should include hash ids-00": {
+        "expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
+        "helpers": {
+            "wycats": {
+                "php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should include hash ids-01": null,
+    "track ids-should include hash ids-02": null,
+    "track ids-should not include anything without the flag-00": {
+        "expected": "success",
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options) {\n        return 'success';\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should not include anything without the flag-01": null,
+    "track ids-should not include anything without the flag-02": null,
+    "track ids-should note ..\/ and .\/ references-00": {
+        "expected": "HELP ME MY BOSS is.a:foo ..\/slave.driver:undefined",
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should note ..\/ and .\/ references-01": null,
+    "track ids-should note ..\/ and .\/ references-02": null,
+    "track ids-should note @data references-00": {
+        "expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should note @data references-01": null,
+    "track ids-should note @data references-02": null,
+    "track ids-should return null for constants-00": {
+        "expected": "HELP ME MY BOSS 1 foo false",
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . $options['hash']['key'];\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should return null for constants-01": null,
+    "track ids-should return null for constants-02": null,
+    "track ids-should return null for constants-03": null,
+    "track ids-should return true for subexpressions-00": {
+        "expected": "HELP ME MY BOSS 1",
+        "helpers": {
+            "sub": {
+                "php": "function() { return 1; }"
+            },
+            "wycats": {
+                "php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "track ids-should return true for subexpressions-01": null
+}

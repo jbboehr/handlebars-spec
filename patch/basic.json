@@ -1,16 +1,97 @@
 {
-	"basic context-this keyword in helpers-00": {
-		"helpers": {
-			"foo": {
-				"php": "function($value) { return 'bar '.$value; }"
-			}
-		}
-	},
-	"basic context-this keyword in helpers-01": {
-		"helpers": {
-			"foo": {
-				"php": "function($value) { return 'bar '.$value; }"
-			}
-		}
-	}
+    "basic context-block functions with context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+            }
+        }
+    },
+    "basic context-block functions without context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+            }
+        }
+    },
+    "basic context-depthed block functions with context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+            }
+        }
+    },
+    "basic context-depthed block functions without context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($options, $scope) { return $scope; }"
+            }
+        }
+    },
+    "basic context-depthed functions with context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($context) { return $context; }"
+            }
+        }
+    },
+    "basic context-functions returning safestrings shouldn't be escaped-00": {
+        "data": {
+            "awesome": {
+                "php": "function () { return new SafeString(\"&\\\"\\\\<>\"); }"
+            }
+        }
+    },
+    "basic context-functions with context argument-00": {
+        "data": {
+            "awesome": {
+                "php": "function($context) { return $context; }"
+            }
+        }
+    },
+    "basic context-functions-00": {
+        "data": {
+            "awesome": {
+                "php": "function () { return \"Awesome\"; }"
+            }
+        }
+    },
+    "basic context-functions-01": {
+        "data": {
+            "awesome": {
+                "php": "function($context, $scope) { return $scope['more']; }"
+            }
+        }
+    },
+    "basic context-pathed block functions without context argument-00": {
+        "data": {
+            "foo": {
+                "awesome": {
+                    "php": "function($options, $scope) { return $scope; }"
+                }
+            }
+        }
+    },
+    "basic context-pathed functions with context argument-00": {
+        "data": {
+            "bar": {
+                "awesome": {
+                    "php": "function($context) { return $context; }"
+                }
+            }
+        }
+    },
+    "basic context-this keyword in helpers-00": {
+        "helpers": {
+            "foo": {
+                "php": "function($value) { return 'bar ' . $value; }"
+            }
+        }
+    },
+    "basic context-this keyword in helpers-01": {
+        "helpers": {
+            "foo": {
+                "php": "function($value) { return 'bar ' . $value; }"
+            }
+        }
+    }
 }

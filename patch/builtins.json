@@ -1,17 +1,124 @@
 {
-	"#each-each with an object and @key-00": {
-		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!"
-	},
-	"#each-data passed to helpers-00": {
-		"options": {
-			"data": {
-				"exclaim": "!"
-			}
-		},
-		"helpers": {
-			"detectDataInsideEach": {
-				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
-			}
-		}
-	}
+    "#each-data passed to helpers-00": {
+        "helpers": {
+            "detectDataInsideEach": {
+                "javascript": "function(options) { return options.data && options.data.exclaim; }",
+                "php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+            }
+        }
+    },
+    "#each-each with an object and @key-00": {
+        "expected": "2. GOODBYE! &lt;b&gt;#1&lt;\/b&gt;. goodbye! cruel world!",
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each with an object and @key-01": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each with function argument-00": {
+        "data": {
+            "goodbyes": {
+                "php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
+            }
+        },
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each with function argument-01": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each without context-00": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each without data-00": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each without data-01": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each-00": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#each-each-01": {
+        "globalHelpers": {
+            "detectDataInsideEach": {
+                "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+            }
+        }
+    },
+    "#if-if with function argument-00": {
+        "data": {
+            "goodbye": {
+                "php": "function($options, $scope) { return $scope['foo']; }"
+            }
+        }
+    },
+    "#if-if with function argument-01": {
+        "data": {
+            "goodbye": {
+                "php": "function($options, $scope) { return $scope['world']; }"
+            }
+        }
+    },
+    "#if-if with function argument-02": {
+        "data": {
+            "goodbye": {
+                "php": "function() { return false; }"
+            }
+        }
+    },
+    "#if-if with function argument-03": {
+        "data": {
+            "goodbye": {
+                "php": "function($options, $scope) { return $scope['foo']; }"
+            }
+        }
+    },
+    "#log-should call logger at data level-00": null,
+    "#log-should call logger at data level-01": null,
+    "#log-should call logger at data level-02": null,
+    "#log-should call logger at default level-00": null,
+    "#log-should call logger at default level-01": null,
+    "#log-should call logger at default level-02": null,
+    "#log-should handle missing logger-00": null,
+    "#log-should log at data level-00": null,
+    "#log-should log at data level-01": null,
+    "#log-should not output to console-00": null,
+    "#with-with with function argument-00": {
+        "data": {
+            "person": {
+                "php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
+            }
+        }
+    }
 }

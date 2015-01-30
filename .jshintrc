@@ -1,3 +1,22 @@
 {
-  "laxcomma": true
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "forin": true,
+  "freeze": true,
+  "funcscope": false,
+  "immed": true,
+  "latedef": "nofunc",
+  "newcap": true,
+  "noarg": true,
+  "node": true,
+  "noempty": false,
+  "nonbsp": true,
+  "notypeof": true,
+  "singleGroups": true,
+  "strict": true,
+  "undef": true,
+  "unused": true
 }

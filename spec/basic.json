@@ -135,6 +135,55 @@
 	},
 	{
 		"description": "basic context",
+		"it": "false",
+		"template": "val1: {{val1}}, val2: {{val2}}",
+		"data": {
+			"val1": false,
+			"val2": false
+		},
+		"expected": "val1: false, val2: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{.}}",
+		"data": false,
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{val1/val2}}",
+		"data": {
+			"val1": {
+				"val2": false
+			}
+		},
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val1: {{{val1}}}, val2: {{{val2}}}",
+		"data": {
+			"val1": false,
+			"val2": false
+		},
+		"expected": "val1: false, val2: false"
+	},
+	{
+		"description": "basic context",
+		"it": "false",
+		"template": "val: {{{val1/val2}}}",
+		"data": {
+			"val1": {
+				"val2": false
+			}
+		},
+		"expected": "val: false"
+	},
+	{
+		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
@@ -224,14 +273,26 @@
 		"description": "basic context",
 		"it": "functions returning safestrings shouldn't be escaped",
 		"template": "{{awesome}}",
-		"data": {},
+		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return new Handlebars.SafeString(\"&\\\"\\\\<>\"); }",
+				"php": "function () { return new SafeString(\"&\\\"\\\\<>\"); }"
+			}
+		},
 		"expected": "&\"\\<>"
 	},
 	{
 		"description": "basic context",
 		"it": "functions",
 		"template": "{{awesome}}",
-		"data": {},
+		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return \"Awesome\"; }",
+				"php": "function () { return \"Awesome\"; }"
+			}
+		},
 		"expected": "Awesome"
 	},
 	{
@@ -239,6 +300,11 @@
 		"it": "functions",
 		"template": "{{awesome}}",
 		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function () { return this.more; }",
+				"php": "function($context, $scope) { return $scope['more']; }"
+			},
 			"more": "More awesome"
 		},
 		"expected": "More awesome"
@@ -248,6 +314,11 @@
 		"it": "functions with context argument",
 		"template": "{{awesome frank}}",
 		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
+			},
 			"frank": "Frank"
 		},
 		"expected": "Frank"
@@ -257,7 +328,13 @@
 		"it": "pathed functions with context argument",
 		"template": "{{bar.awesome frank}}",
 		"data": {
-			"bar": {},
+			"bar": {
+				"awesome": {
+					"!code": true,
+					"javascript": "function (context) { return context; }",
+					"php": "function($context) { return $context; }"
+				}
+			},
 			"frank": "Frank"
 		},
 		"expected": "Frank"
@@ -267,6 +344,11 @@
 		"it": "depthed functions with context argument",
 		"template": "{{#with frank}}{{../awesome .}}{{/with}}",
 		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context) { return context; }",
+				"php": "function($context) { return $context; }"
+			},
 			"frank": "Frank"
 		},
 		"expected": "Frank"
@@ -275,7 +357,13 @@
 		"description": "basic context",
 		"it": "block functions with context argument",
 		"template": "{{#awesome 1}}inner {{.}}{{/awesome}}",
-		"data": {},
+		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context, options) { return options.fn(context); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+			}
+		},
 		"expected": "inner 1"
 	},
 	{
@@ -283,7 +371,12 @@
 		"it": "depthed block functions with context argument",
 		"template": "{{#with value}}{{#../awesome 1}}inner {{.}}{{/../awesome}}{{/with}}",
 		"data": {
-			"value": true
+			"value": true,
+			"awesome": {
+				"!code": true,
+				"javascript": "function (context, options) { return options.fn(context); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+			}
 		},
 		"expected": "inner 1"
 	},
@@ -291,7 +384,13 @@
 		"description": "basic context",
 		"it": "block functions without context argument",
 		"template": "{{#awesome}}inner{{/awesome}}",
-		"data": {},
+		"data": {
+			"awesome": {
+				"!code": true,
+				"javascript": "function (options) { return options.fn(this); }",
+				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+			}
+		},
 		"expected": "inner"
 	},
 	{
@@ -299,7 +398,13 @@
 		"it": "pathed block functions without context argument",
 		"template": "{{#foo.awesome}}inner{{/foo.awesome}}",
 		"data": {
-			"foo": {}
+			"foo": {
+				"awesome": {
+					"!code": true,
+					"javascript": "function (options) { return this; }",
+					"php": "function($options, $scope) { return $scope; }"
+				}
+			}
 		},
 		"expected": "inner"
 	},
@@ -308,7 +413,12 @@
 		"it": "depthed block functions without context argument",
 		"template": "{{#with value}}{{#../awesome}}inner{{/../awesome}}{{/with}}",
 		"data": {
-			"value": true
+			"value": true,
+			"awesome": {
+				"!code": true,
+				"javascript": "function (options) { return this; }",
+				"php": "function($options, $scope) { return $scope; }"
+			}
 		},
 		"expected": "inner"
 	},
@@ -411,7 +521,8 @@
 			"person": {
 				"name": null
 			}
-		}
+		},
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -419,7 +530,8 @@
 		"template": "{{person/name}}",
 		"data": {
 			"person": {}
-		}
+		},
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -472,8 +584,9 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
-				"php": "function($value) { return 'bar '.$value; }"
+				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
 		"expected": "bar goodbyebar Goodbyebar GOODBYE"
@@ -497,8 +610,9 @@
 		},
 		"helpers": {
 			"foo": {
+				"!code": true,
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
-				"php": "function($value) { return 'bar '.$value; }"
+				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
 		"expected": "bar hellobar Hellobar HELLO"

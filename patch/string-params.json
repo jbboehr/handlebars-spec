@@ -1,0 +1,115 @@
+{
+    "string params mode-arguments to helpers can be retrieved from options hash in string form-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
+            }
+        }
+    },
+    "string params mode-hash parameters get context information-00": {
+        "expected": "Helper called",
+        "helpers": {
+            "tomdale": {
+                "!code": true,
+                "javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+                "php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+            },
+            "with": {
+                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "string params mode-hash parameters get context information-01": null,
+    "string params mode-hash parameters get context information-02": null,
+    "string params mode-hash parameters get context information-03": null,
+    "string params mode-hash parameters get context information-04": null,
+    "string params mode-hash parameters get context information-05": null,
+    "string params mode-hash parameters get context information-06": null,
+    "string params mode-hash parameters get context information-07": null,
+    "string params mode-hash parameters get type information-00": {
+        "expected": "Helper called",
+        "helpers": {
+            "tomdale": {
+                "!code": true,
+                "javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+                "php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "string params mode-hash parameters get type information-01": null,
+    "string params mode-hash parameters get type information-02": null,
+    "string params mode-hash parameters get type information-03": null,
+    "string params mode-hash parameters get type information-04": null,
+    "string params mode-hash parameters get type information-05": null,
+    "string params mode-hash parameters get type information-06": null,
+    "string params mode-hash parameters get type information-07": null,
+    "string params mode-hash parameters get type information-08": null,
+    "string params mode-information about the types is passed along-00": {
+        "expected": "Helper called",
+        "helpers": {
+            "tomdale": {
+                "!code": true,
+                "javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+                "php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "string params mode-information about the types is passed along-01": null,
+    "string params mode-information about the types is passed along-02": null,
+    "string params mode-information about the types is passed along-03": null,
+    "string params mode-information about the types is passed along-04": null,
+    "string params mode-information about the types is passed along-05": null,
+    "string params mode-information about the types is passed along-06": null,
+    "string params mode-information about the types is passed along-07": null,
+    "string params mode-should handle data-00": {
+        "expected": "Foo!",
+        "helpers": {
+            "foo": {
+                "php": "function($bar, $options) {\n        return 'Foo!';\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "string params mode-should handle data-01": null,
+    "string params mode-should handle data-02": null,
+    "string params mode-when inside a block in string mode, .. passes the appropriate context in the options hash to a block helper-00": {
+        "helpers": {
+            "tomdale": {
+                "php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options['fn']($scope);\n      }"
+            },
+            "with": {
+                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+            }
+        }
+    },
+    "string params mode-when inside a block in string mode, .. passes the appropriate context in the options hash-00": {
+        "helpers": {
+            "tomdale": {
+                "php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
+            },
+            "with": {
+                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+            }
+        }
+    },
+    "string params mode-when using block form, arguments to helpers can be retrieved from options hash in string form-00": {
+        "helpers": {
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options['fn']($scope);\n      }"
+            }
+        }
+    },
+    "string params mode-with nested block ambiguous-00": {
+        "helpers": {
+            "with": {
+                "php": "function($options) {\n        return \"WITH\";\n      }"
+            },
+            "view": {
+                "php": "function() {\n        return \"VIEW\";\n      }"
+            }
+        }
+    }
+}

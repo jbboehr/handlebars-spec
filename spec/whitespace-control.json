@@ -45,6 +45,13 @@
 		"expected": "bar<"
 	},
 	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": "1\n{{foo~}} \n\n 23\n{{bar}}4",
+		"data": {},
+		"expected": "1\n23\n4"
+	},
+	{
 		"description": "blocks",
 		"it": "should strip whitespace around simple block calls",
 		"template": " {{~#if foo~}} bar {{~/if~}} ",
@@ -82,6 +89,24 @@
 	},
 	{
 		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " \n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar"
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " a\n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\na ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " abara "
+	},
+	{
+		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{~^if foo~}} bar {{~/if~}} ",
 		"data": {},
@@ -107,6 +132,13 @@
 		"template": " {{^if foo}} bar {{/if}} ",
 		"data": {},
 		"expected": "  bar  "
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " \n\n{{~^if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
+		"data": {},
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -156,6 +188,24 @@
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar"
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\n{{{foo}}} \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar<"
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
 		"data": {},
 		"expected": "baz"
@@ -190,6 +240,13 @@
 	},
 	{
 		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {},
+		"expected": "baz"
+	},
+	{
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{~> dude~}} ",
 		"data": {},
@@ -199,7 +256,7 @@
 		"expected": "foobar"
 	},
 	{
-		"description": "blocks",
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude~}} ",
 		"data": {},
@@ -209,7 +266,7 @@
 		"expected": "foo bar"
 	},
 	{
-		"description": "blocks",
+		"description": "should strip whitespace around partials",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude}} ",
 		"data": {},
@@ -219,7 +276,7 @@
 		"expected": "foo bar "
 	},
 	{
-		"description": "blocks",
+		"description": "should only strip whitespace once",
 		"it": "should only strip whitespace once",
 		"template": " {{~foo~}} {{foo}} {{foo}} ",
 		"data": {

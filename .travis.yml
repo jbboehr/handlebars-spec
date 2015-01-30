@@ -1,0 +1,11 @@
+# Note: all environments run nodejs, so set language to PHP so we can lint all of the PHP functions
+language: php
+php:
+  - "5.3"
+before_script:
+  - npm install
+  - make
+script:
+  - make check_changes
+  - make test
+

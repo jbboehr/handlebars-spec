@@ -1,0 +1,193 @@
+{
+    "subexpressions-arg-less helper-00": {
+        "helpers": {
+            "foo": {
+                "php": "function($val) {\n        return $val . $val;\n      }"
+            },
+            "bar": {
+                "php": "function() {\n        return \"LOL\";\n      }"
+            }
+        }
+    },
+    "subexpressions-as hashes in string params mode-00": {
+        "expected": "val is BORK",
+        "helpers": {
+            "blog": {
+                "!code": true,
+                "javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+                "php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
+            },
+            "bork": {
+                "php": "function() {\n        return \"BORK\";\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "subexpressions-as hashes in string params mode-01": null,
+    "subexpressions-as hashes-00": {
+        "helpers": {
+            "blog": {
+                "php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
+            },
+            "equal": {
+                "php": "function($x, $y) {\n        return $x === $y;\n      }"
+            }
+        }
+    },
+    "subexpressions-gh-800 : complex subexpressions-00": {
+        "helpers": {
+            "dash": {
+                "php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+            },
+            "concat": {
+                "php": "function($a, $b) {\n        return $a . $b;\n      }"
+            }
+        }
+    },
+    "subexpressions-gh-800 : complex subexpressions-01": {
+        "helpers": {
+            "dash": {
+                "php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+            },
+            "concat": {
+                "php": "function($a, $b) {\n        return $a . $b;\n      }"
+            }
+        }
+    },
+    "subexpressions-gh-800 : complex subexpressions-02": {
+        "helpers": {
+            "dash": {
+                "php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+            },
+            "concat": {
+                "php": "function($a, $b) {\n        return $a . $b;\n      }"
+            }
+        }
+    },
+    "subexpressions-gh-800 : complex subexpressions-03": {
+        "helpers": {
+            "dash": {
+                "php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+            },
+            "concat": {
+                "php": "function($a, $b) {\n        return $a . $b;\n      }"
+            }
+        }
+    },
+    "subexpressions-gh-800 : complex subexpressions-04": {
+        "helpers": {
+            "dash": {
+                "php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+            },
+            "concat": {
+                "php": "function($a, $b) {\n        return $a . $b;\n      }"
+            }
+        }
+    },
+    "subexpressions-helper w args-00": {
+        "helpers": {
+            "blog": {
+                "php": "function($val) {\n        return \"val is \" . $val;\n      }"
+            },
+            "equal": {
+                "php": "function($x, $y) {\n        return $x === $y;\n      }"
+            }
+        }
+    },
+    "subexpressions-in string params mode,-00": {
+        "expected": "fooyeah",
+        "helpers": {
+            "snog": {
+                "php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
+            },
+            "blorg": {
+                "php": "function($a, $options) {\n        return $a;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "subexpressions-in string params mode,-01": null,
+    "subexpressions-in string params mode,-02": null,
+    "subexpressions-in string params mode,-03": null,
+    "subexpressions-in string params mode,-04": null,
+    "subexpressions-in string params mode,-05": null,
+    "subexpressions-in string params mode,-06": null,
+    "subexpressions-mixed paths and helpers-00": {
+        "helpers": {
+            "blog": {
+                "php": "function($val, $that, $theOther) {\n        return \"val is \" . $val . ', ' . $that . ' and ' . $theOther;\n      }"
+            },
+            "equal": {
+                "php": "function($x, $y) {\n        return $x === $y;\n      }"
+            }
+        }
+    },
+    "subexpressions-multiple subexpressions in a hash with context-00": {
+        "helpers": {
+            "input": {
+                "php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" \/>');\n      }"
+            },
+            "t": {
+                "php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+            }
+        }
+    },
+    "subexpressions-multiple subexpressions in a hash-00": {
+        "helpers": {
+            "input": {
+                "php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" \/>');\n      }"
+            },
+            "t": {
+                "php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+            }
+        }
+    },
+    "subexpressions-provides each nested helper invocation its own options hash-00": {
+        "helpers": {
+            "equal": {
+                "javascript": "function (x, y, options) {\n        return x === y;\n      }",
+                "php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "subexpressions-subexpression functions on the context-00": {
+        "data": {
+            "bar": {
+                "php": "function() {\n        return \"LOL\";\n      }"
+            }
+        },
+        "helpers": {
+            "foo": {
+                "php": "function($val) {\n        return $val . $val;\n      }"
+            }
+        }
+    },
+    "subexpressions-subexpressions can't just be property lookups-00": {
+        "helpers": {
+            "foo": {
+                "php": "function($val) {\n        return $val . $val;\n      }"
+            }
+        }
+    },
+    "subexpressions-supports much nesting-00": {
+        "helpers": {
+            "blog": {
+                "php": "function($val) {\n        return \"val is \" . $val;\n      }"
+            },
+            "equal": {
+                "php": "function($x, $y) {\n        return $x === $y;\n      }"
+            }
+        }
+    },
+    "subexpressions-with hashes-00": {
+        "helpers": {
+            "blog": {
+                "php": "function($val) {\n        return \"val is \" . $val;\n      }"
+            },
+            "equal": {
+                "php": "function($x, $y) {\n        return $x === $y;\n      }"
+            }
+        }
+    }
+}

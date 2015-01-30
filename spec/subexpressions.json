@@ -6,10 +6,14 @@
 		"data": {},
 		"helpers": {
 			"foo": {
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			},
 			"bar": {
-				"javascript": "function () {\n        return \"LOL\";\n      }"
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
 		"expected": "LOLLOL!"
@@ -23,13 +27,42 @@
 		},
 		"helpers": {
 			"blog": {
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "mixed paths and helpers",
+		"template": "{{blog baz.bat (equal a b) baz.bar}}",
+		"data": {
+			"bar": "LOL",
+			"baz": {
+				"bat": "foo!",
+				"bar": "bar!"
+			}
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val, that, theOther) {\n        return \"val is \" + val + ', ' + that + ' and ' + theOther;\n      }",
+				"php": "function($val, $that, $theOther) {\n        return \"val is \" . $val . ', ' . $that . ' and ' . $theOther;\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is foo!, true and bar!"
 	},
 	{
 		"description": "subexpressions",
@@ -40,13 +73,162 @@
 		},
 		"helpers": {
 			"blog": {
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash \"abc\" (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "abc-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash d (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "d-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash c.c (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "c-ab"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a b) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "ab-c"
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a e.e) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "ae-c"
 	},
 	{
 		"description": "subexpressions",
@@ -55,10 +237,13 @@
 		"data": {},
 		"helpers": {
 			"equal": {
-				"javascript": "function (x, y, options) {\n        if (!options || options === lastOptions) {\n          throw new Error(\"options hash was reused\");\n        }\n        lastOptions = options;\n        return x === y;\n      }"
+				"!code": true,
+				"javascript": "function (x, y, options) {\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "true"
+		"expected": "true",
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "subexpressions",
@@ -69,10 +254,14 @@
 		},
 		"helpers": {
 			"blog": {
-				"javascript": "function (val) {\n        return \"val is \" + val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . $val;\n      }"
 			},
 			"equal": {
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
@@ -84,13 +273,60 @@
 		"data": {},
 		"helpers": {
 			"blog": {
-				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }"
+				"!code": true,
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
 			},
 			"equal": {
-				"javascript": "function (x, y) {\n        return x === y;\n      }"
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
 		"expected": "val is true"
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash",
+		"template": "{{input aria-label=(t \"Name\") placeholder=(t \"Example User\")}}",
+		"data": {},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash with context",
+		"template": "{{input aria-label=(t item.field) placeholder=(t item.placeholder)}}",
+		"data": {
+			"item": {
+				"field": "Name",
+				"placeholder": "Example User"
+			}
+		},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />"
 	},
 	{
 		"description": "subexpressions",
@@ -101,14 +337,23 @@
 			"yeah": {}
 		},
 		"expected": "fooyeah",
+		"message": "string params for inner helper processed correctly",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"snog": {
-				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }"
+				"!code": true,
+				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }",
+				"php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
 			},
 			"blorg": {
-				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }"
+				"!code": true,
+				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }",
+				"php": "function($a, $options) {\n        return $a;\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "subexpressions",
@@ -116,23 +361,39 @@
 		"template": "{{blog fun=(bork)}}",
 		"data": {},
 		"expected": "val is BORK",
+		"compileOptions": {
+			"stringParams": true
+		},
 		"helpers": {
 			"blog": {
-				"javascript": "function (options) {\n        equals(options.hashTypes.fun, 'sexpr');\n        return \"val is \" + options.hash.fun;\n      }"
+				"!code": true,
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . $options['hash']['fun'];\n      }"
 			},
 			"bork": {
-				"javascript": "function () {\n        return \"BORK\";\n      }"
+				"!code": true,
+				"javascript": "function () {\n        return \"BORK\";\n      }",
+				"php": "function() {\n        return \"BORK\";\n      }"
 			}
-		}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
 		"description": "subexpressions",
 		"it": "subexpression functions on the context",
 		"template": "{{foo (bar)}}!",
-		"data": {},
+		"data": {
+			"bar": {
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
+			}
+		},
 		"helpers": {
 			"foo": {
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
 		"expected": "LOLLOL!"
@@ -144,11 +405,20 @@
 		"data": {
 			"bar": "LOL"
 		},
+		"exception": true,
 		"helpers": {
 			"foo": {
-				"javascript": "function (val) {\n        return val+val;\n      }"
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
 		"expected": "LOLLOL!"
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpressions can't just be property lookups",
+		"template": "{{blog fun=(bork)}}",
+		"exception": true
 	}
 ]

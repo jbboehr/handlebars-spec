@@ -1,267 +1,675 @@
 {
-	"helpers-helper with complex lookup$-00": {
+    "blockhelpermissing-lambdas are resolved by blockhelpermissing, not handlebars proper-00": {
+        "data": {
+            "truthy": {
+                "php": "function() { return true; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "blockhelpermissing-lambdas resolved by blockhelpermissing are bound to the context-00": {
+        "data": {
+            "truthy": {
+                "php": "function() { return $scope['truthiness'](); /* this is probably wrong */ }"
+            },
+            "truthiness": {
+                "php": "function() { return false; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        },
+        "note": "Check original spec. Needs other tests, possibly implementation dependant."
+    },
+    "decimal number literals work-decimal number literals work-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "hash-block helpers can take an optional hash with booleans-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+            }
+        }
+    },
+    "hash-block helpers can take an optional hash with booleans-01": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+            }
+        }
+    },
+    "hash-block helpers can take an optional hash with single quoted stings-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+            }
+        }
+    },
+    "hash-block helpers can take an optional hash-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+            }
+        }
+    },
+    "hash-helpers can take an optional hash with booleans-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+            }
+        }
+    },
+    "hash-helpers can take an optional hash with booleans-01": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+            }
+        }
+    },
+    "hash-helpers can take an optional hash-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
+            }
+        }
+    },
+    "helpermissing-if a context is not found, custom helpermissing is used-00": {
+        "helpers": {
+            "helperMissing": {
+                "php": "function($mesg, $options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"<\/a>\");\n          }\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "helpermissing-if a value is not found, custom helpermissing is used-00": {
+        "helpers": {
+            "helperMissing": {
+                "php": "function($mesg, $options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"<\/a>\");\n          }\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "helpers hash-in cases of conflict, helpers win-00": {
+        "helpers": {
+            "lookup": {
+                "php": "function() { return 'helpers'; }"
+            }
+        }
+    },
+    "helpers hash-in cases of conflict, helpers win-01": {
+        "helpers": {
+            "lookup": {
+                "php": "function() { return 'helpers'; }"
+            }
+        }
+    },
+    "helpers hash-providing a helpers hash-00": {
+        "helpers": {
+            "world": {
+                "php": "function() { return 'world'; }"
+            }
+        }
+    },
+    "helpers hash-providing a helpers hash-01": {
+        "helpers": {
+            "world": {
+                "php": "function() { return 'world'; }"
+            }
+        }
+    },
+    "helpers hash-the helper hash should augment the global hash-00": {
+        "helpers": {
+            "test_helper": {
+                "javascript": "function() { return 'found it!'; }",
+                "php": "function() { return 'found it!'; }"
+            },
+            "world": {
+                "php": "function() { return 'world!'; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "helpers hash-the helpers hash is available is nested contexts-00": {
+        "helpers": {
+            "helper": {
+                "php": "function() { return 'helper'; }"
+            }
+        }
+    },
+    "helpers-block helper inverted sections-00": {
+        "helpers": {
+            "list": {
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+            }
+        }
+    },
+    "helpers-block helper inverted sections-01": {
+        "helpers": {
+            "list": {
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+            }
+        }
+    },
+    "helpers-block helper inverted sections-02": {
+        "helpers": {
+            "list": {
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+            }
+        }
+    },
+    "helpers-block helper passing a complex path context-00": {
+        "helpers": {
+            "form": {
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+            }
+        }
+    },
+    "helpers-block helper passing a new context-00": {
+        "helpers": {
+            "form": {
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+            }
+        }
+    },
+    "helpers-block helper should have context in this-00": {
+        "helpers": {
+            "link": {
+                "php": "function($context, $scope, $options) {\n    echo '<a href=\"\/people\/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
+            }
+        }
+    },
+    "helpers-block helper staying in the same context-00": {
+        "helpers": {
+            "form": {
+                "php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '<\/form>'; }"
+            }
+        }
+    },
+    "helpers-block helper-00": {
+        "helpers": {
+            "goodbyes": {
+                "php": "function($scope, $options) { $options['fn'](array('text' => 'GOODBYE'), $scope); }"
+            }
+        }
+    },
+    "helpers-helper block with complex lookup expression-00": {
+        "helpers": {
+            "goodbyes": {
+                "php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+            }
+        }
+    },
+    "helpers-helper for raw block gets parameters-00": {
+        "helpers": {
+            "raw": {
+                "php": "function($a, $b, $c, $options) {\n        return $options['fn']() . $a . $b . $c;\n    }"
+            }
+        }
+    },
+    "helpers-helper for raw block gets raw content-00": {
+        "helpers": {
+            "raw": {
+                "php": "function($options) { return $options['fn'](); }"
+            }
+        }
+    },
+    "helpers-helper with complex lookup and nested template in vm+compiler-00": {
+        "helpers": {
+            "link": {
+                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"<\/a>\"; }"
+            }
+        }
+    },
+    "helpers-helper with complex lookup and nested template-00": {
+        "helpers": {
+            "link": {
+                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"<\/a>\"; }"
+            }
+        }
+    },
+    "helpers-helper with complex lookup$-00": {
+        "helpers": {
+            "link": {
+                "php": "function($prefix, $context) { return \"<a href='{$prefix}\/{$context['url']}'>{$context['text']}<\/a>\"; }"
+            }
+        }
+    },
+    "helpers-nested block helpers-00": {
+        "helpers": {
+            "form": {
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+            },
+            "link": {
+                "php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
+            }
+        }
+    },
+    "helpers-pathed lambas with parameters-00": {
+        "data": {
+            "helper": {
+                "php": "function() {\n        return 'winning';\n      }"
+            },
+            "hash": {
+                "helper": {
+                    "php": "function() {\n        return 'winning';\n      }"
+                }
+            }
+        },
 		"helpers": {
-			"link": {
-				"php": "function($prefix, $context) { return \"<a href='{$prefix}/{$context['url']}'>{$context['text']}</a>\"; }"
+			"./helper": {
+				"php": "function() {\n        return 'fail';\n      }"
 			}
 		}
-	},
-	"helpers-helper for raw block gets raw content-00": {
+    },
+    "helpers-pathed lambas with parameters-01": {
+        "data": {
+            "hash": {
+                "helper": {
+                    "!code": true,
+                    "javascript": "function () {\n        return 'winning';\n      }",
+                    "php": "function() {\n        return 'winning';\n      }"
+                }
+            },
+            "helper": {
+                "php": "function() {\n        return 'winning';\n      }"
+            }
+        },
 		"helpers": {
-			"raw": {
-				"php": "function($options) { return $options['fn'](); }"
+			"./helper": {
+				"php": "function() {\n        return 'fail';\n      }"
 			}
 		}
-	},
-	"helpers-helper block with complex lookup expression-00": {
-		"helpers": {
-			"goodbyes": {
-				"php": "function($context, $scope, $options) {\n $byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
-			}
-		}
-	},
-	"helpers-helper with complex lookup and nested template-00": {
-		"helpers": {
-			"link": {
-				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
-			}
-		}
-	},
-	"helpers-helper with complex lookup and nested template in vm+compiler-00": {
-		"helpers": {
-			"link": {
-				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
-			}
-		}
-	},
-	"helpers-block helper-00": {
-		"helpers": {
-			"goodbyes": {
-				"php": "function($scope, $options) { $options['fn'](['text' => 'GOODBYE'], $scope); }"
-			}
-		}
-	},
-	"helpers-block helper staying in the same context-00": {
-		"helpers": {
-			"form": {
-				"php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '</form>'; }"
-			}
-		}
-	},
-	"helpers-block helper should have context in this-00": {
-		"helpers": {
-			"link": {
-				"php":
-						"function($context, $scope, $options) {\n    echo '<a href=\"\/people\/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
-			}
-		}
-	},
-	"helpers-block helper passing a new context-00": {
-		"helpers": {
-			"form": {
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
-			}
-		}
-	},
-	"helpers-block helper passing a complex path context-00": {
-		"helpers": {
-			"form": {
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
-			}
-		}
-	},
-	"helpers-nested block helpers-00": {
-		"helpers": {
-			"form": {
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
-			},
-			"link": {
-				"php":
-						"function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
-			}
-		}
-	},
-	"helpers-block helper inverted sections-00": {
-		"helpers": {
-			"list": {
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
-			}
-		}
-	},
-	"helpers-block helper inverted sections-01": {
-		"helpers": {
-			"list": {
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
-			}
-		}
-	},
-	"helpers-block helper inverted sections-02": {
-		"helpers": {
-			"list": {
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
-			}
-		}
-	},
-	"helpers hash-providing a helpers hash-00": {
-		"helpers": {
-			"world": {
-				"php": "function() { return 'world'; }"
-			}
-		}
-	},
-	"helpers hash-providing a helpers hash-01": {
-		"helpers": {
-			"world": {
-				"php": "function() { return 'world'; }"
-			}
-		}
-	},
-	"helpers hash-in cases of conflict, helpers win-00": {
-		"helpers": {
-			"lookup": {
-				"php": "function() { return 'helpers'; }"
-			}
-		}
-	},
-	"helpers hash-in cases of conflict, helpers win-01": {
-		"helpers": {
-			"lookup": {
-				"php": "function() { return 'helpers'; }"
-			}
-		}
-	}
-
-	,
-	"helpers hash-the helpers hash is available is nested contexts-00": {
-		"helpers": {
-			"helper": {
-				"php": "function() { return 'helper'; }"
-			}
-		}
-	},
-	"helpers hash-the helper hash should augment the global hash-00": {
-		"helpers": {
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			},
-			"world": {
-				"php": "function() { return 'world!'; }"
-			}
-		}
-	},
-	"helpers hash-multiple global helper registration-00": {
-		"helpers": {
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			},
-			"world": {
-				"php": "function() { return 'world!'; }"
-			}
-		}
-	},
-	"helpers hash-decimal number literals work-00": {
-		"helpers": {
-			"hello": {
-				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
-			}
-		}
-	},
-	"helpers hash-negative number literals work-00": {
-		"helpers": {
-			"hello": {
-				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
-			}
-		}
-	},
-	"string literal parameters-simple literals work-00": {
-		"helpers": {
-			"hello": {
-				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = \\Snidely\\Helpers::jstr($bool1);\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = \\Snidely\\Helpers::jstr($bool2);\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
-			}
-		}
-	},
-	"string literal parameters-using a quote in the middle of a parameter raises an error-00": {
-		"helpers": {
-			"hello": {
-				"php": "function() { return ''; }"
-			}
-		}
-	},
-	"string literal parameters-escaping a string is possible-00": {
-		"helpers": {
-			"hello": {
-				"php": "function($param) { return 'Hello '.$param; }"
-			}
-		}
-	},
-	"string literal parameters-negative number literals work-00": {
-		"helpers": {
-			"hello": {
-				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
-			}
-		}
-	},
-	"multiple parameters-simple multi-params work-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
-			}
-		}
-	},
-	"multiple parameters-block multi-params work-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](['greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'], $scope);\n}"
-			}
-		}
-	},
-	"hash-helpers can take an optional hash-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
-			}
-		}
-	},
-	"hash-helpers can take an optional hash with booleans-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
-			}
-		}
-	},
-	"hash-helpers can take an optional hash with booleans-01": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} {$options['hash']['world']}\";\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
-			}
-		}
-	},
-	"hash-block helpers can take an optional hash-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
-			}
-		}
-	},
-	"hash-block helpers can take an optional hash with single quoted stings-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
-			}
-		}
-	},
-	"hash-block helpers can take an optional hash with booleans-00": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
-			}
-		}
-	},
-	"hash-block helpers can take an optional hash with booleans-01": {
-		"helpers": {
-			"goodbye": {
-				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
-			}
-		}
-	}
+    },
+    "knownhelpers-functions are bound to the context in knownhelpers only mode-00": {
+        "data": {
+            "foo": {
+                "php": "function($options, $scope) { return $scope['bar']; }"
+            }
+        }
+    },
+    "knownhelpers-known helper should render helper-00": {
+        "helpers": {
+            "hello": {
+                "php": "function() { return \"foo\"; }"
+            }
+        }
+    },
+    "knownhelpers-unknown helper in knownhelpers only mode should be passed as undefined-00": {
+        "helpers": {
+            "typeof": {
+                "php": "function($arg) { return gettype($arg); }"
+            },
+            "hello": {
+                "php": "function() { return \"foo\"; }"
+            }
+        }
+    },
+    "multiple parameters-block multi-params work-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "multiple parameters-simple multi-params work-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name conflicts-helpers take precedence over same-named context properties$-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+            },
+            "cruel": {
+                "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+            }
+        }
+    },
+    "name conflicts-helpers take precedence over same-named context properties-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
+            },
+            "cruel": {
+                "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+            }
+        }
+    },
+    "name conflicts-scoped names take precedence over block helpers-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+            },
+            "cruel": {
+                "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+            }
+        }
+    },
+    "name conflicts-scoped names take precedence over helpers-00": {
+        "helpers": {
+            "goodbye": {
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
+            },
+            "cruel": {
+                "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+            }
+        }
+    },
+    "name field-should include full id if a hash is passed-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include full id-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include in ambiguous block calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include in ambiguous mustache calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include in helper block calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include in helper mustache calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "name field-should include in known helper calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        }
+    },
+    "name field-should include in simple block calls-00": {
+        "helpers": {
+            "blockHelperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helperMissing": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            },
+            "helper": {
+                "php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "negative number literals work-negative number literals work-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "negative number literals work-negative number literals work-01": {
+        "helpers": {
+            "hello": {
+                "php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "registration-allows multiple globals-00": {
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "registration-unregisters-00": null,
+    "string literal parameters-escaping a string is possible-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($param) { return 'Hello '.$param; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "string literal parameters-it works with ' marks-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($param) { return \"Hello \" . $param; }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "string literal parameters-simple literals work-00": {
+        "helpers": {
+            "hello": {
+                "php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = \\Snidely\\Helpers::jstr($bool1);\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = \\Snidely\\Helpers::jstr($bool2);\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return \"world!\"; }"
+            },
+            "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "string literal parameters-using a quote in the middle of a parameter raises an error-00": {
+        "helpers": {
+            "hello": {
+                "php": "function() { return ''; }"
+            }
+        }
+    }
 }
