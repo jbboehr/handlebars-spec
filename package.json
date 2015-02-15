@@ -1,13 +1,15 @@
 {
   "name": "handlebars-spec",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "bin/index.js",
-  "private": true,
   "scripts": {
     "test": "bin/runner.js"
   },
-  "author": "Kasper Isager <kasperisager@gmail.com>",
+  "author": "John Boehr <jbboehr@gmail.com>",
+  "contributors": [
+    "Kasper Isager <kasperisager@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "commander": "^2.2.x",
