@@ -1,0 +1,3850 @@
+[
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": " {{~foo~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar&lt;",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": " {{~foo}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar&lt; ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": " {{foo~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " bar&lt;",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": " {{~&foo~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar<",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": " {{~{foo}~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar<",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "whitespace control",
+		"it": "should strip whitespace around mustache calls",
+		"template": "1\n{{foo~}} \n\n 23\n{{bar}}4",
+		"data": {},
+		"expected": "1\n23\n4",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"1\n"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"23\n"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bar"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"bar",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"4"
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " {{~#if foo~}} bar {{~/if~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " {{#if foo~}} bar {{/if~}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " {{~#if foo}} bar {{~/if}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " {{#if foo}} bar {{/if}} ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "  bar  ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " \n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around simple block calls",
+		"template": " a\n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\na ",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " abara ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" a"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"a "
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " {{~^if foo~}} bar {{~/if~}} ",
+		"data": {},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " {{^if foo~}} bar {{/if~}} ",
+		"data": {},
+		"expected": " bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " {{~^if foo}} bar {{~/if}} ",
+		"data": {},
+		"expected": " bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " {{^if foo}} bar {{/if}} ",
+		"data": {},
+		"expected": "  bar  ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around inverse block calls",
+		"template": " \n\n{{~^if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
+		"data": {},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{^~}} baz {{/if}}",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo}} bar {{~^~}} baz {{~/if}}",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo}} bar {{^~}} baz {{/if}}",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": " bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~else~}} baz {{~/if}}",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\n{{{foo}}} \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {
+			"foo": "bar<"
+		},
+		"expected": "bar<",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"foo"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"foo",
+								false
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
+		"data": {},
+		"expected": "baz",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo}} bar {{~^~}} baz {{/if}}",
+		"data": {},
+		"expected": "baz ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~^}} baz {{~/if}}",
+		"data": {},
+		"expected": " baz",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~^}} baz {{/if}}",
+		"data": {},
+		"expected": " baz ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" baz "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "{{#if foo~}} bar {{~else~}} baz {{~/if}}",
+		"data": {},
+		"expected": "baz",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "blocks",
+		"it": "should strip whitespace around complex block calls",
+		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
+		"data": {},
+		"expected": "baz",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"bar"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"baz"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "should strip whitespace around partials",
+		"it": "should strip whitespace around partials",
+		"template": "foo {{~> dude~}} ",
+		"data": {},
+		"partials": {
+			"dude": "bar"
+		},
+		"expected": "foobar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"foo"
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "should strip whitespace around partials",
+		"it": "should strip whitespace around partials",
+		"template": "foo {{> dude~}} ",
+		"data": {},
+		"partials": {
+			"dude": "bar"
+		},
+		"expected": "foo bar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"foo "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "should strip whitespace around partials",
+		"it": "should strip whitespace around partials",
+		"template": "foo {{> dude}} ",
+		"data": {},
+		"partials": {
+			"dude": "bar"
+		},
+		"expected": "foo bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"foo "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "should only strip whitespace once",
+		"it": "should only strip whitespace once",
+		"template": " {{~foo~}} {{foo}} {{foo}} ",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "barbar bar ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	}
+]

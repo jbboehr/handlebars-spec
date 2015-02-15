@@ -1,0 +1,1578 @@
+[
+	{
+		"description": "string params mode",
+		"it": "arguments to helpers can be retrieved from options hash in string form",
+		"template": "{{wycats is.a slave.driver}}",
+		"data": {},
+		"expected": "HELP ME MY BOSS is.a slave.driver",
+		"message": "String parameters output",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"wycats": {
+				"!code": true,
+				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }",
+				"php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"is",
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"slave",
+							"driver"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"wycats"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"wycats",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "when using block form, arguments to helpers can be retrieved from options hash in string form",
+		"template": "{{#wycats is.a slave.driver}}help :({{/wycats}}",
+		"data": {},
+		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
+		"message": "String parameters output",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"wycats": {
+				"!code": true,
+				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
+				"php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options['fn']($scope);\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"is",
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"slave",
+							"driver"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"wycats"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"wycats",
+						true
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"help :("
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "when inside a block in String mode, .. passes the appropriate context in the options hash",
+		"template": "{{#with dale}}{{tomdale ../need dad.joke}}{{/with}}",
+		"data": {
+			"dale": {},
+			"need": "need-a"
+		},
+		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
+		"message": "Proper context variable output",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"tomdale": {
+				"!code": true,
+				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }",
+				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
+			},
+			"with": {
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dale"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"need"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"dad",
+									"joke"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"tomdale"
+								],
+								true,
+								null
+							]
+						},
+						{
+							"opcode": "invokeHelper",
+							"args": [
+								2,
+								"tomdale",
+								true
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "information about the types is passed along",
+		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"data": {},
+		"expected": "Helper called",
+		"message": "the string type is passed",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"tomdale": {
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushString",
+					"args": [
+						"need"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dad",
+							"joke"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"false"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"tomdale"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						4,
+						"tomdale",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get type information",
+		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"data": {},
+		"expected": "Helper called",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"tomdale": {
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"he",
+							"says"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"need"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dad",
+							"joke"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"bool"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"noun"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"desire"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"tomdale"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"tomdale",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "hash parameters get context information",
+		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"data": {
+			"dale": {}
+		},
+		"expected": "Helper called",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"tomdale": {
+				"!code": true,
+				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+			},
+			"with": {
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dale"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"he",
+									"says"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushHash",
+							"args": []
+						},
+						{
+							"opcode": "pushString",
+							"args": [
+								"need"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"dad",
+									"joke"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushLiteral",
+							"args": [
+								"true"
+							]
+						},
+						{
+							"opcode": "assignToHash",
+							"args": [
+								"bool"
+							]
+						},
+						{
+							"opcode": "assignToHash",
+							"args": [
+								"noun"
+							]
+						},
+						{
+							"opcode": "assignToHash",
+							"args": [
+								"desire"
+							]
+						},
+						{
+							"opcode": "popHash",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"tomdale"
+								],
+								true,
+								null
+							]
+						},
+						{
+							"opcode": "invokeHelper",
+							"args": [
+								1,
+								"tomdale",
+								true
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "when inside a block in String mode, .. passes the appropriate context in the options hash to a block helper",
+		"template": "{{#with dale}}{{#tomdale ../need dad.joke}}wot{{/tomdale}}{{/with}}",
+		"data": {
+			"dale": {},
+			"need": "need-a"
+		},
+		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
+		"message": "Proper context variable output",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"tomdale": {
+				"!code": true,
+				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }",
+				"php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options['fn']($scope);\n      }"
+			},
+			"with": {
+				"!code": true,
+				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dale"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"need"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"dad",
+									"joke"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"tomdale"
+								],
+								true,
+								null
+							]
+						},
+						{
+							"opcode": "invokeHelper",
+							"args": [
+								2,
+								"tomdale",
+								true
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										"wot"
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": true
+						}
+					],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "with nested block ambiguous",
+		"template": "{{#with content}}{{#view}}{{firstName}} {{lastName}}{{/view}}{{/with}}",
+		"data": {},
+		"expected": "WITH",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"with": {
+				"!code": true,
+				"javascript": "function (options) {\n        return \"WITH\";\n      }",
+				"php": "function($options) {\n        return \"WITH\";\n      }"
+			},
+			"view": {
+				"!code": true,
+				"javascript": "function () {\n        return \"VIEW\";\n      }",
+				"php": "function() {\n        return \"VIEW\";\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"content"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"view"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"view",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"firstName"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"firstName",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										" "
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"lastName"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"lastName",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "string params mode",
+		"it": "should handle DATA",
+		"template": "{{foo @bar}}",
+		"data": {},
+		"expected": "Foo!",
+		"compileOptions": {
+			"stringParams": true
+		},
+		"helpers": {
+			"foo": {
+				"!code": true,
+				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }",
+				"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "lookupData",
+					"args": [
+						0,
+						[
+							"bar"
+						]
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"foo",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	}
+]

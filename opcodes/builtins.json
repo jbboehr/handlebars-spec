@@ -1,0 +1,7899 @@
+[
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": true,
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": "dummy",
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": false,
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": [
+				"foo"
+			],
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": [],
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": 0,
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if",
+		"template": "{{#if goodbye includeZero=true}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": 0,
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"includeZero"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if with function argument",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return true;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
+			},
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if with function argument",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.world;}",
+				"php": "function($options, $scope) { return $scope['world']; }"
+			},
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if with function argument",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return false;}",
+				"php": "function() { return false; }"
+			},
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#if",
+		"it": "if with function argument",
+		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
+		"data": {
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {return this.foo;}",
+				"php": "function($options, $scope) { return $scope['foo']; }"
+			},
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbye"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"if"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"GOODBYE "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#with",
+		"it": "with",
+		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
+		"data": {
+			"person": {
+				"first": "Alan",
+				"last": "Johnson"
+			}
+		},
+		"expected": "Alan Johnson",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"person"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"first"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"first",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"last"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"last",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#with",
+		"it": "with with function argument",
+		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
+		"data": {
+			"person": {
+				"!code": true,
+				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}",
+				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
+			}
+		},
+		"expected": "Alan Johnson",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"person"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"first"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"first",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"last"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"last",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#with",
+		"it": "with with else",
+		"template": "{{#with person}}Person is present{{else}}Person is not present{{/with}}",
+		"data": {},
+		"expected": "Person is not present",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"person"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"with"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"Person is present"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"Person is not present"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [],
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without data",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without data",
+		"template": "{{#each .}}{{.}}{{/each}}",
+		"data": {
+			"goodbyes": "cruel",
+			"world": "world"
+		},
+		"expected": "cruelworld",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each without context",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"expected": "cruel !",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with an object and @key",
+		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"2": {
+					"text": "GOODBYE"
+				},
+				"<b>#1</b>": {
+					"text": "goodbye"
+				}
+			},
+			"world": "world"
+		},
+		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"key"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with an object and @key",
+		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [],
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"key"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with @index",
+		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "The @index variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"index"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with nested @index",
+		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{#each ../goodbyes}}{{@index}} {{/each}}After {{@index}} {{/each}}{{@index}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!",
+		"message": "The @index variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "lookupData",
+					"args": [
+						0,
+						[
+							"index"
+						]
+					]
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"index"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"goodbyes"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"each"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"After "
+							]
+						},
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"index"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "lookupData",
+									"args": [
+										0,
+										[
+											"index"
+										]
+									]
+								},
+								{
+									"opcode": "resolvePossibleLambda",
+									"args": []
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										" "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each object with @index",
+		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"a": {
+					"text": "goodbye"
+				},
+				"b": {
+					"text": "Goodbye"
+				},
+				"c": {
+					"text": "GOODBYE"
+				}
+			},
+			"world": "world"
+		},
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "The @index variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"index"
+								]
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with @first",
+		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "goodbye! cruel world!",
+		"message": "The @first variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"first"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"! "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with nested @first",
+		"template": "{{#each goodbyes}}({{#if @first}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @first}}{{text}}!{{/if}}{{/each}}{{#if @first}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "(goodbye! goodbye! goodbye!) (goodbye!) (goodbye!) cruel world!",
+		"message": "The @first variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"("
+							]
+						},
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"first"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"goodbyes"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"each"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"first"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								2
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								") "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"! "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						},
+						{
+							"opcodes": [
+								{
+									"opcode": "lookupData",
+									"args": [
+										0,
+										[
+											"first"
+										]
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "emptyHash",
+									"args": []
+								},
+								{
+									"opcode": "invokeKnownHelper",
+									"args": [
+										1,
+										"if"
+									]
+								},
+								{
+									"opcode": "append",
+									"args": []
+								}
+							],
+							"children": [
+								{
+									"opcodes": [
+										{
+											"opcode": "getContext",
+											"args": [
+												0
+											]
+										},
+										{
+											"opcode": "pushProgram",
+											"args": [
+												null
+											]
+										},
+										{
+											"opcode": "pushProgram",
+											"args": [
+												null
+											]
+										},
+										{
+											"opcode": "getContext",
+											"args": [
+												0
+											]
+										},
+										{
+											"opcode": "lookupOnContext",
+											"args": [
+												[
+													"text"
+												],
+												null,
+												null
+											]
+										},
+										{
+											"opcode": "invokeAmbiguous",
+											"args": [
+												"text",
+												false
+											]
+										},
+										{
+											"opcode": "appendEscaped",
+											"args": []
+										},
+										{
+											"opcode": "appendContent",
+											"args": [
+												"!"
+											]
+										}
+									],
+									"children": [],
+									"depths": {
+										"list": []
+									},
+									"options": {
+										"data": true,
+										"knownHelpers": {
+											"helperMissing": true,
+											"blockHelperMissing": true,
+											"each": true,
+											"if": true,
+											"unless": true,
+											"with": true,
+											"log": true,
+											"lookup": true
+										}
+									},
+									"isSimple": false
+								}
+							],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"guid": 1,
+							"isSimple": true
+						},
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" "
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"!"
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 3,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each object with @first",
+		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"foo": {
+					"text": "goodbye"
+				},
+				"bar": {
+					"text": "Goodbye"
+				}
+			},
+			"world": "world"
+		},
+		"expected": "goodbye! cruel world!",
+		"message": "The @first variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"first"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"! "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with @last",
+		"template": "{{#each goodbyes}}{{#if @last}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "GOODBYE! cruel world!",
+		"message": "The @last variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"last"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"! "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with nested @last",
+		"template": "{{#each goodbyes}}({{#if @last}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @last}}{{text}}!{{/if}}{{/each}}{{#if @last}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				},
+				{
+					"text": "GOODBYE"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "(GOODBYE!) (GOODBYE!) (GOODBYE! GOODBYE! GOODBYE!) cruel world!",
+		"message": "The @last variable is used",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"("
+							]
+						},
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"last"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"goodbyes"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"each"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "lookupData",
+							"args": [
+								0,
+								[
+									"last"
+								]
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								2
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								1,
+								"if"
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								") "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"! "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						},
+						{
+							"opcodes": [
+								{
+									"opcode": "lookupData",
+									"args": [
+										0,
+										[
+											"last"
+										]
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "emptyHash",
+									"args": []
+								},
+								{
+									"opcode": "invokeKnownHelper",
+									"args": [
+										1,
+										"if"
+									]
+								},
+								{
+									"opcode": "append",
+									"args": []
+								}
+							],
+							"children": [
+								{
+									"opcodes": [
+										{
+											"opcode": "getContext",
+											"args": [
+												0
+											]
+										},
+										{
+											"opcode": "pushProgram",
+											"args": [
+												null
+											]
+										},
+										{
+											"opcode": "pushProgram",
+											"args": [
+												null
+											]
+										},
+										{
+											"opcode": "getContext",
+											"args": [
+												0
+											]
+										},
+										{
+											"opcode": "lookupOnContext",
+											"args": [
+												[
+													"text"
+												],
+												null,
+												null
+											]
+										},
+										{
+											"opcode": "invokeAmbiguous",
+											"args": [
+												"text",
+												false
+											]
+										},
+										{
+											"opcode": "appendEscaped",
+											"args": []
+										},
+										{
+											"opcode": "appendContent",
+											"args": [
+												"!"
+											]
+										}
+									],
+									"children": [],
+									"depths": {
+										"list": []
+									},
+									"options": {
+										"data": true,
+										"knownHelpers": {
+											"helperMissing": true,
+											"blockHelperMissing": true,
+											"each": true,
+											"if": true,
+											"unless": true,
+											"with": true,
+											"log": true,
+											"lookup": true
+										}
+									},
+									"isSimple": false
+								}
+							],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"guid": 1,
+							"isSimple": true
+						},
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" "
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"text"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"text",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"!"
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 3,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with function argument",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}",
+				"php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
+			},
+			"world": "world"
+		},
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each with function argument",
+		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [],
+			"world": "world"
+		},
+		"expected": "cruel world!",
+		"globalHelpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
+				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"world"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"world",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#each",
+		"it": "data passed to helpers",
+		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
+		"data": {
+			"letters": [
+				"a",
+				"b",
+				"c"
+			],
+			"exclaim": "!"
+		},
+		"expected": "a!b!c!",
+		"message": "should output data",
+		"options": {},
+		"helpers": {
+			"detectDataInsideEach": {
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"letters"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"detectDataInsideEach"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"detectDataInsideEach",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#each",
+		"it": "each on implicit context",
+		"template": "{{#each}}{{text}}! {{/each}}cruel world!",
+		"exception": true,
+		"message": "Must pass iterator to #each",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						0,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"cruel world!"
+					]
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"text"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"text",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"! "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "#lookup",
+		"it": "should lookup arbitrary content",
+		"template": "{{#each goodbyes}}{{lookup ../data .}}{{/each}}",
+		"data": {
+			"goodbyes": [
+				0,
+				1
+			],
+			"data": [
+				"foo",
+				"bar"
+			]
+		},
+		"expected": "foobar",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"data"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								2,
+								"lookup"
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "#lookup",
+		"it": "should not fail on undefined value",
+		"template": "{{#each goodbyes}}{{lookup ../bar .}}{{/each}}",
+		"data": {
+			"goodbyes": [
+				0,
+				1
+			],
+			"data": [
+				"foo",
+				"bar"
+			]
+		},
+		"expected": "",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"bar"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "invokeKnownHelper",
+							"args": [
+								2,
+								"lookup"
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	}
+]

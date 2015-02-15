@@ -8,9 +8,10 @@ var path = require('path');
 var util = require('util');
 var extend = require('extend');
 var Handlebars = require('handlebars');
+var pkg = require('../package.json');
 
 program
-  .version('0.0.0')
+  .version(pkg.version)
   .usage('[options] <file ...>')
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);

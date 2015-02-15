@@ -1,0 +1,2968 @@
+[
+	{
+		"description": "partials",
+		"it": "basic partials",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "basic partials",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "partials with context",
+		"template": "Dudes: {{>dude dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{#this}}{{name}} ({{url}}) {{/this}}"
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"message": "Partials can be passed a context",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "partials with undefined context",
+		"template": "Dudes: {{>dude dudes}}",
+		"data": {},
+		"partials": {
+			"dude": "{{foo}} Empty"
+		},
+		"expected": "Dudes:  Empty",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "partials with parameters",
+		"template": "Dudes: {{#dudes}}{{> dude others=..}}{{/dudes}}",
+		"data": {
+			"foo": "bar",
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{others.foo}}{{name}} ({{url}}) "
+		},
+		"expected": "Dudes: barYehuda (http://yehuda) barAlan (http://alan) ",
+		"message": "Basic partials output based on current context.",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "pushHash",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								1
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "assignToHash",
+							"args": [
+								"others"
+							]
+						},
+						{
+							"opcode": "popHash",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"1": true,
+						"list": [
+							1
+						]
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "partial in a partial",
+		"template": "Dudes: {{#dudes}}{{>dude}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} {{> url}} ",
+			"url": "<a href='{{url}}'>{{url}}</a>"
+		},
+		"expected": "Dudes: Yehuda <a href='http://yehuda'>http://yehuda</a> Alan <a href='http://alan'>http://alan</a> ",
+		"message": "Partials are rendered inside of other partials",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "rendering undefined partial throws an exception",
+		"template": "{{> whatever}}",
+		"exception": true,
+		"message": "The partial whatever could not be found",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"whatever",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "partials",
+		"it": "rendering template partial in vm mode throws an exception",
+		"template": "{{> whatever}}",
+		"exception": true,
+		"message": "The partial whatever could not be found",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"whatever",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "partials",
+		"it": "rendering function partial in vm mode",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": {
+				"!code": true,
+				"javascript": "function (context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
+				"php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
+			}
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "GH-14: a partial preceding a selector",
+		"template": "Dudes: {{>dude}} {{another_dude}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"dude": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers Creepers",
+		"message": "Regular selectors can follow a partial",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"another_dude"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"another_dude",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with slash paths",
+		"template": "Dudes: {{> shared/dude}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"shared/dude": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal paths",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"shared/dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with slash and point paths",
+		"template": "Dudes: {{> shared/dude.thing}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"shared/dude.thing": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal with points in paths",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"shared/dude.thing",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Global Partials",
+		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"shared/dude": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers Creepers",
+		"message": "Partials can use globals or passed",
+		"globalPartials": {
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"shared/dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"global_test",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Multiple partial registration",
+		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"expected": "Dudes: Jeepers Creepers",
+		"message": "Partials can use globals or passed",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"shared/dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"global_test",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with integer path",
+		"template": "Dudes: {{> 404}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"404": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"404",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with complex path",
+		"template": "Dudes: {{> 404/asdf?.bar}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"404/asdf?.bar": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"404/asdf?.bar",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with escaped",
+		"template": "Dudes: {{> [+404/asdf?.bar]}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"+404/asdf?.bar": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"+404/asdf?.bar",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "Partials with string",
+		"template": "Dudes: {{> \"+404/asdf?.bar\"}}",
+		"data": {
+			"name": "Jeepers",
+			"another_dude": "Creepers"
+		},
+		"partials": {
+			"+404/asdf?.bar": "{{name}}"
+		},
+		"expected": "Dudes: Jeepers",
+		"message": "Partials can use literal paths",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"+404/asdf?.bar",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "should handle empty partial",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": ""
+		},
+		"expected": "Dudes: ",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "partials",
+		"it": "throw on missing partial",
+		"template": "{{> dude}}",
+		"data": {},
+		"exception": true,
+		"partials": {
+			"dude": "fail"
+		},
+		"expected": "",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "partials",
+		"it": "throw on missing partial",
+		"template": "{{> whatever}}",
+		"exception": true,
+		"message": "/The partial dude could not be compiled/",
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"whatever",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "standalone partials",
+		"it": "indented partials",
+		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}}\n"
+		},
+		"expected": "Dudes:\n  Yehuda\n  Alan\n",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes:\n"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								"  "
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "standalone partials",
+		"it": "nested indented partials",
+		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}}\n {{> url}}",
+			"url": "{{url}}!\n"
+		},
+		"expected": "Dudes:\n  Yehuda\n   http://yehuda!\n  Alan\n   http://alan!\n",
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes:\n"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								"  "
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "compat mode",
+		"it": "partials can access parents",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"root": "yes",
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) {{root}} "
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
+		"compat": true,
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "compat mode",
+		"it": "partials can access parents without data",
+		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
+		"data": {
+			"root": "yes",
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) {{root}} "
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
+		"compat": true,
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dudes"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"dudes",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "push",
+							"args": [
+								"undefined"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushContext",
+							"args": []
+						},
+						{
+							"opcode": "invokePartial",
+							"args": [
+								"dude",
+								""
+							]
+						},
+						{
+							"opcode": "append",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"usePartial": true,
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"usePartial": true,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "compat mode",
+		"it": "partials inherit compat",
+		"template": "Dudes: {{> dude}}",
+		"data": {
+			"root": "yes",
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{#dudes}}{{name}} ({{url}}) {{root}} {{/dudes}}"
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
+		"compat": true,
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"global_test": "{{another_dude}}"
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Dudes: "
+					]
+				},
+				{
+					"opcode": "push",
+					"args": [
+						"undefined"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						"dude",
+						""
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"isSimple": false
+		}
+	}
+]
