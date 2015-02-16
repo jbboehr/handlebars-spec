@@ -2,6 +2,7 @@
     "#each-data passed to helpers-00": {
         "helpers": {
             "detectDataInsideEach": {
+                "!code": true,
                 "javascript": "function(options) { return options.data && options.data.exclaim; }",
                 "php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
             }
@@ -79,14 +80,14 @@
     "#if-if with function argument-00": {
         "data": {
             "goodbye": {
-                "php": "function($options, $scope) { return $scope['foo']; }"
+                "php": "function() { return true; }"
             }
         }
     },
     "#if-if with function argument-01": {
         "data": {
             "goodbye": {
-                "php": "function($options, $scope) { return $scope['world']; }"
+                "php": "function($scope) { return $scope['world']; }"
             }
         }
     },
@@ -100,7 +101,7 @@
     "#if-if with function argument-03": {
         "data": {
             "goodbye": {
-                "php": "function($options, $scope) { return $scope['foo']; }"
+                "php": "function($scope) { return isset($scope['foo']) ? $scope['foo'] : null; }"
             }
         }
     },

@@ -388,7 +388,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn(this); }",
-				"php": "function($context, $options) { return $options->fn($context); }"
+				"php": "function($options) { return $options->fn($options->scope); }"
 			}
 		},
 		"expected": "inner"

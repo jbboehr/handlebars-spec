@@ -1320,7 +1320,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return true;}",
-				"php": "function($options, $scope) { return $scope['foo']; }"
+				"php": "function() { return true; }"
 			},
 			"world": "world"
 		},
@@ -1486,7 +1486,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return this.world;}",
-				"php": "function($options, $scope) { return $scope['world']; }"
+				"php": "function($scope) { return $scope['world']; }"
 			},
 			"world": "world"
 		},
@@ -1818,7 +1818,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {return this.foo;}",
-				"php": "function($options, $scope) { return $scope['foo']; }"
+				"php": "function($scope) { return isset($scope['foo']) ? $scope['foo'] : null; }"
 			},
 			"world": "world"
 		},
@@ -7280,6 +7280,7 @@
 		"options": {},
 		"helpers": {
 			"detectDataInsideEach": {
+				"!code": true,
 				"javascript": "function(options) { return options.data && options.data.exclaim; }",
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}

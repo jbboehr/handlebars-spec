@@ -13,7 +13,7 @@
     "regressions-gh-837: undefined values for helpers-00": {
         "helpers": {
             "str": {
-                "php": "function($value) { return (string) $value; }"
+                "php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
             }
         }
     },

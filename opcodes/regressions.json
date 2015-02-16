@@ -3567,7 +3567,7 @@
 			"str": {
 				"!code": true,
 				"javascript": "function (value) { return value + ''; }",
-				"php": "function($value) { return (string) $value; }"
+				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
 		},
 		"expected": "undefined",

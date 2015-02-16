@@ -17,7 +17,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }",
-				"php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $scope['noun'];\n      }"
+				"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 			}
 		},
 		"opcodes": {
@@ -151,7 +151,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
-				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
 		},
 		"opcodes": {
@@ -719,7 +719,7 @@
 				"bar": "world"
 			}
 		},
-		"expected": "Hello undefined",
+		"expected": "Hello ",
 		"message": "@foo as a parameter retrieves template data",
 		"options": {},
 		"helpers": {
@@ -825,7 +825,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }",
-				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
 		},
 		"opcodes": {
@@ -1114,7 +1114,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.data.adjective + \" \"  + this.noun;\n      }",
-				"php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $scope['noun'];\n      }"
+				"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 			}
 		},
 		"opcodes": {
@@ -1204,7 +1204,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (noun, options) {\n        return options.data.adjective + \" \"  + noun + (this.exclaim ? \"!\" : \"\");\n      }",
-				"php": "function($noun, $options, $scope) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($scope['exclaim'] ? \"!\" : \"\");\n      }"
+				"php": "function($noun, $options) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -1308,12 +1308,12 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn(this);\n      }",
-				"php": "function($options, $scope) {\n        return $options->fn($scope);\n      }"
+				"php": "function($options) {\n        return $options->fn($options->scope);\n      }"
 			},
 			"world": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.data.adjective + \" world\" + (this.exclaim ? \"!\" : \"\");\n      }",
-				"php": "function($options, $scope) {\n        return $options['data']['adjective'] . \" world\" . ($scope['exclaim'] ? \"!\" : \"\");\n      }"
+				"php": "function($options) {\n        return $options['data']['adjective'] . \" world\" . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -1497,7 +1497,7 @@
 			"world": {
 				"!code": true,
 				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }",
-				"php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -1700,7 +1700,7 @@
 			"world": {
 				"!code": true,
 				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }",
-				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -1902,7 +1902,7 @@
 			"world": {
 				"!code": true,
 				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }",
-				"php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -2101,7 +2101,7 @@
 			"world": {
 				"!code": true,
 				"javascript": "function (thing, options) {\n        return options.data.adjective + \" \" + thing + (this.exclaim || \"\");\n      }",
-				"php": "function($thing, $options, $scope) {\n        return $options['data']['adjective'] . \" \" . $thing . ($scope['exclaim'] ?: \"\");\n      }"
+				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
 		},
 		"opcodes": {
@@ -2444,7 +2444,7 @@
 			"helper": {
 				"!code": true,
 				"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }",
-				"php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($scope, array(\"data\" => $frame));\n          }"
+				"php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($options->scope, array(\"data\" => $frame));\n          }"
 			}
 		},
 		"opcodes": {

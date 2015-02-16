@@ -9,7 +9,7 @@
     "basic context-block functions without context argument-00": {
         "data": {
             "awesome": {
-                "php": "function($context, $options) { return $options->fn($context); }"
+                "php": "function($options) { return $options->fn($options->scope); }"
             }
         }
     },
