@@ -2802,7 +2802,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function () { return this.more; }",
-				"php": "function($context, $scope) { return $scope['more']; }"
+				"php": "function($scope) { return $scope['more']; }"
 			},
 			"more": "More awesome"
 		},
@@ -3238,7 +3238,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context, options) { return options.fn(context); }",
-				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+				"php": "function($context, $options) { return $options->fn($context); }"
 			}
 		},
 		"expected": "inner 1",
@@ -3372,7 +3372,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function (context, options) { return options.fn(context); }",
-				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+				"php": "function($context, $options) { return $options->fn($context); }"
 			}
 		},
 		"expected": "inner 1",
@@ -3575,7 +3575,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn(this); }",
-				"php": "function($context, $scope, $options) { return $options['fn']($context); }"
+				"php": "function($context, $options) { return $options->fn($context); }"
 			}
 		},
 		"expected": "inner",
@@ -3706,7 +3706,7 @@
 				"awesome": {
 					"!code": true,
 					"javascript": "function (options) { return this; }",
-					"php": "function($options, $scope) { return $scope; }"
+					"php": "function($scope) { return $scope; }"
 				}
 			}
 		},
@@ -3820,7 +3820,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function (options) { return this; }",
-				"php": "function($options, $scope) { return $scope; }"
+				"php": "function($context) { return $context; }"
 			}
 		},
 		"expected": "inner",
