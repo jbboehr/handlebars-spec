@@ -4188,6 +4188,9 @@
 		},
 		"expected": "Goodbye cruel OMG!",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"opcodes": {
 			"opcodes": [
 				{
@@ -4467,6 +4470,9 @@
 		},
 		"expected": "Goodbye cruel OMG!",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"opcodes": {
 			"opcodes": [
 				{
@@ -4726,6 +4732,9 @@
 		},
 		"expected": "Goodbye cruel ",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"opcodes": {
 			"opcodes": [
 				{

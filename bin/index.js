@@ -428,6 +428,13 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   if( context.compileOptions ) {
     spec.compileOptions = context.compileOptions;
   }
+  if( compat ) { // @todo is this a runtime flag, or compile flag?
+    if( spec.compileOptions ) {
+      spec.compileOptions.compat = true;
+    } else {
+      spec.compileOptions = {compat: true};
+    }
+  }
   
   // Get global partials
   if (context.globalPartials) {

@@ -2558,6 +2558,9 @@
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
 			"global_test": "{{another_dude}}"
@@ -2731,6 +2734,9 @@
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
 			"global_test": "{{another_dude}}"
@@ -2904,6 +2910,9 @@
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
 		"compat": true,
+		"compileOptions": {
+			"compat": true
+		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
 			"global_test": "{{another_dude}}"
