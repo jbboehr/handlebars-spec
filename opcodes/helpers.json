@@ -206,7 +206,7 @@
 			"raw": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn();\n    }",
-				"php": "function($options) { return $options['fn'](); }"
+				"php": "function($options) { return $options->fn(); }"
 			}
 		},
 		"expected": " {{test}} ",
@@ -339,7 +339,7 @@
 			"raw": {
 				"!code": true,
 				"javascript": "function (a, b, c, options) {\n        return options.fn() + a + b + c;\n    }",
-				"php": "function($a, $b, $c, $options) {\n        return $options['fn']() . $a . $b . $c;\n    }"
+				"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
 			}
 		},
 		"expected": " {{test}} 123",
@@ -469,7 +469,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n      var out = \"\";\n      var byes = [\"Goodbye\", \"goodbye\", \"GOODBYE\"];\n      for (var i = 0,j = byes.length; i < j; i++) {\n        out += byes[i] + \" \" + options.fn(this) + \"! \";\n      }\n      return out;\n    }",
-				"php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+				"php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options->fn($context, $scope);\n echo '! ';\n }\n}"
 			}
 		},
 		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! ",
@@ -629,7 +629,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }",
-				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
+				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options->fn($context, $scope); echo \"</a>\"; }"
 			}
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>",
@@ -894,7 +894,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (prefix, options) {\n        return \"<a href='\" + prefix + \"/\" + this.url + \"'>\" + options.fn(this) + \"</a>\";\n    }",
-				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"</a>\"; }"
+				"php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}/{$context['url']}'>\"; $options->fn($context, $scope); echo \"</a>\"; }"
 			}
 		},
 		"expected": "<a href='/root/goodbye'>Goodbye</a>",
@@ -1155,7 +1155,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn({text: \"GOODBYE\"}); }",
-				"php": "function($scope, $options) { $options['fn'](array('text' => 'GOODBYE'), $scope); }"
+				"php": "function($scope, $options) { $options->fn(array('text' => 'GOODBYE'), $scope); }"
 			}
 		},
 		"opcodes": {
@@ -1391,7 +1391,7 @@
 			"form": {
 				"!code": true,
 				"javascript": "function (options) { return \"<form>\" + options.fn(this) + \"</form>\"; }",
-				"php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '</form>'; }"
+				"php": "function($context, $scope, $options) { echo '<form>'; $options->fn($context, $scope); echo '</form>'; }"
 			}
 		},
 		"opcodes": {
@@ -1583,7 +1583,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
-				"php": "function($context, $scope, $options) {\n    echo '<a href=\"/people/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
+				"php": "function($context, $scope, $options) {\n    echo '<a href=\"/people/'.$context['id'].'\">';\n    $options->fn($context, $scope);\n    echo '</a>';\n}"
 			}
 		},
 		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>",
@@ -1996,7 +1996,7 @@
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '</form>';\n}"
 			}
 		},
 		"opcodes": {
@@ -2181,7 +2181,7 @@
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '</form>';\n}"
 			}
 		},
 		"opcodes": {
@@ -2364,12 +2364,12 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (options) { return \"<a href='\" + this.name + \"'>\" + options.fn(this) + \"</a>\"; }",
-				"php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '</a>';\n}"
+				"php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options->fn($context, $scope);\n    echo '</a>';\n}"
 			},
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return \"<form>\" + options.fn(context) + \"</form>\"; }",
-				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '</form>';\n}"
+				"php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '</form>';\n}"
 			}
 		},
 		"opcodes": {
@@ -2649,7 +2649,7 @@
 			"list": {
 				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>",
@@ -2844,7 +2844,7 @@
 			"list": {
 				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<p><em>Nobody's here</em></p>",
@@ -3040,7 +3040,7 @@
 			"list": {
 				"!code": true,
 				"javascript": "function (context, options) {\n      if (context.length > 0) {\n        var out = \"<ul>\";\n        for(var i = 0,j=context.length; i < j; i++) {\n          out += \"<li>\";\n          out += options.fn(context[i]);\n          out += \"</li>\";\n        }\n        out += \"</ul>\";\n        return out;\n      } else {\n        return \"<p>\" + options.inverse(this) + \"</p>\";\n      }\n    }",
-				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '</p>';\n    }\n}"
+				"php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '</li>';\n        }\n        echo '</ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '</p>';\n    }\n}"
 			}
 		},
 		"expected": "<p>Nobody&#x27;s here</p>",
@@ -5808,7 +5808,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: \"Goodbye\", adj: cruel, noun: world});\n      }",
-				"php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
+				"php": "function($cruel, $world, $scope, $options) {\n    $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
 			}
 		},
 		"expected": "Message: Goodbye cruel world",
@@ -6474,7 +6474,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }",
-				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options->fn($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
 			}
 		},
 		"opcodes": {
@@ -6613,7 +6613,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this) + \" \" + options.hash.times + \" TIMES\";\n        }",
-				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+				"php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options->fn($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
 			}
 		},
 		"opcodes": {
@@ -6752,7 +6752,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
-				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options->fn($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
 		},
 		"opcodes": {
@@ -6891,7 +6891,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return \"GOODBYE \" + options.hash.cruel + \" \" + options.fn(this);\n          } else if (options.hash.print === false) {\n            return \"NOT PRINTING\";\n          } else {\n            return \"THIS SHOULD NOT HAPPEN\";\n          }\n        }",
-				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options->fn($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
 			}
 		},
 		"opcodes": {
@@ -9738,7 +9738,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
-				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options->fn($scope);\n        }"
 			},
 			"cruel": {
 				"!code": true,
@@ -10139,7 +10139,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
-				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options->fn($scope);\n        }"
 			},
 			"cruel": {
 				"!code": true,

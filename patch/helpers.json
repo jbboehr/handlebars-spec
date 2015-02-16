@@ -51,28 +51,28 @@
     "hash-block helpers can take an optional hash with booleans-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options->fn($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
             }
         }
     },
     "hash-block helpers can take an optional hash with booleans-01": {
         "helpers": {
             "goodbye": {
-                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options['fn']($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+                "php": "function($context, $scope, $options) {\n    if ($options['hash']['print'] === true) {\n        echo \"GOODBYE {$options['hash']['cruel']} \";\n        $options->fn($context, $scope);\n    } elseif ($options['hash']['print'] === false) {\n        echo \"NOT PRINTING\";\n    } else {\n        echo \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
             }
         }
     },
     "hash-block helpers can take an optional hash with single quoted stings-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options->fn($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
             }
         }
     },
     "hash-block helpers can take an optional hash-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options['fn']($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
+                "php": "function($context, $scope, $options) {\n    echo \"GOODBYE {$options['hash']['cruel']} \";\n    $options->fn($context, $scope);\n    echo \" {$options['hash']['times']} TIMES\";\n}"
             }
         }
     },
@@ -184,91 +184,91 @@
     "helpers-block helper inverted sections-00": {
         "helpers": {
             "list": {
-                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '<\/p>';\n    }\n}"
             }
         }
     },
     "helpers-block helper inverted sections-01": {
         "helpers": {
             "list": {
-                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '<\/p>';\n    }\n}"
             }
         }
     },
     "helpers-block helper inverted sections-02": {
         "helpers": {
             "list": {
-                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options['fn']($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options['inverse'])) {\n        echo '<p>';\n        $options['inverse']($prev, $scope);\n        echo '<\/p>';\n    }\n}"
+                "php": "function($context, $prev, $scope, $options) {\n    if (count($context) > 0) {\n        echo '<ul>';\n        foreach ($context as $row) {\n            echo '<li>';\n            $options->fn($row, $scope);\n            echo '<\/li>';\n        }\n        echo '<\/ul>';\n    } elseif (isset($options->inverse)) {\n        echo '<p>';\n        $options->inverse($prev, $scope);\n        echo '<\/p>';\n    }\n}"
             }
         }
     },
     "helpers-block helper passing a complex path context-00": {
         "helpers": {
             "form": {
-                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '<\/form>';\n}"
             }
         }
     },
     "helpers-block helper passing a new context-00": {
         "helpers": {
             "form": {
-                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '<\/form>';\n}"
             }
         }
     },
     "helpers-block helper should have context in this-00": {
         "helpers": {
             "link": {
-                "php": "function($context, $scope, $options) {\n    echo '<a href=\"\/people\/'.$context['id'].'\">';\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
+                "php": "function($context, $scope, $options) {\n    echo '<a href=\"\/people\/'.$context['id'].'\">';\n    $options->fn($context, $scope);\n    echo '<\/a>';\n}"
             }
         }
     },
     "helpers-block helper staying in the same context-00": {
         "helpers": {
             "form": {
-                "php": "function($context, $scope, $options) { echo '<form>'; $options['fn']($context, $scope); echo '<\/form>'; }"
+                "php": "function($context, $scope, $options) { echo '<form>'; $options->fn($context, $scope); echo '<\/form>'; }"
             }
         }
     },
     "helpers-block helper-00": {
         "helpers": {
             "goodbyes": {
-                "php": "function($scope, $options) { $options['fn'](array('text' => 'GOODBYE'), $scope); }"
+                "php": "function($scope, $options) { $options->fn(array('text' => 'GOODBYE'), $scope); }"
             }
         }
     },
     "helpers-helper block with complex lookup expression-00": {
         "helpers": {
             "goodbyes": {
-                "php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options['fn']($context, $scope);\n echo '! ';\n }\n}"
+                "php": "function($context, $scope, $options) {\n $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n foreach ($byes as $bye) {\n echo $bye.' ';\n $options->fn($context, $scope);\n echo '! ';\n }\n}"
             }
         }
     },
     "helpers-helper for raw block gets parameters-00": {
         "helpers": {
             "raw": {
-                "php": "function($a, $b, $c, $options) {\n        return $options['fn']() . $a . $b . $c;\n    }"
+                "php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
             }
         }
     },
     "helpers-helper for raw block gets raw content-00": {
         "helpers": {
             "raw": {
-                "php": "function($options) { return $options['fn'](); }"
+                "php": "function($options) { return $options->fn(); }"
             }
         }
     },
     "helpers-helper with complex lookup and nested template in vm+compiler-00": {
         "helpers": {
             "link": {
-                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"<\/a>\"; }"
+                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options->fn($context, $scope); echo \"<\/a>\"; }"
             }
         }
     },
     "helpers-helper with complex lookup and nested template-00": {
         "helpers": {
             "link": {
-                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options['fn']($context, $scope); echo \"<\/a>\"; }"
+                "php": "function($prefix, $context, $options) { echo \"<a href='{$prefix}\/{$context['url']}'>\"; $options->fn($context, $scope); echo \"<\/a>\"; }"
             }
         }
     },
@@ -282,10 +282,10 @@
     "helpers-nested block helpers-00": {
         "helpers": {
             "form": {
-                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options['fn']($context, $scope);\n    echo '<\/form>';\n}"
+                "php": "function($context, $scope, $options) {\n    echo '<form>';\n    $options->fn($context, $scope);\n    echo '<\/form>';\n}"
             },
             "link": {
-                "php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options['fn']($context, $scope);\n    echo '<\/a>';\n}"
+                "php": "function($context, $scope, $options) {\n    echo \"<a href='\".$context['name'].\"'>\";\n    $options->fn($context, $scope);\n    echo '<\/a>';\n}"
             }
         }
     },
@@ -352,7 +352,7 @@
     "multiple parameters-block multi-params work-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($cruel, $world, $scope, $options) {\n    $options['fn'](array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
+                "php": "function($cruel, $world, $scope, $options) {\n    $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'), $scope);\n}"
             }
         },
         "globalHelpers": {
@@ -382,7 +382,7 @@
     "name conflicts-helpers take precedence over same-named context properties$-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options->fn($scope);\n        }"
             },
             "cruel": {
                 "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
@@ -402,7 +402,7 @@
     "name conflicts-scoped names take precedence over block helpers-00": {
         "helpers": {
             "goodbye": {
-                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options['fn']($scope);\n        }"
+                "php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']) . $options->fn($scope);\n        }"
             },
             "cruel": {
                 "php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"

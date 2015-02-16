@@ -45,7 +45,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
-				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options['fn']($scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($scope, array(\"data\" => $frame));\n      }"
 			}
 		}
 	},
@@ -150,7 +150,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }",
-				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options['fn']($scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options, $scope) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($scope, array(\"data\" => $frame));\n      }"
 			}
 		}
 	},
@@ -220,7 +220,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn(this);\n      }",
-				"php": "function($options, $scope) {\n        return $options['fn']($scope);\n      }"
+				"php": "function($options, $scope) {\n        return $options->fn($scope);\n      }"
 			},
 			"world": {
 				"!code": true,
@@ -248,7 +248,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"});\n      }",
-				"php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\"));\n      }"
+				"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"));\n      }"
 			},
 			"world": {
 				"!code": true,
@@ -277,7 +277,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.data.accessData + \" \" + options.fn({exclaim: \"?\"});\n      }",
-				"php": "function($options) {\n        return $options['data']['accessData'] . \" \" . $options['fn'](array(\"exclaim\" => \"?\"));\n      }"
+				"php": "function($options) {\n        return $options['data']['accessData'] . \" \" . $options->fn(array(\"exclaim\" => \"?\"));\n      }"
 			},
 			"world": {
 				"!code": true,
@@ -305,7 +305,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\", zomg: \"world\"}, { data: {adjective: \"sad\"} });\n      }",
-				"php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\", \"zomg\" => \"world\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+				"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\", \"zomg\" => \"world\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
 			},
 			"world": {
 				"!code": true,
@@ -333,7 +333,7 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (options) {\n        return options.fn({exclaim: \"?\"}, { data: {adjective: \"sad\"} });\n      }",
-				"php": "function($options) {\n        return $options['fn'](array(\"exclaim\" => \"?\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+				"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
 			},
 			"world": {
 				"!code": true,
@@ -387,7 +387,7 @@
 			"helper": {
 				"!code": true,
 				"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }",
-				"php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options['fn']($scope, array(\"data\" => $frame));\n          }"
+				"php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($scope, array(\"data\" => $frame));\n          }"
 			}
 		}
 	}
