@@ -465,7 +465,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
@@ -759,7 +759,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . $options['hash']['key'];\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
@@ -1070,7 +1070,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -1274,7 +1274,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -1478,7 +1478,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -1741,7 +1741,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -1942,7 +1942,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -2219,7 +2219,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
@@ -2433,7 +2433,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		},
 		"opcodes": {
