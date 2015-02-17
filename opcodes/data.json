@@ -729,14 +729,14 @@
 				"bar": "world"
 			}
 		},
-		"expected": "Hello ",
+		"expected": "Hello undefined",
 		"message": "@foo as a parameter retrieves template data",
 		"options": {},
 		"helpers": {
 			"hello": {
 				"!code": true,
 				"javascript": "function (noun) {\n        return \"Hello \" + noun;\n      }",
-				"php": "function($noun) { return \"Hello \" . $noun; }"
+				"php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
 			}
 		},
 		"opcodes": {

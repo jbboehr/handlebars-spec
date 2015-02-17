@@ -37,10 +37,9 @@
         }
     },
     "data-nested parameter data does not fail with @world.bar-00": {
-        "expected": "Hello ",
         "helpers": {
             "hello": {
-                "php": "function($noun) { return \"Hello \" . $noun; }"
+                "php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
             }
         }
     },
