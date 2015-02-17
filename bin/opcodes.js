@@ -46,7 +46,7 @@ var tests = [];
 Object.keys(inputTests).forEach(function(x) {
     var test = inputTests[x];
     try {
-        var opcodes = compile(test.template);
+        var opcodes = compile(test.template, test.compileOptions);
         test.opcodes = opcodes;
         tests.push(test);
     } catch(e) {

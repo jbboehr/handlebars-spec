@@ -7,7 +7,18 @@
 		"expected": "HELP ME MY BOSS is.a slave.driver",
 		"message": "String parameters output",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"wycats": {
@@ -25,14 +36,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"is",
-							"a"
-						],
-						null,
-						null
+						"is.a",
+						"ID"
 					]
 				},
 				{
@@ -42,14 +49,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"slave",
-							"driver"
-						],
-						null,
-						null
+						"slave.driver",
+						"ID"
 					]
 				},
 				{
@@ -102,6 +105,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -114,6 +118,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	},
@@ -125,13 +130,24 @@
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
 		"message": "String parameters output",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
-				"php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($scope);\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
 			}
 		},
 		"opcodes": {
@@ -143,14 +159,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"is",
-							"a"
-						],
-						null,
-						null
+						"is.a",
+						"ID"
 					]
 				},
 				{
@@ -160,14 +172,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"slave",
-							"driver"
-						],
-						null,
-						null
+						"slave.driver",
+						"ID"
 					]
 				},
 				{
@@ -230,6 +238,7 @@
 						"list": []
 					},
 					"options": {
+						"stringParams": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -242,6 +251,7 @@
 							"lookup": true
 						}
 					},
+					"stringParams": true,
 					"isSimple": true
 				}
 			],
@@ -249,6 +259,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -261,6 +272,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"guid": 1,
 			"isSimple": true
 		}
@@ -276,7 +288,18 @@
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
 		"message": "Proper context variable output",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"tomdale": {
@@ -299,13 +322,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"dale"
-						],
-						null,
-						null
+						"dale",
+						"ID"
 					]
 				},
 				{
@@ -346,13 +366,10 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"need"
-								],
-								null,
-								null
+								"need",
+								"ID"
 							]
 						},
 						{
@@ -362,14 +379,10 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"dad",
-									"joke"
-								],
-								null,
-								null
+								"dad.joke",
+								"ID"
 							]
 						},
 						{
@@ -425,6 +438,7 @@
 						]
 					},
 					"options": {
+						"stringParams": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -437,6 +451,7 @@
 							"lookup": true
 						}
 					},
+					"stringParams": true,
 					"isSimple": true
 				}
 			],
@@ -444,6 +459,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -456,6 +472,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"guid": 1,
 			"isSimple": true
 		}
@@ -468,7 +485,18 @@
 		"expected": "Helper called",
 		"message": "the string type is passed",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"tomdale": {
@@ -481,9 +509,16 @@
 		"opcodes": {
 			"opcodes": [
 				{
-					"opcode": "pushString",
+					"opcode": "getContext",
 					"args": [
-						"need"
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"need",
+						"STRING"
 					]
 				},
 				{
@@ -493,26 +528,36 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"dad",
-							"joke"
-						],
-						null,
-						null
+						"dad.joke",
+						"ID"
 					]
 				},
 				{
-					"opcode": "pushLiteral",
+					"opcode": "getContext",
 					"args": [
-						"true"
+						0
 					]
 				},
 				{
-					"opcode": "pushLiteral",
+					"opcode": "pushStringParam",
 					"args": [
-						"false"
+						true,
+						"BOOLEAN"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						false,
+						"BOOLEAN"
 					]
 				},
 				{
@@ -565,6 +610,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -577,6 +623,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	},
@@ -587,7 +634,18 @@
 		"data": {},
 		"expected": "Helper called",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"tomdale": {
@@ -606,14 +664,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"he",
-							"says"
-						],
-						null,
-						null
+						"he.says",
+						"ID"
 					]
 				},
 				{
@@ -633,9 +687,16 @@
 					"args": []
 				},
 				{
-					"opcode": "pushString",
+					"opcode": "getContext",
 					"args": [
-						"need"
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"need",
+						"STRING"
 					]
 				},
 				{
@@ -645,20 +706,23 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"dad",
-							"joke"
-						],
-						null,
-						null
+						"dad.joke",
+						"ID"
 					]
 				},
 				{
-					"opcode": "pushLiteral",
+					"opcode": "getContext",
 					"args": [
-						"true"
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						true,
+						"BOOLEAN"
 					]
 				},
 				{
@@ -717,6 +781,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -729,6 +794,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	},
@@ -741,7 +807,18 @@
 		},
 		"expected": "Helper called",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"tomdale": {
@@ -765,13 +842,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"dale"
-						],
-						null,
-						null
+						"dale",
+						"ID"
 					]
 				},
 				{
@@ -812,14 +886,10 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"he",
-									"says"
-								],
-								null,
-								null
+								"he.says",
+								"ID"
 							]
 						},
 						{
@@ -839,9 +909,16 @@
 							"args": []
 						},
 						{
-							"opcode": "pushString",
+							"opcode": "getContext",
 							"args": [
-								"need"
+								0
+							]
+						},
+						{
+							"opcode": "pushStringParam",
+							"args": [
+								"need",
+								"STRING"
 							]
 						},
 						{
@@ -851,20 +928,23 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"dad",
-									"joke"
-								],
-								null,
-								null
+								"dad.joke",
+								"ID"
 							]
 						},
 						{
-							"opcode": "pushLiteral",
+							"opcode": "getContext",
 							"args": [
-								"true"
+								0
+							]
+						},
+						{
+							"opcode": "pushStringParam",
+							"args": [
+								true,
+								"BOOLEAN"
 							]
 						},
 						{
@@ -926,6 +1006,7 @@
 						]
 					},
 					"options": {
+						"stringParams": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -938,6 +1019,7 @@
 							"lookup": true
 						}
 					},
+					"stringParams": true,
 					"isSimple": true
 				}
 			],
@@ -945,6 +1027,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -957,6 +1040,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"guid": 1,
 			"isSimple": true
 		}
@@ -972,13 +1056,24 @@
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
 		"message": "Proper context variable output",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"tomdale": {
 				"!code": true,
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }",
-				"php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($scope);\n      }"
+				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($options->scope);\n      }"
 			},
 			"with": {
 				"!code": true,
@@ -995,13 +1090,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"dale"
-						],
-						null,
-						null
+						"dale",
+						"ID"
 					]
 				},
 				{
@@ -1042,13 +1134,10 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"need"
-								],
-								null,
-								null
+								"need",
+								"ID"
 							]
 						},
 						{
@@ -1058,14 +1147,10 @@
 							]
 						},
 						{
-							"opcode": "lookupOnContext",
+							"opcode": "pushStringParam",
 							"args": [
-								[
-									"dad",
-									"joke"
-								],
-								null,
-								null
+								"dad.joke",
+								"ID"
 							]
 						},
 						{
@@ -1128,6 +1213,7 @@
 								"list": []
 							},
 							"options": {
+								"stringParams": true,
 								"data": true,
 								"knownHelpers": {
 									"helperMissing": true,
@@ -1140,6 +1226,7 @@
 									"lookup": true
 								}
 							},
+							"stringParams": true,
 							"isSimple": true
 						}
 					],
@@ -1150,6 +1237,7 @@
 						]
 					},
 					"options": {
+						"stringParams": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -1162,6 +1250,7 @@
 							"lookup": true
 						}
 					},
+					"stringParams": true,
 					"guid": 1,
 					"isSimple": true
 				}
@@ -1170,6 +1259,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -1182,6 +1272,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"guid": 1,
 			"isSimple": true
 		}
@@ -1193,7 +1284,18 @@
 		"data": {},
 		"expected": "WITH",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"with": {
@@ -1216,13 +1318,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"content"
-						],
-						null,
-						null
+						"content",
+						"ID"
 					]
 				},
 				{
@@ -1427,6 +1526,7 @@
 								"list": []
 							},
 							"options": {
+								"stringParams": true,
 								"data": true,
 								"knownHelpers": {
 									"helperMissing": true,
@@ -1439,6 +1539,7 @@
 									"lookup": true
 								}
 							},
+							"stringParams": true,
 							"isSimple": false
 						}
 					],
@@ -1446,6 +1547,7 @@
 						"list": []
 					},
 					"options": {
+						"stringParams": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -1458,6 +1560,7 @@
 							"lookup": true
 						}
 					},
+					"stringParams": true,
 					"guid": 1,
 					"isSimple": true
 				}
@@ -1466,6 +1569,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -1478,6 +1582,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"guid": 1,
 			"isSimple": true
 		}
@@ -1489,7 +1594,18 @@
 		"data": {},
 		"expected": "Foo!",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"foo": {
@@ -1502,12 +1618,16 @@
 		"opcodes": {
 			"opcodes": [
 				{
-					"opcode": "lookupData",
+					"opcode": "getContext",
 					"args": [
-						0,
-						[
-							"bar"
-						]
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"bar",
+						"DATA"
 					]
 				},
 				{
@@ -1560,6 +1680,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -1572,6 +1693,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	}

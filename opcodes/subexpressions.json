@@ -2541,7 +2541,18 @@
 		"expected": "fooyeah",
 		"message": "string params for inner helper processed correctly",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"snog": {
@@ -2565,13 +2576,23 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"foo"
-						],
 						null,
-						null
+						"sexpr"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"foo",
+						"ID"
 					]
 				},
 				{
@@ -2597,13 +2618,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"y"
-						],
-						null,
-						null
+						"y",
+						"ID"
 					]
 				},
 				{
@@ -2647,13 +2665,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"yeah"
-						],
-						null,
-						null
+						"yeah",
+						"ID"
 					]
 				},
 				{
@@ -2679,13 +2694,10 @@
 					]
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "pushStringParam",
 					"args": [
-						[
-							"b"
-						],
-						null,
-						null
+						"b",
+						"ID"
 					]
 				},
 				{
@@ -2732,6 +2744,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -2744,6 +2757,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	},
@@ -2754,7 +2768,18 @@
 		"data": {},
 		"expected": "val is BORK",
 		"compileOptions": {
-			"stringParams": true
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"blog": {
@@ -2786,6 +2811,19 @@
 				{
 					"opcode": "pushHash",
 					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						null,
+						"sexpr"
+					]
 				},
 				{
 					"opcode": "pushProgram",
@@ -2871,6 +2909,7 @@
 				"list": []
 			},
 			"options": {
+				"stringParams": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -2883,6 +2922,7 @@
 					"lookup": true
 				}
 			},
+			"stringParams": true,
 			"isSimple": true
 		}
 	},

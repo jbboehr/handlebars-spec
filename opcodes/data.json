@@ -11,7 +11,17 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -819,7 +829,17 @@
 		"message": "data variables are inherited downstream",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"let": {
@@ -1108,7 +1128,17 @@
 		"message": "Data output by helper inside partial",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -1198,7 +1228,17 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -1302,7 +1342,17 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -1486,7 +1536,17 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -1689,7 +1749,17 @@
 		"message": "Data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -1891,7 +1961,17 @@
 		"message": "Overriden data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {
@@ -2090,7 +2170,17 @@
 		"message": "Overriden data output by helper",
 		"options": {},
 		"compileOptions": {
-			"data": true
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"hello": {

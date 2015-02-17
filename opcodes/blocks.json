@@ -4189,7 +4189,19 @@
 		"expected": "Goodbye cruel OMG!",
 		"compat": true,
 		"compileOptions": {
-			"compat": true
+			"compat": true,
+			"data": true,
+			"useDepths": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
@@ -4394,7 +4406,9 @@
 								"list": []
 							},
 							"options": {
+								"compat": true,
 								"data": true,
+								"useDepths": true,
 								"knownHelpers": {
 									"helperMissing": true,
 									"blockHelperMissing": true,
@@ -4413,7 +4427,9 @@
 						"list": []
 					},
 					"options": {
+						"compat": true,
 						"data": true,
+						"useDepths": true,
 						"knownHelpers": {
 							"helperMissing": true,
 							"blockHelperMissing": true,
@@ -4433,7 +4449,9 @@
 				"list": []
 			},
 			"options": {
+				"compat": true,
 				"data": true,
+				"useDepths": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -4471,7 +4489,19 @@
 		"expected": "Goodbye cruel OMG!",
 		"compat": true,
 		"compileOptions": {
-			"compat": true
+			"compat": true,
+			"data": true,
+			"useDepths": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
@@ -4656,7 +4686,9 @@
 								"list": []
 							},
 							"options": {
+								"compat": true,
 								"data": true,
+								"useDepths": true,
 								"knownHelpers": {
 									"helperMissing": true,
 									"blockHelperMissing": true,
@@ -4675,7 +4707,9 @@
 						"list": []
 					},
 					"options": {
+						"compat": true,
 						"data": true,
+						"useDepths": true,
 						"knownHelpers": {
 							"helperMissing": true,
 							"blockHelperMissing": true,
@@ -4695,7 +4729,9 @@
 				"list": []
 			},
 			"options": {
+				"compat": true,
 				"data": true,
+				"useDepths": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -4733,7 +4769,19 @@
 		"expected": "Goodbye cruel ",
 		"compat": true,
 		"compileOptions": {
-			"compat": true
+			"compat": true,
+			"data": true,
+			"useDepths": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
@@ -4918,7 +4966,9 @@
 								"list": []
 							},
 							"options": {
+								"compat": true,
 								"data": true,
+								"useDepths": true,
 								"knownHelpers": {
 									"helperMissing": true,
 									"blockHelperMissing": true,
@@ -4937,7 +4987,9 @@
 						"list": []
 					},
 					"options": {
+						"compat": true,
 						"data": true,
+						"useDepths": true,
 						"knownHelpers": {
 							"helperMissing": true,
 							"blockHelperMissing": true,
@@ -4957,7 +5009,9 @@
 				"list": []
 			},
 			"options": {
+				"compat": true,
 				"data": true,
+				"useDepths": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,

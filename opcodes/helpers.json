@@ -7478,8 +7478,17 @@
 		"message": "'foo' should === 'foo",
 		"compileOptions": {
 			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
 				"hello": true
-			}
+			},
+			"data": true
 		},
 		"helpers": {
 			"hello": {
@@ -7491,12 +7500,6 @@
 		"opcodes": {
 			"opcodes": [
 				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
 					"opcode": "pushProgram",
 					"args": [
 						null
@@ -7509,26 +7512,14 @@
 					]
 				},
 				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
+					"opcode": "emptyHash",
+					"args": []
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "invokeKnownHelper",
 					"args": [
-						[
-							"hello"
-						],
-						null,
-						null
-					]
-				},
-				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"hello",
-						false
+						0,
+						"hello"
 					]
 				},
 				{
@@ -7541,7 +7532,6 @@
 				"list": []
 			},
 			"options": {
-				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -7550,8 +7540,10 @@
 					"unless": true,
 					"with": true,
 					"log": true,
-					"lookup": true
-				}
+					"lookup": true,
+					"hello": true
+				},
+				"data": true
 			},
 			"isSimple": true
 		}
@@ -7565,9 +7557,18 @@
 		"message": "'undefined' should === 'undefined",
 		"compileOptions": {
 			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
 				"typeof": true
 			},
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true
 		},
 		"helpers": {
 			"typeof": {
@@ -7616,27 +7617,10 @@
 					"args": []
 				},
 				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"typeof"
-						],
-						true,
-						null
-					]
-				},
-				{
-					"opcode": "invokeHelper",
+					"opcode": "invokeKnownHelper",
 					"args": [
 						1,
-						"typeof",
-						true
+						"typeof"
 					]
 				},
 				{
@@ -7649,7 +7633,6 @@
 				"list": []
 			},
 			"options": {
-				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -7658,8 +7641,11 @@
 					"unless": true,
 					"with": true,
 					"log": true,
-					"lookup": true
-				}
+					"lookup": true,
+					"typeof": true
+				},
+				"knownHelpersOnly": true,
+				"data": true
 			},
 			"isSimple": true
 		}
@@ -7672,7 +7658,18 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
@@ -7735,6 +7732,7 @@
 						"list": []
 					},
 					"options": {
+						"knownHelpersOnly": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -7754,6 +7752,7 @@
 				"list": []
 			},
 			"options": {
+				"knownHelpersOnly": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -7780,28 +7779,21 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
 				{
 					"opcode": "getContext",
 					"args": [
@@ -7819,11 +7811,8 @@
 					]
 				},
 				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"foo",
-						false
-					]
+					"opcode": "resolvePossibleLambda",
+					"args": []
 				},
 				{
 					"opcode": "appendEscaped",
@@ -7835,6 +7824,7 @@
 				"list": []
 			},
 			"options": {
+				"knownHelpersOnly": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -7860,28 +7850,21 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
 				{
 					"opcode": "getContext",
 					"args": [
@@ -7899,11 +7882,8 @@
 					]
 				},
 				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"foo",
-						true
-					]
+					"opcode": "resolvePossibleLambda",
+					"args": []
 				},
 				{
 					"opcode": "pushProgram",
@@ -7922,8 +7902,10 @@
 					"args": []
 				},
 				{
-					"opcode": "ambiguousBlockValue",
-					"args": []
+					"opcode": "blockValue",
+					"args": [
+						"foo"
+					]
 				},
 				{
 					"opcode": "append",
@@ -7945,6 +7927,7 @@
 						"list": []
 					},
 					"options": {
+						"knownHelpersOnly": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -7964,6 +7947,7 @@
 				"list": []
 			},
 			"options": {
+				"knownHelpersOnly": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -7990,28 +7974,21 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						0
-					]
-				},
 				{
 					"opcode": "getContext",
 					"args": [
@@ -8029,11 +8006,8 @@
 					]
 				},
 				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"foo",
-						true
-					]
+					"opcode": "resolvePossibleLambda",
+					"args": []
 				},
 				{
 					"opcode": "pushProgram",
@@ -8052,8 +8026,10 @@
 					"args": []
 				},
 				{
-					"opcode": "ambiguousBlockValue",
-					"args": []
+					"opcode": "blockValue",
+					"args": [
+						"foo"
+					]
 				},
 				{
 					"opcode": "append",
@@ -8075,6 +8051,7 @@
 						"list": []
 					},
 					"options": {
+						"knownHelpersOnly": true,
 						"data": true,
 						"knownHelpers": {
 							"helperMissing": true,
@@ -8094,6 +8071,7 @@
 				"list": []
 			},
 			"options": {
+				"knownHelpersOnly": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -8125,28 +8103,21 @@
 		"expected": "bar",
 		"message": "'bar' should === 'bar",
 		"compileOptions": {
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
 		},
 		"opcodes": {
 			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					]
-				},
 				{
 					"opcode": "getContext",
 					"args": [
@@ -8164,11 +8135,8 @@
 					]
 				},
 				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"foo",
-						false
-					]
+					"opcode": "resolvePossibleLambda",
+					"args": []
 				},
 				{
 					"opcode": "appendEscaped",
@@ -8180,6 +8148,7 @@
 				"list": []
 			},
 			"options": {
+				"knownHelpersOnly": true,
 				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
@@ -9196,9 +9165,18 @@
 		"expected": "ran: helper",
 		"compileOptions": {
 			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true,
 				"helper": true
 			},
-			"knownHelpersOnly": true
+			"knownHelpersOnly": true,
+			"data": true
 		},
 		"helpers": {
 			"blockHelperMissing": {
@@ -9220,12 +9198,6 @@
 		"opcodes": {
 			"opcodes": [
 				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
-				},
-				{
 					"opcode": "pushProgram",
 					"args": [
 						null
@@ -9238,26 +9210,14 @@
 					]
 				},
 				{
-					"opcode": "getContext",
-					"args": [
-						0
-					]
+					"opcode": "emptyHash",
+					"args": []
 				},
 				{
-					"opcode": "lookupOnContext",
+					"opcode": "invokeKnownHelper",
 					"args": [
-						[
-							"helper"
-						],
-						null,
-						null
-					]
-				},
-				{
-					"opcode": "invokeAmbiguous",
-					"args": [
-						"helper",
-						false
+						0,
+						"helper"
 					]
 				},
 				{
@@ -9270,7 +9230,6 @@
 				"list": []
 			},
 			"options": {
-				"data": true,
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -9279,8 +9238,11 @@
 					"unless": true,
 					"with": true,
 					"log": true,
-					"lookup": true
-				}
+					"lookup": true,
+					"helper": true
+				},
+				"knownHelpersOnly": true,
+				"data": true
 			},
 			"isSimple": true
 		}
