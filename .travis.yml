@@ -9,3 +9,6 @@ script:
   - make check_changes
   - make test
 
+branches:
+  only:
+    - master
