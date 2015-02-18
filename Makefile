@@ -3,13 +3,13 @@ BASIC_SPECS := basic blocks builtins data helpers partials regressions \
 		 string-params subexpressions track-ids whitespace-control
 SPECS := $(BASIC_SPECS) parser tokenizer
 
-all: spec opcodes
+all: spec export
 
 spec: node_modules
 	$(foreach var, $(SPECS), node bin handlebars.js/spec/$(var).js -o spec/$(var).json;)
 
-opcodes: node_modules
-	$(foreach var, $(BASIC_SPECS), node bin/opcodes spec/$(var).json -o opcodes/$(var).json;)
+export: node_modules
+	$(foreach var, $(BASIC_SPECS), node bin/export spec/$(var).json -o export/$(var).json;)
 
 check_changes:
 	@git status --porcelain | grep 'spec/' && return 1 || return 0
@@ -30,4 +30,4 @@ jshint: node_modules
 node_modules:
 	npm install
 
-.PHONY: all spec opcodes check_changes test test_node test_php
+.PHONY: all spec export check_changes test test_node test_php

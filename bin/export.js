@@ -12,6 +12,7 @@ program
   .version(pkg.version)
   .usage('[options] <spec file ...>')
   .option('-o, --output [file]', 'write JSON output to a file')
+  .option('-v, --verbose', 'verbose')
   .parse(process.argv);
 
 var input = path.resolve(program.args[0]);
@@ -35,8 +36,12 @@ function compile(input, options) {
     }
     
     var ast = env.parse(input);
-    var environment = new env.Compiler().compile(ast, options);
-    return environment;
+    var astCopy = JSON.parse(JSON.stringify(ast));
+    var opcodes = new env.Compiler().compile(ast, options);
+    return {
+        ast: astCopy,
+        opcodes: opcodes
+    };
     //return new env.JavaScriptCompiler().compile(environment, options);
 }
 
@@ -46,12 +51,36 @@ var tests = [];
 Object.keys(inputTests).forEach(function(x) {
     var test = inputTests[x];
     try {
-        var opcodes = compile(test.template, test.compileOptions);
-        test.opcodes = opcodes;
+        var res = compile(test.template, test.compileOptions);
+        test.ast = res.ast;
+        test.opcodes = res.opcodes;
+        if( test.partials ) {
+            var partialAsts = {};
+            var partialOpcodes = {};
+            Object.keys(test.partials).forEach(function(y) {
+                var res = compile(test.partials[y], test.compileOptions);
+                partialAsts[y] = res.ast;
+                partialOpcodes[y] = res.opcodes;
+            });
+            test.partialAsts = partialAsts;
+            test.partialOpcodes = partialOpcodes;
+        }
+        if( test.globalPartials ) {
+            var globalPartialAsts = {};
+            var globalPartialOpcodes = {};
+            Object.keys(test.globalPartials).forEach(function(y) {
+                var res = compile(test.globalPartials[y], test.compileOptions);
+                globalPartialAsts[y] = res.ast;
+                globalPartialOpcodes[y] = res.opcodes;
+            });
+            test.globalPartialAsts = globalPartialAsts;
+            test.globalPartialOpcodes = globalPartialOpcodes;
+        }
         tests.push(test);
     } catch(e) {
         if( !test.exception ) {
-            throw e;
+            console.log('Caught exception, skipping test ', 
+                test.description, '-', test.it, program.verbose ? e.stack : e);
         }
     }
 });
