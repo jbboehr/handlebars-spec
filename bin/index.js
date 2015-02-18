@@ -8,9 +8,10 @@ var path = require('path');
 var util = require('util');
 var extend = require('extend');
 var Handlebars = require('handlebars');
+var pkg = require('../package.json');
 
 program
-  .version('0.0.0')
+  .version(pkg.version)
   .usage('[options] <file ...>')
   .option('-o, --output [file]', 'write JSON output to a file')
   .parse(process.argv);
@@ -426,6 +427,13 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   // Get compiler options
   if( context.compileOptions ) {
     spec.compileOptions = context.compileOptions;
+  }
+  if( compat ) { // @todo is this a runtime flag, or compile flag?
+    if( spec.compileOptions ) {
+      spec.compileOptions.compat = true;
+    } else {
+      spec.compileOptions = {compat: true};
+    }
   }
   
   // Get global partials

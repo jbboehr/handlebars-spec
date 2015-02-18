@@ -13,27 +13,27 @@
     "regressions-gh-837: undefined values for helpers-00": {
         "helpers": {
             "str": {
-                "php": "function($value) { return (string) $value; }"
+                "php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
             }
         }
     },
     "regressions-gs-428: nested if else rendering-00": {
         "helpers": {
             "blk": {
-                "php": "function($block) { return $block['fn'](''); }"
+                "php": "function($block) { return $block/*['fn']*/->fn(''); }"
             },
             "inverse": {
-                "php": "function($block) { return $block['inverse'](''); }"
+                "php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
             }
         }
     },
     "regressions-gs-428: nested if else rendering-01": {
         "helpers": {
             "blk": {
-                "php": "function($block) { return $block['fn'](''); }"
+                "php": "function($block) { return $block/*['fn']*/->fn(''); }"
             },
             "inverse": {
-                "php": "function($block) { return $block['inverse'](''); }"
+                "php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
             }
         }
     }

@@ -1,0 +1,7282 @@
+[
+	{
+		"description": "subexpressions",
+		"it": "arg-less helper",
+		"template": "{{foo (bar)}}!",
+		"data": {},
+		"helpers": {
+			"foo": {
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
+			},
+			"bar": {
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
+			}
+		},
+		"expected": "LOLLOL!",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 14,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 13,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 11,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": true,
+							"stringModeValue": "foo"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 7,
+									"lastColumn": 10,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "bar",
+									"parts": [
+										"bar"
+									],
+									"string": "bar",
+									"depth": 0,
+									"idName": "bar",
+									"isSimple": true,
+									"stringModeValue": "bar"
+								},
+								"params": [],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "foo",
+						"parts": [
+							"foo"
+						],
+						"string": "foo",
+						"depth": 0,
+						"idName": "foo",
+						"isSimple": true,
+						"stringModeValue": "foo"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "bar",
+								"parts": [
+									"bar"
+								],
+								"string": "bar",
+								"depth": 0,
+								"idName": "bar",
+								"isSimple": true,
+								"stringModeValue": "bar"
+							},
+							"params": [],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 13,
+					"lastColumn": 14,
+					"lastLine": 1,
+					"type": "content",
+					"string": "!",
+					"original": "!"
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bar"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"bar",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"foo",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "helper w args",
+		"template": "{{blog (equal a b)}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . (is_bool($val) ? ($val ? 'true' : 'false') : $val);\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is true",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 20,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 20,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 18,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 17,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 13,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "equal",
+									"parts": [
+										"equal"
+									],
+									"string": "equal",
+									"depth": 0,
+									"idName": "equal",
+									"isSimple": true,
+									"stringModeValue": "equal"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 14,
+										"lastColumn": 15,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 16,
+										"lastColumn": 17,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 17,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "equal",
+								"parts": [
+									"equal"
+								],
+								"string": "equal",
+								"depth": 0,
+								"idName": "equal",
+								"isSimple": true,
+								"stringModeValue": "equal"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 14,
+									"lastColumn": 15,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 16,
+									"lastColumn": 17,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "mixed paths and helpers",
+		"template": "{{blog baz.bat (equal a b) baz.bar}}",
+		"data": {
+			"bar": "LOL",
+			"baz": {
+				"bat": "foo!",
+				"bar": "bar!"
+			}
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val, that, theOther) {\n        return \"val is \" + val + ', ' + that + ' and ' + theOther;\n      }",
+				"php": "function($val, $that, $theOther) {\n        return \"val is \" . $val . ', ' . (is_bool($that) ? ($that ? 'true' : 'false') : $that) . ' and ' . $theOther;\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is foo!, true and bar!",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 36,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 36,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 34,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 14,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "baz.bat",
+								"parts": [
+									"baz",
+									"bat"
+								],
+								"string": "baz.bat",
+								"depth": 0,
+								"idName": "baz.bat",
+								"isSimple": false,
+								"stringModeValue": "baz.bat"
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 16,
+								"lastColumn": 25,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 16,
+									"lastColumn": 21,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "equal",
+									"parts": [
+										"equal"
+									],
+									"string": "equal",
+									"depth": 0,
+									"idName": "equal",
+									"isSimple": true,
+									"stringModeValue": "equal"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 22,
+										"lastColumn": 23,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 24,
+										"lastColumn": 25,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 27,
+								"lastColumn": 34,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "baz.bar",
+								"parts": [
+									"baz",
+									"bar"
+								],
+								"string": "baz.bar",
+								"depth": 0,
+								"idName": "baz.bar",
+								"isSimple": false,
+								"stringModeValue": "baz.bar"
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 14,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "baz.bat",
+							"parts": [
+								"baz",
+								"bat"
+							],
+							"string": "baz.bat",
+							"depth": 0,
+							"idName": "baz.bat",
+							"isSimple": false,
+							"stringModeValue": "baz.bat"
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 16,
+							"lastColumn": 25,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 16,
+								"lastColumn": 21,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "equal",
+								"parts": [
+									"equal"
+								],
+								"string": "equal",
+								"depth": 0,
+								"idName": "equal",
+								"isSimple": true,
+								"stringModeValue": "equal"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 22,
+									"lastColumn": 23,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 24,
+									"lastColumn": 25,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 27,
+							"lastColumn": 34,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "baz.bar",
+							"parts": [
+								"baz",
+								"bar"
+							],
+							"string": "baz.bar",
+							"depth": 0,
+							"idName": "baz.bar",
+							"isSimple": false,
+							"stringModeValue": "baz.bar"
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"baz",
+							"bat"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"baz",
+							"bar"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						3,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "supports much nesting",
+		"template": "{{blog (equal (equal true true) true)}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . (is_bool($val) ? ($val ? 'true' : 'false') : $val);\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is true",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 39,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 39,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 37,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 36,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 13,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "equal",
+									"parts": [
+										"equal"
+									],
+									"string": "equal",
+									"depth": 0,
+									"idName": "equal",
+									"isSimple": true,
+									"stringModeValue": "equal"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 30,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 15,
+											"lastColumn": 20,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "equal",
+											"parts": [
+												"equal"
+											],
+											"string": "equal",
+											"depth": 0,
+											"idName": "equal",
+											"isSimple": true,
+											"stringModeValue": "equal"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 21,
+												"lastColumn": 25,
+												"lastLine": 1,
+												"type": "BOOLEAN",
+												"bool": "true",
+												"stringModeValue": true
+											},
+											{
+												"firstLine": 1,
+												"firstColumn": 26,
+												"lastColumn": 30,
+												"lastLine": 1,
+												"type": "BOOLEAN",
+												"bool": "true",
+												"stringModeValue": true
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 32,
+										"lastColumn": 36,
+										"lastLine": 1,
+										"type": "BOOLEAN",
+										"bool": "true",
+										"stringModeValue": true
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 36,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "equal",
+								"parts": [
+									"equal"
+								],
+								"string": "equal",
+								"depth": 0,
+								"idName": "equal",
+								"isSimple": true,
+								"stringModeValue": "equal"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 15,
+									"lastColumn": 30,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 20,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "equal",
+										"parts": [
+											"equal"
+										],
+										"string": "equal",
+										"depth": 0,
+										"idName": "equal",
+										"isSimple": true,
+										"stringModeValue": "equal"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 21,
+											"lastColumn": 25,
+											"lastLine": 1,
+											"type": "BOOLEAN",
+											"bool": "true",
+											"stringModeValue": true
+										},
+										{
+											"firstLine": 1,
+											"firstColumn": 26,
+											"lastColumn": 30,
+											"lastLine": 1,
+											"type": "BOOLEAN",
+											"bool": "true",
+											"stringModeValue": true
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 32,
+									"lastColumn": 36,
+									"lastLine": 1,
+									"type": "BOOLEAN",
+									"bool": "true",
+									"stringModeValue": true
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash \"abc\" (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "abc-ab",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 27,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 25,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "dash",
+							"parts": [
+								"dash"
+							],
+							"string": "dash",
+							"depth": 0,
+							"idName": "dash",
+							"isSimple": true,
+							"stringModeValue": "dash"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 12,
+								"lastLine": 1,
+								"type": "STRING",
+								"stringModeValue": "abc",
+								"string": "abc",
+								"original": "abc"
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 14,
+								"lastColumn": 24,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 14,
+									"lastColumn": 20,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "concat",
+									"parts": [
+										"concat"
+									],
+									"string": "concat",
+									"depth": 0,
+									"idName": "concat",
+									"isSimple": true,
+									"stringModeValue": "concat"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 21,
+										"lastColumn": 22,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 23,
+										"lastColumn": 24,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "dash",
+						"parts": [
+							"dash"
+						],
+						"string": "dash",
+						"depth": 0,
+						"idName": "dash",
+						"isSimple": true,
+						"stringModeValue": "dash"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 12,
+							"lastLine": 1,
+							"type": "STRING",
+							"stringModeValue": "abc",
+							"string": "abc",
+							"original": "abc"
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 14,
+							"lastColumn": 24,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 14,
+								"lastColumn": 20,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "concat",
+								"parts": [
+									"concat"
+								],
+								"string": "concat",
+								"depth": 0,
+								"idName": "concat",
+								"isSimple": true,
+								"stringModeValue": "concat"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 21,
+									"lastColumn": 22,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 23,
+									"lastColumn": 24,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushString",
+					"args": [
+						"abc"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"concat"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"concat",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dash"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"dash",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash d (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "d-ab",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 23,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 23,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 21,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "dash",
+							"parts": [
+								"dash"
+							],
+							"string": "dash",
+							"depth": 0,
+							"idName": "dash",
+							"isSimple": true,
+							"stringModeValue": "dash"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 8,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "d",
+								"parts": [
+									"d"
+								],
+								"string": "d",
+								"depth": 0,
+								"idName": "d",
+								"isSimple": true,
+								"stringModeValue": "d"
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 10,
+								"lastColumn": 20,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 10,
+									"lastColumn": 16,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "concat",
+									"parts": [
+										"concat"
+									],
+									"string": "concat",
+									"depth": 0,
+									"idName": "concat",
+									"isSimple": true,
+									"stringModeValue": "concat"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 17,
+										"lastColumn": 18,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 19,
+										"lastColumn": 20,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "dash",
+						"parts": [
+							"dash"
+						],
+						"string": "dash",
+						"depth": 0,
+						"idName": "dash",
+						"isSimple": true,
+						"stringModeValue": "dash"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 8,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "d",
+							"parts": [
+								"d"
+							],
+							"string": "d",
+							"depth": 0,
+							"idName": "d",
+							"isSimple": true,
+							"stringModeValue": "d"
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 10,
+							"lastColumn": 20,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 10,
+								"lastColumn": 16,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "concat",
+								"parts": [
+									"concat"
+								],
+								"string": "concat",
+								"depth": 0,
+								"idName": "concat",
+								"isSimple": true,
+								"stringModeValue": "concat"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 17,
+									"lastColumn": 18,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 19,
+									"lastColumn": 20,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"d"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"concat"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"concat",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dash"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"dash",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash c.c (concat a b)}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "c-ab",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 25,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 25,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 23,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "dash",
+							"parts": [
+								"dash"
+							],
+							"string": "dash",
+							"depth": 0,
+							"idName": "dash",
+							"isSimple": true,
+							"stringModeValue": "dash"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "c.c",
+								"parts": [
+									"c",
+									"c"
+								],
+								"string": "c.c",
+								"depth": 0,
+								"idName": "c.c",
+								"isSimple": false,
+								"stringModeValue": "c.c"
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 12,
+								"lastColumn": 22,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 18,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "concat",
+									"parts": [
+										"concat"
+									],
+									"string": "concat",
+									"depth": 0,
+									"idName": "concat",
+									"isSimple": true,
+									"stringModeValue": "concat"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 19,
+										"lastColumn": 20,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 21,
+										"lastColumn": 22,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "dash",
+						"parts": [
+							"dash"
+						],
+						"string": "dash",
+						"depth": 0,
+						"idName": "dash",
+						"isSimple": true,
+						"stringModeValue": "dash"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "c.c",
+							"parts": [
+								"c",
+								"c"
+							],
+							"string": "c.c",
+							"depth": 0,
+							"idName": "c.c",
+							"isSimple": false,
+							"stringModeValue": "c.c"
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 12,
+							"lastColumn": 22,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 12,
+								"lastColumn": 18,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "concat",
+								"parts": [
+									"concat"
+								],
+								"string": "concat",
+								"depth": 0,
+								"idName": "concat",
+								"isSimple": true,
+								"stringModeValue": "concat"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 19,
+									"lastColumn": 20,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 21,
+									"lastColumn": 22,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"c",
+							"c"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"concat"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"concat",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dash"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"dash",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a b) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "ab-c",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 25,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 25,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 23,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "dash",
+							"parts": [
+								"dash"
+							],
+							"string": "dash",
+							"depth": 0,
+							"idName": "dash",
+							"isSimple": true,
+							"stringModeValue": "dash"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 18,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 14,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "concat",
+									"parts": [
+										"concat"
+									],
+									"string": "concat",
+									"depth": 0,
+									"idName": "concat",
+									"isSimple": true,
+									"stringModeValue": "concat"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 17,
+										"lastColumn": 18,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 20,
+								"lastColumn": 23,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "c.c",
+								"parts": [
+									"c",
+									"c"
+								],
+								"string": "c.c",
+								"depth": 0,
+								"idName": "c.c",
+								"isSimple": false,
+								"stringModeValue": "c.c"
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "dash",
+						"parts": [
+							"dash"
+						],
+						"string": "dash",
+						"depth": 0,
+						"idName": "dash",
+						"isSimple": true,
+						"stringModeValue": "dash"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 18,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 14,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "concat",
+								"parts": [
+									"concat"
+								],
+								"string": "concat",
+								"depth": 0,
+								"idName": "concat",
+								"isSimple": true,
+								"stringModeValue": "concat"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 15,
+									"lastColumn": 16,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 17,
+									"lastColumn": 18,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 20,
+							"lastColumn": 23,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "c.c",
+							"parts": [
+								"c",
+								"c"
+							],
+							"string": "c.c",
+							"depth": 0,
+							"idName": "c.c",
+							"isSimple": false,
+							"stringModeValue": "c.c"
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"b"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"concat"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"concat",
+						true
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"c",
+							"c"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dash"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"dash",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "GH-800 : Complex subexpressions",
+		"template": "{{dash (concat a e.e) c.c}}",
+		"data": {
+			"a": "a",
+			"b": "b",
+			"c": {
+				"c": "c"
+			},
+			"d": "d",
+			"e": {
+				"e": "e"
+			}
+		},
+		"helpers": {
+			"dash": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + \"-\" + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+			},
+			"concat": {
+				"!code": true,
+				"javascript": "function (a, b) {\n        return a + b;\n      }",
+				"php": "function($a, $b) {\n        return $a . $b;\n      }"
+			}
+		},
+		"expected": "ae-c",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 27,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 25,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "dash",
+							"parts": [
+								"dash"
+							],
+							"string": "dash",
+							"depth": 0,
+							"idName": "dash",
+							"isSimple": true,
+							"stringModeValue": "dash"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 20,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 14,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "concat",
+									"parts": [
+										"concat"
+									],
+									"string": "concat",
+									"depth": 0,
+									"idName": "concat",
+									"isSimple": true,
+									"stringModeValue": "concat"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "a",
+										"parts": [
+											"a"
+										],
+										"string": "a",
+										"depth": 0,
+										"idName": "a",
+										"isSimple": true,
+										"stringModeValue": "a"
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 17,
+										"lastColumn": 20,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "e.e",
+										"parts": [
+											"e",
+											"e"
+										],
+										"string": "e.e",
+										"depth": 0,
+										"idName": "e.e",
+										"isSimple": false,
+										"stringModeValue": "e.e"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 22,
+								"lastColumn": 25,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "c.c",
+								"parts": [
+									"c",
+									"c"
+								],
+								"string": "c.c",
+								"depth": 0,
+								"idName": "c.c",
+								"isSimple": false,
+								"stringModeValue": "c.c"
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "dash",
+						"parts": [
+							"dash"
+						],
+						"string": "dash",
+						"depth": 0,
+						"idName": "dash",
+						"isSimple": true,
+						"stringModeValue": "dash"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 20,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 14,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "concat",
+								"parts": [
+									"concat"
+								],
+								"string": "concat",
+								"depth": 0,
+								"idName": "concat",
+								"isSimple": true,
+								"stringModeValue": "concat"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 15,
+									"lastColumn": 16,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "a",
+									"parts": [
+										"a"
+									],
+									"string": "a",
+									"depth": 0,
+									"idName": "a",
+									"isSimple": true,
+									"stringModeValue": "a"
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 17,
+									"lastColumn": 20,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "e.e",
+									"parts": [
+										"e",
+										"e"
+									],
+									"string": "e.e",
+									"depth": 0,
+									"idName": "e.e",
+									"isSimple": false,
+									"stringModeValue": "e.e"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 22,
+							"lastColumn": 25,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "c.c",
+							"parts": [
+								"c",
+								"c"
+							],
+							"string": "c.c",
+							"depth": 0,
+							"idName": "c.c",
+							"isSimple": false,
+							"stringModeValue": "c.c"
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"a"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"e",
+							"e"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"concat"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"concat",
+						true
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"c",
+							"c"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"dash"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"dash",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "provides each nested helper invocation its own options hash",
+		"template": "{{equal (equal true true) true}}",
+		"data": {},
+		"helpers": {
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y, options) {\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "true",
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 32,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 32,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 30,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 7,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "equal",
+							"parts": [
+								"equal"
+							],
+							"string": "equal",
+							"depth": 0,
+							"idName": "equal",
+							"isSimple": true,
+							"stringModeValue": "equal"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 9,
+								"lastColumn": 24,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 9,
+									"lastColumn": 14,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "equal",
+									"parts": [
+										"equal"
+									],
+									"string": "equal",
+									"depth": 0,
+									"idName": "equal",
+									"isSimple": true,
+									"stringModeValue": "equal"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 19,
+										"lastLine": 1,
+										"type": "BOOLEAN",
+										"bool": "true",
+										"stringModeValue": true
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 20,
+										"lastColumn": 24,
+										"lastLine": 1,
+										"type": "BOOLEAN",
+										"bool": "true",
+										"stringModeValue": true
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 26,
+								"lastColumn": 30,
+								"lastLine": 1,
+								"type": "BOOLEAN",
+								"bool": "true",
+								"stringModeValue": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 7,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "equal",
+						"parts": [
+							"equal"
+						],
+						"string": "equal",
+						"depth": 0,
+						"idName": "equal",
+						"isSimple": true,
+						"stringModeValue": "equal"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 9,
+							"lastColumn": 24,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 9,
+								"lastColumn": 14,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "equal",
+								"parts": [
+									"equal"
+								],
+								"string": "equal",
+								"depth": 0,
+								"idName": "equal",
+								"isSimple": true,
+								"stringModeValue": "equal"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 15,
+									"lastColumn": 19,
+									"lastLine": 1,
+									"type": "BOOLEAN",
+									"bool": "true",
+									"stringModeValue": true
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 20,
+									"lastColumn": 24,
+									"lastLine": 1,
+									"type": "BOOLEAN",
+									"bool": "true",
+									"stringModeValue": true
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 26,
+							"lastColumn": 30,
+							"lastLine": 1,
+							"type": "BOOLEAN",
+							"bool": "true",
+							"stringModeValue": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "with hashes",
+		"template": "{{blog (equal (equal true true) true fun=\"yes\")}}",
+		"data": {
+			"bar": "LOL"
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (val) {\n        return \"val is \" + val;\n      }",
+				"php": "function($val) {\n        return \"val is \" . (is_bool($val) ? ($val ? 'true' : 'false') : $val);\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is true",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 49,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 49,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 47,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 46,
+								"lastLine": 1,
+								"type": "sexpr",
+								"hash": {
+									"firstLine": 1,
+									"firstColumn": 37,
+									"lastColumn": 46,
+									"lastLine": 1,
+									"type": "hash",
+									"pairs": [
+										[
+											"fun",
+											{
+												"firstLine": 1,
+												"firstColumn": 41,
+												"lastColumn": 46,
+												"lastLine": 1,
+												"type": "STRING",
+												"stringModeValue": "yes",
+												"string": "yes",
+												"original": "yes"
+											}
+										]
+									]
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 13,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "equal",
+									"parts": [
+										"equal"
+									],
+									"string": "equal",
+									"depth": 0,
+									"idName": "equal",
+									"isSimple": true,
+									"stringModeValue": "equal"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 30,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 15,
+											"lastColumn": 20,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "equal",
+											"parts": [
+												"equal"
+											],
+											"string": "equal",
+											"depth": 0,
+											"idName": "equal",
+											"isSimple": true,
+											"stringModeValue": "equal"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 21,
+												"lastColumn": 25,
+												"lastLine": 1,
+												"type": "BOOLEAN",
+												"bool": "true",
+												"stringModeValue": true
+											},
+											{
+												"firstLine": 1,
+												"firstColumn": 26,
+												"lastColumn": 30,
+												"lastLine": 1,
+												"type": "BOOLEAN",
+												"bool": "true",
+												"stringModeValue": true
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									},
+									{
+										"firstLine": 1,
+										"firstColumn": 32,
+										"lastColumn": 36,
+										"lastLine": 1,
+										"type": "BOOLEAN",
+										"bool": "true",
+										"stringModeValue": true
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 46,
+							"lastLine": 1,
+							"type": "sexpr",
+							"hash": {
+								"firstLine": 1,
+								"firstColumn": 37,
+								"lastColumn": 46,
+								"lastLine": 1,
+								"type": "hash",
+								"pairs": [
+									[
+										"fun",
+										{
+											"firstLine": 1,
+											"firstColumn": 41,
+											"lastColumn": 46,
+											"lastLine": 1,
+											"type": "STRING",
+											"stringModeValue": "yes",
+											"string": "yes",
+											"original": "yes"
+										}
+									]
+								]
+							},
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "equal",
+								"parts": [
+									"equal"
+								],
+								"string": "equal",
+								"depth": 0,
+								"idName": "equal",
+								"isSimple": true,
+								"stringModeValue": "equal"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 15,
+									"lastColumn": 30,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 15,
+										"lastColumn": 20,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "equal",
+										"parts": [
+											"equal"
+										],
+										"string": "equal",
+										"depth": 0,
+										"idName": "equal",
+										"isSimple": true,
+										"stringModeValue": "equal"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 21,
+											"lastColumn": 25,
+											"lastLine": 1,
+											"type": "BOOLEAN",
+											"bool": "true",
+											"stringModeValue": true
+										},
+										{
+											"firstLine": 1,
+											"firstColumn": 26,
+											"lastColumn": 30,
+											"lastLine": 1,
+											"type": "BOOLEAN",
+											"bool": "true",
+											"stringModeValue": true
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								},
+								{
+									"firstLine": 1,
+									"firstColumn": 32,
+									"lastColumn": 36,
+									"lastLine": 1,
+									"type": "BOOLEAN",
+									"bool": "true",
+									"stringModeValue": true
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"true"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"yes"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"fun"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "as hashes",
+		"template": "{{blog fun=(equal (blog fun=1) \"val is 1\")}}",
+		"data": {},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
+			},
+			"equal": {
+				"!code": true,
+				"javascript": "function (x, y) {\n        return x === y;\n      }",
+				"php": "function($x, $y) {\n        return $x === $y;\n      }"
+			}
+		},
+		"expected": "val is true",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 44,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 44,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 42,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"fun",
+									{
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 41,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 12,
+											"lastColumn": 17,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "equal",
+											"parts": [
+												"equal"
+											],
+											"string": "equal",
+											"depth": 0,
+											"idName": "equal",
+											"isSimple": true,
+											"stringModeValue": "equal"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 19,
+												"lastColumn": 29,
+												"lastLine": 1,
+												"type": "sexpr",
+												"hash": {
+													"firstLine": 1,
+													"firstColumn": 24,
+													"lastColumn": 29,
+													"lastLine": 1,
+													"type": "hash",
+													"pairs": [
+														[
+															"fun",
+															{
+																"firstLine": 1,
+																"firstColumn": 28,
+																"lastColumn": 29,
+																"lastLine": 1,
+																"type": "NUMBER",
+																"number": "1",
+																"original": "1",
+																"stringModeValue": 1
+															}
+														]
+													]
+												},
+												"id": {
+													"firstLine": 1,
+													"firstColumn": 19,
+													"lastColumn": 23,
+													"lastLine": 1,
+													"type": "ID",
+													"original": "blog",
+													"parts": [
+														"blog"
+													],
+													"string": "blog",
+													"depth": 0,
+													"idName": "blog",
+													"isSimple": true,
+													"stringModeValue": "blog"
+												},
+												"params": [],
+												"isHelper": true,
+												"eligibleHelper": true
+											},
+											{
+												"firstLine": 1,
+												"firstColumn": 31,
+												"lastColumn": 41,
+												"lastLine": 1,
+												"type": "STRING",
+												"stringModeValue": "val is 1",
+												"string": "val is 1",
+												"original": "val is 1"
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 7,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"fun",
+								{
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 41,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 17,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "equal",
+										"parts": [
+											"equal"
+										],
+										"string": "equal",
+										"depth": 0,
+										"idName": "equal",
+										"isSimple": true,
+										"stringModeValue": "equal"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 19,
+											"lastColumn": 29,
+											"lastLine": 1,
+											"type": "sexpr",
+											"hash": {
+												"firstLine": 1,
+												"firstColumn": 24,
+												"lastColumn": 29,
+												"lastLine": 1,
+												"type": "hash",
+												"pairs": [
+													[
+														"fun",
+														{
+															"firstLine": 1,
+															"firstColumn": 28,
+															"lastColumn": 29,
+															"lastLine": 1,
+															"type": "NUMBER",
+															"number": "1",
+															"original": "1",
+															"stringModeValue": 1
+														}
+													]
+												]
+											},
+											"id": {
+												"firstLine": 1,
+												"firstColumn": 19,
+												"lastColumn": 23,
+												"lastLine": 1,
+												"type": "ID",
+												"original": "blog",
+												"parts": [
+													"blog"
+												],
+												"string": "blog",
+												"depth": 0,
+												"idName": "blog",
+												"isSimple": true,
+												"stringModeValue": "blog"
+											},
+											"params": [],
+											"isHelper": true,
+											"eligibleHelper": true
+										},
+										{
+											"firstLine": 1,
+											"firstColumn": 31,
+											"lastColumn": 41,
+											"lastLine": 1,
+											"type": "STRING",
+											"stringModeValue": "val is 1",
+											"string": "val is 1",
+											"original": "val is 1"
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"1"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"fun"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"val is 1"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"equal"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"equal",
+						true
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"fun"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash",
+		"template": "{{input aria-label=(t \"Name\") placeholder=(t \"Example User\")}}",
+		"data": {},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 62,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 62,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 60,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 60,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"aria-label",
+									{
+										"firstLine": 1,
+										"firstColumn": 20,
+										"lastColumn": 28,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 20,
+											"lastColumn": 21,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "t",
+											"parts": [
+												"t"
+											],
+											"string": "t",
+											"depth": 0,
+											"idName": "t",
+											"isSimple": true,
+											"stringModeValue": "t"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 22,
+												"lastColumn": 28,
+												"lastLine": 1,
+												"type": "STRING",
+												"stringModeValue": "Name",
+												"string": "Name",
+												"original": "Name"
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								],
+								[
+									"placeholder",
+									{
+										"firstLine": 1,
+										"firstColumn": 43,
+										"lastColumn": 59,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 43,
+											"lastColumn": 44,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "t",
+											"parts": [
+												"t"
+											],
+											"string": "t",
+											"depth": 0,
+											"idName": "t",
+											"isSimple": true,
+											"stringModeValue": "t"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 45,
+												"lastColumn": 59,
+												"lastLine": 1,
+												"type": "STRING",
+												"stringModeValue": "Example User",
+												"string": "Example User",
+												"original": "Example User"
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 7,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "input",
+							"parts": [
+								"input"
+							],
+							"string": "input",
+							"depth": 0,
+							"idName": "input",
+							"isSimple": true,
+							"stringModeValue": "input"
+						},
+						"params": [],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 7,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "input",
+						"parts": [
+							"input"
+						],
+						"string": "input",
+						"depth": 0,
+						"idName": "input",
+						"isSimple": true,
+						"stringModeValue": "input"
+					},
+					"params": [],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 8,
+						"lastColumn": 60,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"aria-label",
+								{
+									"firstLine": 1,
+									"firstColumn": 20,
+									"lastColumn": 28,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 20,
+										"lastColumn": 21,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "t",
+										"parts": [
+											"t"
+										],
+										"string": "t",
+										"depth": 0,
+										"idName": "t",
+										"isSimple": true,
+										"stringModeValue": "t"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 22,
+											"lastColumn": 28,
+											"lastLine": 1,
+											"type": "STRING",
+											"stringModeValue": "Name",
+											"string": "Name",
+											"original": "Name"
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							],
+							[
+								"placeholder",
+								{
+									"firstLine": 1,
+									"firstColumn": 43,
+									"lastColumn": 59,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 43,
+										"lastColumn": 44,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "t",
+										"parts": [
+											"t"
+										],
+										"string": "t",
+										"depth": 0,
+										"idName": "t",
+										"isSimple": true,
+										"stringModeValue": "t"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 45,
+											"lastColumn": 59,
+											"lastLine": 1,
+											"type": "STRING",
+											"stringModeValue": "Example User",
+											"string": "Example User",
+											"original": "Example User"
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"Name"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"t"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"t",
+						true
+					]
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"Example User"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"t"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"t",
+						true
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"placeholder"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"aria-label"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"input"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"input",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "multiple subexpressions in a hash with context",
+		"template": "{{input aria-label=(t item.field) placeholder=(t item.placeholder)}}",
+		"data": {
+			"item": {
+				"field": "Name",
+				"placeholder": "Example User"
+			}
+		},
+		"helpers": {
+			"input": {
+				"!code": true,
+				"javascript": "function (options) {\n        var hash        = options.hash;\n        var ariaLabel   = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+				"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
+			},
+			"t": {
+				"!code": true,
+				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+			}
+		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 68,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 68,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 66,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 66,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"aria-label",
+									{
+										"firstLine": 1,
+										"firstColumn": 20,
+										"lastColumn": 32,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 20,
+											"lastColumn": 21,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "t",
+											"parts": [
+												"t"
+											],
+											"string": "t",
+											"depth": 0,
+											"idName": "t",
+											"isSimple": true,
+											"stringModeValue": "t"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 22,
+												"lastColumn": 32,
+												"lastLine": 1,
+												"type": "ID",
+												"original": "item.field",
+												"parts": [
+													"item",
+													"field"
+												],
+												"string": "item.field",
+												"depth": 0,
+												"idName": "item.field",
+												"isSimple": false,
+												"stringModeValue": "item.field"
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								],
+								[
+									"placeholder",
+									{
+										"firstLine": 1,
+										"firstColumn": 47,
+										"lastColumn": 65,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 47,
+											"lastColumn": 48,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "t",
+											"parts": [
+												"t"
+											],
+											"string": "t",
+											"depth": 0,
+											"idName": "t",
+											"isSimple": true,
+											"stringModeValue": "t"
+										},
+										"params": [
+											{
+												"firstLine": 1,
+												"firstColumn": 49,
+												"lastColumn": 65,
+												"lastLine": 1,
+												"type": "ID",
+												"original": "item.placeholder",
+												"parts": [
+													"item",
+													"placeholder"
+												],
+												"string": "item.placeholder",
+												"depth": 0,
+												"idName": "item.placeholder",
+												"isSimple": false,
+												"stringModeValue": "item.placeholder"
+											}
+										],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 7,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "input",
+							"parts": [
+								"input"
+							],
+							"string": "input",
+							"depth": 0,
+							"idName": "input",
+							"isSimple": true,
+							"stringModeValue": "input"
+						},
+						"params": [],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 7,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "input",
+						"parts": [
+							"input"
+						],
+						"string": "input",
+						"depth": 0,
+						"idName": "input",
+						"isSimple": true,
+						"stringModeValue": "input"
+					},
+					"params": [],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 8,
+						"lastColumn": 66,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"aria-label",
+								{
+									"firstLine": 1,
+									"firstColumn": 20,
+									"lastColumn": 32,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 20,
+										"lastColumn": 21,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "t",
+										"parts": [
+											"t"
+										],
+										"string": "t",
+										"depth": 0,
+										"idName": "t",
+										"isSimple": true,
+										"stringModeValue": "t"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 22,
+											"lastColumn": 32,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "item.field",
+											"parts": [
+												"item",
+												"field"
+											],
+											"string": "item.field",
+											"depth": 0,
+											"idName": "item.field",
+											"isSimple": false,
+											"stringModeValue": "item.field"
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							],
+							[
+								"placeholder",
+								{
+									"firstLine": 1,
+									"firstColumn": 47,
+									"lastColumn": 65,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 47,
+										"lastColumn": 48,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "t",
+										"parts": [
+											"t"
+										],
+										"string": "t",
+										"depth": 0,
+										"idName": "t",
+										"isSimple": true,
+										"stringModeValue": "t"
+									},
+									"params": [
+										{
+											"firstLine": 1,
+											"firstColumn": 49,
+											"lastColumn": 65,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "item.placeholder",
+											"parts": [
+												"item",
+												"placeholder"
+											],
+											"string": "item.placeholder",
+											"depth": 0,
+											"idName": "item.placeholder",
+											"isSimple": false,
+											"stringModeValue": "item.placeholder"
+										}
+									],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"item",
+							"field"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"t"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"t",
+						true
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"item",
+							"placeholder"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"t"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"t",
+						true
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"placeholder"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"aria-label"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"input"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"input",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "in string params mode,",
+		"template": "{{snog (blorg foo x=y) yeah a=b}}",
+		"data": {
+			"foo": {},
+			"yeah": {}
+		},
+		"expected": "fooyeah",
+		"message": "string params for inner helper processed correctly",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"helpers": {
+			"snog": {
+				"!code": true,
+				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, \"string params for outer helper processed correctly\");\n        equals(options.types[0], 'sexpr', \"string params for outer helper processed correctly\");\n        equals(options.types[1], 'ID', \"string params for outer helper processed correctly\");\n        return a + b;\n      }",
+				"php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
+			},
+			"blorg": {
+				"!code": true,
+				"javascript": "function (a, options) {\n        equals(options.types.length, 1, \"string params for inner helper processed correctly\");\n        equals(options.types[0], 'ID', \"string params for inner helper processed correctly\");\n        return a;\n      }",
+				"php": "function($a, $options) {\n        return $a;\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 33,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 33,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 31,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 28,
+							"lastColumn": 31,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"a",
+									{
+										"firstLine": 1,
+										"firstColumn": 30,
+										"lastColumn": 31,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "b",
+										"parts": [
+											"b"
+										],
+										"string": "b",
+										"depth": 0,
+										"idName": "b",
+										"isSimple": true,
+										"stringModeValue": "b"
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "snog",
+							"parts": [
+								"snog"
+							],
+							"string": "snog",
+							"depth": 0,
+							"idName": "snog",
+							"isSimple": true,
+							"stringModeValue": "snog"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 21,
+								"lastLine": 1,
+								"type": "sexpr",
+								"hash": {
+									"firstLine": 1,
+									"firstColumn": 18,
+									"lastColumn": 21,
+									"lastLine": 1,
+									"type": "hash",
+									"pairs": [
+										[
+											"x",
+											{
+												"firstLine": 1,
+												"firstColumn": 20,
+												"lastColumn": 21,
+												"lastLine": 1,
+												"type": "ID",
+												"original": "y",
+												"parts": [
+													"y"
+												],
+												"string": "y",
+												"depth": 0,
+												"idName": "y",
+												"isSimple": true,
+												"stringModeValue": "y"
+											}
+										]
+									]
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 13,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "blorg",
+									"parts": [
+										"blorg"
+									],
+									"string": "blorg",
+									"depth": 0,
+									"idName": "blorg",
+									"isSimple": true,
+									"stringModeValue": "blorg"
+								},
+								"params": [
+									{
+										"firstLine": 1,
+										"firstColumn": 14,
+										"lastColumn": 17,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "foo",
+										"parts": [
+											"foo"
+										],
+										"string": "foo",
+										"depth": 0,
+										"idName": "foo",
+										"isSimple": true,
+										"stringModeValue": "foo"
+									}
+								],
+								"isHelper": true,
+								"eligibleHelper": true
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 23,
+								"lastColumn": 27,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "yeah",
+								"parts": [
+									"yeah"
+								],
+								"string": "yeah",
+								"depth": 0,
+								"idName": "yeah",
+								"isSimple": true,
+								"stringModeValue": "yeah"
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "snog",
+						"parts": [
+							"snog"
+						],
+						"string": "snog",
+						"depth": 0,
+						"idName": "snog",
+						"isSimple": true,
+						"stringModeValue": "snog"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 21,
+							"lastLine": 1,
+							"type": "sexpr",
+							"hash": {
+								"firstLine": 1,
+								"firstColumn": 18,
+								"lastColumn": 21,
+								"lastLine": 1,
+								"type": "hash",
+								"pairs": [
+									[
+										"x",
+										{
+											"firstLine": 1,
+											"firstColumn": 20,
+											"lastColumn": 21,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "y",
+											"parts": [
+												"y"
+											],
+											"string": "y",
+											"depth": 0,
+											"idName": "y",
+											"isSimple": true,
+											"stringModeValue": "y"
+										}
+									]
+								]
+							},
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "blorg",
+								"parts": [
+									"blorg"
+								],
+								"string": "blorg",
+								"depth": 0,
+								"idName": "blorg",
+								"isSimple": true,
+								"stringModeValue": "blorg"
+							},
+							"params": [
+								{
+									"firstLine": 1,
+									"firstColumn": 14,
+									"lastColumn": 17,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "foo",
+									"parts": [
+										"foo"
+									],
+									"string": "foo",
+									"depth": 0,
+									"idName": "foo",
+									"isSimple": true,
+									"stringModeValue": "foo"
+								}
+							],
+							"isHelper": true,
+							"eligibleHelper": true
+						},
+						{
+							"firstLine": 1,
+							"firstColumn": 23,
+							"lastColumn": 27,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "yeah",
+							"parts": [
+								"yeah"
+							],
+							"string": "yeah",
+							"depth": 0,
+							"idName": "yeah",
+							"isSimple": true,
+							"stringModeValue": "yeah"
+						}
+					],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 28,
+						"lastColumn": 31,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"a",
+								{
+									"firstLine": 1,
+									"firstColumn": 30,
+									"lastColumn": 31,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "b",
+									"parts": [
+										"b"
+									],
+									"string": "b",
+									"depth": 0,
+									"idName": "b",
+									"isSimple": true,
+									"stringModeValue": "b"
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						null,
+						"sexpr"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"foo",
+						"ID"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"y",
+						"ID"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"x"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blorg"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"blorg",
+						true
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"yeah",
+						"ID"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						"b",
+						"ID"
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"a"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"snog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						2,
+						"snog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"stringParams": true,
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"stringParams": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "as hashes in string params mode",
+		"template": "{{blog fun=(bork)}}",
+		"data": {},
+		"expected": "val is BORK",
+		"compileOptions": {
+			"stringParams": true,
+			"data": true,
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"helpers": {
+			"blog": {
+				"!code": true,
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
+			},
+			"bork": {
+				"!code": true,
+				"javascript": "function () {\n        return \"BORK\";\n      }",
+				"php": "function() {\n        return \"BORK\";\n      }"
+			}
+		},
+		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 19,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 19,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 17,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 17,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"fun",
+									{
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 12,
+											"lastColumn": 16,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "bork",
+											"parts": [
+												"bork"
+											],
+											"string": "bork",
+											"depth": 0,
+											"idName": "bork",
+											"isSimple": true,
+											"stringModeValue": "bork"
+										},
+										"params": [],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 7,
+						"lastColumn": 17,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"fun",
+								{
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 16,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "bork",
+										"parts": [
+											"bork"
+										],
+										"string": "bork",
+										"depth": 0,
+										"idName": "bork",
+										"isSimple": true,
+										"stringModeValue": "bork"
+									},
+									"params": [],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushStringParam",
+					"args": [
+						null,
+						"sexpr"
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bork"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"bork",
+						true
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"fun"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"stringParams": true,
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"stringParams": true,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpression functions on the context",
+		"template": "{{foo (bar)}}!",
+		"data": {
+			"bar": {
+				"!code": true,
+				"javascript": "function () {\n        return \"LOL\";\n      }",
+				"php": "function() {\n        return \"LOL\";\n      }"
+			}
+		},
+		"helpers": {
+			"foo": {
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
+			}
+		},
+		"expected": "LOLLOL!",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 14,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 13,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 11,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": true,
+							"stringModeValue": "foo"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 7,
+									"lastColumn": 10,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "bar",
+									"parts": [
+										"bar"
+									],
+									"string": "bar",
+									"depth": 0,
+									"idName": "bar",
+									"isSimple": true,
+									"stringModeValue": "bar"
+								},
+								"params": [],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "foo",
+						"parts": [
+							"foo"
+						],
+						"string": "foo",
+						"depth": 0,
+						"idName": "foo",
+						"isSimple": true,
+						"stringModeValue": "foo"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "bar",
+								"parts": [
+									"bar"
+								],
+								"string": "bar",
+								"depth": 0,
+								"idName": "bar",
+								"isSimple": true,
+								"stringModeValue": "bar"
+							},
+							"params": [],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 13,
+					"lastColumn": 14,
+					"lastLine": 1,
+					"type": "content",
+					"string": "!",
+					"original": "!"
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bar"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"bar",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"foo",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpressions can't just be property lookups",
+		"template": "{{foo (bar)}}!",
+		"data": {
+			"bar": "LOL"
+		},
+		"exception": true,
+		"helpers": {
+			"foo": {
+				"!code": true,
+				"javascript": "function (val) {\n        return val+val;\n      }",
+				"php": "function($val) {\n        return $val . $val;\n      }"
+			}
+		},
+		"expected": "LOLLOL!",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 14,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 13,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 11,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": true,
+							"stringModeValue": "foo"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "sexpr",
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 7,
+									"lastColumn": 10,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "bar",
+									"parts": [
+										"bar"
+									],
+									"string": "bar",
+									"depth": 0,
+									"idName": "bar",
+									"isSimple": true,
+									"stringModeValue": "bar"
+								},
+								"params": [],
+								"isHelper": true,
+								"eligibleHelper": true
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "foo",
+						"parts": [
+							"foo"
+						],
+						"string": "foo",
+						"depth": 0,
+						"idName": "foo",
+						"isSimple": true,
+						"stringModeValue": "foo"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 7,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "bar",
+								"parts": [
+									"bar"
+								],
+								"string": "bar",
+								"depth": 0,
+								"idName": "bar",
+								"isSimple": true,
+								"stringModeValue": "bar"
+							},
+							"params": [],
+							"isHelper": true,
+							"eligibleHelper": true
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 13,
+					"lastColumn": 14,
+					"lastLine": 1,
+					"type": "content",
+					"string": "!",
+					"original": "!"
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bar"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"bar",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"foo",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "subexpressions",
+		"it": "subexpressions can't just be property lookups",
+		"template": "{{blog fun=(bork)}}",
+		"exception": true,
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 19,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 19,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 17,
+						"lastLine": 1,
+						"type": "sexpr",
+						"hash": {
+							"firstLine": 1,
+							"firstColumn": 7,
+							"lastColumn": 17,
+							"lastLine": 1,
+							"type": "hash",
+							"pairs": [
+								[
+									"fun",
+									{
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 12,
+											"lastColumn": 16,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "bork",
+											"parts": [
+												"bork"
+											],
+											"string": "bork",
+											"depth": 0,
+											"idName": "bork",
+											"isSimple": true,
+											"stringModeValue": "bork"
+										},
+										"params": [],
+										"isHelper": true,
+										"eligibleHelper": true
+									}
+								]
+							]
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "blog",
+							"parts": [
+								"blog"
+							],
+							"string": "blog",
+							"depth": 0,
+							"idName": "blog",
+							"isSimple": true,
+							"stringModeValue": "blog"
+						},
+						"params": [],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "blog",
+						"parts": [
+							"blog"
+						],
+						"string": "blog",
+						"depth": 0,
+						"idName": "blog",
+						"isSimple": true,
+						"stringModeValue": "blog"
+					},
+					"params": [],
+					"hash": {
+						"firstLine": 1,
+						"firstColumn": 7,
+						"lastColumn": 17,
+						"lastLine": 1,
+						"type": "hash",
+						"pairs": [
+							[
+								"fun",
+								{
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 16,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 16,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "bork",
+										"parts": [
+											"bork"
+										],
+										"string": "bork",
+										"depth": 0,
+										"idName": "bork",
+										"isSimple": true,
+										"stringModeValue": "bork"
+									},
+									"params": [],
+									"isHelper": true,
+									"eligibleHelper": true
+								}
+							]
+						]
+					},
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushHash",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bork"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"bork",
+						true
+					]
+				},
+				{
+					"opcode": "assignToHash",
+					"args": [
+						"fun"
+					]
+				},
+				{
+					"opcode": "popHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"blog"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						0,
+						"blog",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	}
+]

@@ -2,28 +2,28 @@
     "basic context-block functions with context argument-00": {
         "data": {
             "awesome": {
-                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+                "php": "function($context, $options) { return $options->fn($context); }"
             }
         }
     },
     "basic context-block functions without context argument-00": {
         "data": {
             "awesome": {
-                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+                "php": "function($options) { return $options->fn($options->scope); }"
             }
         }
     },
     "basic context-depthed block functions with context argument-00": {
         "data": {
             "awesome": {
-                "php": "function($context, $scope, $options) { return $options['fn']($context); }"
+                "php": "function($context, $options) { return $options->fn($context); }"
             }
         }
     },
     "basic context-depthed block functions without context argument-00": {
         "data": {
             "awesome": {
-                "php": "function($options, $scope) { return $scope; }"
+                "php": "function($context) { return $context; }"
             }
         }
     },
@@ -58,7 +58,7 @@
     "basic context-functions-01": {
         "data": {
             "awesome": {
-                "php": "function($context, $scope) { return $scope['more']; }"
+                "php": "function($scope) { return $scope['more']; }"
             }
         }
     },
@@ -66,7 +66,7 @@
         "data": {
             "foo": {
                 "awesome": {
-                    "php": "function($options, $scope) { return $scope; }"
+                    "php": "function($scope) { return $scope; }"
                 }
             }
         }

@@ -1,0 +1,7227 @@
+[
+	{
+		"description": "Regressions",
+		"it": "GH-94: Cannot read property of undefined",
+		"template": "{{#books}}{{title}}{{author.name}}{{/books}}",
+		"data": {
+			"books": [
+				{
+					"title": "The origin of species",
+					"author": {
+						"name": "Charles Darwin"
+					}
+				},
+				{
+					"title": "Lazarillo de Tormes"
+				}
+			]
+		},
+		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 44,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 44,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 10,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 8,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 8,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "books",
+								"parts": [
+									"books"
+								],
+								"string": "books",
+								"depth": 0,
+								"idName": "books",
+								"isSimple": true,
+								"stringModeValue": "books"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 8,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "books",
+							"parts": [
+								"books"
+							],
+							"string": "books",
+							"depth": 0,
+							"idName": "books",
+							"isSimple": true,
+							"stringModeValue": "books"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 34,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 10,
+								"lastColumn": 19,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 17,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 12,
+										"lastColumn": 17,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "title",
+										"parts": [
+											"title"
+										],
+										"string": "title",
+										"depth": 0,
+										"idName": "title",
+										"isSimple": true,
+										"stringModeValue": "title"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 12,
+									"lastColumn": 17,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "title",
+									"parts": [
+										"title"
+									],
+									"string": "title",
+									"depth": 0,
+									"idName": "title",
+									"isSimple": true,
+									"stringModeValue": "title"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 19,
+								"lastColumn": 34,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 21,
+									"lastColumn": 32,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 21,
+										"lastColumn": 32,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "author.name",
+										"parts": [
+											"author",
+											"name"
+										],
+										"string": "author.name",
+										"depth": 0,
+										"idName": "author.name",
+										"isSimple": false,
+										"stringModeValue": "author.name"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": false
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 21,
+									"lastColumn": 32,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "author.name",
+									"parts": [
+										"author",
+										"name"
+									],
+									"string": "author.name",
+									"depth": 0,
+									"idName": "author.name",
+									"isSimple": false,
+									"stringModeValue": "author.name"
+								},
+								"params": [],
+								"eligibleHelper": false,
+								"isHelper": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"books"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"books",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"title"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"title",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"author",
+									"name"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": []
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-150: Inverted sections print when they shouldn't",
+		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
+		"data": {},
+		"expected": "not set :: ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 46,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 23,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 8,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 6,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 15,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 15,
+								"lastLine": 1,
+								"type": "content",
+								"string": "not set",
+								"original": "not set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					},
+					"isInverse": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 23,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "content",
+					"string": " :: ",
+					"original": " :: "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 27,
+					"lastColumn": 46,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 35,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 30,
+								"lastColumn": 33,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 38,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 35,
+								"lastColumn": 38,
+								"lastLine": 1,
+								"type": "content",
+								"string": "set",
+								"original": "set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" :: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"not set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-150: Inverted sections print when they shouldn't",
+		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
+		"data": {},
+		"expected": "not set :: ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 46,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 23,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 8,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 6,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 15,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 15,
+								"lastLine": 1,
+								"type": "content",
+								"string": "not set",
+								"original": "not set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					},
+					"isInverse": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 23,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "content",
+					"string": " :: ",
+					"original": " :: "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 27,
+					"lastColumn": 46,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 35,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 30,
+								"lastColumn": 33,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 38,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 35,
+								"lastColumn": 38,
+								"lastLine": 1,
+								"type": "content",
+								"string": "set",
+								"original": "set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" :: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"not set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-150: Inverted sections print when they shouldn't",
+		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
+		"data": {
+			"set": false
+		},
+		"expected": "not set :: ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 46,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 23,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 8,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 6,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 15,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 15,
+								"lastLine": 1,
+								"type": "content",
+								"string": "not set",
+								"original": "not set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					},
+					"isInverse": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 23,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "content",
+					"string": " :: ",
+					"original": " :: "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 27,
+					"lastColumn": 46,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 35,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 30,
+								"lastColumn": 33,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 38,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 35,
+								"lastColumn": 38,
+								"lastLine": 1,
+								"type": "content",
+								"string": "set",
+								"original": "set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" :: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"not set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-150: Inverted sections print when they shouldn't",
+		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
+		"data": {
+			"set": true
+		},
+		"expected": " :: set",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 46,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 23,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 8,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 6,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 15,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 15,
+								"lastLine": 1,
+								"type": "content",
+								"string": "not set",
+								"original": "not set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					},
+					"isInverse": true
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 23,
+					"lastColumn": 27,
+					"lastLine": 1,
+					"type": "content",
+					"string": " :: ",
+					"original": " :: "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 27,
+					"lastColumn": 46,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 35,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 30,
+								"lastColumn": 33,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "set",
+								"parts": [
+									"set"
+								],
+								"string": "set",
+								"depth": 0,
+								"idName": "set",
+								"isSimple": true,
+								"stringModeValue": "set"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 30,
+							"lastColumn": 33,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "set",
+							"parts": [
+								"set"
+							],
+							"string": "set",
+							"depth": 0,
+							"idName": "set",
+							"isSimple": true,
+							"stringModeValue": "set"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 27,
+						"lastColumn": 38,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 35,
+								"lastColumn": 38,
+								"lastLine": 1,
+								"type": "content",
+								"string": "set",
+								"original": "set"
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" :: "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"set"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"set",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"not set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"set"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-158: Using array index twice, breaks the template",
+		"template": "{{arr.[0]}}, {{arr.[1]}}",
+		"data": {
+			"arr": [
+				1,
+				2
+			]
+		},
+		"expected": "1, 2",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 24,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 11,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 9,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 9,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "arr.0",
+							"parts": [
+								"arr",
+								"0"
+							],
+							"string": "arr.0",
+							"depth": 0,
+							"idName": "arr.0",
+							"isSimple": false,
+							"stringModeValue": "arr.0"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": false
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 9,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "arr.0",
+						"parts": [
+							"arr",
+							"0"
+						],
+						"string": "arr.0",
+						"depth": 0,
+						"idName": "arr.0",
+						"isSimple": false,
+						"stringModeValue": "arr.0"
+					},
+					"params": [],
+					"eligibleHelper": false,
+					"isHelper": false
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 11,
+					"lastColumn": 13,
+					"lastLine": 1,
+					"type": "content",
+					"string": ", ",
+					"original": ", "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 13,
+					"lastColumn": 24,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 15,
+						"lastColumn": 22,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 15,
+							"lastColumn": 22,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "arr.1",
+							"parts": [
+								"arr",
+								"1"
+							],
+							"string": "arr.1",
+							"depth": 0,
+							"idName": "arr.1",
+							"isSimple": false,
+							"stringModeValue": "arr.1"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": false
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 15,
+						"lastColumn": 22,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "arr.1",
+						"parts": [
+							"arr",
+							"1"
+						],
+						"string": "arr.1",
+						"depth": 0,
+						"idName": "arr.1",
+						"isSimple": false,
+						"stringModeValue": "arr.1"
+					},
+					"params": [],
+					"eligibleHelper": false,
+					"isHelper": false
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"arr",
+							"0"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						", "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"arr",
+							"1"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "bug reported by @fat where lambdas weren't being properly resolved",
+		"template": "<strong>This is a slightly more complicated {{thing}}.</strong>.\n{{! Just ignore this business. }}\nCheck this out:\n{{#hasThings}}\n<ul>\n{{#things}}\n<li class={{className}}>{{word}}</li>\n{{/things}}</ul>.\n{{/hasThings}}\n{{^hasThings}}\n\n<small>Nothing to check out...</small>\n{{/hasThings}}",
+		"data": {
+			"thing": {
+				"!code": true,
+				"javascript": "function () {\n        return \"blah\";\n      }",
+				"php": "function() {\n        return \"blah\";\n      }"
+			},
+			"things": [
+				{
+					"className": "one",
+					"word": "@fat"
+				},
+				{
+					"className": "two",
+					"word": "@dhg"
+				},
+				{
+					"className": "three",
+					"word": "@sayrer"
+				}
+			],
+			"hasThings": {
+				"!code": true,
+				"javascript": "function () {\n        return true;\n      }",
+				"php": "function() {\n        return true;\n      }"
+			}
+		},
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 14,
+			"lastLine": 13,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 44,
+					"lastLine": 1,
+					"type": "content",
+					"string": "<strong>This is a slightly more complicated ",
+					"original": "<strong>This is a slightly more complicated "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 44,
+					"lastColumn": 53,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 46,
+						"lastColumn": 51,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 46,
+							"lastColumn": 51,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "thing",
+							"parts": [
+								"thing"
+							],
+							"string": "thing",
+							"depth": 0,
+							"idName": "thing",
+							"isSimple": true,
+							"stringModeValue": "thing"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 46,
+						"lastColumn": 51,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "thing",
+						"parts": [
+							"thing"
+						],
+						"string": "thing",
+						"depth": 0,
+						"idName": "thing",
+						"isSimple": true,
+						"stringModeValue": "thing"
+					},
+					"params": [],
+					"eligibleHelper": true,
+					"isHelper": false
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 53,
+					"lastColumn": 0,
+					"lastLine": 2,
+					"type": "content",
+					"string": ".</strong>.\n",
+					"original": ".</strong>.\n",
+					"leftStripped": false
+				},
+				{
+					"firstLine": 2,
+					"firstColumn": 0,
+					"lastColumn": 33,
+					"lastLine": 2,
+					"type": "comment",
+					"comment": " Just ignore this business. ",
+					"strip": {
+						"inlineStandalone": true
+					}
+				},
+				{
+					"firstLine": 2,
+					"firstColumn": 33,
+					"lastColumn": 0,
+					"lastLine": 4,
+					"type": "content",
+					"string": "Check this out:\n",
+					"original": "\nCheck this out:\n",
+					"rightStripped": true,
+					"leftStripped": false
+				},
+				{
+					"firstLine": 4,
+					"firstColumn": 0,
+					"lastColumn": 14,
+					"lastLine": 9,
+					"type": "block",
+					"mustache": {
+						"firstLine": 4,
+						"firstColumn": 0,
+						"lastColumn": 14,
+						"lastLine": 4,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 4,
+							"firstColumn": 3,
+							"lastColumn": 12,
+							"lastLine": 4,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 4,
+								"firstColumn": 3,
+								"lastColumn": 12,
+								"lastLine": 4,
+								"type": "ID",
+								"original": "hasThings",
+								"parts": [
+									"hasThings"
+								],
+								"string": "hasThings",
+								"depth": 0,
+								"idName": "hasThings",
+								"isSimple": true,
+								"stringModeValue": "hasThings"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 4,
+							"firstColumn": 3,
+							"lastColumn": 12,
+							"lastLine": 4,
+							"type": "ID",
+							"original": "hasThings",
+							"parts": [
+								"hasThings"
+							],
+							"string": "hasThings",
+							"depth": 0,
+							"idName": "hasThings",
+							"isSimple": true,
+							"stringModeValue": "hasThings"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 4,
+						"firstColumn": 0,
+						"lastColumn": 0,
+						"lastLine": 9,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 4,
+								"firstColumn": 14,
+								"lastColumn": 0,
+								"lastLine": 6,
+								"type": "content",
+								"string": "<ul>\n",
+								"original": "\n<ul>\n",
+								"leftStripped": false,
+								"rightStripped": true
+							},
+							{
+								"firstLine": 6,
+								"firstColumn": 0,
+								"lastColumn": 11,
+								"lastLine": 8,
+								"type": "block",
+								"mustache": {
+									"firstLine": 6,
+									"firstColumn": 0,
+									"lastColumn": 11,
+									"lastLine": 6,
+									"type": "mustache",
+									"strip": {
+										"left": false,
+										"right": false
+									},
+									"escaped": true,
+									"sexpr": {
+										"firstLine": 6,
+										"firstColumn": 3,
+										"lastColumn": 9,
+										"lastLine": 6,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 6,
+											"firstColumn": 3,
+											"lastColumn": 9,
+											"lastLine": 6,
+											"type": "ID",
+											"original": "things",
+											"parts": [
+												"things"
+											],
+											"string": "things",
+											"depth": 0,
+											"idName": "things",
+											"isSimple": true,
+											"stringModeValue": "things"
+										},
+										"params": [],
+										"isHelper": false,
+										"eligibleHelper": true
+									},
+									"id": {
+										"firstLine": 6,
+										"firstColumn": 3,
+										"lastColumn": 9,
+										"lastLine": 6,
+										"type": "ID",
+										"original": "things",
+										"parts": [
+											"things"
+										],
+										"string": "things",
+										"depth": 0,
+										"idName": "things",
+										"isSimple": true,
+										"stringModeValue": "things"
+									},
+									"params": [],
+									"eligibleHelper": true,
+									"isHelper": false
+								},
+								"program": {
+									"firstLine": 6,
+									"firstColumn": 0,
+									"lastColumn": 0,
+									"lastLine": 8,
+									"type": "program",
+									"statements": [
+										{
+											"firstLine": 6,
+											"firstColumn": 11,
+											"lastColumn": 10,
+											"lastLine": 7,
+											"type": "content",
+											"string": "<li class=",
+											"original": "\n<li class=",
+											"rightStripped": true
+										},
+										{
+											"firstLine": 7,
+											"firstColumn": 10,
+											"lastColumn": 23,
+											"lastLine": 7,
+											"type": "mustache",
+											"strip": {
+												"left": false,
+												"right": false
+											},
+											"escaped": true,
+											"sexpr": {
+												"firstLine": 7,
+												"firstColumn": 12,
+												"lastColumn": 21,
+												"lastLine": 7,
+												"type": "sexpr",
+												"id": {
+													"firstLine": 7,
+													"firstColumn": 12,
+													"lastColumn": 21,
+													"lastLine": 7,
+													"type": "ID",
+													"original": "className",
+													"parts": [
+														"className"
+													],
+													"string": "className",
+													"depth": 0,
+													"idName": "className",
+													"isSimple": true,
+													"stringModeValue": "className"
+												},
+												"params": [],
+												"isHelper": false,
+												"eligibleHelper": true
+											},
+											"id": {
+												"firstLine": 7,
+												"firstColumn": 12,
+												"lastColumn": 21,
+												"lastLine": 7,
+												"type": "ID",
+												"original": "className",
+												"parts": [
+													"className"
+												],
+												"string": "className",
+												"depth": 0,
+												"idName": "className",
+												"isSimple": true,
+												"stringModeValue": "className"
+											},
+											"params": [],
+											"eligibleHelper": true,
+											"isHelper": false
+										},
+										{
+											"firstLine": 7,
+											"firstColumn": 23,
+											"lastColumn": 24,
+											"lastLine": 7,
+											"type": "content",
+											"string": ">",
+											"original": ">"
+										},
+										{
+											"firstLine": 7,
+											"firstColumn": 24,
+											"lastColumn": 32,
+											"lastLine": 7,
+											"type": "mustache",
+											"strip": {
+												"left": false,
+												"right": false
+											},
+											"escaped": true,
+											"sexpr": {
+												"firstLine": 7,
+												"firstColumn": 26,
+												"lastColumn": 30,
+												"lastLine": 7,
+												"type": "sexpr",
+												"id": {
+													"firstLine": 7,
+													"firstColumn": 26,
+													"lastColumn": 30,
+													"lastLine": 7,
+													"type": "ID",
+													"original": "word",
+													"parts": [
+														"word"
+													],
+													"string": "word",
+													"depth": 0,
+													"idName": "word",
+													"isSimple": true,
+													"stringModeValue": "word"
+												},
+												"params": [],
+												"isHelper": false,
+												"eligibleHelper": true
+											},
+											"id": {
+												"firstLine": 7,
+												"firstColumn": 26,
+												"lastColumn": 30,
+												"lastLine": 7,
+												"type": "ID",
+												"original": "word",
+												"parts": [
+													"word"
+												],
+												"string": "word",
+												"depth": 0,
+												"idName": "word",
+												"isSimple": true,
+												"stringModeValue": "word"
+											},
+											"params": [],
+											"eligibleHelper": true,
+											"isHelper": false
+										},
+										{
+											"firstLine": 7,
+											"firstColumn": 32,
+											"lastColumn": 0,
+											"lastLine": 8,
+											"type": "content",
+											"string": "</li>\n",
+											"original": "</li>\n"
+										}
+									],
+									"strip": {}
+								},
+								"strip": {
+									"left": false,
+									"right": false,
+									"openStandalone": true,
+									"closeStandalone": true
+								}
+							},
+							{
+								"firstLine": 8,
+								"firstColumn": 11,
+								"lastColumn": 0,
+								"lastLine": 9,
+								"type": "content",
+								"string": "</ul>.\n",
+								"original": "</ul>.\n",
+								"leftStripped": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": true,
+						"closeStandalone": true
+					}
+				},
+				{
+					"firstLine": 9,
+					"firstColumn": 14,
+					"lastColumn": 0,
+					"lastLine": 10,
+					"type": "content",
+					"string": "",
+					"original": "\n",
+					"rightStripped": true,
+					"leftStripped": false
+				},
+				{
+					"firstLine": 10,
+					"firstColumn": 0,
+					"lastColumn": 14,
+					"lastLine": 13,
+					"type": "block",
+					"mustache": {
+						"firstLine": 10,
+						"firstColumn": 0,
+						"lastColumn": 14,
+						"lastLine": 10,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 10,
+							"firstColumn": 3,
+							"lastColumn": 12,
+							"lastLine": 10,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 10,
+								"firstColumn": 3,
+								"lastColumn": 12,
+								"lastLine": 10,
+								"type": "ID",
+								"original": "hasThings",
+								"parts": [
+									"hasThings"
+								],
+								"string": "hasThings",
+								"depth": 0,
+								"idName": "hasThings",
+								"isSimple": true,
+								"stringModeValue": "hasThings"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 10,
+							"firstColumn": 3,
+							"lastColumn": 12,
+							"lastLine": 10,
+							"type": "ID",
+							"original": "hasThings",
+							"parts": [
+								"hasThings"
+							],
+							"string": "hasThings",
+							"depth": 0,
+							"idName": "hasThings",
+							"isSimple": true,
+							"stringModeValue": "hasThings"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"inverse": {
+						"firstLine": 10,
+						"firstColumn": 0,
+						"lastColumn": 0,
+						"lastLine": 13,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 10,
+								"firstColumn": 14,
+								"lastColumn": 0,
+								"lastLine": 13,
+								"type": "content",
+								"string": "\n<small>Nothing to check out...</small>\n",
+								"original": "\n\n<small>Nothing to check out...</small>\n",
+								"rightStripped": true,
+								"leftStripped": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": true,
+						"closeStandalone": true
+					},
+					"isInverse": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"<strong>This is a slightly more complicated "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"thing"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"thing",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						".</strong>.\n"
+					]
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Check this out:\n"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"hasThings"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"hasThings",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"hasThings"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"hasThings",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"<ul>\n"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"things"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"things",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"</ul>.\n"
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										"<li class="
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"className"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"className",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										">"
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "pushProgram",
+									"args": [
+										null
+									]
+								},
+								{
+									"opcode": "getContext",
+									"args": [
+										0
+									]
+								},
+								{
+									"opcode": "lookupOnContext",
+									"args": [
+										[
+											"word"
+										],
+										null,
+										null
+									]
+								},
+								{
+									"opcode": "invokeAmbiguous",
+									"args": [
+										"word",
+										false
+									]
+								},
+								{
+									"opcode": "appendEscaped",
+									"args": []
+								},
+								{
+									"opcode": "appendContent",
+									"args": [
+										"</li>\n"
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": false
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"\n<small>Nothing to check out...</small>\n"
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-408: Multiple loops fail",
+		"template": "{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}{{#.}}{{name}}{{/.}}",
+		"data": [
+			{
+				"name": "John Doe",
+				"location": {
+					"city": "Chicago"
+				}
+			},
+			{
+				"name": "Jane Doe",
+				"location": {
+					"city": "New York"
+				}
+			}
+		],
+		"expected": "John DoeJane DoeJohn DoeJane DoeJohn DoeJane Doe",
+		"message": "It should output multiple times",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 60,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 20,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 6,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 4,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 4,
+								"lastLine": 1,
+								"type": "ID",
+								"isScoped": true,
+								"original": ".",
+								"parts": [],
+								"string": "",
+								"depth": 0,
+								"idName": "",
+								"isSimple": false,
+								"stringModeValue": ""
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": false
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 4,
+							"lastLine": 1,
+							"type": "ID",
+							"isScoped": true,
+							"original": ".",
+							"parts": [],
+							"string": "",
+							"depth": 0,
+							"idName": "",
+							"isSimple": false,
+							"stringModeValue": ""
+						},
+						"params": [],
+						"eligibleHelper": false,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 14,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 6,
+								"lastColumn": 14,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 12,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 8,
+										"lastColumn": 12,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "name",
+										"parts": [
+											"name"
+										],
+										"string": "name",
+										"depth": 0,
+										"idName": "name",
+										"isSimple": true,
+										"stringModeValue": "name"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 8,
+									"lastColumn": 12,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "name",
+									"parts": [
+										"name"
+									],
+									"string": "name",
+									"depth": 0,
+									"idName": "name",
+									"isSimple": true,
+									"stringModeValue": "name"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false
+					}
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 20,
+					"lastColumn": 40,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 20,
+						"lastColumn": 26,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 23,
+							"lastColumn": 24,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 23,
+								"lastColumn": 24,
+								"lastLine": 1,
+								"type": "ID",
+								"isScoped": true,
+								"original": ".",
+								"parts": [],
+								"string": "",
+								"depth": 0,
+								"idName": "",
+								"isSimple": false,
+								"stringModeValue": ""
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": false
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 23,
+							"lastColumn": 24,
+							"lastLine": 1,
+							"type": "ID",
+							"isScoped": true,
+							"original": ".",
+							"parts": [],
+							"string": "",
+							"depth": 0,
+							"idName": "",
+							"isSimple": false,
+							"stringModeValue": ""
+						},
+						"params": [],
+						"eligibleHelper": false,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 20,
+						"lastColumn": 34,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 26,
+								"lastColumn": 34,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 28,
+									"lastColumn": 32,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 28,
+										"lastColumn": 32,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "name",
+										"parts": [
+											"name"
+										],
+										"string": "name",
+										"depth": 0,
+										"idName": "name",
+										"isSimple": true,
+										"stringModeValue": "name"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 28,
+									"lastColumn": 32,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "name",
+									"parts": [
+										"name"
+									],
+									"string": "name",
+									"depth": 0,
+									"idName": "name",
+									"isSimple": true,
+									"stringModeValue": "name"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false
+					}
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 40,
+					"lastColumn": 60,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 40,
+						"lastColumn": 46,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 43,
+							"lastColumn": 44,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 43,
+								"lastColumn": 44,
+								"lastLine": 1,
+								"type": "ID",
+								"isScoped": true,
+								"original": ".",
+								"parts": [],
+								"string": "",
+								"depth": 0,
+								"idName": "",
+								"isSimple": false,
+								"stringModeValue": ""
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": false
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 43,
+							"lastColumn": 44,
+							"lastLine": 1,
+							"type": "ID",
+							"isScoped": true,
+							"original": ".",
+							"parts": [],
+							"string": "",
+							"depth": 0,
+							"idName": "",
+							"isSimple": false,
+							"stringModeValue": ""
+						},
+						"params": [],
+						"eligibleHelper": false,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 40,
+						"lastColumn": 54,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 46,
+								"lastColumn": 54,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 48,
+									"lastColumn": 52,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 48,
+										"lastColumn": 52,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "name",
+										"parts": [
+											"name"
+										],
+										"string": "name",
+										"depth": 0,
+										"idName": "name",
+										"isSimple": true,
+										"stringModeValue": "name"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 48,
+									"lastColumn": 52,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "name",
+									"parts": [
+										"name"
+									],
+									"string": "name",
+									"depth": 0,
+									"idName": "name",
+									"isSimple": true,
+									"stringModeValue": "name"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "blockValue",
+					"args": [
+						"."
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "blockValue",
+					"args": [
+						"."
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						2
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "blockValue",
+					"args": [
+						"."
+					]
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"name"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"name",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"name"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"name",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"name"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"name",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 3,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GS-428: Nested if else rendering",
+		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}}  {{#blk}} Expected {{/blk}} {{/inverse}}",
+		"data": {},
+		"helpers": {
+			"blk": {
+				"!code": true,
+				"javascript": "function (block) { return block.fn(''); }",
+				"php": "function($block) { return $block/*['fn']*/->fn(''); }"
+			},
+			"inverse": {
+				"!code": true,
+				"javascript": "function (block) { return block.inverse(''); }",
+				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
+			}
+		},
+		"expected": "   Expected  ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 91,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 91,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 12,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "inverse",
+								"parts": [
+									"inverse"
+								],
+								"string": "inverse",
+								"depth": 0,
+								"idName": "inverse",
+								"isSimple": true,
+								"stringModeValue": "inverse"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "inverse",
+							"parts": [
+								"inverse"
+							],
+							"string": "inverse",
+							"depth": 0,
+							"idName": "inverse",
+							"isSimple": true,
+							"stringModeValue": "inverse"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 12,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 13,
+								"lastColumn": 41,
+								"lastLine": 1,
+								"type": "block",
+								"mustache": {
+									"firstLine": 1,
+									"firstColumn": 13,
+									"lastColumn": 21,
+									"lastLine": 1,
+									"type": "mustache",
+									"strip": {
+										"left": false,
+										"right": false
+									},
+									"escaped": true,
+									"sexpr": {
+										"firstLine": 1,
+										"firstColumn": 16,
+										"lastColumn": 19,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 16,
+											"lastColumn": 19,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "blk",
+											"parts": [
+												"blk"
+											],
+											"string": "blk",
+											"depth": 0,
+											"idName": "blk",
+											"isSimple": true,
+											"stringModeValue": "blk"
+										},
+										"params": [],
+										"isHelper": false,
+										"eligibleHelper": true
+									},
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 16,
+										"lastColumn": 19,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "blk",
+										"parts": [
+											"blk"
+										],
+										"string": "blk",
+										"depth": 0,
+										"idName": "blk",
+										"isSimple": true,
+										"stringModeValue": "blk"
+									},
+									"params": [],
+									"eligibleHelper": true,
+									"isHelper": false
+								},
+								"program": {
+									"firstLine": 1,
+									"firstColumn": 13,
+									"lastColumn": 33,
+									"lastLine": 1,
+									"type": "program",
+									"statements": [
+										{
+											"firstLine": 1,
+											"firstColumn": 21,
+											"lastColumn": 33,
+											"lastLine": 1,
+											"type": "content",
+											"string": " Unexpected ",
+											"original": " Unexpected "
+										}
+									],
+									"strip": {}
+								},
+								"strip": {
+									"left": false,
+									"right": false,
+									"openStandalone": false,
+									"closeStandalone": false
+								}
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 41,
+								"lastColumn": 42,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							}
+						],
+						"strip": {}
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 42,
+						"lastColumn": 79,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 50,
+								"lastColumn": 52,
+								"lastLine": 1,
+								"type": "content",
+								"string": "  ",
+								"original": "  "
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 52,
+								"lastColumn": 78,
+								"lastLine": 1,
+								"type": "block",
+								"mustache": {
+									"firstLine": 1,
+									"firstColumn": 52,
+									"lastColumn": 60,
+									"lastLine": 1,
+									"type": "mustache",
+									"strip": {
+										"left": false,
+										"right": false
+									},
+									"escaped": true,
+									"sexpr": {
+										"firstLine": 1,
+										"firstColumn": 55,
+										"lastColumn": 58,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 55,
+											"lastColumn": 58,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "blk",
+											"parts": [
+												"blk"
+											],
+											"string": "blk",
+											"depth": 0,
+											"idName": "blk",
+											"isSimple": true,
+											"stringModeValue": "blk"
+										},
+										"params": [],
+										"isHelper": false,
+										"eligibleHelper": true
+									},
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 55,
+										"lastColumn": 58,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "blk",
+										"parts": [
+											"blk"
+										],
+										"string": "blk",
+										"depth": 0,
+										"idName": "blk",
+										"isSimple": true,
+										"stringModeValue": "blk"
+									},
+									"params": [],
+									"eligibleHelper": true,
+									"isHelper": false
+								},
+								"program": {
+									"firstLine": 1,
+									"firstColumn": 52,
+									"lastColumn": 70,
+									"lastLine": 1,
+									"type": "program",
+									"statements": [
+										{
+											"firstLine": 1,
+											"firstColumn": 60,
+											"lastColumn": 70,
+											"lastLine": 1,
+											"type": "content",
+											"string": " Expected ",
+											"original": " Expected "
+										}
+									],
+									"strip": {}
+								},
+								"strip": {
+									"left": false,
+									"right": false,
+									"openStandalone": false,
+									"closeStandalone": false
+								}
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 78,
+								"lastColumn": 79,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"inverse"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"inverse",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"blk"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"blk",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" Unexpected "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": true
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"  "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"blk"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"blk",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" Expected "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": true
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GS-428: Nested if else rendering",
+		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}} {{#blk}} Expected {{/blk}} {{/inverse}}",
+		"data": {},
+		"helpers": {
+			"blk": {
+				"!code": true,
+				"javascript": "function (block) { return block.fn(''); }",
+				"php": "function($block) { return $block/*['fn']*/->fn(''); }"
+			},
+			"inverse": {
+				"!code": true,
+				"javascript": "function (block) { return block.inverse(''); }",
+				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
+			}
+		},
+		"expected": "  Expected  ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 90,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 90,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 12,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 10,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "inverse",
+								"parts": [
+									"inverse"
+								],
+								"string": "inverse",
+								"depth": 0,
+								"idName": "inverse",
+								"isSimple": true,
+								"stringModeValue": "inverse"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 10,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "inverse",
+							"parts": [
+								"inverse"
+							],
+							"string": "inverse",
+							"depth": 0,
+							"idName": "inverse",
+							"isSimple": true,
+							"stringModeValue": "inverse"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 12,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 13,
+								"lastColumn": 41,
+								"lastLine": 1,
+								"type": "block",
+								"mustache": {
+									"firstLine": 1,
+									"firstColumn": 13,
+									"lastColumn": 21,
+									"lastLine": 1,
+									"type": "mustache",
+									"strip": {
+										"left": false,
+										"right": false
+									},
+									"escaped": true,
+									"sexpr": {
+										"firstLine": 1,
+										"firstColumn": 16,
+										"lastColumn": 19,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 16,
+											"lastColumn": 19,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "blk",
+											"parts": [
+												"blk"
+											],
+											"string": "blk",
+											"depth": 0,
+											"idName": "blk",
+											"isSimple": true,
+											"stringModeValue": "blk"
+										},
+										"params": [],
+										"isHelper": false,
+										"eligibleHelper": true
+									},
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 16,
+										"lastColumn": 19,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "blk",
+										"parts": [
+											"blk"
+										],
+										"string": "blk",
+										"depth": 0,
+										"idName": "blk",
+										"isSimple": true,
+										"stringModeValue": "blk"
+									},
+									"params": [],
+									"eligibleHelper": true,
+									"isHelper": false
+								},
+								"program": {
+									"firstLine": 1,
+									"firstColumn": 13,
+									"lastColumn": 33,
+									"lastLine": 1,
+									"type": "program",
+									"statements": [
+										{
+											"firstLine": 1,
+											"firstColumn": 21,
+											"lastColumn": 33,
+											"lastLine": 1,
+											"type": "content",
+											"string": " Unexpected ",
+											"original": " Unexpected "
+										}
+									],
+									"strip": {}
+								},
+								"strip": {
+									"left": false,
+									"right": false,
+									"openStandalone": false,
+									"closeStandalone": false
+								}
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 41,
+								"lastColumn": 42,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							}
+						],
+						"strip": {}
+					},
+					"inverse": {
+						"firstLine": 1,
+						"firstColumn": 42,
+						"lastColumn": 78,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 50,
+								"lastColumn": 51,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 51,
+								"lastColumn": 77,
+								"lastLine": 1,
+								"type": "block",
+								"mustache": {
+									"firstLine": 1,
+									"firstColumn": 51,
+									"lastColumn": 59,
+									"lastLine": 1,
+									"type": "mustache",
+									"strip": {
+										"left": false,
+										"right": false
+									},
+									"escaped": true,
+									"sexpr": {
+										"firstLine": 1,
+										"firstColumn": 54,
+										"lastColumn": 57,
+										"lastLine": 1,
+										"type": "sexpr",
+										"id": {
+											"firstLine": 1,
+											"firstColumn": 54,
+											"lastColumn": 57,
+											"lastLine": 1,
+											"type": "ID",
+											"original": "blk",
+											"parts": [
+												"blk"
+											],
+											"string": "blk",
+											"depth": 0,
+											"idName": "blk",
+											"isSimple": true,
+											"stringModeValue": "blk"
+										},
+										"params": [],
+										"isHelper": false,
+										"eligibleHelper": true
+									},
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 54,
+										"lastColumn": 57,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "blk",
+										"parts": [
+											"blk"
+										],
+										"string": "blk",
+										"depth": 0,
+										"idName": "blk",
+										"isSimple": true,
+										"stringModeValue": "blk"
+									},
+									"params": [],
+									"eligibleHelper": true,
+									"isHelper": false
+								},
+								"program": {
+									"firstLine": 1,
+									"firstColumn": 51,
+									"lastColumn": 69,
+									"lastLine": 1,
+									"type": "program",
+									"statements": [
+										{
+											"firstLine": 1,
+											"firstColumn": 59,
+											"lastColumn": 69,
+											"lastLine": 1,
+											"type": "content",
+											"string": " Expected ",
+											"original": " Expected "
+										}
+									],
+									"strip": {}
+								},
+								"strip": {
+									"left": false,
+									"right": false,
+									"openStandalone": false,
+									"closeStandalone": false
+								}
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 77,
+								"lastColumn": 78,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ",
+								"original": " "
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"inverse"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"inverse",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"blk"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"blk",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" Unexpected "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": true
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				},
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"blk"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"blk",
+								true
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "emptyHash",
+							"args": []
+						},
+						{
+							"opcode": "ambiguousBlockValue",
+							"args": []
+						},
+						{
+							"opcode": "append",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" "
+							]
+						}
+					],
+					"children": [
+						{
+							"opcodes": [
+								{
+									"opcode": "appendContent",
+									"args": [
+										" Expected "
+									]
+								}
+							],
+							"children": [],
+							"depths": {
+								"list": []
+							},
+							"options": {
+								"data": true,
+								"knownHelpers": {
+									"helperMissing": true,
+									"blockHelperMissing": true,
+									"each": true,
+									"if": true,
+									"unless": true,
+									"with": true,
+									"log": true,
+									"lookup": true
+								}
+							},
+							"isSimple": true
+						}
+					],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"guid": 1,
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-458: Scoped this identifier",
+		"template": "{{./foo}}",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "bar",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 9,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 9,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 7,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 7,
+							"lastLine": 1,
+							"type": "ID",
+							"isScoped": true,
+							"original": "./foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": false,
+							"stringModeValue": "foo"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": false
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 7,
+						"lastLine": 1,
+						"type": "ID",
+						"isScoped": true,
+						"original": "./foo",
+						"parts": [
+							"foo"
+						],
+						"string": "foo",
+						"depth": 0,
+						"idName": "foo",
+						"isSimple": false,
+						"stringModeValue": "foo"
+					},
+					"params": [],
+					"eligibleHelper": false,
+					"isHelper": false
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						true
+					]
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-375: Unicode line terminators",
+		"template": " ",
+		"data": {},
+		"expected": " ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 1,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 1,
+					"lastLine": 1,
+					"type": "content",
+					"string": " ",
+					"original": " "
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					]
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-534: Object prototype aliases",
+		"template": "{{foo}}",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "bar",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 7,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 7,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": true,
+							"stringModeValue": "foo"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "foo",
+						"parts": [
+							"foo"
+						],
+						"string": "foo",
+						"depth": 0,
+						"idName": "foo",
+						"isSimple": true,
+						"stringModeValue": "foo"
+					},
+					"params": [],
+					"eligibleHelper": true,
+					"isHelper": false
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-676: Using array in escaping mustache fails",
+		"template": "{{arr}}",
+		"data": {
+			"arr": [
+				1,
+				2
+			]
+		},
+		"expected": "1,2",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 7,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 7,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "arr",
+							"parts": [
+								"arr"
+							],
+							"string": "arr",
+							"depth": 0,
+							"idName": "arr",
+							"isSimple": true,
+							"stringModeValue": "arr"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "arr",
+						"parts": [
+							"arr"
+						],
+						"string": "arr",
+						"depth": 0,
+						"idName": "arr",
+						"isSimple": true,
+						"stringModeValue": "arr"
+					},
+					"params": [],
+					"eligibleHelper": true,
+					"isHelper": false
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"arr"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"arr",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "Mustache man page",
+		"template": "Hello {{name}}. You have just won ${{value}}!{{#in_ca}} Well, ${{taxed_value}}, after taxes.{{/in_ca}}",
+		"data": {
+			"name": "Chris",
+			"value": 10000,
+			"taxed_value": 6000,
+			"in_ca": true
+		},
+		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes.",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 102,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 6,
+					"lastLine": 1,
+					"type": "content",
+					"string": "Hello ",
+					"original": "Hello "
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 6,
+					"lastColumn": 14,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 8,
+						"lastColumn": 12,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 8,
+							"lastColumn": 12,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "name",
+							"parts": [
+								"name"
+							],
+							"string": "name",
+							"depth": 0,
+							"idName": "name",
+							"isSimple": true,
+							"stringModeValue": "name"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 8,
+						"lastColumn": 12,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "name",
+						"parts": [
+							"name"
+						],
+						"string": "name",
+						"depth": 0,
+						"idName": "name",
+						"isSimple": true,
+						"stringModeValue": "name"
+					},
+					"params": [],
+					"eligibleHelper": true,
+					"isHelper": false
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 14,
+					"lastColumn": 35,
+					"lastLine": 1,
+					"type": "content",
+					"string": ". You have just won $",
+					"original": ". You have just won $"
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 35,
+					"lastColumn": 44,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 37,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 37,
+							"lastColumn": 42,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "value",
+							"parts": [
+								"value"
+							],
+							"string": "value",
+							"depth": 0,
+							"idName": "value",
+							"isSimple": true,
+							"stringModeValue": "value"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 37,
+						"lastColumn": 42,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "value",
+						"parts": [
+							"value"
+						],
+						"string": "value",
+						"depth": 0,
+						"idName": "value",
+						"isSimple": true,
+						"stringModeValue": "value"
+					},
+					"params": [],
+					"eligibleHelper": true,
+					"isHelper": false
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 44,
+					"lastColumn": 45,
+					"lastLine": 1,
+					"type": "content",
+					"string": "!",
+					"original": "!"
+				},
+				{
+					"firstLine": 1,
+					"firstColumn": 45,
+					"lastColumn": 102,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 45,
+						"lastColumn": 55,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 48,
+							"lastColumn": 53,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 48,
+								"lastColumn": 53,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "in_ca",
+								"parts": [
+									"in_ca"
+								],
+								"string": "in_ca",
+								"depth": 0,
+								"idName": "in_ca",
+								"isSimple": true,
+								"stringModeValue": "in_ca"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 48,
+							"lastColumn": 53,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "in_ca",
+							"parts": [
+								"in_ca"
+							],
+							"string": "in_ca",
+							"depth": 0,
+							"idName": "in_ca",
+							"isSimple": true,
+							"stringModeValue": "in_ca"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 45,
+						"lastColumn": 92,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 55,
+								"lastColumn": 63,
+								"lastLine": 1,
+								"type": "content",
+								"string": " Well, $",
+								"original": " Well, $"
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 63,
+								"lastColumn": 78,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 65,
+									"lastColumn": 76,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 65,
+										"lastColumn": 76,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "taxed_value",
+										"parts": [
+											"taxed_value"
+										],
+										"string": "taxed_value",
+										"depth": 0,
+										"idName": "taxed_value",
+										"isSimple": true,
+										"stringModeValue": "taxed_value"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 65,
+									"lastColumn": 76,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "taxed_value",
+									"parts": [
+										"taxed_value"
+									],
+									"string": "taxed_value",
+									"depth": 0,
+									"idName": "taxed_value",
+									"isSimple": true,
+									"stringModeValue": "taxed_value"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 78,
+								"lastColumn": 92,
+								"lastLine": 1,
+								"type": "content",
+								"string": ", after taxes.",
+								"original": ", after taxes."
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"Hello "
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"name"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"name",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						". You have just won $"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"value"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"value",
+						false
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"!"
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"in_ca"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"in_ca",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" Well, $"
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"taxed_value"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"taxed_value",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								", after taxes."
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": false
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-731: zero context rendering",
+		"template": "{{#foo}} This is {{bar}} ~ {{/foo}}",
+		"data": {
+			"foo": 0,
+			"bar": "OK"
+		},
+		"expected": " This is  ~ ",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 35,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 35,
+					"lastLine": 1,
+					"type": "block",
+					"mustache": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 8,
+						"lastLine": 1,
+						"type": "mustache",
+						"strip": {
+							"left": false,
+							"right": false
+						},
+						"escaped": true,
+						"sexpr": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "sexpr",
+							"id": {
+								"firstLine": 1,
+								"firstColumn": 3,
+								"lastColumn": 6,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "foo",
+								"parts": [
+									"foo"
+								],
+								"string": "foo",
+								"depth": 0,
+								"idName": "foo",
+								"isSimple": true,
+								"stringModeValue": "foo"
+							},
+							"params": [],
+							"isHelper": false,
+							"eligibleHelper": true
+						},
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 3,
+							"lastColumn": 6,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo",
+							"parts": [
+								"foo"
+							],
+							"string": "foo",
+							"depth": 0,
+							"idName": "foo",
+							"isSimple": true,
+							"stringModeValue": "foo"
+						},
+						"params": [],
+						"eligibleHelper": true,
+						"isHelper": false
+					},
+					"program": {
+						"firstLine": 1,
+						"firstColumn": 0,
+						"lastColumn": 27,
+						"lastLine": 1,
+						"type": "program",
+						"statements": [
+							{
+								"firstLine": 1,
+								"firstColumn": 8,
+								"lastColumn": 17,
+								"lastLine": 1,
+								"type": "content",
+								"string": " This is ",
+								"original": " This is "
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 17,
+								"lastColumn": 24,
+								"lastLine": 1,
+								"type": "mustache",
+								"strip": {
+									"left": false,
+									"right": false
+								},
+								"escaped": true,
+								"sexpr": {
+									"firstLine": 1,
+									"firstColumn": 19,
+									"lastColumn": 22,
+									"lastLine": 1,
+									"type": "sexpr",
+									"id": {
+										"firstLine": 1,
+										"firstColumn": 19,
+										"lastColumn": 22,
+										"lastLine": 1,
+										"type": "ID",
+										"original": "bar",
+										"parts": [
+											"bar"
+										],
+										"string": "bar",
+										"depth": 0,
+										"idName": "bar",
+										"isSimple": true,
+										"stringModeValue": "bar"
+									},
+									"params": [],
+									"isHelper": false,
+									"eligibleHelper": true
+								},
+								"id": {
+									"firstLine": 1,
+									"firstColumn": 19,
+									"lastColumn": 22,
+									"lastLine": 1,
+									"type": "ID",
+									"original": "bar",
+									"parts": [
+										"bar"
+									],
+									"string": "bar",
+									"depth": 0,
+									"idName": "bar",
+									"isSimple": true,
+									"stringModeValue": "bar"
+								},
+								"params": [],
+								"eligibleHelper": true,
+								"isHelper": false
+							},
+							{
+								"firstLine": 1,
+								"firstColumn": 24,
+								"lastColumn": 27,
+								"lastLine": 1,
+								"type": "content",
+								"string": " ~ ",
+								"original": " ~ "
+							}
+						],
+						"strip": {}
+					},
+					"strip": {
+						"left": false,
+						"right": false,
+						"openStandalone": false,
+						"closeStandalone": false
+					}
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"foo",
+						true
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": []
+				},
+				{
+					"opcode": "append",
+					"args": []
+				}
+			],
+			"children": [
+				{
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								" This is "
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "pushProgram",
+							"args": [
+								null
+							]
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							]
+						},
+						{
+							"opcode": "lookupOnContext",
+							"args": [
+								[
+									"bar"
+								],
+								null,
+								null
+							]
+						},
+						{
+							"opcode": "invokeAmbiguous",
+							"args": [
+								"bar",
+								false
+							]
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": []
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								" ~ "
+							]
+						}
+					],
+					"children": [],
+					"depths": {
+						"list": []
+					},
+					"options": {
+						"data": true,
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false
+				}
+			],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-820: zero pathed rendering",
+		"template": "{{foo.bar}}",
+		"data": {
+			"foo": 0
+		},
+		"expected": "",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 11,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 11,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 9,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 9,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "foo.bar",
+							"parts": [
+								"foo",
+								"bar"
+							],
+							"string": "foo.bar",
+							"depth": 0,
+							"idName": "foo.bar",
+							"isSimple": false,
+							"stringModeValue": "foo.bar"
+						},
+						"params": [],
+						"isHelper": false,
+						"eligibleHelper": false
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 9,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "foo.bar",
+						"parts": [
+							"foo",
+							"bar"
+						],
+						"string": "foo.bar",
+						"depth": 0,
+						"idName": "foo.bar",
+						"isSimple": false,
+						"stringModeValue": "foo.bar"
+					},
+					"params": [],
+					"eligibleHelper": false,
+					"isHelper": false
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"foo",
+							"bar"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": []
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-837: undefined values for helpers",
+		"template": "{{str bar.baz}}",
+		"data": {},
+		"helpers": {
+			"str": {
+				"!code": true,
+				"javascript": "function (value) { return value + ''; }",
+				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
+			}
+		},
+		"expected": "undefined",
+		"ast": {
+			"firstLine": 1,
+			"firstColumn": 0,
+			"lastColumn": 15,
+			"lastLine": 1,
+			"type": "program",
+			"statements": [
+				{
+					"firstLine": 1,
+					"firstColumn": 0,
+					"lastColumn": 15,
+					"lastLine": 1,
+					"type": "mustache",
+					"strip": {
+						"left": false,
+						"right": false
+					},
+					"escaped": true,
+					"sexpr": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 13,
+						"lastLine": 1,
+						"type": "sexpr",
+						"id": {
+							"firstLine": 1,
+							"firstColumn": 2,
+							"lastColumn": 5,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "str",
+							"parts": [
+								"str"
+							],
+							"string": "str",
+							"depth": 0,
+							"idName": "str",
+							"isSimple": true,
+							"stringModeValue": "str"
+						},
+						"params": [
+							{
+								"firstLine": 1,
+								"firstColumn": 6,
+								"lastColumn": 13,
+								"lastLine": 1,
+								"type": "ID",
+								"original": "bar.baz",
+								"parts": [
+									"bar",
+									"baz"
+								],
+								"string": "bar.baz",
+								"depth": 0,
+								"idName": "bar.baz",
+								"isSimple": false,
+								"stringModeValue": "bar.baz"
+							}
+						],
+						"isHelper": true,
+						"eligibleHelper": true
+					},
+					"id": {
+						"firstLine": 1,
+						"firstColumn": 2,
+						"lastColumn": 5,
+						"lastLine": 1,
+						"type": "ID",
+						"original": "str",
+						"parts": [
+							"str"
+						],
+						"string": "str",
+						"depth": 0,
+						"idName": "str",
+						"isSimple": true,
+						"stringModeValue": "str"
+					},
+					"params": [
+						{
+							"firstLine": 1,
+							"firstColumn": 6,
+							"lastColumn": 13,
+							"lastLine": 1,
+							"type": "ID",
+							"original": "bar.baz",
+							"parts": [
+								"bar",
+								"baz"
+							],
+							"string": "bar.baz",
+							"depth": 0,
+							"idName": "bar.baz",
+							"isSimple": false,
+							"stringModeValue": "bar.baz"
+						}
+					],
+					"eligibleHelper": true,
+					"isHelper": true
+				}
+			],
+			"strip": {}
+		},
+		"opcodes": {
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"bar",
+							"baz"
+						],
+						null,
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					]
+				},
+				{
+					"opcode": "emptyHash",
+					"args": []
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"str"
+						],
+						true,
+						null
+					]
+				},
+				{
+					"opcode": "invokeHelper",
+					"args": [
+						1,
+						"str",
+						true
+					]
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": []
+				}
+			],
+			"children": [],
+			"depths": {
+				"list": []
+			},
+			"options": {
+				"data": true,
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true
+		}
+	}
+]

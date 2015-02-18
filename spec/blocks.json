@@ -266,7 +266,10 @@
 			]
 		},
 		"expected": "Goodbye cruel OMG!",
-		"compat": true
+		"compat": true,
+		"compileOptions": {
+			"compat": true
+		}
 	},
 	{
 		"description": "compat mode",
@@ -288,7 +291,10 @@
 			]
 		},
 		"expected": "Goodbye cruel OMG!",
-		"compat": true
+		"compat": true,
+		"compileOptions": {
+			"compat": true
+		}
 	},
 	{
 		"description": "compat mode",
@@ -310,6 +316,9 @@
 			]
 		},
 		"expected": "Goodbye cruel ",
-		"compat": true
+		"compat": true,
+		"compileOptions": {
+			"compat": true
+		}
 	}
 ]

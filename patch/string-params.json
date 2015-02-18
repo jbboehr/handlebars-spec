@@ -15,7 +15,7 @@
                 "php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
             },
             "with": {
-                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+                "php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
             }
         },
         "note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -78,10 +78,10 @@
     "string params mode-when inside a block in string mode, .. passes the appropriate context in the options hash to a block helper-00": {
         "helpers": {
             "tomdale": {
-                "php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options['fn']($scope);\n      }"
+                "php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($options->scope);\n      }"
             },
             "with": {
-                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+                "php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
             }
         }
     },
@@ -91,14 +91,14 @@
                 "php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
             },
             "with": {
-                "php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+                "php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
             }
         }
     },
     "string params mode-when using block form, arguments to helpers can be retrieved from options hash in string form-00": {
         "helpers": {
             "wycats": {
-                "php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options['fn']($scope);\n      }"
+                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
             }
         }
     },

@@ -31,7 +31,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
-				"php": "function($passiveVoice, $noun, $options, $scope) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options['fn']($scope);\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
 			}
 		}
 	},
@@ -57,7 +57,7 @@
 			"with": {
 				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
-				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
 		}
 	},
@@ -118,7 +118,7 @@
 			"with": {
 				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
-				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -140,12 +140,12 @@
 			"tomdale": {
 				"!code": true,
 				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }",
-				"php": "function($desire, $noun, $options, $scope) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options['fn']($scope);\n      }"
+				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($options->scope);\n      }"
 			},
 			"with": {
 				"!code": true,
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
-				"php": "function($context, $options) {\n        return $options['fn']($options['contexts'][0][$context]);\n      }"
+				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
 		}
 	},

@@ -124,12 +124,12 @@
 			"blk": {
 				"!code": true,
 				"javascript": "function (block) { return block.fn(''); }",
-				"php": "function($block) { return $block['fn'](''); }"
+				"php": "function($block) { return $block/*['fn']*/->fn(''); }"
 			},
 			"inverse": {
 				"!code": true,
 				"javascript": "function (block) { return block.inverse(''); }",
-				"php": "function($block) { return $block['inverse'](''); }"
+				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
 		"expected": "   Expected  "
@@ -143,12 +143,12 @@
 			"blk": {
 				"!code": true,
 				"javascript": "function (block) { return block.fn(''); }",
-				"php": "function($block) { return $block['fn'](''); }"
+				"php": "function($block) { return $block/*['fn']*/->fn(''); }"
 			},
 			"inverse": {
 				"!code": true,
 				"javascript": "function (block) { return block.inverse(''); }",
-				"php": "function($block) { return $block['inverse'](''); }"
+				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
 		"expected": "  Expected  "
@@ -242,7 +242,7 @@
 			"str": {
 				"!code": true,
 				"javascript": "function (value) { return value + ''; }",
-				"php": "function($value) { return (string) $value; }"
+				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
 		},
 		"expected": "undefined"
