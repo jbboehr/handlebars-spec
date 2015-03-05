@@ -355,7 +355,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		}
 	}

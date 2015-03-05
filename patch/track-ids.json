@@ -2,7 +2,7 @@
     "#blockhelpermissing-should handle nesting-00": {
         "helpers": {
             "wycats": {
-                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . '\\n';\n      }"
+                "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
             }
         }
     },
