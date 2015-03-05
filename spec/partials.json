@@ -330,28 +330,6 @@
 		}
 	},
 	{
-		"description": "partials",
-		"it": "throw on missing partial",
-		"template": "{{> dude}}",
-		"data": {},
-		"exception": true,
-		"partials": {
-			"dude": "fail"
-		},
-		"expected": "",
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
-		}
-	},
-	{
-		"description": "partials",
-		"it": "throw on missing partial",
-		"template": "{{> whatever}}",
-		"exception": true,
-		"message": "/The partial dude could not be compiled/"
-	},
-	{
 		"description": "standalone partials",
 		"it": "indented partials",
 		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",

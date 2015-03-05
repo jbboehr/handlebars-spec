@@ -6,5 +6,7 @@
                 "php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
             }
         }
-    }
+    },
+    "partials-throw on missing partial-00": null,
+    "partials-throw on missing partial-01": null
 }
