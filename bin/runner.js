@@ -7,6 +7,7 @@ var path = require('path');
 var util = require('util');
 var assert = require('assert');
 var Handlebars = require('handlebars');
+var safeEval = require('./eval');
 
 
 
@@ -19,17 +20,6 @@ function astFor(template) { // borrowed from spec/parser.js
 
 function clone(v) {
   return v === undefined ? undefined : JSON.parse(JSON.stringify(v));
-}
-
-function safeEval(templateSpec) {
-  try {
-    /* jshint ignore:start */
-    return eval('(' + templateSpec + ')');
-    /* jshint ignore:end */
-  } catch (err) {
-    console.error("SPEC:" + templateSpec);
-    throw err;
-  }
 }
 
 function tokenize(template) { // borrowed from spec/tokenizer.js
@@ -166,6 +156,7 @@ function runTest(test) {
   var result = null;
   switch( test.suite ) {
     case 'basic':
+    case 'bench':
     case 'blocks':
     case 'builtins':
     case 'data':
