@@ -1,0 +1,19 @@
+{
+    "benchmarks-arguments-00": {
+        "helpers": {
+            "foo": {
+                "php": "function() {\n      return '';\n    }"
+            }
+        }
+    },
+    "benchmarks-subexpression-00": {
+        "helpers": {
+            "echo": {
+                "php": "function($value) {\n      return 'foo ' . $value;\n    }"
+            },
+            "header": {
+                "php": "function() {\n      return \"Colors\";\n    }"
+            }
+        }
+    }
+}

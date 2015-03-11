@@ -6,9 +6,11 @@ SPECS := $(BASIC_SPECS) parser tokenizer
 all: spec export
 
 spec: node_modules
+	node bin handlebars.js/bench/templates/index.js -o spec/bench.json
 	$(foreach var, $(SPECS), node bin handlebars.js/spec/$(var).js -o spec/$(var).json;)
 
 export: node_modules
+	node bin/export spec/bench.json -o export/bench.json
 	$(foreach var, $(BASIC_SPECS), node bin/export spec/$(var).json -o export/$(var).json;)
 
 check_changes:

@@ -508,7 +508,45 @@ if( input.match(/tokenizer\.js$/) ) {
   });
 }
 
-require(input);
+if( input.match(/bench\/templates/) ) {
+  suite = 'bench';
+  var benches = require(input);
+  Object.keys(benches).forEach(function(x) {
+    var data = benches[x];
+    var expected = Handlebars.compile(data.handlebars)(data.context, {
+      helpers: data.helpers,
+      partials: data.partials && data.partials.handlebars
+    });
+    stringifyLambdas(data.context);
+    var test = {
+      description: 'Benchmarks',
+      it: x,
+      template: data.handlebars,
+      data: data.context,
+      expected: expected,
+      compileOptions: {
+        data: false
+      }
+    };
+    if( data.helpers ) {
+      test.helpers = extractHelpers(data.helpers);
+    }
+    if( data.partials && data.partials.handlebars ) {
+      test.partials = data.partials.handlebars;
+    }
+    addTest(test);
+    
+    if( test.mustache ) {
+      test = clone(test);
+      test.it = x + ' compat';
+      test.template = data.mustache;
+      test.compileOptions.compat = true;
+      addTest(test);
+    }
+  });
+} else {
+  require(input);
+}
 
 try {
   var output = JSON.stringify(tests, null, '\t');
@@ -530,3 +568,4 @@ try {
   console.log(e);
   return process.exit(73);
 }
+
