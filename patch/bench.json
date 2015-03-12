@@ -6,8 +6,15 @@
             }
         }
     },
+    "benchmarks-complex-00": {
+        "data": {
+            "header": {
+                "php": "function () {\n      return \"Colors\";\n    }"
+            }
+        }
+    },
     "benchmarks-subexpression-00": {
-        "helpers": {
+        "data": {
             "echo": {
                 "php": "function($value) {\n      return 'foo ' . $value;\n    }"
             },

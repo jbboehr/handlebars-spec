@@ -1172,7 +1172,8 @@
 		"data": {
 			"header": {
 				"!code": true,
-				"javascript": "function () {\n      return \"Colors\";\n    }"
+				"javascript": "function () {\n      return \"Colors\";\n    }",
+				"php": "function () {\n      return \"Colors\";\n    }"
 			},
 			"hasItems": true,
 			"items": [
@@ -6519,11 +6520,13 @@
 		"data": {
 			"echo": {
 				"!code": true,
-				"javascript": "function (value) {\n      return 'foo ' + value;\n    }"
+				"javascript": "function (value) {\n      return 'foo ' + value;\n    }",
+				"php": "function($value) {\n      return 'foo ' . $value;\n    }"
 			},
 			"header": {
 				"!code": true,
-				"javascript": "function () {\n      return \"Colors\";\n    }"
+				"javascript": "function () {\n      return \"Colors\";\n    }",
+				"php": "function() {\n      return \"Colors\";\n    }"
 			}
 		},
 		"expected": "foo Colors",
@@ -6540,14 +6543,7 @@
 				"lookup": true
 			}
 		},
-		"helpers": {
-			"echo": {
-				"php": "function($value) {\n      return 'foo ' . $value;\n    }"
-			},
-			"header": {
-				"php": "function() {\n      return \"Colors\";\n    }"
-			}
-		},
+		"helpers": false,
 		"ast": {
 			"firstLine": 1,
 			"firstColumn": 0,
