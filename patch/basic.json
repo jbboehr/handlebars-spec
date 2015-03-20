@@ -58,7 +58,7 @@
     "basic context-functions-01": {
         "data": {
             "awesome": {
-                "php": "function($scope) { return $scope['more']; }"
+                "php": "function($options) { return $options->scope['more']; }"
             }
         }
     },

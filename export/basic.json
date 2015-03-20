@@ -5604,7 +5604,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function () { return this.more; }",
-				"php": "function($scope) { return $scope['more']; }"
+				"php": "function($options) { return $options->scope['more']; }"
 			},
 			"more": "More awesome"
 		},
