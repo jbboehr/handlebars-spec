@@ -313,7 +313,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
-				"php": "function($options) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
 		},
 		"ast": {
@@ -1940,7 +1940,7 @@
 			"let": {
 				"!code": true,
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          frame[prop] = options.hash[prop];\n        }\n        return options.fn(this, {data: frame});\n      }",
-				"php": "function($options) {\n        $frame = $options['data'];\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
+				"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
 		},
 		"ast": {
@@ -5438,7 +5438,7 @@
 			"helper": {
 				"!code": true,
 				"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }",
-				"php": "function($options) {\n            $frame = $options['data'];\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($options->scope, array(\"data\" => $frame));\n          }"
+				"php": "function($options) {\n            $frame = Utils::createFrame($options['data']);\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($options->scope, array(\"data\" => $frame));\n          }"
 			}
 		},
 		"ast": {
