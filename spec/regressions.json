@@ -16,21 +16,24 @@
 				}
 			]
 		},
-		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes"
+		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
-		"expected": "not set :: "
+		"expected": "not set :: ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
-		"expected": "not set :: "
+		"expected": "not set :: ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -39,7 +42,8 @@
 		"data": {
 			"set": false
 		},
-		"expected": "not set :: "
+		"expected": "not set :: ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -48,7 +52,8 @@
 		"data": {
 			"set": true
 		},
-		"expected": " :: set"
+		"expected": " :: set",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -60,7 +65,8 @@
 				2
 			]
 		},
-		"expected": "1, 2"
+		"expected": "1, 2",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -69,7 +75,7 @@
 		"data": {
 			"thing": {
 				"!code": true,
-				"javascript": "function () {\n        return \"blah\";\n      }",
+				"javascript": "function () {\n        return 'blah';\n      }",
 				"php": "function() {\n        return \"blah\";\n      }"
 			},
 			"things": [
@@ -92,7 +98,8 @@
 				"php": "function() {\n        return true;\n      }"
 			}
 		},
-		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n"
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -132,7 +139,8 @@
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
-		"expected": "   Expected  "
+		"expected": "   Expected  ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -151,7 +159,8 @@
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
-		"expected": "  Expected  "
+		"expected": "  Expected  ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -160,14 +169,16 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-375: Unicode line terminators",
 		"template": " ",
 		"data": {},
-		"expected": " "
+		"expected": " ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -176,7 +187,8 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar"
+		"expected": "bar",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -200,7 +212,8 @@
 				2
 			]
 		},
-		"expected": "1,2"
+		"expected": "1,2",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -212,7 +225,8 @@
 			"taxed_value": 6000,
 			"in_ca": true
 		},
-		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
+		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes.",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -222,7 +236,8 @@
 			"foo": 0,
 			"bar": "OK"
 		},
-		"expected": " This is  ~ "
+		"expected": " This is  ~ ",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -231,7 +246,8 @@
 		"data": {
 			"foo": 0
 		},
-		"expected": ""
+		"expected": "",
+		"compileOptions": {}
 	},
 	{
 		"description": "Regressions",
@@ -245,6 +261,22 @@
 				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
 		},
-		"expected": "undefined"
+		"expected": "undefined",
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-926: Depths and de-dupe",
+		"template": "{{#if dater}}{{#each data}}{{../name}}{{/each}}{{else}}{{#each notData}}{{../name}}{{/each}}{{/if}}",
+		"data": {
+			"name": "foo",
+			"data": [
+				1
+			],
+			"notData": [
+				1
+			]
+		},
+		"expected": "foo"
 	}
 ]

@@ -12,7 +12,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun;\n      }",
+				"javascript": "function (passiveVoice, noun) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun;\n      }",
 				"php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
 			}
 		}
@@ -30,7 +30,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
+				"javascript": "function (passiveVoice, noun, options) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
 			}
 		}
@@ -51,7 +51,7 @@
 		"helpers": {
 			"tomdale": {
 				"!code": true,
-				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun;\n      }",
+				"javascript": "function (desire, noun, options) {\n        return 'STOP ME FROM READING HACKER NEWS I ' +\n                options.contexts[0][desire] + ' ' + noun;\n      }",
 				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
 			},
 			"with": {
@@ -64,7 +64,7 @@
 	{
 		"description": "string params mode",
 		"it": "information about the types is passed along",
-		"template": "{{tomdale \"need\" dad.joke true false}}",
+		"template": "{{tomdale 'need' dad.joke true false}}",
 		"data": {},
 		"expected": "Helper called",
 		"message": "the string type is passed",
@@ -83,7 +83,7 @@
 	{
 		"description": "string params mode",
 		"it": "hash parameters get type information",
-		"template": "{{tomdale he.says desire=\"need\" noun=dad.joke bool=true}}",
+		"template": "{{tomdale he.says desire='need' noun=dad.joke bool=true}}",
 		"data": {},
 		"expected": "Helper called",
 		"compileOptions": {
@@ -101,7 +101,7 @@
 	{
 		"description": "string params mode",
 		"it": "hash parameters get context information",
-		"template": "{{#with dale}}{{tomdale he.says desire=\"need\" noun=../dad/joke bool=true}}{{/with}}",
+		"template": "{{#with dale}}{{tomdale he.says desire='need' noun=../dad/joke bool=true}}{{/with}}",
 		"data": {
 			"dale": {}
 		},
@@ -117,7 +117,7 @@
 			},
 			"with": {
 				"!code": true,
-				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+				"javascript": "function (withContext, options) {\n        return options.fn(options.contexts[0][withContext]);\n      }",
 				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
 		},
@@ -139,7 +139,7 @@
 		"helpers": {
 			"tomdale": {
 				"!code": true,
-				"javascript": "function (desire, noun, options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" +\n                options.contexts[0][desire] + \" \" + noun + \" \" +\n                options.fn(this);\n      }",
+				"javascript": "function (desire, noun, options) {\n        return 'STOP ME FROM READING HACKER NEWS I ' +\n                options.contexts[0][desire] + ' ' + noun + ' ' +\n                options.fn(this);\n      }",
 				"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($options->scope);\n      }"
 			},
 			"with": {
@@ -161,12 +161,12 @@
 		"helpers": {
 			"with": {
 				"!code": true,
-				"javascript": "function (options) {\n        return \"WITH\";\n      }",
+				"javascript": "function () {\n        return 'WITH';\n      }",
 				"php": "function($options) {\n        return \"WITH\";\n      }"
 			},
 			"view": {
 				"!code": true,
-				"javascript": "function () {\n        return \"VIEW\";\n      }",
+				"javascript": "function () {\n        return 'VIEW';\n      }",
 				"php": "function() {\n        return \"VIEW\";\n      }"
 			}
 		}
@@ -183,7 +183,7 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (bar, options) {\n        equal(bar, 'bar');\n        equal(options.types[0], 'DATA');\n        return 'Foo!';\n      }",
+				"javascript": "function (bar, options) {\n        equal(bar, '@bar');\n        equal(options.types[0], 'PathExpression');\n        return 'Foo!';\n      }",
 				"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
 			}
 		},

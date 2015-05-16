@@ -33,7 +33,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		},
@@ -58,7 +58,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
+				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
 				"php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
 			}
 		},
@@ -83,7 +83,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
 			}
 		},
@@ -109,7 +109,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return \"HELP ME MY BOSS \" + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		},
@@ -134,7 +134,7 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return \"HELP ME MY BOSS \" + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
+				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
 			}
 		},
@@ -164,11 +164,40 @@
 			},
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return \"HELP ME MY BOSS \" + passiveVoice;\n      }",
+				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return 'HELP ME MY BOSS ' + passiveVoice;\n      }",
 				"php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+	},
+	{
+		"description": "track ids",
+		"it": "should use block param paths",
+		"template": "{{#doIt as |is|}}{{wycats is.a slave.driver is}}{{/doIt}}",
+		"data": {
+			"is": {
+				"a": "foo"
+			},
+			"slave": {
+				"driver": "bar"
+			}
+		},
+		"expected": "HELP ME MY BOSS zomg.a:foo slave.driver:bar",
+		"compileOptions": {
+			"trackIds": true
+		},
+		"helpers": {
+			"doIt": {
+				"!code": true,
+				"javascript": "function (options) {\n        var blockParams = [this.is];\n        blockParams.path = ['zomg'];\n        return options.fn(this, {blockParams: blockParams});\n      }",
+				"php": "function($options) {\n        $blockParams = array($options->scope['is']);\n        $blockParams['path'] = array('zomg');\n        return $options->fn($options->scope, array('blockParams' => $blockParams));\n      }"
+			},
+			"wycats": {
+				"!code": true,
+				"javascript": "function (passiveVoice, noun, blah, options) {\n        equal(options.ids[0], 'zomg.a');\n        equal(options.ids[1], 'slave.driver');\n        equal(options.ids[2], 'zomg');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"php": "function($passiveVoice, $noun, $blah, $options) {\n        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;\n      }"
+			}
+		}
 	},
 	{
 		"description": "#each",
@@ -189,6 +218,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -215,6 +249,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -241,10 +280,46 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
 				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+			}
+		}
+	},
+	{
+		"description": "#each",
+		"it": "should handle block params",
+		"template": "{{#each array as |value|}}{{blockParams value.name}}{{/each}}",
+		"data": {
+			"array": [
+				{
+					"name": "foo"
+				},
+				{
+					"name": "bar"
+				}
+			]
+		},
+		"expected": "foo:array.0.name\nbar:array.1.name\n",
+		"compileOptions": {
+			"trackIds": true
+		},
+		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
+			"wycats": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->data['contextPath'] . '\\n';\n      }"
 			}
 		}
 	},
@@ -262,6 +337,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -285,6 +365,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -308,6 +393,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -329,6 +419,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
@@ -352,6 +447,11 @@
 			"trackIds": true
 		},
 		"helpers": {
+			"blockParams": {
+				"!code": true,
+				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+			},
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",

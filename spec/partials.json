@@ -18,7 +18,8 @@
 		"partials": {
 			"dude": "{{name}} ({{url}}) "
 		},
-		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -39,7 +40,96 @@
 		"partials": {
 			"dude": "{{name}} ({{url}}) "
 		},
-		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
+	},
+	{
+		"description": "partials",
+		"it": "dynamic partials",
+		"template": "Dudes: {{#dudes}}{{> (partial)}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
+		},
+		"helpers": {
+			"partial": {
+				"!code": true,
+				"javascript": "function () {\n        return 'dude';\n      }",
+				"php": "function() {\n        return 'dude';\n      }"
+			}
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
+	},
+	{
+		"description": "partials",
+		"it": "dynamic partials",
+		"template": "Dudes: {{#dudes}}{{> (partial)}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
+		},
+		"helpers": {
+			"partial": {
+				"!code": true,
+				"javascript": "function () {\n        return 'dude';\n      }",
+				"php": "function() {\n        return 'dude';\n      }"
+			}
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
+	},
+	{
+		"description": "partials",
+		"it": "failing dynamic partials",
+		"template": "Dudes: {{#dudes}}{{> (partial)}}{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"exception": true,
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
+		},
+		"helpers": {
+			"partial": {
+				"!code": true,
+				"javascript": "function () {\n        return 'missing';\n      }",
+				"php": "function() {\n        return 'missing';\n      }"
+			}
+		},
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -61,7 +151,8 @@
 			"dude": "{{#this}}{{name}} ({{url}}) {{/this}}"
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
-		"message": "Partials can be passed a context"
+		"message": "Partials can be passed a context",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -71,7 +162,15 @@
 		"partials": {
 			"dude": "{{foo}} Empty"
 		},
-		"expected": "Dudes:  Empty"
+		"expected": "Dudes:  Empty",
+		"compileOptions": {}
+	},
+	{
+		"description": "partials",
+		"it": "partials with duplicate parameters",
+		"template": "Dudes: {{>dude dudes foo bar=baz}}",
+		"exception": true,
+		"message": "Unsupported number of partial arguments: 2 - 1:7"
 	},
 	{
 		"description": "partials",
@@ -94,7 +193,8 @@
 			"dude": "{{others.foo}}{{name}} ({{url}}) "
 		},
 		"expected": "Dudes: barYehuda (http://yehuda) barAlan (http://alan) ",
-		"message": "Basic partials output based on current context."
+		"message": "Basic partials output based on current context.",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -114,10 +214,11 @@
 		},
 		"partials": {
 			"dude": "{{name}} {{> url}} ",
-			"url": "<a href='{{url}}'>{{url}}</a>"
+			"url": "<a href=\"{{url}}\">{{url}}</a>"
 		},
-		"expected": "Dudes: Yehuda <a href='http://yehuda'>http://yehuda</a> Alan <a href='http://alan'>http://alan</a> ",
-		"message": "Partials are rendered inside of other partials"
+		"expected": "Dudes: Yehuda <a href=\"http://yehuda\">http://yehuda</a> Alan <a href=\"http://alan\">http://alan</a> ",
+		"message": "Partials are rendered inside of other partials",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -125,6 +226,13 @@
 		"template": "{{> whatever}}",
 		"exception": true,
 		"message": "The partial whatever could not be found"
+	},
+	{
+		"description": "partials",
+		"it": "registering undefined partial throws an exception",
+		"template": "{{> whatever}}",
+		"exception": true,
+		"message": "Attempting to register a partial as undefined"
 	},
 	{
 		"description": "partials",
@@ -152,25 +260,27 @@
 		"partials": {
 			"dude": {
 				"!code": true,
-				"javascript": "function (context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
+				"javascript": "function partial(context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
 				"php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
 			}
 		},
-		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
+		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
 		"it": "GH-14: a partial preceding a selector",
-		"template": "Dudes: {{>dude}} {{another_dude}}",
+		"template": "Dudes: {{>dude}} {{anotherDude}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"dude": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers Creepers",
-		"message": "Regular selectors can follow a partial"
+		"message": "Regular selectors can follow a partial",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -178,13 +288,14 @@
 		"template": "Dudes: {{> shared/dude}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"shared/dude": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal paths"
+		"message": "Partials can use literal paths",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
@@ -192,44 +303,47 @@
 		"template": "Dudes: {{> shared/dude.thing}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"shared/dude.thing": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
-		"message": "Partials can use literal with points in paths"
+		"message": "Partials can use literal with points in paths",
+		"compileOptions": {}
 	},
 	{
 		"description": "partials",
 		"it": "Global Partials",
-		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
+		"template": "Dudes: {{> shared/dude}} {{> globalTest}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"shared/dude": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers Creepers",
 		"message": "Partials can use globals or passed",
+		"compileOptions": {},
 		"globalPartials": {
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
 		"description": "partials",
 		"it": "Multiple partial registration",
-		"template": "Dudes: {{> shared/dude}} {{> global_test}}",
+		"template": "Dudes: {{> shared/dude}} {{> globalTest}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"expected": "Dudes: Jeepers Creepers",
 		"message": "Partials can use globals or passed",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -238,16 +352,17 @@
 		"template": "Dudes: {{> 404}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"404": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -256,16 +371,17 @@
 		"template": "Dudes: {{> 404/asdf?.bar}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -274,34 +390,36 @@
 		"template": "Dudes: {{> [+404/asdf?.bar]}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"+404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
 		"description": "partials",
 		"it": "Partials with string",
-		"template": "Dudes: {{> \"+404/asdf?.bar\"}}",
+		"template": "Dudes: {{> '+404/asdf?.bar'}}",
 		"data": {
 			"name": "Jeepers",
-			"another_dude": "Creepers"
+			"anotherDude": "Creepers"
 		},
 		"partials": {
 			"+404/asdf?.bar": "{{name}}"
 		},
 		"expected": "Dudes: Jeepers",
 		"message": "Partials can use literal paths",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -324,9 +442,10 @@
 			"dude": ""
 		},
 		"expected": "Dudes: ",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -349,9 +468,10 @@
 			"dude": "{{name}}\n"
 		},
 		"expected": "Dudes:\n  Yehuda\n  Alan\n",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -375,9 +495,39 @@
 			"url": "{{url}}!\n"
 		},
 		"expected": "Dudes:\n  Yehuda\n   http://yehuda!\n  Alan\n   http://alan!\n",
+		"compileOptions": {},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
+		}
+	},
+	{
+		"description": "standalone partials",
+		"it": "prevent nested indented partials",
+		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
+		"data": {
+			"dudes": [
+				{
+					"name": "Yehuda",
+					"url": "http://yehuda"
+				},
+				{
+					"name": "Alan",
+					"url": "http://alan"
+				}
+			]
+		},
+		"partials": {
+			"dude": "{{name}}\n {{> url}}",
+			"url": "{{url}}!\n"
+		},
+		"expected": "Dudes:\n  Yehuda\n http://yehuda!\n  Alan\n http://alan!\n",
+		"compileOptions": {
+			"preventIndent": true
+		},
+		"globalPartials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -407,7 +557,7 @@
 		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -437,7 +587,7 @@
 		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
@@ -467,7 +617,7 @@
 		},
 		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"global_test": "{{another_dude}}"
+			"globalTest": "{{anotherDude}}"
 		}
 	}
 ]

@@ -17,7 +17,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -27,7 +28,8 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -47,7 +49,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE"
+		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -88,7 +91,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -98,7 +102,8 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -118,7 +123,8 @@
 				}
 			]
 		},
-		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
+		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! ",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -138,7 +144,8 @@
 				}
 			]
 		},
-		"expected": "AlanAlanAlanAlanAlanAlan"
+		"expected": "AlanAlanAlanAlanAlanAlan",
+		"compileOptions": {}
 	},
 	{
 		"description": "blocks",
@@ -163,14 +170,16 @@
 				}
 			]
 		},
-		"expected": "Goodbye cruel sad OMG!"
+		"expected": "Goodbye cruel sad OMG!",
+		"compileOptions": {}
 	},
 	{
 		"description": "inverted sections",
 		"it": "inverted sections with unset value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {},
-		"expected": "Right On!"
+		"expected": "Right On!",
+		"compileOptions": {}
 	},
 	{
 		"description": "inverted sections",
@@ -179,7 +188,8 @@
 		"data": {
 			"goodbyes": false
 		},
-		"expected": "Right On!"
+		"expected": "Right On!",
+		"compileOptions": {}
 	},
 	{
 		"description": "inverted sections",
@@ -188,7 +198,8 @@
 		"data": {
 			"goodbyes": []
 		},
-		"expected": "Right On!"
+		"expected": "Right On!",
+		"compileOptions": {}
 	},
 	{
 		"description": "inverted sections",
@@ -197,7 +208,55 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people"
+		"expected": "No people",
+		"compileOptions": {}
+	},
+	{
+		"description": "inverted sections",
+		"it": "chained inverted sections",
+		"template": "{{#people}}{{name}}{{else if none}}{{none}}{{/people}}",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people",
+		"compileOptions": {}
+	},
+	{
+		"description": "inverted sections",
+		"it": "chained inverted sections",
+		"template": "{{#people}}{{name}}{{else if nothere}}fail{{else unless nothere}}{{none}}{{/people}}",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people",
+		"compileOptions": {}
+	},
+	{
+		"description": "inverted sections",
+		"it": "chained inverted sections",
+		"template": "{{#people}}{{name}}{{else if none}}{{none}}{{else}}fail{{/people}}",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people",
+		"compileOptions": {}
+	},
+	{
+		"description": "inverted sections",
+		"it": "chained inverted sections with mismatch",
+		"template": "{{#people}}{{name}}{{else if none}}{{none}}{{/if}}",
+		"data": {
+			"none": "No people"
+		},
+		"exception": true,
+		"expected": "No people",
+		"compileOptions": {}
+	},
+	{
+		"description": "inverted sections",
+		"it": "chained inverted sections with mismatch",
+		"template": "{{#goodbyes}}{{@index}}. {{text}}! {{/goodbyes}}cruel {{world}}!",
+		"exception": true
 	},
 	{
 		"description": "inverted sections",
@@ -207,7 +266,8 @@
 			"none": "No people",
 			"people": []
 		},
-		"expected": "No people"
+		"expected": "No people",
+		"compileOptions": {}
 	},
 	{
 		"description": "standalone sections",
@@ -216,7 +276,8 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n"
+		"expected": "No people\n",
+		"compileOptions": {}
 	},
 	{
 		"description": "standalone sections",
@@ -225,7 +286,8 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n"
+		"expected": "No people\n",
+		"compileOptions": {}
 	},
 	{
 		"description": "standalone sections",
@@ -234,7 +296,28 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n"
+		"expected": "No people\n",
+		"compileOptions": {}
+	},
+	{
+		"description": "standalone sections",
+		"it": "block standalone chained else sections",
+		"template": "{{#people}}\n{{name}}\n{{else if none}}\n{{none}}\n{{/people}}\n",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people\n",
+		"compileOptions": {}
+	},
+	{
+		"description": "standalone sections",
+		"it": "block standalone chained else sections",
+		"template": "{{#people}}\n{{name}}\n{{else if none}}\n{{none}}\n{{^}}\n{{/people}}\n",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "No people\n",
+		"compileOptions": {}
 	},
 	{
 		"description": "standalone sections",
@@ -247,7 +330,8 @@
 				5
 			]
 		},
-		"expected": "1\n3\n5\nOK."
+		"expected": "1\n3\n5\nOK.",
+		"compileOptions": {}
 	},
 	{
 		"description": "compat mode",

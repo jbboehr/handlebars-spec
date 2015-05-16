@@ -512,7 +512,7 @@
 			},
 			{
 				"name": "ID",
-				"text": "bar"
+				"text": "[bar]"
 			},
 			{
 				"name": "CLOSE",
@@ -539,7 +539,7 @@
 			},
 			{
 				"name": "ID",
-				"text": "bar"
+				"text": "[bar]"
 			},
 			{
 				"name": "CLOSE",
@@ -559,7 +559,7 @@
 			},
 			{
 				"name": "ID",
-				"text": "baz"
+				"text": "[baz]"
 			},
 			{
 				"name": "CLOSE",
@@ -878,7 +878,7 @@
 			},
 			{
 				"name": "COMMENT",
-				"text": " this is a comment "
+				"text": "{{! this is a comment }}"
 			},
 			{
 				"name": "CONTENT",
@@ -909,7 +909,7 @@
 			},
 			{
 				"name": "COMMENT",
-				"text": " this is a {{comment}} "
+				"text": "{{!-- this is a {{comment}} --}}"
 			},
 			{
 				"name": "CONTENT",
@@ -940,7 +940,7 @@
 			},
 			{
 				"name": "COMMENT",
-				"text": " this is a\n{{comment}}\n"
+				"text": "{{!-- this is a\n{{comment}}\n--}}"
 			},
 			{
 				"name": "CONTENT",
@@ -1096,7 +1096,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
-		"template": "{{ foo bar \"baz\" }}",
+		"template": "{{ foo bar 'baz' }}",
 		"expected": [
 			{
 				"name": "OPEN",
@@ -1351,6 +1351,33 @@
 			{
 				"name": "BOOLEAN",
 				"text": "false"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes undefined and null",
+		"template": "{{ foo undefined null }}",
+		"expected": [
+			{
+				"name": "OPEN",
+				"text": "{{"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "UNDEFINED",
+				"text": "undefined"
+			},
+			{
+				"name": "NULL",
+				"text": "null"
 			},
 			{
 				"name": "CLOSE",
@@ -2025,6 +2052,181 @@
 			{
 				"name": "CLOSE_SEXPR",
 				"text": ")"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes block params",
+		"template": "{{#foo as |bar|}}",
+		"expected": [
+			{
+				"name": "OPEN_BLOCK",
+				"text": "{{#"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "OPEN_BLOCK_PARAMS",
+				"text": "as |"
+			},
+			{
+				"name": "ID",
+				"text": "bar"
+			},
+			{
+				"name": "CLOSE_BLOCK_PARAMS",
+				"text": "|"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes block params",
+		"template": "{{#foo as |bar baz|}}",
+		"expected": [
+			{
+				"name": "OPEN_BLOCK",
+				"text": "{{#"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "OPEN_BLOCK_PARAMS",
+				"text": "as |"
+			},
+			{
+				"name": "ID",
+				"text": "bar"
+			},
+			{
+				"name": "ID",
+				"text": "baz"
+			},
+			{
+				"name": "CLOSE_BLOCK_PARAMS",
+				"text": "|"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes block params",
+		"template": "{{#foo as | bar baz |}}",
+		"expected": [
+			{
+				"name": "OPEN_BLOCK",
+				"text": "{{#"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "OPEN_BLOCK_PARAMS",
+				"text": "as |"
+			},
+			{
+				"name": "ID",
+				"text": "bar"
+			},
+			{
+				"name": "ID",
+				"text": "baz"
+			},
+			{
+				"name": "CLOSE_BLOCK_PARAMS",
+				"text": "|"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes block params",
+		"template": "{{#foo as as | bar baz |}}",
+		"expected": [
+			{
+				"name": "OPEN_BLOCK",
+				"text": "{{#"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "ID",
+				"text": "as"
+			},
+			{
+				"name": "OPEN_BLOCK_PARAMS",
+				"text": "as |"
+			},
+			{
+				"name": "ID",
+				"text": "bar"
+			},
+			{
+				"name": "ID",
+				"text": "baz"
+			},
+			{
+				"name": "CLOSE_BLOCK_PARAMS",
+				"text": "|"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes block params",
+		"template": "{{else foo as |bar baz|}}",
+		"expected": [
+			{
+				"name": "OPEN_INVERSE_CHAIN",
+				"text": "{{else"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "OPEN_BLOCK_PARAMS",
+				"text": "as |"
+			},
+			{
+				"name": "ID",
+				"text": "bar"
+			},
+			{
+				"name": "ID",
+				"text": "baz"
+			},
+			{
+				"name": "CLOSE_BLOCK_PARAMS",
+				"text": "|"
 			},
 			{
 				"name": "CLOSE",
