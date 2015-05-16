@@ -30,7 +30,7 @@ var indices = [];   // Temp array for auto-incrementing test indices
 var context = {};   // Current test context
 var afterFns = [];  // Functions to execute after a test
 var beforeFns = []; // Functions to execute before a test
-
+var unusedPatches = null;
 
 
 // Utils
@@ -68,6 +68,12 @@ function addTest(spec) {
         // Using nulls in patches to unset things
         stripNulls(spec);
       }
+      
+      // Track unused patches
+      if( unusedPatches === null ) {
+        unusedPatches = extend({}, patch);
+      }
+      delete unusedPatches[name];
     }
   }
 
@@ -374,13 +380,18 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   var helpers;
   var data;
   var compat;
-
+  var compileOptions = extend({}, context.compileOptions);
+  
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
     helpers  = extractHelpers(hashOrArray[1]);
     partials = hashOrArray[2];
     if( hashOrArray[3] ) {
-      compat = true;
+      if( typeof hashOrArray[3] === 'boolean' ) {
+        compileOptions.compat = compat = true;
+      } else if( typeof hashOrArray[3] === 'object' ) {
+        extend(compileOptions, hashOrArray[3]);
+      }
     }
     /* if (hashOrArray[4] != null) {
       options.data = !!hashOrArray[4];
@@ -425,24 +436,17 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   }
   
   // Get compiler options
-  if( context.compileOptions ) {
-    spec.compileOptions = context.compileOptions;
-  }
-  if( compat ) { // @todo is this a runtime flag, or compile flag?
-    if( spec.compileOptions ) {
-      spec.compileOptions.compat = true;
-    } else {
-      spec.compileOptions = {compat: true};
-    }
+  if( compileOptions ) {
+    spec.compileOptions = compileOptions;
   }
   
   // Get global partials
-  if (context.globalPartials) {
+  if( context.globalPartials ) {
     spec.globalPartials = context.globalPartials;
   }
   
   // Get global helpers
-  if (context.globalHelpers) {
+  if( context.globalHelpers ) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
   }
   
@@ -564,6 +568,12 @@ var outputFile = path.resolve(program.output);
 try {
   fs.writeFileSync(outputFile, output);
   console.log('JSON saved to ' + program.output);
+  if( unusedPatches !== null ) {
+    unusedPatches = Object.keys(unusedPatches);
+    if( unusedPatches.length ) {
+      console.log("Unused patches: " + unusedPatches);
+    }
+  }
 } catch(e) {
   console.log(e);
   return process.exit(73);

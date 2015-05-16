@@ -16,6 +16,9 @@ export: node_modules
 check_changes:
 	@git status --porcelain | grep 'spec/' && return 1 || return 0
 
+stubs:
+	$(foreach var, $(SPECS), php bin/stubs.php spec/$(var).json patch/$(var).json;)
+
 test: jshint test_node test_php
 
 test_node:

@@ -3,6 +3,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -10,6 +13,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -17,6 +23,19 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+            }
+        }
+    },
+    "#each-should handle block params-00": {
+        "helpers": {
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+            },
+            "wycats": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->data['contextPath'] . '\\n';\n      }"
             }
         }
     },
@@ -24,6 +43,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -31,6 +53,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -38,6 +63,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -45,6 +73,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -52,6 +83,9 @@
         "helpers": {
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+            },
+            "blockParams": {
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
             }
         }
     },
@@ -134,5 +168,19 @@
         },
         "note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
-    "track ids-should return true for subexpressions-01": null
+    "track ids-should return true for subexpressions-01": null,
+    "track ids-should use block param paths-00": {
+        "expected": "HELP ME MY BOSS zomg.a:foo slave.driver:bar",
+        "helpers": {
+            "doIt": {
+                "php": "function($options) {\n        $blockParams = array($options->scope['is']);\n        $blockParams['path'] = array('zomg');\n        return $options->fn($options->scope, array('blockParams' => $blockParams));\n      }"
+            },
+            "wycats": {
+                "php": "function($passiveVoice, $noun, $blah, $options) {\n        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;\n      }"
+            }
+        }
+    },
+    "track ids-should use block param paths-01": null,
+    "track ids-should use block param paths-02": null,
+    "track ids-should use block param paths-03": null
 }

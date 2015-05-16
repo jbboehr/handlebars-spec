@@ -7,7 +7,8 @@
 			"goodbye": true,
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -17,7 +18,8 @@
 			"goodbye": "dummy",
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -27,7 +29,8 @@
 			"goodbye": false,
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -36,7 +39,8 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -48,7 +52,8 @@
 			],
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -58,7 +63,8 @@
 			"goodbye": [],
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -68,7 +74,8 @@
 			"goodbye": 0,
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -78,7 +85,8 @@
 			"goodbye": 0,
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -87,12 +95,13 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return true;}",
+				"javascript": "function () {return true; }",
 				"php": "function() { return true; }"
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -101,12 +110,13 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return this.world;}",
+				"javascript": "function () {return this.world; }",
 				"php": "function($scope) { return $scope['world']; }"
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!"
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -115,12 +125,13 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return false;}",
+				"javascript": "function () {return false; }",
 				"php": "function() { return false; }"
 			},
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#if",
@@ -129,12 +140,13 @@
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return this.foo;}",
+				"javascript": "function () {return this.foo; }",
 				"php": "function($scope) { return isset($scope['foo']) ? $scope['foo'] : null; }"
 			},
 			"world": "world"
 		},
-		"expected": "cruel world!"
+		"expected": "cruel world!",
+		"compileOptions": {}
 	},
 	{
 		"description": "#with",
@@ -146,7 +158,8 @@
 				"last": "Johnson"
 			}
 		},
-		"expected": "Alan Johnson"
+		"expected": "Alan Johnson",
+		"compileOptions": {}
 	},
 	{
 		"description": "#with",
@@ -155,18 +168,20 @@
 		"data": {
 			"person": {
 				"!code": true,
-				"javascript": "function () { return {first: \"Alan\", last: \"Johnson\"};}",
+				"javascript": "function () { return {first: 'Alan', last: 'Johnson'}; }",
 				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
 			}
 		},
-		"expected": "Alan Johnson"
+		"expected": "Alan Johnson",
+		"compileOptions": {}
 	},
 	{
 		"description": "#with",
 		"it": "with with else",
 		"template": "{{#with person}}Person is present{{else}}Person is not present{{/with}}",
 		"data": {},
-		"expected": "Person is not present"
+		"expected": "Person is not present",
+		"compileOptions": {}
 	},
 	{
 		"description": "#each",
@@ -187,6 +202,7 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -204,6 +220,7 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -231,6 +248,7 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -248,6 +266,7 @@
 			"world": "world"
 		},
 		"expected": "cruelworld",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -261,6 +280,7 @@
 		"it": "each without context",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"expected": "cruel !",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -285,6 +305,7 @@
 			"world": "world"
 		},
 		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
@@ -296,10 +317,11 @@
 		"it": "each with an object and @key",
 		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
-			"goodbyes": [],
+			"goodbyes": {},
 			"world": "world"
 		},
 		"expected": "cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -349,6 +371,23 @@
 		},
 		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!",
 		"message": "The @index variable is used"
+	},
+	{
+		"description": "#each",
+		"it": "each with block params",
+		"template": "{{#each goodbyes as |value index|}}{{index}}. {{value.text}}! {{#each ../goodbyes as |childValue childIndex|}} {{index}} {{childIndex}}{{/each}} After {{index}} {{/each}}{{index}}cruel {{world}}!",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				}
+			],
+			"world": "world"
+		},
+		"expected": "0. goodbye!  0 0 0 1 After 0 1. Goodbye!  1 0 1 1 After 1 cruel world!"
 	},
 	{
 		"description": "#each",
@@ -454,6 +493,24 @@
 	},
 	{
 		"description": "#each",
+		"it": "each object with @last",
+		"template": "{{#each goodbyes}}{{#if @last}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"foo": {
+					"text": "goodbye"
+				},
+				"bar": {
+					"text": "Goodbye"
+				}
+			},
+			"world": "world"
+		},
+		"expected": "Goodbye! cruel world!",
+		"message": "The @last variable is used"
+	},
+	{
+		"description": "#each",
 		"it": "each with nested @last",
 		"template": "{{#each goodbyes}}({{#if @last}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @last}}{{text}}!{{/if}}{{/each}}{{#if @last}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
 		"data": {
@@ -480,12 +537,13 @@
 		"data": {
 			"goodbyes": {
 				"!code": true,
-				"javascript": "function () { return [{text: \"goodbye\"}, {text: \"Goodbye\"}, {text: \"GOODBYE\"}];}",
+				"javascript": "function () { return [{text: 'goodbye'}, {text: 'Goodbye'}, {text: 'GOODBYE'}]; }",
 				"php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
 			},
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -503,6 +561,7 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
+		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,

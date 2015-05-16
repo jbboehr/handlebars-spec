@@ -1,4 +1,25 @@
 {
+    "partials-dynamic partials-00": {
+        "helpers": {
+            "partial": {
+                "php": "function() {\n        return 'dude';\n      }"
+            }
+        }
+    },
+    "partials-dynamic partials-01": {
+        "helpers": {
+            "partial": {
+                "php": "function() {\n        return 'dude';\n      }"
+            }
+        }
+    },
+    "partials-failing dynamic partials-00": {
+        "helpers": {
+            "partial": {
+                "php": "function() {\n        return 'missing';\n      }"
+            }
+        }
+    },
     "partials-global partials-01": null,
     "partials-rendering function partial in vm mode-00": {
         "partials": {
@@ -7,6 +28,7 @@
             }
         }
     },
+    "partials-should pass compiler flags-00": null,
     "partials-throw on missing partial-00": null,
     "partials-throw on missing partial-01": null
 }

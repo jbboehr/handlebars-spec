@@ -9,7 +9,6 @@
             }
         }
     },
-    "regressions-can pass through an already-compiled ast via compile/precompile-00": null,
     "regressions-gh-837: undefined values for helpers-00": {
         "helpers": {
             "str": {
@@ -20,20 +19,20 @@
     "regressions-gs-428: nested if else rendering-00": {
         "helpers": {
             "blk": {
-                "php": "function($block) { return $block/*['fn']*/->fn(''); }"
+                "php": "function($block) { return $block\/*['fn']*\/->fn(''); }"
             },
             "inverse": {
-                "php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
+                "php": "function($block) { return $block\/*['inverse']*\/->inverse(''); }"
             }
         }
     },
     "regressions-gs-428: nested if else rendering-01": {
         "helpers": {
             "blk": {
-                "php": "function($block) { return $block/*['fn']*/->fn(''); }"
+                "php": "function($block) { return $block\/*['fn']*\/->fn(''); }"
             },
             "inverse": {
-                "php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
+                "php": "function($block) { return $block\/*['inverse']*\/->inverse(''); }"
             }
         }
     }
