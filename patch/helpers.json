@@ -1,4 +1,86 @@
 {
+    "block params-should allow block params on chained helpers-00": {
+        "helpers": {
+            "goodbyes": {
+                "php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return 'world!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "block params-should not take presedence over pathed values-00": {
+        "helpers": {
+            "value": {
+                "php": "function() {\n          return 'foo';\n        }"
+            },
+            "goodbyes": {
+                "php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return 'world!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "block params-should take presedence over context values-00": {
+        "helpers": {
+            "goodbyes": {
+                "php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return 'world!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "block params-should take presedence over helper values-00": {
+        "helpers": {
+            "value": {
+                "php": "function() {\n          return 'foo';\n        }"
+            },
+            "goodbyes": {
+                "php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return 'world!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
+    "block params-should take presednece over parent block params-00": {
+        "helpers": {
+            "goodbyes": {
+                "javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
+                "php": "function($options) {\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => $options->blockParams === 1 ? array($value++, $value++) : null));\n        }"
+            }
+        },
+        "globalHelpers": {
+            "world": {
+                "php": "function() { return 'world!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
+            }
+        }
+    },
     "blockhelpermissing-lambdas are resolved by blockhelpermissing, not handlebars proper-00": {
         "data": {
             "truthy": {
@@ -10,6 +92,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -29,6 +114,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         },
         "note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -44,6 +132,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -109,6 +200,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -123,6 +217,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -259,6 +356,20 @@
             }
         }
     },
+    "helpers-helper returning undefined value-00": {
+        "helpers": {
+            "nothere": {
+                "php": "function() {}"
+            }
+        }
+    },
+    "helpers-helper returning undefined value-01": {
+        "helpers": {
+            "nothere": {
+                "php": "function() {}"
+            }
+        }
+    },
     "helpers-helper with complex lookup and nested template in vm+compiler-00": {
         "helpers": {
             "link": {
@@ -301,11 +412,11 @@
                 }
             }
         },
-		"helpers": {
-			"./helper": {
-				"php": "function() {\n        return 'fail';\n      }"
-			}
-		}
+        "helpers": {
+            ".\/helper": {
+                "php": "function() {\n        return 'fail';\n      }"
+            }
+        }
     },
     "helpers-pathed lambas with parameters-01": {
         "data": {
@@ -320,11 +431,11 @@
                 "php": "function() {\n        return 'winning';\n      }"
             }
         },
-		"helpers": {
-			"./helper": {
-				"php": "function() {\n        return 'fail';\n      }"
-			}
-		}
+        "helpers": {
+            ".\/helper": {
+                "php": "function() {\n        return 'fail';\n      }"
+            }
+        }
     },
     "knownhelpers-functions are bound to the context in knownhelpers only mode-00": {
         "data": {
@@ -362,6 +473,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -376,6 +490,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -438,6 +555,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -458,6 +578,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -480,6 +603,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -500,6 +626,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -522,6 +651,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -542,6 +674,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -577,6 +712,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -591,6 +729,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -607,6 +748,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -616,6 +760,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }
@@ -633,6 +780,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -648,6 +798,9 @@
             },
             "test_helper": {
                 "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
+                "php": "function() { return 'found it!'; }"
             }
         }
     },
@@ -662,6 +815,9 @@
                 "php": "function() { return \"world!\"; }"
             },
             "test_helper": {
+                "php": "function() { return 'found it!'; }"
+            },
+            "testHelper": {
                 "php": "function() { return 'found it!'; }"
             }
         }

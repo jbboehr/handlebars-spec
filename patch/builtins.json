@@ -114,7 +114,8 @@
     "#log-should handle missing logger-00": null,
     "#log-should log at data level-00": null,
     "#log-should log at data level-01": null,
-    "#log-should not output to console-00": null,
+    "#log-should output to info-00": null,
+    "#log-should output to info-01": null,
     "#with-with with function argument-00": {
         "data": {
             "person": {

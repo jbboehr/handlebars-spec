@@ -62,6 +62,15 @@
             }
         }
     },
+    "basic context-pass number literals-04": {
+        "data": {
+            "12": {
+                "34": {
+                    "php": "function($arg) { return 'bar' . $arg; }"
+                }
+            }
+        }
+    },
     "basic context-pathed block functions without context argument-00": {
         "data": {
             "foo": {
@@ -80,6 +89,39 @@
             }
         }
     },
+    "basic context-should handle literals in subexpression-00": {
+        "data": {
+            "false": {
+                "php": "function() { return 'bar'; }"
+            }
+        },
+        "helpers": {
+            "foo": {
+                "php": "function($arg) {\n        return $arg;\n      }"
+            }
+        }
+    },
+    "basic context-should handle undefined and null-00": {
+        "data": {
+            "awesome": {
+                "php": "function ($_undefined, $_null, $options) {\n            return ($_undefined === null ? 'true' : 'false') . ' ' . ($_null === null ? 'true' : 'false') . ' ' . gettype($options);\n          }"
+            }
+        }
+    },
+    "basic context-should handle undefined and null-01": {
+        "data": {
+            "undefined": {
+                "php": "function() {\n            return 'undefined!';\n          }"
+            }
+        }
+    },
+    "basic context-should handle undefined and null-02": {
+        "data": {
+            "null": {
+                "php": "function() {\n            return 'null!';\n          }"
+            }
+        }
+    },
     "basic context-this keyword in helpers-00": {
         "helpers": {
             "foo": {
@@ -91,6 +133,20 @@
         "helpers": {
             "foo": {
                 "php": "function($value) { return 'bar ' . $value; }"
+            }
+        }
+    },
+    "basic context-this keyword nested inside helpers param-01": {
+        "data": {
+            "foo": {
+                "php": "function($value) { return $value; }"
+            }
+        }
+    },
+    "basic context-this keyword nested inside helpers param-02": {
+        "data": {
+            "foo": {
+                "php": "function($value) { return $value; }"
             }
         }
     }

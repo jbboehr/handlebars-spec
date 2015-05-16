@@ -1,4 +1,18 @@
 {
+    "data-data can be functions with params-00": {
+        "data": {
+            "hello": {
+                "php": "function($arg) { return $arg; }"
+            }
+        }
+    },
+    "data-data can be functions-00": {
+        "data": {
+            "hello": {
+                "php": "function() { return 'hello'; }"
+            }
+        }
+    },
     "data-data is inherited downstream-00": {
         "helpers": {
             "let": {
