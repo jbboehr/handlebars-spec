@@ -1,0 +1,17 @@
+{
+    "authors" : [
+        {
+            "email" : "jbboehr@gmail.com",
+            "name" : "John Boehr"
+        }
+    ],
+    "description" : "Handlebars Specification",
+    "homepage": "http://github.com/jbboehr/handlebars-spec",
+    "name" : "jbboehr/handlebars-spec",
+    "keywords" : [
+        "handlebars",
+        "mustache"
+    ],
+    "license": "LGPLv3",
+    "type" : "library"
+}
