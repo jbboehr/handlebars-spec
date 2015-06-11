@@ -484,8 +484,9 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
   
   // If a template is found in the lexer, use it for the spec. This is true in
   // the case of the tokenizer.
-  if (!spec.template && Handlebars.Parser.lexer.matched) {
-    spec.template = Handlebars.Parser.lexer.matched;
+  if (!spec.template) {
+    spec.template = Handlebars.Parser.lexer.matched +
+        Handlebars.Parser.lexer._input;
   }
   
   // Add the test
