@@ -338,7 +338,7 @@
 	{
 		"description": "parser",
 		"it": "throws on old inverse section",
-		"template": "{{else",
+		"template": "{{else foo}}bar{{/foo}}",
 		"exception": true
 	},
 	{
@@ -362,7 +362,7 @@
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
-		"template": "foo{{^}}",
+		"template": "foo{{^}}bar",
 		"exception": true,
 		"message": "/Parse error on line 1/"
 	},
@@ -376,7 +376,7 @@
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
-		"template": "{{foo &",
+		"template": "{{foo &}}",
 		"exception": true,
 		"message": "/Parse error on line 1/"
 	},
