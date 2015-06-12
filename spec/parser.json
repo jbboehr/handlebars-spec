@@ -399,21 +399,21 @@
 		"it": "should handle invalid paths",
 		"template": "{{foo/../bar}}",
 		"exception": true,
-		"message": "/Invalid path: foo\\/\\.\\. - 1:2/"
+		"message": "/Invalid path: foo\\/\\.\\./"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"template": "{{foo/./bar}}",
 		"exception": true,
-		"message": "/Invalid path: foo\\/\\. - 1:2/"
+		"message": "/Invalid path: foo\\/\\./"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"template": "{{foo/this/bar}}",
 		"exception": true,
-		"message": "/Invalid path: foo\\/this - 1:2/"
+		"message": "/Invalid path: foo\\/this/"
 	},
 	{
 		"description": "parser",

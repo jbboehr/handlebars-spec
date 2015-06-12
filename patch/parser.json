@@ -1,3 +1,12 @@
 {
-    "externally compiled ast-can pass through an already-compiled ast-00": null
+    "externally compiled ast-can pass through an already-compiled ast-00": null,
+    "parser-should handle invalid paths-00": {
+		"message": "/Invalid path: foo\\/\\.\\./"
+    },
+    "parser-should handle invalid paths-01": {
+		"message": "/Invalid path: foo\\/\\./"
+    },
+    "parser-should handle invalid paths-02": {
+		"message": "/Invalid path: foo\\/this/"
+    }
 }
