@@ -898,14 +898,10 @@
 		"it": "pass number literals",
 		"template": "{{12.34 1}}",
 		"data": {
-			"12": {
-				"34": {
-					"php": "function($arg) { return 'bar' . $arg; }"
-				}
-			},
 			"12.34": {
 				"!code": true,
-				"javascript": "function (arg) { return 'bar' + arg; }"
+				"javascript": "function (arg) { return 'bar' + arg; }",
+				"php": "function($arg) { return 'bar' . $arg; }"
 			}
 		},
 		"expected": "bar1",
