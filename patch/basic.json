@@ -64,10 +64,8 @@
     },
     "basic context-pass number literals-04": {
         "data": {
-            "12": {
-                "34": {
-                    "php": "function($arg) { return 'bar' . $arg; }"
-                }
+            "12.34": {
+                "php": "function($arg) { return 'bar' . $arg; }"
             }
         }
     },
