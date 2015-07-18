@@ -37,7 +37,7 @@
     "basic context-functions returning safestrings shouldn't be escaped-00": {
         "data": {
             "awesome": {
-                "php": "function () { return new SafeString(\"&\\\"\\\\<>\"); }"
+                "php": "function () { return new SafeString('&\\'\\\\<>'); }"
             }
         }
     },
