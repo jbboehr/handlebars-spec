@@ -398,7 +398,7 @@
 			"awesome": {
 				"!code": true,
 				"javascript": "function () { return new Handlebars.SafeString('&\\'\\\\<>'); }",
-				"php": "function () { return new SafeString(\"&\\\"\\\\<>\"); }"
+				"php": "function () { return new SafeString('&\\'\\\\<>'); }"
 			}
 		},
 		"expected": "&'\\<>",
