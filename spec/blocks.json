@@ -249,14 +249,7 @@
 			"none": "No people"
 		},
 		"exception": true,
-		"expected": "No people",
 		"compileOptions": {}
-	},
-	{
-		"description": "inverted sections",
-		"it": "chained inverted sections with mismatch",
-		"template": "{{#goodbyes}}{{@index}}. {{text}}! {{/goodbyes}}cruel {{world}}!",
-		"exception": true
 	},
 	{
 		"description": "inverted sections",
