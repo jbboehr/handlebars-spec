@@ -128,7 +128,6 @@
 				"php": "function() {\n        return 'missing';\n      }"
 			}
 		},
-		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
 		"compileOptions": {}
 	},
 	{

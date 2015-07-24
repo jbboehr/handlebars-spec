@@ -16,7 +16,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (prefix) {\n      return '<a href=\"' + prefix + '/' + this.url + '\">' + this.text + '</a>';\n    }",
-				"php": "function($prefix, $options) { return \"<a href='{$prefix}/\" . $options->scope['url'] . \"'>\" . $options->scope['text'] . \"</a>\"; }"
+				"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
 			}
 		},
 		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
@@ -90,7 +90,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
-				"php": "function($prefix, $options) { $out = \"<a href='{$prefix}/\" . $options->scope['url'] . \"'>\"; $out .= $options->fn($options->scope); return $out . \"</a>\"; }"
+				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
 		},
 		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
@@ -113,7 +113,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
-				"php": "function($prefix, $options) { $out = \"<a href='{$prefix}/\" . $options->scope['url'] . \"'>\"; $out .= $options->fn($options->scope); return $out . \"</a>\"; }"
+				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
 		},
 		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
@@ -273,7 +273,7 @@
 			"link": {
 				"!code": true,
 				"javascript": "function (options) { return '<a href=\"' + this.name + '\">' + options.fn(this) + '</a>'; }",
-				"php": "function($options) {\n    $out = \"<a href='\".$options->scope['name'].\"'>\";\n    $out .= $options->fn($options->scope);\n    return $out . '</a>';\n}"
+				"php": "function($options) {\n    $out = '<a href=\"' . $options->scope['name'].'\">';\n    $out .= $options->fn($options->scope);\n    return $out . '</a>';\n}"
 			},
 			"form": {
 				"!code": true,
@@ -1685,7 +1685,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
-				"php": "function($options) {\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => $options->blockParams === 1 ? array($value++, $value++) : null));\n        }"
+				"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
 			}
 		},
 		"expected": "13foo",
