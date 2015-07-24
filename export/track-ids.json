@@ -5377,7 +5377,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -7250,7 +7250,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -7814,7 +7814,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -8380,7 +8380,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
