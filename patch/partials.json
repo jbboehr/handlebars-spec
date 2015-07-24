@@ -18,7 +18,8 @@
             "partial": {
                 "php": "function() {\n        return 'missing';\n      }"
             }
-        }
+        },
+        "expected": null
     },
     "partials-global partials-01": null,
     "partials-rendering function partial in vm mode-00": {

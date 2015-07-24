@@ -69,7 +69,7 @@
         "helpers": {
             "goodbyes": {
                 "javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
-                "php": "function($options) {\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => $options->blockParams === 1 ? array($value++, $value++) : null));\n        }"
+                "php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
             }
         },
         "globalHelpers": {
@@ -373,21 +373,21 @@
     "helpers-helper with complex lookup and nested template in vm+compiler-00": {
         "helpers": {
             "link": {
-                "php": "function($prefix, $options) { $out = \"<a href='{$prefix}\/\" . $options->scope['url'] . \"'>\"; $out .= $options->fn($options->scope); return $out . \"<\/a>\"; }"
+                "php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '\/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '<\/a>'; }"
             }
         }
     },
     "helpers-helper with complex lookup and nested template-00": {
         "helpers": {
             "link": {
-                "php": "function($prefix, $options) { $out = \"<a href='{$prefix}\/\" . $options->scope['url'] . \"'>\"; $out .= $options->fn($options->scope); return $out . \"<\/a>\"; }"
+                "php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '\/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '<\/a>'; }"
             }
         }
     },
     "helpers-helper with complex lookup$-00": {
         "helpers": {
             "link": {
-                "php": "function($prefix, $options) { return \"<a href='{$prefix}\/\" . $options->scope['url'] . \"'>\" . $options->scope['text'] . \"<\/a>\"; }"
+                "php": "function($prefix, $options) { return '<a href=\"' . $prefix . '\/' . $options->scope['url'] . '\">' . $options->scope['text'] . '<\/a>'; }"
             }
         }
     },
@@ -397,7 +397,7 @@
                 "php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '<\/form>';\n}"
             },
             "link": {
-                "php": "function($options) {\n    $out = \"<a href='\".$options->scope['name'].\"'>\";\n    $out .= $options->fn($options->scope);\n    return $out . '<\/a>';\n}"
+                "php": "function($options) {\n    $out = '<a href=\"' . $options->scope['name'].'\">';\n    $out .= $options->fn($options->scope);\n    return $out . '<\/a>';\n}"
             }
         }
     },
