@@ -5,7 +5,7 @@
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
             },
             "blockParams": {
-                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
             }
         }
     },
@@ -15,7 +15,7 @@
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
             },
             "blockParams": {
-                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
             }
         }
     },
@@ -25,14 +25,14 @@
                 "php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
             },
             "blockParams": {
-                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
             }
         }
     },
     "#each-should handle block params-00": {
         "helpers": {
             "blockParams": {
-                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+                "php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
             },
             "wycats": {
                 "php": "function($name, $options) {\n        return $name . ':' . $options->data['contextPath'] . '\\n';\n      }"
