@@ -1,6 +1,8 @@
 
 /*jshint strict: false */
 
+var _utils = require('handlebars').Utils;
+
 function safeEval(templateSpec) {
   try {
     /* jshint ignore:start */

@@ -1,6 +1,6 @@
 {
   "name": "handlebars-spec",
-  "version": "3.0.3",
+  "version": "4.0.2",
   "description": "",
   "main": "bin/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "commander": "^2.2.x",
     "extend": "^1.2.x",
-    "handlebars": "3.0.3",
+    "handlebars": "4.0.2",
     "jshint": "2.5.x"
   }
 }

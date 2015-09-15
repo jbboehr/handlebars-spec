@@ -118,6 +118,9 @@ function prepareTestGeneric(test) {
   spec.partials = test.partials;
   unstringifyLambdas(spec.partials);
   spec.globalPartials = test.globalPartials || undefined;
+  // Decorators
+  spec.decorators = unstringifyHelpers(test.decorators);
+  spec.globalDecorators = test.globalDecorators || undefined;
   // Options
   spec.options = clone(test.options);
   spec.compileOptions = clone(test.compileOptions);
@@ -191,6 +194,11 @@ function runTestGeneric(test) {
     Object.keys(test.globalHelpers || {}).forEach(function(x) {
       global.handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
     });
+    
+    // Register global decorators
+    Object.keys(test.globalDecorators || {}).forEach(function(x) {
+      global.handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
+    });
 
     // Execute
     var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
@@ -202,6 +210,9 @@ function runTestGeneric(test) {
     }
     if( test.partials ) {
       opts.partials = test.partials;
+    }
+    if( test.decorators ) {
+      opts.decorators = test.decorators;
     }
     var actual = template(test.data, opts);
     global.equals(actual, test.expected);

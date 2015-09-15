@@ -133,6 +133,8 @@
     },
     "track ids-should note ..\/ and .\/ references-01": null,
     "track ids-should note ..\/ and .\/ references-02": null,
+    "track ids-should note ..\/ and .\/ references-03": null,
+    "track ids-should note ..\/ and .\/ references-04": null,
     "track ids-should note @data references-00": {
         "expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
         "helpers": {
