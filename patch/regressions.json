@@ -9,6 +9,13 @@
             }
         }
     },
+    "regressions-gh-1054: should handle simple safe string responses-00": {
+        "helpers": {
+            "wrap": {
+                "php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
+            }
+        }
+    },
     "regressions-gh-837: undefined values for helpers-00": {
         "helpers": {
             "str": {

@@ -1,4 +1,11 @@
 {
+    "inline partials-should override global partials-00": {
+        "partials": {
+            "myPartial": {
+                "php": "function() { return 'fail'; }"
+            }
+        }
+    },
     "partials-dynamic partials-00": {
         "helpers": {
             "partial": {
@@ -31,6 +38,5 @@
     },
     "partials-throw on missing partial-00": null,
     "partials-throw on missing partial-01": null,
-
     "should pass compiler flags-should pass compiler flags-00": null
 }
