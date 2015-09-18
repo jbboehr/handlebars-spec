@@ -87,9 +87,9 @@ function checkResult(test, e) {
     var msg = e || 'Error: should have thrown, did not';
     console.log(test.prefix + msg);
     if( e ) {
-      console.log(e.stack);
+      console.error(e.stack);
     }
-    console.log('Test Data: ', test);
+    console.error('Test Data: ', test);
     return false;
   }
 }
@@ -204,7 +204,7 @@ function runTestGeneric(test) {
     var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
     var template = global.CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
     var opts = test.options === undefined ? {} : clone(test.options);
-    opts.data = test.data; // le sigh
+    opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
     if( test.helpers ) {
       opts.helpers = test.helpers;
     }

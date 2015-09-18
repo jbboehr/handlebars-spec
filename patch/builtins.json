@@ -16,7 +16,8 @@
             }
         }
     },
-    "#each-each with an object and @key-01": {
+    "#each-each with an object and @key-01": null,
+    "#each-each with an object and @key-02": {
         "globalHelpers": {
             "detectDataInsideEach": {
                 "php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"

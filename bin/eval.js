@@ -1,5 +1,5 @@
 
-/*jshint strict: false */
+/*jshint strict: false, unused: false */
 
 var _utils = require('handlebars').Utils;
 

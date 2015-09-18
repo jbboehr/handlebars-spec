@@ -184,5 +184,9 @@
     },
     "track ids-should use block param paths-01": null,
     "track ids-should use block param paths-02": null,
-    "track ids-should use block param paths-03": null
+    "track ids-should use block param paths-03": null,
+
+    "partials-should pass track id for basic partial-00": null,
+    "partials-should pass track id for context partial-00": null,
+    "partials-should invalidate context for partials with parameters-00": null
 }

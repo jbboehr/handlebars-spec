@@ -8,5 +8,9 @@
     },
     "parser-should handle invalid paths-02": {
 		"message": "/Invalid path: foo\\/this/"
-    }
+    },
+
+    "gh1024 - should track program location properly-gh1024 - should track program location properly-00": null,
+    "gh1024 - should track program location properly-gh1024 - should track program location properly-01": null,
+    "gh1024 - should track program location properly-gh1024 - should track program location properly-02": null
 }

@@ -29,7 +29,8 @@
             }
         }
     },
-    "partials-should pass compiler flags-00": null,
     "partials-throw on missing partial-00": null,
-    "partials-throw on missing partial-01": null
+    "partials-throw on missing partial-01": null,
+
+    "should pass compiler flags-should pass compiler flags-00": null
 }

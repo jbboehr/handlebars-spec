@@ -2,5 +2,13 @@
     "inverted sections-chained inverted sections with mismatch-00": {
         "expected": null
     },
-    "inverted sections-chained inverted sections with mismatch-01": null
+    "inverted sections-chained inverted sections with mismatch-01": null,
+    "registration-allows multiple globals-00": null,
+    "registration-allows multiple globals-01": null,
+    "registration-allows multiple globals-02": null,
+    "registration-allows multiple globals-03": null,
+    "registration-unregisters-00": null,
+    "registration-unregisters-01": null,
+    "decorators-should fail when accessing variables from root-01": null,
+    "decorators-should work with root program-01": null
 }
