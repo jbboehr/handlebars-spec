@@ -124,6 +124,9 @@ function prepareTestGeneric(test) {
   // Options
   spec.options = clone(test.options);
   spec.compileOptions = clone(test.compileOptions);
+  if( spec.options && typeof spec.options.data === 'object' ) {
+    unstringifyLambdas(spec.options.data);
+  }
   // Compat
   spec.compat = Boolean(test.compat);
   return spec;
@@ -203,8 +206,8 @@ function runTestGeneric(test) {
     // Execute
     var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
     var template = global.CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
-    var opts = test.options === undefined ? {} : clone(test.options);
-    opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
+    var opts = test.options || {};
+    //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
     if( test.helpers ) {
       opts.helpers = test.helpers;
     }
@@ -214,7 +217,9 @@ function runTestGeneric(test) {
     if( test.decorators ) {
       opts.decorators = test.decorators;
     }
-    var actual = template(test.data, opts);
+    test.opts = opts;
+
+    var actual = template(test.data, test.opts);
     global.equals(actual, test.expected);
     
     return checkResult(test);

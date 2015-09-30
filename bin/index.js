@@ -263,10 +263,10 @@ global.CompilerContext = {
       // Note: merging data in the options causes tests to fail, possibly
       // a separate type of data?
       if (options && options.hasOwnProperty('data')) {
-        data = extend(true, data, options.data);
+        //data = extend(true, data, options.data);
         context.options = context.options || {};
+	context.options.data = options.data;
       }
-      //context.options = options;
 
       // Push template data unto context
       context.data = data;
@@ -336,6 +336,9 @@ global.equal = global.equals = function equals(actual, expected, message) {
   // Get options
   if( context.options ) {
     spec.options = context.options;
+    if( spec.options.data ) {
+      stringifyLambdas(spec.options.data);
+    }
   }
   
   // Get compiler options
@@ -484,6 +487,9 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   // Get options
   if( context.options ) {
     spec.options = context.options;
+    if( spec.options.data ) {
+      stringifyLambdas(spec.options.data);
+    }
   }
   
   // Get compiler options
