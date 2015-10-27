@@ -133,7 +133,7 @@
 	},
 	{
 		"description": "parser",
-		"it": "parses mutaches with DATA parameters",
+		"it": "parses mustaches with DATA parameters",
 		"template": "{{foo @bar}}",
 		"expected": "{{ PATH:foo [@PATH:bar] }}\n"
 	},
@@ -256,6 +256,25 @@
 		"it": "parses a partial with a complex name",
 		"template": "{{> shared/partial?.bar}}",
 		"expected": "{{> PARTIAL:shared/partial?.bar }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parsers partial blocks",
+		"template": "{{#> foo}}bar{{/foo}}",
+		"expected": "{{> PARTIAL BLOCK:foo PROGRAM:\n  CONTENT[ 'bar' ]\n }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "should handle parser block mismatch",
+		"template": "{{#> goodbyes}}{{/hellos}}",
+		"exception": true,
+		"message": "/goodbyes doesn't match hellos/"
+	},
+	{
+		"description": "parser",
+		"it": "parsers partial blocks with arguments",
+		"template": "{{#> foo context hash=value}}bar{{/foo}}",
+		"expected": "{{> PARTIAL BLOCK:foo PATH:context HASH{hash=PATH:value} PROGRAM:\n  CONTENT[ 'bar' ]\n }}\n"
 	},
 	{
 		"description": "parser",
@@ -435,5 +454,24 @@
 		"template": "\n\nhello\n\nmy\n\n{{foo}",
 		"exception": true,
 		"message": "/Parse error on line 7/"
+	},
+	{
+		"description": "directives",
+		"it": "should parse block directives",
+		"template": "{{#* foo}}{{/foo}}",
+		"expected": "DIRECTIVE BLOCK:\n  PATH:foo []\n  PROGRAM:\n"
+	},
+	{
+		"description": "directives",
+		"it": "should parse directives",
+		"template": "{{* foo}}",
+		"expected": "{{ DIRECTIVE PATH:foo [] }}\n"
+	},
+	{
+		"description": "directives",
+		"it": "should fail if directives have inverse",
+		"template": "{{#* foo}}{{^}}{{/foo}}",
+		"exception": true,
+		"message": "/Unexpected inverse/"
 	}
 ]

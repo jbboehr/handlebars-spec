@@ -13,7 +13,7 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (options) {\n      return '';\n    }",
+				"javascript": "function () {\n      return '';\n    }",
 				"php": "function() {\n      return '';\n    }"
 			}
 		}
@@ -75,7 +75,7 @@
 		"data": {
 			"header": {
 				"!code": true,
-				"javascript": "function () {\n      return \"Colors\";\n    }",
+				"javascript": "function () {\n      return 'Colors';\n    }",
 				"php": "function () {\n      return \"Colors\";\n    }"
 			},
 			"hasItems": true,
@@ -316,7 +316,7 @@
 			},
 			"header": {
 				"!code": true,
-				"javascript": "function () {\n      return \"Colors\";\n    }",
+				"javascript": "function () {\n      return 'Colors';\n    }",
 				"php": "function() {\n      return \"Colors\";\n    }"
 			}
 		},

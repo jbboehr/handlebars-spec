@@ -149,6 +149,19 @@
 		"compileOptions": {}
 	},
 	{
+		"description": "#if",
+		"it": "should not change the depth list",
+		"template": "{{#with foo}}{{#if goodbye}}GOODBYE cruel {{../world}}!{{/if}}{{/with}}",
+		"data": {
+			"foo": {
+				"goodbye": true
+			},
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel world!",
+		"compileOptions": {}
+	},
+	{
 		"description": "#with",
 		"it": "with",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
@@ -182,6 +195,34 @@
 		"data": {},
 		"expected": "Person is not present",
 		"compileOptions": {}
+	},
+	{
+		"description": "#with",
+		"it": "with provides block parameter",
+		"template": "{{#with person as |foo|}}{{foo.first}} {{last}}{{/with}}",
+		"data": {
+			"person": {
+				"first": "Alan",
+				"last": "Johnson"
+			}
+		},
+		"expected": "Alan Johnson",
+		"compileOptions": {}
+	},
+	{
+		"description": "#with",
+		"it": "works when data is disabled",
+		"template": "{{#with person as |foo|}}{{foo.first}} {{last}}{{/with}}",
+		"data": {
+			"person": {
+				"first": "Alan",
+				"last": "Johnson"
+			}
+		},
+		"expected": "Alan Johnson",
+		"compileOptions": {
+			"data": false
+		}
 	},
 	{
 		"description": "#each",
@@ -572,6 +613,27 @@
 	},
 	{
 		"description": "#each",
+		"it": "each object when last key is an empty string",
+		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
+		"data": {
+			"goodbyes": {
+				"a": {
+					"text": "goodbye"
+				},
+				"b": {
+					"text": "Goodbye"
+				},
+				"": {
+					"text": "GOODBYE"
+				}
+			},
+			"world": "world"
+		},
+		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"message": "Empty string key is not skipped"
+	},
+	{
+		"description": "#each",
 		"it": "data passed to helpers",
 		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
 		"data": {
@@ -579,12 +641,15 @@
 				"a",
 				"b",
 				"c"
-			],
-			"exclaim": "!"
+			]
 		},
 		"expected": "a!b!c!",
 		"message": "should output data",
-		"options": {},
+		"options": {
+			"data": {
+				"exclaim": "!"
+			}
+		},
 		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,

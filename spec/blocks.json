@@ -174,6 +174,27 @@
 		"compileOptions": {}
 	},
 	{
+		"description": "blocks",
+		"it": "works with cached blocks",
+		"template": "{{#each person}}{{#with .}}{{first}} {{last}}{{/with}}{{/each}}",
+		"data": {
+			"person": [
+				{
+					"first": "Alan",
+					"last": "Johnson"
+				},
+				{
+					"first": "Alan",
+					"last": "Johnson"
+				}
+			]
+		},
+		"expected": "Alan JohnsonAlan Johnson",
+		"compileOptions": {
+			"data": false
+		}
+	},
+	{
 		"description": "inverted sections",
 		"it": "inverted sections with unset value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
@@ -294,6 +315,32 @@
 	},
 	{
 		"description": "standalone sections",
+		"it": "block standalone else sections can be disabled",
+		"template": "{{#people}}\n{{name}}\n{{^}}\n{{none}}\n{{/people}}\n",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "\nNo people\n\n",
+		"partials": {},
+		"compileOptions": {
+			"ignoreStandalone": true
+		}
+	},
+	{
+		"description": "standalone sections",
+		"it": "block standalone else sections can be disabled",
+		"template": "{{#none}}\n{{.}}\n{{^}}\nFail\n{{/none}}\n",
+		"data": {
+			"none": "No people"
+		},
+		"expected": "\nNo people\n\n",
+		"partials": {},
+		"compileOptions": {
+			"ignoreStandalone": true
+		}
+	},
+	{
+		"description": "standalone sections",
 		"it": "block standalone chained else sections",
 		"template": "{{#people}}\n{{name}}\n{{else if none}}\n{{none}}\n{{/people}}\n",
 		"data": {
@@ -397,5 +444,178 @@
 		"compileOptions": {
 			"compat": true
 		}
+	},
+	{
+		"description": "decorators",
+		"it": "should apply mustache decorators",
+		"template": "{{#helper}}{{*decorator}}{{/helper}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn) {\n          fn.run = 'success';\n          return fn;\n        }",
+				"php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should apply allow undefined return",
+		"template": "{{#helper}}{{*decorator}}suc{{/helper}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn() + options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn() . $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn) {\n          fn.run = 'cess';\n        }",
+				"php": "function($fn) {\n          $fn->run = 'cess';\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should apply block decorators",
+		"template": "{{#helper}}{{#*decorator}}success{{/decorator}}{{/helper}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should support nested decorators",
+		"template": "{{#helper}}{{#*decorator}}{{#*nested}}suc{{/nested}}cess{{/decorator}}{{/helper}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn.nested + options.fn();\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn->nested . $options->fn();\n          return $fn;\n        }"
+			},
+			"nested": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          props.nested = options.fn();\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should apply multiple decorators",
+		"template": "{{#helper}}{{#*decorator}}suc{{/decorator}}{{#*decorator}}cess{{/decorator}}{{/helper}}",
+		"data": {},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should access parent variables",
+		"template": "{{#helper}}{{*decorator foo}}{{/helper}}",
+		"data": {
+			"foo": "success"
+		},
+		"expected": "success",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn.run;\n        }",
+				"php": "function($options) {\n          return $options->fn->run;\n        }"
+			}
+		},
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should work with root program",
+		"template": "{{*decorator \"success\"}}",
+		"data": {
+			"foo": "success"
+		},
+		"expected": "",
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "decorators",
+		"it": "should fail when accessing variables from root",
+		"template": "{{*decorator foo}}",
+		"data": {
+			"foo": "fail"
+		},
+		"expected": "",
+		"decorators": {
+			"decorator": {
+				"!code": true,
+				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
+			}
+		},
+		"compileOptions": {}
 	}
 ]
