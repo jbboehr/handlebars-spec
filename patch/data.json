@@ -1,15 +1,19 @@
 {
     "data-data can be functions with params-00": {
-        "data": {
-            "hello": {
-                "php": "function($arg) { return $arg; }"
+        "options": {
+            "data": {
+                "hello": {
+                    "php": "function() { return 'hello'; }"
+                }
             }
         }
     },
     "data-data can be functions-00": {
-        "data": {
-            "hello": {
-                "php": "function() { return 'hello'; }"
+        "options": {
+            "data": {
+                "hello": {
+                    "php": "function() { return 'hello'; }"
+                }
             }
         }
     },

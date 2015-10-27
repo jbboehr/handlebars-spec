@@ -280,10 +280,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{~> dude~}} ",
 		"data": {},
+		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foobar",
 		"compileOptions": {}
 	},
 	{
@@ -291,10 +291,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude~}} ",
 		"data": {},
+		"expected": "foo bar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo bar",
 		"compileOptions": {}
 	},
 	{
@@ -302,10 +302,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude}} ",
 		"data": {},
+		"expected": "foo bar ",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo bar ",
 		"compileOptions": {}
 	},
 	{
@@ -313,10 +313,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo\n {{~> dude}} ",
 		"data": {},
+		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foobar",
 		"compileOptions": {}
 	},
 	{
@@ -324,10 +324,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo\n {{> dude}} ",
 		"data": {},
+		"expected": "foo\n bar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo\n bar",
 		"compileOptions": {}
 	},
 	{

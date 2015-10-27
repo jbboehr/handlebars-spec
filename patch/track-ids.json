@@ -89,6 +89,9 @@
             }
         }
     },
+    "partials-should invalidate context for partials with parameters-00": null,
+    "partials-should pass track id for basic partial-00": null,
+    "partials-should pass track id for context partial-00": null,
     "track ids-should include argument ids-00": {
         "expected": "HELP ME MY BOSS is.a:foo slave.driver:bar",
         "helpers": {
@@ -126,13 +129,15 @@
         "expected": "HELP ME MY BOSS is.a:foo ..\/slave.driver:undefined",
         "helpers": {
             "wycats": {
-                "php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
+                "php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
             }
         },
         "note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
     "track ids-should note ..\/ and .\/ references-01": null,
     "track ids-should note ..\/ and .\/ references-02": null,
+    "track ids-should note ..\/ and .\/ references-03": null,
+    "track ids-should note ..\/ and .\/ references-04": null,
     "track ids-should note @data references-00": {
         "expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
         "helpers": {

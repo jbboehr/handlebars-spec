@@ -869,6 +869,25 @@
 	},
 	{
 		"description": "Tokenizer",
+		"it": "tokenizes partial block declarations",
+		"template": "{{#> foo}}",
+		"expected": [
+			{
+				"name": "OPEN_PARTIAL_BLOCK",
+				"text": "{{#>"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
 		"it": "tokenizes a comment as \"COMMENT\"",
 		"template": "foo {{! this is a comment }} bar {{ baz }}",
 		"expected": [
@@ -997,6 +1016,60 @@
 	},
 	{
 		"description": "Tokenizer",
+		"it": "tokenizes directives",
+		"template": "{{#*foo}}content{{/foo}}",
+		"expected": [
+			{
+				"name": "OPEN_BLOCK",
+				"text": "{{#*"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			},
+			{
+				"name": "CONTENT",
+				"text": "content"
+			},
+			{
+				"name": "OPEN_ENDBLOCK",
+				"text": "{{/"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes directives",
+		"template": "{{*foo}}",
+		"expected": [
+			{
+				"name": "OPEN",
+				"text": "{{*"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"INVERSE\"",
 		"template": "{{^}}",
 		"expected": [
@@ -1096,7 +1169,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes mustaches with String params as \"OPEN ID ID STRING CLOSE\"",
-		"template": "{{ foo bar 'baz' }}",
+		"template": "{{ foo bar \"baz\" }}",
 		"expected": [
 			{
 				"name": "OPEN",

@@ -67,7 +67,7 @@
 	{
 		"description": "track ids",
 		"it": "should note ../ and ./ references",
-		"template": "{{wycats ./is.a ../slave.driver}}",
+		"template": "{{wycats ./is.a ../slave.driver this.is.a this}}",
 		"data": {
 			"is": {
 				"a": "foo"
@@ -83,8 +83,8 @@
 		"helpers": {
 			"wycats": {
 				"!code": true,
-				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
+				"javascript": "function (passiveVoice, noun, thiz, thiz2, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n        equal(options.ids[2], 'is.a');\n        equal(options.ids[3], '');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+				"php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
 			}
 		},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
@@ -93,16 +93,18 @@
 		"description": "track ids",
 		"it": "should note @data references",
 		"template": "{{wycats @is.a @slave.driver}}",
-		"data": {
-			"is": {
-				"a": "foo"
-			},
-			"slave": {
-				"driver": "bar"
+		"data": {},
+		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
+		"options": {
+			"data": {
+				"is": {
+					"a": "foo"
+				},
+				"slave": {
+					"driver": "bar"
+				}
 			}
 		},
-		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
-		"options": {},
 		"compileOptions": {
 			"trackIds": true
 		},

@@ -1,6 +1,104 @@
 {
+    "decorators-should access parent variables-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should apply allow undefined return-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn() . $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn) {\n          $fn->run = 'cess';\n        }"
+            }
+        }
+    },
+    "decorators-should apply block decorators-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should apply multiple decorators-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should apply mustache decorators-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should fail when accessing variables from root-00": {
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should fail when accessing variables from root-01": null,
+    "decorators-should support nested decorators-00": {
+        "helpers": {
+            "helper": {
+                "php": "function($options) {\n          return $options->fn->run;\n        }"
+            }
+        },
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn->nested . $options->fn();\n          return $fn;\n        }"
+            },
+            "nested": {
+                "php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
+            }
+        }
+    },
+    "decorators-should work with root program-00": {
+        "decorators": {
+            "decorator": {
+                "php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
+            }
+        }
+    },
+    "decorators-should work with root program-01": null,
     "inverted sections-chained inverted sections with mismatch-00": {
         "expected": null
     },
-    "inverted sections-chained inverted sections with mismatch-01": null
+    "inverted sections-chained inverted sections with mismatch-01": null,
+    "registration-allows multiple globals-00": null,
+    "registration-allows multiple globals-01": null,
+    "registration-allows multiple globals-02": null,
+    "registration-allows multiple globals-03": null,
+    "registration-unregisters-00": null,
+    "registration-unregisters-01": null,
+    "registration-fails with multiple and args-00": null
 }

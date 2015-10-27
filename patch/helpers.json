@@ -338,7 +338,21 @@
     "helpers-helper block with complex lookup expression-00": {
         "helpers": {
             "goodbyes": {
-                "php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn($options->scope);\n$out .= '! ';\n}\nreturn $out;\n}"
+                "php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
+            }
+        }
+    },
+    "helpers-helper block with identical context-00": {
+        "helpers": {
+            "goodbyes": {
+                "php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
+            }
+        }
+    },
+    "helpers-helper for nested raw block gets raw content-00": {
+        "helpers": {
+            "a": {
+                "php": "function($options) {\n          return $options->fn();\n      }"
             }
         }
     },

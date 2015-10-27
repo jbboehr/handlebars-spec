@@ -22,19 +22,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 11
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -45,24 +38,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 10
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -72,23 +59,29 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -99,14 +92,20 @@
 							"column": 11
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 11
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -182,6 +181,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -269,19 +269,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 10
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -292,24 +285,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 9
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -319,23 +306,29 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -345,14 +338,20 @@
 							"line": 1,
 							"column": 10
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 10
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -428,6 +427,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -531,19 +531,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 10
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -553,24 +546,18 @@
 							"line": 1,
 							"column": 1
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 9
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -580,23 +567,29 @@
 								"line": 1,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": false,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -607,14 +600,20 @@
 							"column": 10
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 10
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -706,6 +705,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -793,19 +793,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 12
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -816,24 +809,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 11
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -843,23 +830,29 @@
 								"line": 1,
 								"column": 8
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": false,
 					"strip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 11
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -870,14 +863,20 @@
 							"column": 12
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 12
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -953,6 +952,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -1040,19 +1040,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 13
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -1063,24 +1056,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 12
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -1090,23 +1077,29 @@
 								"line": 1,
 								"column": 8
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": false,
 					"strip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -1117,14 +1110,20 @@
 							"column": 13
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 13
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -1200,6 +1199,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -1285,19 +1285,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 5,
-					"column": 8
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "1\n",
+					"value": "1\n",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -1307,24 +1300,18 @@
 							"line": 2,
 							"column": 0
 						}
-					},
-					"type": "ContentStatement",
-					"value": "1\n",
-					"original": "1\n"
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 2,
-							"column": 0
-						},
-						"end": {
-							"line": 2,
-							"column": 8
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 2,
@@ -1334,23 +1321,29 @@
 								"line": 2,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": false,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 0
+						},
+						"end": {
+							"line": 2,
+							"column": 8
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " \n\n 23\n",
+					"value": "23\n",
 					"loc": {
 						"start": {
 							"line": 2,
@@ -1361,24 +1354,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "23\n",
-					"original": " \n\n 23\n",
 					"rightStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 5,
-							"column": 0
-						},
-						"end": {
-							"line": 5,
-							"column": 7
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"bar"
+						],
+						"original": "bar",
 						"loc": {
 							"start": {
 								"line": 5,
@@ -1388,23 +1375,29 @@
 								"line": 5,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "bar",
-						"parts": [
-							"bar"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 5,
+							"column": 0
+						},
+						"end": {
+							"line": 5,
+							"column": 7
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "4",
+					"value": "4",
 					"loc": {
 						"start": {
 							"line": 5,
@@ -1414,14 +1407,20 @@
 							"line": 5,
 							"column": 8
 						}
-					},
-					"type": "ContentStatement",
-					"value": "4",
-					"original": "4"
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 5,
+					"column": 8
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -1513,6 +1512,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -1644,6 +1644,7 @@
 							"bar"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -1747,19 +1748,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 29
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -1770,24 +1764,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 28
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -1797,17 +1785,17 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -1817,30 +1805,16 @@
 									"line": 1,
 									"column": 11
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 19
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -1851,14 +1825,21 @@
 										"column": 19
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 14
+							},
+							"end": {
+								"line": 1,
+								"column": 19
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -1867,9 +1848,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -1880,14 +1874,20 @@
 							"column": 29
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -1914,6 +1914,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -2090,19 +2091,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 27
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2112,24 +2106,18 @@
 							"line": 1,
 							"column": 1
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 26
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -2139,17 +2127,17 @@
 								"line": 1,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -2159,30 +2147,16 @@
 									"line": 1,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 18
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -2193,13 +2167,20 @@
 										"column": 18
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar ",
-								"original": " bar ",
 								"rightStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 18
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -2208,9 +2189,22 @@
 					"closeStrip": {
 						"open": false,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 26
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2221,14 +2215,20 @@
 							"column": 27
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -2271,6 +2271,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -2447,19 +2448,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 27
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2470,24 +2464,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 26
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -2497,17 +2485,17 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -2517,30 +2505,16 @@
 									"line": 1,
 									"column": 11
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 18
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -2551,13 +2525,20 @@
 										"column": 18
 									}
 								},
-								"type": "ContentStatement",
-								"value": " bar",
-								"original": " bar ",
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 18
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -2566,9 +2547,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 26
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2578,14 +2572,20 @@
 							"line": 1,
 							"column": 27
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -2612,6 +2612,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -2804,19 +2805,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 25
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2826,24 +2820,18 @@
 							"line": 1,
 							"column": 1
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 24
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -2853,17 +2841,17 @@
 								"line": 1,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -2873,30 +2861,16 @@
 									"line": 1,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -2906,13 +2880,20 @@
 										"line": 1,
 										"column": 17
 									}
-								},
-								"type": "ContentStatement",
-								"value": " bar ",
-								"original": " bar "
+								}
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 12
+							},
+							"end": {
+								"line": 1,
+								"column": 17
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -2921,9 +2902,22 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -2933,14 +2927,20 @@
 							"line": 1,
 							"column": 25
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 25
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -2983,6 +2983,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -3175,19 +3176,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 9,
-					"column": 1
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " \n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -3198,24 +3192,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " \n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 7,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -3225,17 +3213,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -3245,30 +3233,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbar \n\n",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -3279,14 +3253,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " \n\nbar \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 13
+							},
+							"end": {
+								"line": 7,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -3295,9 +3276,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 7,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\n ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 7,
@@ -3308,14 +3302,20 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 9,
+					"column": 1
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -3342,6 +3342,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -3518,19 +3519,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 9,
-					"column": 2
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " a\n\n",
+					"value": " a",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -3541,24 +3535,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": " a",
-					"original": " a\n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 7,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -3568,17 +3556,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -3588,30 +3576,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbar \n\n",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -3622,14 +3596,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " \n\nbar \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 13
+							},
+							"end": {
+								"line": 7,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -3638,9 +3619,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 7,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\na ",
+					"value": "a ",
 					"loc": {
 						"start": {
 							"line": 7,
@@ -3651,14 +3645,20 @@
 							"column": 2
 						}
 					},
-					"type": "ContentStatement",
-					"value": "a ",
-					"original": "\n\na ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 9,
+					"column": 2
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -3701,6 +3701,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -3891,19 +3892,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 29
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -3914,24 +3908,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 28
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -3941,17 +3929,17 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -3961,30 +3949,16 @@
 									"line": 1,
 									"column": 11
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"inverse": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 19
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -3995,14 +3969,21 @@
 										"column": 19
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 14
+							},
+							"end": {
+								"line": 1,
+								"column": 19
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -4011,9 +3992,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4024,14 +4018,20 @@
 							"column": 29
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -4058,6 +4058,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -4232,19 +4233,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 27
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4254,24 +4248,18 @@
 							"line": 1,
 							"column": 1
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 26
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -4281,17 +4269,17 @@
 								"line": 1,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -4301,30 +4289,16 @@
 									"line": 1,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"inverse": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 18
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -4335,13 +4309,20 @@
 										"column": 18
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar ",
-								"original": " bar ",
 								"rightStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 18
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -4350,9 +4331,22 @@
 					"closeStrip": {
 						"open": false,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 26
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4363,14 +4357,20 @@
 							"column": 27
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -4413,6 +4413,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -4587,19 +4588,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 27
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4610,24 +4604,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 26
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -4637,17 +4625,17 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -4657,30 +4645,16 @@
 									"line": 1,
 									"column": 11
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"inverse": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 18
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -4691,13 +4665,20 @@
 										"column": 18
 									}
 								},
-								"type": "ContentStatement",
-								"value": " bar",
-								"original": " bar ",
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 18
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -4706,9 +4687,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 26
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4718,14 +4712,20 @@
 							"line": 1,
 							"column": 27
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -4752,6 +4752,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -4942,19 +4943,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 25
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -4964,24 +4958,18 @@
 							"line": 1,
 							"column": 1
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 24
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -4991,17 +4979,17 @@
 								"line": 1,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -5011,30 +4999,16 @@
 									"line": 1,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"inverse": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 1
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -5044,13 +5018,20 @@
 										"line": 1,
 										"column": 17
 									}
-								},
-								"type": "ContentStatement",
-								"value": " bar ",
-								"original": " bar "
+								}
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 12
+							},
+							"end": {
+								"line": 1,
+								"column": 17
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -5059,9 +5040,22 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -5071,14 +5065,20 @@
 							"line": 1,
 							"column": 25
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 25
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -5121,6 +5121,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -5311,19 +5312,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 9,
-					"column": 1
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " \n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -5334,24 +5328,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " \n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 7,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -5361,17 +5349,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -5381,30 +5369,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"inverse": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbar \n\n",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -5415,14 +5389,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " \n\nbar \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 13
+							},
+							"end": {
+								"line": 7,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -5431,9 +5412,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 7,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\n ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 7,
@@ -5444,14 +5438,20 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 9,
+					"column": 1
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -5478,6 +5478,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -5654,31 +5655,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 37
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 37
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -5688,17 +5676,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -5708,30 +5696,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -5742,29 +5716,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 29
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -5775,15 +5749,21 @@
 										"column": 29
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " baz ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 24
+							},
+							"end": {
+								"line": 1,
+								"column": 29
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -5796,11 +5776,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 37
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 37
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -5827,6 +5826,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -6041,31 +6041,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 35
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 35
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -6075,17 +6062,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -6095,30 +6082,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6129,28 +6102,28 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar ",
-								"original": " bar ",
 								"rightStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 28
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6161,14 +6134,20 @@
 										"column": 28
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz ",
-								"original": " baz ",
 								"rightStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -6181,11 +6160,30 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 35
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 35
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -6212,6 +6210,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -6426,31 +6425,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 36
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 36
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -6460,17 +6446,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -6480,30 +6466,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 16
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6514,28 +6486,28 @@
 										"column": 16
 									}
 								},
-								"type": "ContentStatement",
-								"value": " bar",
-								"original": " bar ",
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16
+								"column": 11
 							},
 							"end": {
 								"line": 1,
-								"column": 28
+								"column": 16
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6546,15 +6518,21 @@
 										"column": 28
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " baz ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -6567,11 +6545,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 36
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -6598,6 +6595,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -6812,31 +6810,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 34
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 34
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -6846,17 +6831,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -6866,30 +6851,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 16
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6899,28 +6870,28 @@
 										"line": 1,
 										"column": 16
 									}
-								},
-								"type": "ContentStatement",
-								"value": " bar ",
-								"original": " bar "
+								}
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16
+								"column": 11
 							},
 							"end": {
 								"line": 1,
-								"column": 27
+								"column": 16
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -6931,14 +6902,20 @@
 										"column": 27
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz ",
-								"original": " baz ",
 								"rightStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 22
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -6951,11 +6928,30 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 34
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 34
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -6982,6 +6978,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -7196,31 +7193,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 40
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 40
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -7230,17 +7214,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -7250,30 +7234,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -7284,29 +7254,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 32
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -7317,15 +7287,21 @@
 										"column": 32
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " baz ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 32
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -7338,11 +7314,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 40
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 40
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -7369,6 +7364,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -7583,19 +7579,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 13,
-					"column": 0
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -7606,24 +7595,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 11,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -7633,17 +7616,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -7653,30 +7636,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbar \n\n",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -7687,29 +7656,29 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " \n\nbar \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
-								"line": 7,
-								"column": 0
+								"line": 3,
+								"column": 13
 							},
 							"end": {
-								"line": 11,
+								"line": 7,
 								"column": 0
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbaz \n\n",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 7,
@@ -7720,15 +7689,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " \n\nbaz \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 7
+							},
+							"end": {
+								"line": 11,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -7741,9 +7716,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 11,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 11,
@@ -7754,14 +7742,20 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 13,
+					"column": 0
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -7788,6 +7782,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -8002,19 +7997,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 13,
-					"column": 0
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -8025,24 +8013,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 11,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -8052,17 +8034,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -8072,30 +8054,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\n",
+								"value": "",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -8106,24 +8074,18 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "",
-								"original": " \n\n",
 								"rightStripped": true
 							},
 							{
-								"loc": {
-									"start": {
-										"line": 5,
-										"column": 0
-									},
-									"end": {
-										"line": 5,
-										"column": 9
-									}
-								},
 								"type": "MustacheStatement",
 								"path": {
+									"type": "PathExpression",
+									"data": false,
+									"depth": 0,
+									"parts": [
+										"foo"
+									],
+									"original": "foo",
 									"loc": {
 										"start": {
 											"line": 5,
@@ -8133,23 +8095,29 @@
 											"line": 5,
 											"column": 6
 										}
-									},
-									"type": "PathExpression",
-									"data": false,
-									"original": "foo",
-									"parts": [
-										"foo"
-									],
-									"depth": 0
+									}
 								},
 								"params": [],
 								"escaped": false,
 								"strip": {
 									"open": false,
 									"close": false
+								},
+								"loc": {
+									"start": {
+										"line": 5,
+										"column": 0
+									},
+									"end": {
+										"line": 5,
+										"column": 9
+									}
 								}
 							},
 							{
+								"type": "ContentStatement",
+								"original": " \n\n",
+								"value": "",
 								"loc": {
 									"start": {
 										"line": 5,
@@ -8160,28 +8128,28 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "",
-								"original": " \n\n",
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
-								"line": 7,
-								"column": 0
+								"line": 3,
+								"column": 13
 							},
 							"end": {
-								"line": 11,
+								"line": 7,
 								"column": 0
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbaz \n\n",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 7,
@@ -8192,15 +8160,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " \n\nbaz \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 7
+							},
+							"end": {
+								"line": 11,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -8213,9 +8187,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 11,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 11,
@@ -8226,14 +8213,20 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 13,
+					"column": 0
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -8260,6 +8253,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -8429,6 +8423,7 @@
 									"foo"
 								],
 								null,
+								true,
 								false
 							],
 							"loc": {
@@ -8571,31 +8566,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 37
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 37
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -8605,17 +8587,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -8625,30 +8607,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -8659,29 +8627,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 29
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -8692,15 +8660,21 @@
 										"column": 29
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " baz ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 24
+							},
+							"end": {
+								"line": 1,
+								"column": 29
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -8713,11 +8687,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 37
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 37
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -8744,6 +8737,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -8956,31 +8950,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 35
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 35
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -8990,17 +8971,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -9010,30 +8991,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 16
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": " bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9044,28 +9011,28 @@
 										"column": 16
 									}
 								},
-								"type": "ContentStatement",
-								"value": " bar",
-								"original": " bar ",
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16
+								"column": 11
 							},
 							"end": {
 								"line": 1,
-								"column": 28
+								"column": 16
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9076,14 +9043,20 @@
 										"column": 28
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz ",
-								"original": " baz ",
 								"rightStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -9096,11 +9069,30 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 35
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 35
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -9127,6 +9119,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -9339,31 +9332,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 36
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 36
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -9373,17 +9353,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -9393,30 +9373,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9427,29 +9393,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 28
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": " baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9460,14 +9426,20 @@
 										"column": 28
 									}
 								},
-								"type": "ContentStatement",
-								"value": " baz",
-								"original": " baz ",
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -9480,11 +9452,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 36
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -9511,6 +9502,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -9723,31 +9715,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 35
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 35
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -9757,17 +9736,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -9777,30 +9756,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9811,29 +9776,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 28
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": " baz ",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -9843,14 +9808,20 @@
 										"line": 1,
 										"column": 28
 									}
-								},
-								"type": "ContentStatement",
-								"value": " baz ",
-								"original": " baz "
+								}
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -9863,11 +9834,30 @@
 					"closeStrip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 35
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 35
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -9894,6 +9884,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -10106,31 +10097,18 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 40
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 40
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -10140,17 +10118,17 @@
 								"line": 1,
 								"column": 5
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 1,
@@ -10160,30 +10138,16 @@
 									"line": 1,
 									"column": 9
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 0
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " bar ",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -10194,29 +10158,29 @@
 										"column": 17
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " bar ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17
+								"column": 12
 							},
 							"end": {
 								"line": 1,
-								"column": 32
+								"column": 17
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " baz ",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -10227,15 +10191,21 @@
 										"column": 32
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " baz ",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 32
+							}
+						}
 					},
 					"openStrip": {
 						"open": false,
@@ -10248,11 +10218,30 @@
 					"closeStrip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 40
+						}
 					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 40
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -10279,6 +10268,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -10491,19 +10481,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 13,
-					"column": 0
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -10514,24 +10497,18 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 0
-						},
-						"end": {
-							"line": 11,
-							"column": 9
-						}
-					},
 					"type": "BlockStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
 						"loc": {
 							"start": {
 								"line": 3,
@@ -10541,17 +10518,17 @@
 								"line": 3,
 								"column": 6
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "if",
-						"parts": [
-							"if"
-						],
-						"depth": 0
+						}
 					},
 					"params": [
 						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"foo"
+							],
+							"original": "foo",
 							"loc": {
 								"start": {
 									"line": 3,
@@ -10561,30 +10538,16 @@
 									"line": 3,
 									"column": 10
 								}
-							},
-							"type": "PathExpression",
-							"data": false,
-							"original": "foo",
-							"parts": [
-								"foo"
-							],
-							"depth": 0
+							}
 						}
 					],
 					"program": {
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 0
-							},
-							"end": {
-								"line": 7,
-								"column": 0
-							}
-						},
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbar \n\n",
+								"value": "bar",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -10595,29 +10558,29 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "bar",
-								"original": " \n\nbar \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"strip": {}
-					},
-					"inverse": {
+						"strip": {},
 						"loc": {
 							"start": {
-								"line": 7,
-								"column": 0
+								"line": 3,
+								"column": 13
 							},
 							"end": {
-								"line": 11,
+								"line": 7,
 								"column": 0
 							}
-						},
+						}
+					},
+					"inverse": {
 						"type": "Program",
 						"body": [
 							{
+								"type": "ContentStatement",
+								"original": " \n\nbaz \n\n",
+								"value": "baz",
 								"loc": {
 									"start": {
 										"line": 7,
@@ -10628,15 +10591,21 @@
 										"column": 0
 									}
 								},
-								"type": "ContentStatement",
-								"value": "baz",
-								"original": " \n\nbaz \n\n",
 								"rightStripped": true,
 								"leftStripped": true
 							}
 						],
-						"blockParams": null,
-						"strip": {}
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 7
+							},
+							"end": {
+								"line": 11,
+								"column": 0
+							}
+						}
 					},
 					"openStrip": {
 						"open": true,
@@ -10649,9 +10618,22 @@
 					"closeStrip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 0
+						},
+						"end": {
+							"line": 11,
+							"column": 9
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": "\n\n",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 11,
@@ -10662,14 +10644,20 @@
 							"column": 0
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": "\n\n",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 13,
+					"column": 0
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -10696,6 +10684,7 @@
 						[
 							"foo"
 						],
+						null,
 						null,
 						false
 					],
@@ -10892,10 +10881,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{~> dude~}} ",
 		"data": {},
+		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foobar",
 		"compileOptions": {
 			"data": true,
 			"blockParams": [],
@@ -10911,19 +10900,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 17
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "foo ",
+					"value": "foo",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -10934,24 +10916,18 @@
 							"column": 4
 						}
 					},
-					"type": "ContentStatement",
-					"value": "foo",
-					"original": "foo ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 4
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					},
 					"type": "PartialStatement",
 					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"dude"
+						],
+						"original": "dude",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -10961,23 +10937,29 @@
 								"line": 1,
 								"column": 13
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "dude",
-						"parts": [
-							"dude"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"indent": "",
 					"strip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 16
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -10988,14 +10970,20 @@
 							"column": 17
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 17
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -11128,19 +11116,12 @@
 		},
 		"partialAsts": {
 			"dude": {
-				"loc": {
-					"start": {
-						"line": 1,
-						"column": 0
-					},
-					"end": {
-						"line": 1,
-						"column": 3
-					}
-				},
 				"type": "Program",
 				"body": [
 					{
+						"type": "ContentStatement",
+						"original": "bar",
+						"value": "bar",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -11150,14 +11131,20 @@
 								"line": 1,
 								"column": 3
 							}
-						},
-						"type": "ContentStatement",
-						"value": "bar",
-						"original": "bar"
+						}
 					}
 				],
-				"blockParams": null,
-				"strip": {}
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 3
+					}
+				}
 			}
 		},
 		"partialOpcodes": {
@@ -11206,10 +11193,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude~}} ",
 		"data": {},
+		"expected": "foo bar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo bar",
 		"compileOptions": {
 			"data": true,
 			"blockParams": [],
@@ -11225,19 +11212,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 16
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "foo ",
+					"value": "foo ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -11247,24 +11227,18 @@
 							"line": 1,
 							"column": 4
 						}
-					},
-					"type": "ContentStatement",
-					"value": "foo ",
-					"original": "foo "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 4
-						},
-						"end": {
-							"line": 1,
-							"column": 15
-						}
-					},
 					"type": "PartialStatement",
 					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"dude"
+						],
+						"original": "dude",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -11274,23 +11248,29 @@
 								"line": 1,
 								"column": 12
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "dude",
-						"parts": [
-							"dude"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"indent": "",
 					"strip": {
 						"open": false,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 15
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -11301,14 +11281,20 @@
 							"column": 16
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 16
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -11441,19 +11427,12 @@
 		},
 		"partialAsts": {
 			"dude": {
-				"loc": {
-					"start": {
-						"line": 1,
-						"column": 0
-					},
-					"end": {
-						"line": 1,
-						"column": 3
-					}
-				},
 				"type": "Program",
 				"body": [
 					{
+						"type": "ContentStatement",
+						"original": "bar",
+						"value": "bar",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -11463,14 +11442,20 @@
 								"line": 1,
 								"column": 3
 							}
-						},
-						"type": "ContentStatement",
-						"value": "bar",
-						"original": "bar"
+						}
 					}
 				],
-				"blockParams": null,
-				"strip": {}
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 3
+					}
+				}
 			}
 		},
 		"partialOpcodes": {
@@ -11519,10 +11504,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo {{> dude}} ",
 		"data": {},
+		"expected": "foo bar ",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo bar ",
 		"compileOptions": {
 			"data": true,
 			"blockParams": [],
@@ -11538,19 +11523,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 15
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "foo ",
+					"value": "foo ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -11560,24 +11538,18 @@
 							"line": 1,
 							"column": 4
 						}
-					},
-					"type": "ContentStatement",
-					"value": "foo ",
-					"original": "foo "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 4
-						},
-						"end": {
-							"line": 1,
-							"column": 14
-						}
-					},
 					"type": "PartialStatement",
 					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"dude"
+						],
+						"original": "dude",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -11587,23 +11559,29 @@
 								"line": 1,
 								"column": 12
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "dude",
-						"parts": [
-							"dude"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"indent": "",
 					"strip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -11613,14 +11591,20 @@
 							"line": 1,
 							"column": 15
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 15
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -11769,19 +11753,12 @@
 		},
 		"partialAsts": {
 			"dude": {
-				"loc": {
-					"start": {
-						"line": 1,
-						"column": 0
-					},
-					"end": {
-						"line": 1,
-						"column": 3
-					}
-				},
 				"type": "Program",
 				"body": [
 					{
+						"type": "ContentStatement",
+						"original": "bar",
+						"value": "bar",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -11791,14 +11768,20 @@
 								"line": 1,
 								"column": 3
 							}
-						},
-						"type": "ContentStatement",
-						"value": "bar",
-						"original": "bar"
+						}
 					}
 				],
-				"blockParams": null,
-				"strip": {}
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 3
+					}
+				}
 			}
 		},
 		"partialOpcodes": {
@@ -11847,10 +11830,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo\n {{~> dude}} ",
 		"data": {},
+		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foobar",
 		"compileOptions": {
 			"data": true,
 			"blockParams": [],
@@ -11866,19 +11849,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 2,
-					"column": 13
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "foo\n ",
+					"value": "foo",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -11889,24 +11865,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "foo",
-					"original": "foo\n ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 2,
-							"column": 1
-						},
-						"end": {
-							"line": 2,
-							"column": 12
-						}
-					},
 					"type": "PartialStatement",
 					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"dude"
+						],
+						"original": "dude",
 						"loc": {
 							"start": {
 								"line": 2,
@@ -11916,23 +11886,29 @@
 								"line": 2,
 								"column": 10
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "dude",
-						"parts": [
-							"dude"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"indent": "",
 					"strip": {
 						"open": true,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 1
+						},
+						"end": {
+							"line": 2,
+							"column": 12
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 2,
@@ -11943,14 +11919,20 @@
 							"column": 13
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 13
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -12083,19 +12065,12 @@
 		},
 		"partialAsts": {
 			"dude": {
-				"loc": {
-					"start": {
-						"line": 1,
-						"column": 0
-					},
-					"end": {
-						"line": 1,
-						"column": 3
-					}
-				},
 				"type": "Program",
 				"body": [
 					{
+						"type": "ContentStatement",
+						"original": "bar",
+						"value": "bar",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -12105,14 +12080,20 @@
 								"line": 1,
 								"column": 3
 							}
-						},
-						"type": "ContentStatement",
-						"value": "bar",
-						"original": "bar"
+						}
 					}
 				],
-				"blockParams": null,
-				"strip": {}
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 3
+					}
+				}
 			}
 		},
 		"partialOpcodes": {
@@ -12161,10 +12142,10 @@
 		"it": "should strip whitespace around partials",
 		"template": "foo\n {{> dude}} ",
 		"data": {},
+		"expected": "foo\n bar",
 		"partials": {
 			"dude": "bar"
 		},
-		"expected": "foo\n bar",
 		"compileOptions": {
 			"data": true,
 			"blockParams": [],
@@ -12180,19 +12161,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 2,
-					"column": 12
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": "foo\n ",
+					"value": "foo\n",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -12203,24 +12177,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "foo\n",
-					"original": "foo\n ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 2,
-							"column": 1
-						},
-						"end": {
-							"line": 2,
-							"column": 11
-						}
-					},
 					"type": "PartialStatement",
 					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"dude"
+						],
+						"original": "dude",
 						"loc": {
 							"start": {
 								"line": 2,
@@ -12230,23 +12198,29 @@
 								"line": 2,
 								"column": 9
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "dude",
-						"parts": [
-							"dude"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"indent": " ",
 					"strip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 1
+						},
+						"end": {
+							"line": 2,
+							"column": 11
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 2,
@@ -12257,14 +12231,20 @@
 							"column": 12
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 12
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -12397,19 +12377,12 @@
 		},
 		"partialAsts": {
 			"dude": {
-				"loc": {
-					"start": {
-						"line": 1,
-						"column": 0
-					},
-					"end": {
-						"line": 1,
-						"column": 3
-					}
-				},
 				"type": "Program",
 				"body": [
 					{
+						"type": "ContentStatement",
+						"original": "bar",
+						"value": "bar",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -12419,14 +12392,20 @@
 								"line": 1,
 								"column": 3
 							}
-						},
-						"type": "ContentStatement",
-						"value": "bar",
-						"original": "bar"
+						}
 					}
 				],
-				"blockParams": null,
-				"strip": {}
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 3
+					}
+				}
 			}
 		},
 		"partialOpcodes": {
@@ -12493,19 +12472,12 @@
 			}
 		},
 		"ast": {
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 27
-				}
-			},
 			"type": "Program",
 			"body": [
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -12516,24 +12488,18 @@
 							"column": 1
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"leftStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 1
-						},
-						"end": {
-							"line": 1,
-							"column": 10
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -12543,23 +12509,29 @@
 								"line": 1,
 								"column": 7
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": true,
 						"close": true
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 1
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": "",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -12570,24 +12542,18 @@
 							"column": 11
 						}
 					},
-					"type": "ContentStatement",
-					"value": "",
-					"original": " ",
 					"rightStripped": true
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 11
-						},
-						"end": {
-							"line": 1,
-							"column": 18
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -12597,23 +12563,29 @@
 								"line": 1,
 								"column": 16
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -12623,24 +12595,18 @@
 							"line": 1,
 							"column": 19
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				},
 				{
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 19
-						},
-						"end": {
-							"line": 1,
-							"column": 26
-						}
-					},
 					"type": "MustacheStatement",
 					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"foo"
+						],
+						"original": "foo",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -12650,23 +12616,29 @@
 								"line": 1,
 								"column": 24
 							}
-						},
-						"type": "PathExpression",
-						"data": false,
-						"original": "foo",
-						"parts": [
-							"foo"
-						],
-						"depth": 0
+						}
 					},
 					"params": [],
 					"escaped": true,
 					"strip": {
 						"open": false,
 						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 19
+						},
+						"end": {
+							"line": 1,
+							"column": 26
+						}
 					}
 				},
 				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
 					"loc": {
 						"start": {
 							"line": 1,
@@ -12676,14 +12648,20 @@
 							"line": 1,
 							"column": 27
 						}
-					},
-					"type": "ContentStatement",
-					"value": " ",
-					"original": " "
+					}
 				}
 			],
-			"blockParams": null,
-			"strip": {}
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27
+				}
+			}
 		},
 		"opcodes": {
 			"sourceNode": [],
@@ -12759,6 +12737,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -12874,6 +12853,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {
@@ -13005,6 +12985,7 @@
 							"foo"
 						],
 						null,
+						true,
 						false
 					],
 					"loc": {

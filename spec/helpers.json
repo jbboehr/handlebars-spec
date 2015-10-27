@@ -12,6 +12,7 @@
 				}
 			]
 		},
+		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -19,7 +20,6 @@
 				"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
 			}
 		},
-		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"compileOptions": {}
 	},
 	{
@@ -29,6 +29,7 @@
 		"data": {
 			"test": "hello"
 		},
+		"expected": " {{test}} ",
 		"helpers": {
 			"raw": {
 				"!code": true,
@@ -36,7 +37,6 @@
 				"php": "function($options) { return $options->fn(); }"
 			}
 		},
-		"expected": " {{test}} ",
 		"compileOptions": {}
 	},
 	{
@@ -46,6 +46,7 @@
 		"data": {
 			"test": "hello"
 		},
+		"expected": " {{test}} 123",
 		"helpers": {
 			"raw": {
 				"!code": true,
@@ -53,7 +54,38 @@
 				"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
 			}
 		},
-		"expected": " {{test}} 123",
+		"compileOptions": {}
+	},
+	{
+		"description": "helpers",
+		"it": "helper for nested raw block gets raw content",
+		"template": "{{{{a}}}} {{{{b}}}} {{{{/b}}}} {{{{/a}}}}",
+		"data": {},
+		"expected": " {{{{b}}}} {{{{/b}}}} ",
+		"helpers": {
+			"a": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "helpers",
+		"it": "helper block with identical context",
+		"template": "{{#goodbyes}}{{name}}{{/goodbyes}}",
+		"data": {
+			"name": "Alan"
+		},
+		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! ",
+		"helpers": {
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
+				"php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
+			}
+		},
 		"compileOptions": {}
 	},
 	{
@@ -63,14 +95,14 @@
 		"data": {
 			"name": "Alan"
 		},
+		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! ",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
-				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
-				"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn($options->scope);\n$out .= '! ';\n}\nreturn $out;\n}"
+				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn({}) + '! ';\n      }\n      return out;\n    }",
+				"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
 			}
 		},
-		"expected": "Goodbye Alan! goodbye Alan! GOODBYE Alan! ",
 		"compileOptions": {}
 	},
 	{
@@ -86,6 +118,7 @@
 				}
 			]
 		},
+		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -93,7 +126,6 @@
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
 		},
-		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"compileOptions": {}
 	},
 	{
@@ -109,6 +141,7 @@
 				}
 			]
 		},
+		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -116,7 +149,6 @@
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
 		},
-		"expected": "<a href=\"/root/goodbye\">Goodbye</a>",
 		"compileOptions": {}
 	},
 	{
@@ -124,6 +156,7 @@
 		"it": "helper returning undefined value",
 		"template": " {{nothere}}",
 		"data": {},
+		"expected": " ",
 		"helpers": {
 			"nothere": {
 				"!code": true,
@@ -131,7 +164,6 @@
 				"php": "function() {}"
 			}
 		},
-		"expected": " ",
 		"compileOptions": {}
 	},
 	{
@@ -139,6 +171,7 @@
 		"it": "helper returning undefined value",
 		"template": " {{#nothere}}{{/nothere}}",
 		"data": {},
+		"expected": " ",
 		"helpers": {
 			"nothere": {
 				"!code": true,
@@ -146,7 +179,6 @@
 				"php": "function() {}"
 			}
 		},
-		"expected": " ",
 		"compileOptions": {}
 	},
 	{
@@ -199,6 +231,7 @@
 				}
 			]
 		},
+		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -206,7 +239,6 @@
 				"php": "function($options) {\n    return '<a href=\"/people/'.$options->scope['id'].'\">' . $options->fn($options->scope) . '</a>';\n}"
 			}
 		},
-		"expected": "<ul><li><a href=\"/people/1\">Alan</a></li><li><a href=\"/people/2\">Yehuda</a></li></ul>",
 		"compileOptions": {}
 	},
 	{
@@ -296,6 +328,7 @@
 				}
 			]
 		},
+		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>",
 		"helpers": {
 			"list": {
 				"!code": true,
@@ -303,7 +336,6 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"expected": "<ul><li>Alan</li><li>Yehuda</li></ul>",
 		"compileOptions": {}
 	},
 	{
@@ -313,6 +345,7 @@
 		"data": {
 			"people": []
 		},
+		"expected": "<p><em>Nobody's here</em></p>",
 		"helpers": {
 			"list": {
 				"!code": true,
@@ -320,7 +353,6 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"expected": "<p><em>Nobody's here</em></p>",
 		"compileOptions": {}
 	},
 	{
@@ -331,6 +363,7 @@
 			"people": [],
 			"message": "Nobody's here"
 		},
+		"expected": "<p>Nobody&#x27;s here</p>",
 		"helpers": {
 			"list": {
 				"!code": true,
@@ -338,7 +371,6 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"expected": "<p>Nobody&#x27;s here</p>",
 		"compileOptions": {}
 	},
 	{
@@ -359,6 +391,7 @@
 				}
 			}
 		},
+		"expected": "winning",
 		"helpers": {
 			"./helper": {
 				"!code": true,
@@ -366,7 +399,6 @@
 				"php": "function() {\n        return 'fail';\n      }"
 			}
 		},
-		"expected": "winning",
 		"compileOptions": {}
 	},
 	{
@@ -387,6 +419,7 @@
 				}
 			}
 		},
+		"expected": "winning",
 		"helpers": {
 			"./helper": {
 				"!code": true,
@@ -394,7 +427,6 @@
 				"php": "function() {\n        return 'fail';\n      }"
 			}
 		},
-		"expected": "winning",
 		"compileOptions": {}
 	},
 	{
@@ -404,6 +436,7 @@
 		"data": {
 			"cruel": "cruel"
 		},
+		"expected": "Goodbye cruel world!",
 		"helpers": {
 			"world": {
 				"!code": true,
@@ -411,7 +444,6 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"expected": "Goodbye cruel world!",
 		"compileOptions": {}
 	},
 	{
@@ -425,6 +457,7 @@
 				}
 			]
 		},
+		"expected": "Goodbye cruel world!",
 		"helpers": {
 			"world": {
 				"!code": true,
@@ -432,7 +465,6 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"expected": "Goodbye cruel world!",
 		"compileOptions": {}
 	},
 	{
@@ -442,6 +474,7 @@
 		"data": {
 			"lookup": "Explicit"
 		},
+		"expected": "helpers",
 		"helpers": {
 			"lookup": {
 				"!code": true,
@@ -449,7 +482,6 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"expected": "helpers",
 		"compileOptions": {}
 	},
 	{
@@ -459,6 +491,7 @@
 		"data": {
 			"lookup": "Explicit"
 		},
+		"expected": "helpers",
 		"helpers": {
 			"lookup": {
 				"!code": true,
@@ -466,7 +499,6 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"expected": "helpers",
 		"compileOptions": {}
 	},
 	{
@@ -480,6 +512,7 @@
 				}
 			}
 		},
+		"expected": "helper",
 		"helpers": {
 			"helper": {
 				"!code": true,
@@ -487,7 +520,6 @@
 				"php": "function() { return 'helper'; }"
 			}
 		},
-		"expected": "helper",
 		"compileOptions": {}
 	},
 	{
@@ -497,6 +529,7 @@
 		"data": {
 			"cruel": "cruel"
 		},
+		"expected": "found it! Goodbye cruel world!!",
 		"helpers": {
 			"world": {
 				"!code": true,
@@ -509,7 +542,6 @@
 				"php": "function() { return 'found it!'; }"
 			}
 		},
-		"expected": "found it! Goodbye cruel world!!",
 		"compileOptions": {},
 		"globalHelpers": {
 			"test_helper": {
@@ -559,6 +591,7 @@
 		"it": "decimal number literals work",
 		"template": "Message: {{hello -1.2 1.2}}",
 		"data": {},
+		"expected": "Message: Hello -1.2 1.2 times",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -566,7 +599,6 @@
 				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -1.2 1.2 times",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -589,6 +621,7 @@
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
 		"data": {},
+		"expected": "Message: Hello -12 times",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -596,7 +629,6 @@
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -12 times",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -619,6 +651,7 @@
 		"it": "simple literals work",
 		"template": "Message: {{hello \"world\" 12 true false}}",
 		"data": {},
+		"expected": "Message: Hello world 12 times: true false",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -626,7 +659,6 @@
 				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
-		"expected": "Message: Hello world 12 times: true false",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -660,6 +692,7 @@
 		"it": "escaping a String is possible",
 		"template": "Message: {{{hello \"\\\"world\\\"\"}}}",
 		"data": {},
+		"expected": "Message: Hello \"world\"",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -667,7 +700,6 @@
 				"php": "function($param) { return 'Hello '.$param; }"
 			}
 		},
-		"expected": "Message: Hello \"world\"",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -690,6 +722,7 @@
 		"it": "it works with ' marks",
 		"template": "Message: {{{hello \"Alan's world\"}}}",
 		"data": {},
+		"expected": "Message: Hello Alan's world",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -697,7 +730,6 @@
 				"php": "function($param) { return \"Hello \" . $param; }"
 			}
 		},
-		"expected": "Message: Hello Alan's world",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -720,6 +752,7 @@
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
 		"data": {},
+		"expected": "Message: Hello -12 times",
 		"helpers": {
 			"hello": {
 				"!code": true,
@@ -727,7 +760,6 @@
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"expected": "Message: Hello -12 times",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -753,6 +785,7 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
+		"expected": "Message: Goodbye cruel world",
 		"helpers": {
 			"goodbye": {
 				"!code": true,
@@ -760,7 +793,6 @@
 				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
 		},
-		"expected": "Message: Goodbye cruel world",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -786,6 +818,7 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
+		"expected": "Message: Goodbye cruel world",
 		"helpers": {
 			"goodbye": {
 				"!code": true,
@@ -793,7 +826,6 @@
 				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
 			}
 		},
-		"expected": "Message: Goodbye cruel world",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -931,6 +963,7 @@
 			"hello": "Hello",
 			"world": "world"
 		},
+		"expected": "Hello <a>world</a>",
 		"helpers": {
 			"helperMissing": {
 				"!code": true,
@@ -938,7 +971,6 @@
 				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
 			}
 		},
-		"expected": "Hello <a>world</a>",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -964,6 +996,7 @@
 			"hello": "Hello",
 			"world": "world"
 		},
+		"expected": "Hello <a>winning</a>",
 		"helpers": {
 			"helperMissing": {
 				"!code": true,
@@ -971,7 +1004,6 @@
 				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
 			}
 		},
-		"expected": "Hello <a>winning</a>",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1178,6 +1210,7 @@
 		"it": "should include in ambiguous mustache calls",
 		"template": "{{helper}}",
 		"data": {},
+		"expected": "ran: helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1195,7 +1228,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "ran: helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1218,6 +1250,7 @@
 		"it": "should include in helper mustache calls",
 		"template": "{{helper 1}}",
 		"data": {},
+		"expected": "ran: helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1235,7 +1268,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "ran: helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1258,6 +1290,7 @@
 		"it": "should include in ambiguous block calls",
 		"template": "{{#helper}}{{/helper}}",
 		"data": {},
+		"expected": "ran: helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1275,7 +1308,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "ran: helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1298,6 +1330,7 @@
 		"it": "should include in simple block calls",
 		"template": "{{#./helper}}{{/./helper}}",
 		"data": {},
+		"expected": "missing: ./helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1315,7 +1348,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "missing: ./helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1338,6 +1370,7 @@
 		"it": "should include in helper block calls",
 		"template": "{{#helper 1}}{{/helper}}",
 		"data": {},
+		"expected": "ran: helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1355,7 +1388,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "ran: helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1410,6 +1442,7 @@
 		"data": {
 			"foo": {}
 		},
+		"expected": "missing: foo.helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1427,7 +1460,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "missing: foo.helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1452,6 +1484,7 @@
 		"data": {
 			"foo": {}
 		},
+		"expected": "helper missing: foo.helper",
 		"helpers": {
 			"blockHelperMissing": {
 				"!code": true,
@@ -1469,7 +1502,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"expected": "helper missing: foo.helper",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1586,6 +1618,7 @@
 		"data": {
 			"value": "foo"
 		},
+		"expected": "1foo",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
@@ -1593,7 +1626,6 @@
 				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"expected": "1foo",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1613,6 +1645,7 @@
 		"it": "should take presedence over helper values",
 		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
 		"data": {},
+		"expected": "1foo",
 		"helpers": {
 			"value": {
 				"!code": true,
@@ -1625,7 +1658,6 @@
 				"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"expected": "1foo",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1647,6 +1679,7 @@
 		"data": {
 			"value": "bar"
 		},
+		"expected": "barfoo",
 		"helpers": {
 			"value": {
 				"!code": true,
@@ -1659,7 +1692,6 @@
 				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"expected": "barfoo",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1681,6 +1713,7 @@
 		"data": {
 			"value": "foo"
 		},
+		"expected": "13foo",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
@@ -1688,7 +1721,6 @@
 				"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
 			}
 		},
-		"expected": "13foo",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
@@ -1710,6 +1742,7 @@
 		"data": {
 			"value": "foo"
 		},
+		"expected": "1foo",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
@@ -1717,7 +1750,6 @@
 				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"expected": "1foo",
 		"compileOptions": {},
 		"globalHelpers": {
 			"world": {

@@ -87,9 +87,9 @@ function checkResult(test, e) {
     var msg = e || 'Error: should have thrown, did not';
     console.log(test.prefix + msg);
     if( e ) {
-      console.log(e.stack);
+      console.error(e.stack);
     }
-    console.log('Test Data: ', test);
+    console.error('Test Data: ', test);
     return false;
   }
 }
@@ -118,9 +118,15 @@ function prepareTestGeneric(test) {
   spec.partials = test.partials;
   unstringifyLambdas(spec.partials);
   spec.globalPartials = test.globalPartials || undefined;
+  // Decorators
+  spec.decorators = unstringifyHelpers(test.decorators);
+  spec.globalDecorators = test.globalDecorators || undefined;
   // Options
   spec.options = clone(test.options);
   spec.compileOptions = clone(test.compileOptions);
+  if( spec.options && typeof spec.options.data === 'object' ) {
+    unstringifyLambdas(spec.options.data);
+  }
   // Compat
   spec.compat = Boolean(test.compat);
   return spec;
@@ -191,19 +197,29 @@ function runTestGeneric(test) {
     Object.keys(test.globalHelpers || {}).forEach(function(x) {
       global.handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
     });
+    
+    // Register global decorators
+    Object.keys(test.globalDecorators || {}).forEach(function(x) {
+      global.handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
+    });
 
     // Execute
     var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
     var template = global.CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
-    var opts = test.options === undefined ? {} : clone(test.options);
-    opts.data = test.data; // le sigh
+    var opts = test.options || {};
+    //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
     if( test.helpers ) {
       opts.helpers = test.helpers;
     }
     if( test.partials ) {
       opts.partials = test.partials;
     }
-    var actual = template(test.data, opts);
+    if( test.decorators ) {
+      opts.decorators = test.decorators;
+    }
+    test.opts = opts;
+
+    var actual = template(test.data, test.opts);
     global.equals(actual, test.expected);
     
     return checkResult(test);

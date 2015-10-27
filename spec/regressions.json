@@ -127,6 +127,7 @@
 		"it": "GS-428: Nested if else rendering",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}}  {{#blk}} Expected {{/blk}} {{/inverse}}",
 		"data": {},
+		"expected": "   Expected  ",
 		"helpers": {
 			"blk": {
 				"!code": true,
@@ -139,7 +140,6 @@
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
-		"expected": "   Expected  ",
 		"compileOptions": {}
 	},
 	{
@@ -147,6 +147,7 @@
 		"it": "GS-428: Nested if else rendering",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}} {{#blk}} Expected {{/blk}} {{/inverse}}",
 		"data": {},
+		"expected": "  Expected  ",
 		"helpers": {
 			"blk": {
 				"!code": true,
@@ -159,7 +160,6 @@
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
 		},
-		"expected": "  Expected  ",
 		"compileOptions": {}
 	},
 	{
@@ -254,6 +254,7 @@
 		"it": "GH-837: undefined values for helpers",
 		"template": "{{str bar.baz}}",
 		"data": {},
+		"expected": "undefined",
 		"helpers": {
 			"str": {
 				"!code": true,
@@ -261,7 +262,6 @@
 				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
 		},
-		"expected": "undefined",
 		"compileOptions": {}
 	},
 	{
@@ -278,5 +278,76 @@
 			]
 		},
 		"expected": "foo"
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1021: Each empty string key",
+		"template": "{{#each data}}Key: {{@key}}\n{{/each}}",
+		"data": {
+			"data": {
+				"": "foo",
+				"name": "Chris",
+				"value": 10000
+			}
+		},
+		"expected": "Key: \nKey: name\nKey: value\n",
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1054: Should handle simple safe string responses",
+		"template": "{{#wrap}}{{>partial}}{{/wrap}}",
+		"data": {},
+		"expected": "<partial>",
+		"partials": {
+			"partial": "{{#wrap}}<partial>{{/wrap}}"
+		},
+		"helpers": {
+			"wrap": {
+				"!code": true,
+				"javascript": "function (options) {\n        return new Handlebars.SafeString(options.fn());\n      }",
+				"php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
+			}
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1065: Sparse arrays",
+		"template": "{{#each array}}{{@index}}{{.}}{{/each}}",
+		"data": {
+			"array": [
+				null,
+				"foo",
+				null,
+				"bar"
+			]
+		},
+		"expected": "1foo3bar",
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "should support multiple levels of inline partials",
+		"template": "{{#> layout}}{{#*inline \"subcontent\"}}subcontent{{/inline}}{{/layout}}",
+		"data": {},
+		"expected": "doctypelayoutsubcontent",
+		"partials": {
+			"doctype": "doctype{{> content}}",
+			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{> subcontent}}{{/inline}}{{/doctype}}"
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1089: should support failover content in multiple levels of inline partials",
+		"template": "{{#> layout}}{{/layout}}",
+		"data": {},
+		"expected": "doctypelayoutsubcontent",
+		"partials": {
+			"doctype": "doctype{{> content}}",
+			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{#> subcontent}}subcontent{{/subcontent}}{{/inline}}{{/doctype}}"
+		},
+		"compileOptions": {}
 	}
 ]

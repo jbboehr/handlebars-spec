@@ -106,6 +106,25 @@ function detectGlobalHelpers() {
   }
 }
 
+function detectGlobalDecorators() {
+  var builtins = ['inline'];
+  var globalDecorators;
+  Object.keys(global.handlebarsEnv.decorators).forEach(function(x) {
+    if( builtins.indexOf(x) !== -1 ) {
+      return;
+    }
+    if( !globalDecorators ) {
+      globalDecorators = {};
+    }
+    globalDecorators[x] = global.handlebarsEnv.decorators[x];
+  });
+  if( globalDecorators ) {
+    context.globalDecorators = globalDecorators;
+  } else {
+    delete context.globalDecorators;
+  }
+}
+
 function detectGlobalPartials() {
   // This should never be null, but it is in one case
   if( !global.handlebarsEnv ) {
@@ -182,6 +201,8 @@ function resetContext() {
   delete context.globalHelpers;
   delete context.partials;
   delete context.globalPartials;
+  delete context.decorators;
+  delete context.globalDecorators;
   delete context.exception;
 }
 
@@ -242,10 +263,10 @@ global.CompilerContext = {
       // Note: merging data in the options causes tests to fail, possibly
       // a separate type of data?
       if (options && options.hasOwnProperty('data')) {
-        data = extend(true, data, options.data);
+        //data = extend(true, data, options.data);
         context.options = context.options || {};
+	context.options.data = options.data;
       }
-      //context.options = options;
 
       // Push template data unto context
       context.data = data;
@@ -254,6 +275,12 @@ global.CompilerContext = {
         // Push helpers unto context
         context.helpers = options.helpers;
       }
+
+      if (options && options.hasOwnProperty('decorators')) {
+        // Push decorators unto context
+        context.decorators = options.decorators;
+      }
+      
       return compiledTemplate(data, options);
     };
   },
@@ -309,6 +336,9 @@ global.equal = global.equals = function equals(actual, expected, message) {
   // Get options
   if( context.options ) {
     spec.options = context.options;
+    if( spec.options.data ) {
+      stringifyLambdas(spec.options.data);
+    }
   }
   
   // Get compiler options
@@ -324,6 +354,16 @@ global.equal = global.equals = function equals(actual, expected, message) {
   // Get global helpers
   if (context.globalHelpers) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
+  }
+  
+  // Get decorators
+  if (context.decorators) {
+    spec.decorators = extractHelpers(context.decorators);
+  }
+  
+  // Get global decorators
+  if (context.globalDecorators) {
+    spec.globalDecorators = extractHelpers(context.globalDecorators);
   }
   
   // If a template is found in the lexer, use it for the spec. This is true in
@@ -373,11 +413,13 @@ global.shouldCompileTo = function shouldCompileTo(string, hashOrArray, expected)
 global.shouldCompileToWithPartials = function shouldCompileToWithPartials(string, hashOrArray, partials, expected, message) {
   detectGlobalHelpers();
   detectGlobalPartials();
+  detectGlobalDecorators();
   global.compileWithPartials(string, hashOrArray, partials, expected, message);
 };
 
 global.compileWithPartials = function compileWithPartials(string, hashOrArray, partials, expected, message) {
   var helpers;
+  var decorators;
   var data;
   var compat;
   var compileOptions = extend({}, context.compileOptions);
@@ -399,6 +441,15 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
     } */
   } else {
     data = hashOrArray;
+    if( typeof data === 'object' ) {
+      data = hashOrArray.hash || hashOrArray;
+      helpers = extractHelpers(hashOrArray.helpers || context.helpers);
+      partials = hashOrArray.partials || context.partials;
+      decorators = extractHelpers(hashOrArray.decorators || context.decorators);
+      delete data.helpers;
+      delete data.partials;
+      delete data.decorators;
+    }
   }
   
   var spec = {
@@ -406,6 +457,7 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
     it          : context.it,
     template    : string,
     data        : data,
+    expected    : expected
   };
   
   // Remove circular references in data
@@ -422,7 +474,9 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   if (helpers) {
     spec.helpers  = helpers;
   }
-  spec.expected = expected;
+  if (decorators) {
+    spec.decorators  = decorators;
+  }
   if (message) {
     spec.message  = '' + message;
   }
@@ -433,6 +487,9 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   // Get options
   if( context.options ) {
     spec.options = context.options;
+    if( spec.options.data ) {
+      stringifyLambdas(spec.options.data);
+    }
   }
   
   // Get compiler options
@@ -448,6 +505,11 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   // Get global helpers
   if( context.globalHelpers ) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
+  }
+  
+  // Get global decorators
+  if( context.globalDecorators ) {
+    spec.globalDecorators = extractHelpers(context.globalDecorators);
   }
   
   // Convert lambdas to object/strings
@@ -520,7 +582,8 @@ if( input.match(/bench\/templates/) ) {
     var data = benches[x];
     var expected = Handlebars.compile(data.handlebars)(data.context, {
       helpers: data.helpers,
-      partials: data.partials && data.partials.handlebars
+      partials: data.partials && data.partials.handlebars,
+      decorators: data.decorators
     });
     stringifyLambdas(data.context);
     var test = {
@@ -538,6 +601,9 @@ if( input.match(/bench\/templates/) ) {
     }
     if( data.partials && data.partials.handlebars ) {
       test.partials = data.partials.handlebars;
+    }
+    if( data.decorators ) {
+      test.decorators = extractHelpers(data.decorators);
     }
     addTest(test);
     

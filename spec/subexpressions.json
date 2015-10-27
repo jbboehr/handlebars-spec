@@ -4,6 +4,7 @@
 		"it": "arg-less helper",
 		"template": "{{foo (bar)}}!",
 		"data": {},
+		"expected": "LOLLOL!",
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -16,7 +17,6 @@
 				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
-		"expected": "LOLLOL!",
 		"compileOptions": {}
 	},
 	{
@@ -26,6 +26,7 @@
 		"data": {
 			"bar": "LOL"
 		},
+		"expected": "val is true",
 		"helpers": {
 			"blog": {
 				"!code": true,
@@ -38,7 +39,6 @@
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "val is true",
 		"compileOptions": {}
 	},
 	{
@@ -52,6 +52,7 @@
 				"bar": "bar!"
 			}
 		},
+		"expected": "val is foo!, true and bar!",
 		"helpers": {
 			"blog": {
 				"!code": true,
@@ -64,7 +65,6 @@
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "val is foo!, true and bar!",
 		"compileOptions": {}
 	},
 	{
@@ -74,6 +74,7 @@
 		"data": {
 			"bar": "LOL"
 		},
+		"expected": "val is true",
 		"helpers": {
 			"blog": {
 				"!code": true,
@@ -86,7 +87,6 @@
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "val is true",
 		"compileOptions": {}
 	},
 	{
@@ -104,6 +104,7 @@
 				"e": "e"
 			}
 		},
+		"expected": "abc-ab",
 		"helpers": {
 			"dash": {
 				"!code": true,
@@ -116,7 +117,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"expected": "abc-ab",
 		"compileOptions": {}
 	},
 	{
@@ -134,6 +134,7 @@
 				"e": "e"
 			}
 		},
+		"expected": "d-ab",
 		"helpers": {
 			"dash": {
 				"!code": true,
@@ -146,7 +147,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"expected": "d-ab",
 		"compileOptions": {}
 	},
 	{
@@ -164,6 +164,7 @@
 				"e": "e"
 			}
 		},
+		"expected": "c-ab",
 		"helpers": {
 			"dash": {
 				"!code": true,
@@ -176,7 +177,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"expected": "c-ab",
 		"compileOptions": {}
 	},
 	{
@@ -194,6 +194,7 @@
 				"e": "e"
 			}
 		},
+		"expected": "ab-c",
 		"helpers": {
 			"dash": {
 				"!code": true,
@@ -206,7 +207,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"expected": "ab-c",
 		"compileOptions": {}
 	},
 	{
@@ -224,6 +224,7 @@
 				"e": "e"
 			}
 		},
+		"expected": "ae-c",
 		"helpers": {
 			"dash": {
 				"!code": true,
@@ -236,7 +237,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"expected": "ae-c",
 		"compileOptions": {}
 	},
 	{
@@ -244,6 +244,7 @@
 		"it": "provides each nested helper invocation its own options hash",
 		"template": "{{equal (equal true true) true}}",
 		"data": {},
+		"expected": "true",
 		"helpers": {
 			"equal": {
 				"!code": true,
@@ -251,7 +252,6 @@
 				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "true",
 		"compileOptions": {},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
@@ -262,6 +262,7 @@
 		"data": {
 			"bar": "LOL"
 		},
+		"expected": "val is true",
 		"helpers": {
 			"blog": {
 				"!code": true,
@@ -274,7 +275,6 @@
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "val is true",
 		"compileOptions": {}
 	},
 	{
@@ -282,6 +282,7 @@
 		"it": "as hashes",
 		"template": "{{blog fun=(equal (blog fun=1) 'val is 1')}}",
 		"data": {},
+		"expected": "val is true",
 		"helpers": {
 			"blog": {
 				"!code": true,
@@ -294,7 +295,6 @@
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
 		},
-		"expected": "val is true",
 		"compileOptions": {}
 	},
 	{
@@ -302,6 +302,7 @@
 		"it": "multiple subexpressions in a hash",
 		"template": "{{input aria-label=(t \"Name\") placeholder=(t \"Example User\")}}",
 		"data": {},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
 		"helpers": {
 			"input": {
 				"!code": true,
@@ -314,7 +315,6 @@
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
 		},
-		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
 		"compileOptions": {}
 	},
 	{
@@ -327,6 +327,7 @@
 				"placeholder": "Example User"
 			}
 		},
+		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
 		"helpers": {
 			"input": {
 				"!code": true,
@@ -339,7 +340,6 @@
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
 		},
-		"expected": "<input aria-label=\"Name\" placeholder=\"Example User\" />",
 		"compileOptions": {}
 	},
 	{
@@ -403,6 +403,7 @@
 				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
+		"expected": "LOLLOL!",
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -410,7 +411,6 @@
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
-		"expected": "LOLLOL!",
 		"compileOptions": {}
 	},
 	{
@@ -420,6 +420,7 @@
 		"data": {
 			"bar": "LOL"
 		},
+		"expected": "LOLLOL!",
 		"exception": true,
 		"helpers": {
 			"foo": {
@@ -428,7 +429,6 @@
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
-		"expected": "LOLLOL!",
 		"compileOptions": {}
 	},
 	{

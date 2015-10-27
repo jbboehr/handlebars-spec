@@ -72,6 +72,21 @@
 	},
 	{
 		"description": "basic context",
+		"it": "compiling with a string context",
+		"template": "{{.}}{{length}}",
+		"data": "bye",
+		"expected": "bye3",
+		"compileOptions": {},
+		"note": "PHP strings do not have properties",
+		"helpers": {
+			"length": {
+				"!code": true,
+				"php": "function($options) { return strlen($options->scope); }"
+			}
+		}
+	},
+	{
+		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
 		"expected": "Goodbye\n\n!",
@@ -648,6 +663,56 @@
 	},
 	{
 		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{\"foo bar\"}} world!",
+		"data": {
+			"foo bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!",
+		"compileOptions": {}
+	},
+	{
+		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{'foo bar'}} world!",
+		"data": {
+			"foo bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!",
+		"compileOptions": {}
+	},
+	{
+		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{\"foo[bar\"}} world!",
+		"data": {
+			"foo[bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!",
+		"compileOptions": {}
+	},
+	{
+		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{\"foo'bar\"}} world!",
+		"data": {
+			"foo'bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!",
+		"compileOptions": {}
+	},
+	{
+		"description": "basic context",
+		"it": "literal references",
+		"template": "Goodbye {{'foo\"bar'}} world!",
+		"data": {
+			"foo\"bar": "beautiful"
+		},
+		"expected": "Goodbye beautiful world!",
+		"compileOptions": {}
+	},
+	{
+		"description": "basic context",
 		"it": "that current context path ({{.}}) doesn't hit helpers",
 		"template": "test: {{.}}",
 		"data": null,
@@ -750,6 +815,7 @@
 				"GOODBYE"
 			]
 		},
+		"expected": "bar goodbyebar Goodbyebar GOODBYE",
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -757,7 +823,6 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"expected": "bar goodbyebar Goodbyebar GOODBYE",
 		"compileOptions": {}
 	},
 	{
@@ -777,6 +842,7 @@
 				}
 			]
 		},
+		"expected": "bar hellobar Hellobar HELLO",
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -784,7 +850,6 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"expected": "bar hellobar Hellobar HELLO",
 		"compileOptions": {}
 	},
 	{
@@ -946,6 +1011,7 @@
 				"php": "function() { return 'bar'; }"
 			}
 		},
+		"expected": "bar",
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -953,7 +1019,6 @@
 				"php": "function($arg) {\n        return $arg;\n      }"
 			}
 		},
-		"expected": "bar",
 		"compileOptions": {}
 	}
 ]
