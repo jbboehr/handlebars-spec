@@ -4211,12 +4211,6 @@
 				"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 			}
 		},
-		"decorators": {
-			"inline": {
-				"!code": true,
-				"javascript": "function (fn, props, container, options) {\n    var ret = fn;\n    if (!props.partials) {\n      props.partials = {};\n      ret = function (context, options) {\n        // Create a new partials stack frame prior to exec.\n        var original = container.partials;\n        container.partials = _utils.extend({}, original, props.partials);\n        var ret = fn(context, options);\n        container.partials = original;\n        return ret;\n      };\n    }\n\n    props.partials[options.args[0]] = options.fn;\n\n    return ret;\n  }"
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
