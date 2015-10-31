@@ -11182,7 +11182,7 @@
 		"it": "registering undefined partial throws an exception",
 		"template": "{{> whatever}}",
 		"exception": true,
-		"message": "Attempting to register a partial as undefined",
+		"message": "Attempting to register a partial called \"undefined_test\" as undefined",
 		"ast": {
 			"type": "Program",
 			"body": [
