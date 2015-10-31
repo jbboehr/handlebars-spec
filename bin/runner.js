@@ -73,6 +73,29 @@ function unstringifyLambdas(data) {
   return data;
 }
 
+function fixSparseArray(data) {
+  if( !data || typeof data !== 'object' ) {
+    return data;
+  }
+  
+  if( '!sparsearray' in data ) {
+    var newData = [];
+    for( var x in data ) {
+      var i;
+      if( !isNaN(i = parseInt(x)) ) {
+        newData[i] = data[x];
+      }
+    }
+    data = newData;
+  } else {
+    for( var x in data ) {
+      data[x] = fixSparseArray(data[x]);
+    }
+  }
+    
+  return data;
+}
+
 
 
 // Test utils
@@ -109,7 +132,7 @@ function prepareTestGeneric(test) {
   // Exception
   spec.exception = test.exception ? true : false;
   // Data
-  spec.data = clone(test.data);
+  spec.data = fixSparseArray(clone(test.data));
   unstringifyLambdas(spec.data);
   // Helpers
   spec.helpers = unstringifyHelpers(test.helpers);

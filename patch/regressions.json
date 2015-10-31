@@ -42,5 +42,15 @@
                 "php": "function($block) { return $block\/*['inverse']*\/->inverse(''); }"
             }
         }
-    }
+    },
+    "regressions-gh-1065: sparse arrays-00": {
+		"data": {
+			"array": {
+				"!sparsearray": true,
+				"1": "foo",
+				"3": "bar"
+			}
+		}
+    },
+    "regressions-gh-1093: undefined helper context-00": null
 }
