@@ -13,6 +13,15 @@
             }
         }
     },
+    "basic context-compiling with a string context-00": {
+        "note": "PHP strings do not have properties",
+        "helpers": {
+            "length": {
+                "!code": true,
+                "php": "function($options) { return strlen($options->scope); }"
+            }
+        }
+    },
     "basic context-depthed block functions with context argument-00": {
         "data": {
             "awesome": {
@@ -145,15 +154,6 @@
         "data": {
             "foo": {
                 "php": "function($value) { return $value; }"
-            }
-        }
-    },
-    "basic context-compiling with a string context-00": {
-        "note": "PHP strings do not have properties",
-        "helpers": {
-            "length": {
-                "!code": true,
-                "php": "function($options) { return strlen($options->scope); }"
             }
         }
     }

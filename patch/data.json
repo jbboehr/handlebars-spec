@@ -118,7 +118,8 @@
             "hello": {
                 "php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
             }
-        }
+        },
+        "decorators": null
     },
     "data-passing in data to a compiled function that expects data - works with helpers-00": {
         "helpers": {
