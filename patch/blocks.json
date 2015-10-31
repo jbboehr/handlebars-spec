@@ -98,7 +98,7 @@
     "registration-allows multiple globals-01": null,
     "registration-allows multiple globals-02": null,
     "registration-allows multiple globals-03": null,
+    "registration-fails with multiple and args-00": null,
     "registration-unregisters-00": null,
-    "registration-unregisters-01": null,
-    "registration-fails with multiple and args-00": null
+    "registration-unregisters-01": null
 }

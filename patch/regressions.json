@@ -16,6 +16,16 @@
             }
         }
     },
+    "regressions-gh-1065: sparse arrays-00": {
+        "data": {
+            "array": {
+                "!sparsearray": true,
+                "1": "foo",
+                "3": "bar"
+            }
+        }
+    },
+    "regressions-gh-1093: undefined helper context-00": null,
     "regressions-gh-837: undefined values for helpers-00": {
         "helpers": {
             "str": {

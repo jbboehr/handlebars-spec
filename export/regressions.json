@@ -13295,12 +13295,11 @@
 		"it": "GH-1065: Sparse arrays",
 		"template": "{{#each array}}{{@index}}{{.}}{{/each}}",
 		"data": {
-			"array": [
-				null,
-				"foo",
-				null,
-				"bar"
-			]
+			"array": {
+				"1": "foo",
+				"3": "bar",
+				"!sparsearray": true
+			}
 		},
 		"expected": "1foo3bar",
 		"compileOptions": {
@@ -16062,6 +16061,671 @@
 				"usePartial": true,
 				"guid": 1,
 				"isSimple": true,
+				"blockParams": 0
+			}
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1099: should support greater than 3 nested levels of inline partials",
+		"template": "{{#> layout}}Outer{{/layout}}",
+		"data": {},
+		"expected": "Outer",
+		"partials": {
+			"layout": "{{#> inner}}Inner{{/inner}}{{> @partial-block }}",
+			"inner": ""
+		},
+		"compileOptions": {
+			"data": true,
+			"blockParams": [],
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "PartialBlockStatement",
+					"name": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"layout"
+						],
+						"original": "layout",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 5
+							},
+							"end": {
+								"line": 1,
+								"column": 11
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [
+							{
+								"type": "ContentStatement",
+								"original": "Outer",
+								"value": "Outer",
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 13
+									},
+									"end": {
+										"line": 1,
+										"column": 18
+									}
+								}
+							}
+						],
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 18
+							}
+						}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					]
+				},
+				{
+					"opcode": "pushContext",
+					"args": []
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						true
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "invokePartial",
+					"args": [
+						false,
+						"layout",
+						""
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"Outer"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 13
+								},
+								"end": {
+									"line": 1,
+									"column": 18
+								}
+							}
+						}
+					],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"usePartial": true,
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		},
+		"partialAsts": {
+			"layout": {
+				"type": "Program",
+				"body": [
+					{
+						"type": "PartialBlockStatement",
+						"name": {
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"inner"
+							],
+							"original": "inner",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 5
+								},
+								"end": {
+									"line": 1,
+									"column": 10
+								}
+							}
+						},
+						"params": [],
+						"program": {
+							"type": "Program",
+							"body": [
+								{
+									"type": "ContentStatement",
+									"original": "Inner",
+									"value": "Inner",
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 12
+										},
+										"end": {
+											"line": 1,
+											"column": 17
+										}
+									}
+								}
+							],
+							"strip": {},
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 12
+								},
+								"end": {
+									"line": 1,
+									"column": 17
+								}
+							}
+						},
+						"openStrip": {
+							"open": false,
+							"close": false
+						},
+						"closeStrip": {
+							"open": false,
+							"close": false
+						},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"type": "PartialStatement",
+						"name": {
+							"type": "PathExpression",
+							"data": true,
+							"depth": 0,
+							"parts": [
+								"partial-block"
+							],
+							"original": "@partial-block",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 31
+								},
+								"end": {
+									"line": 1,
+									"column": 45
+								}
+							}
+						},
+						"params": [],
+						"indent": "",
+						"strip": {
+							"open": false,
+							"close": false
+						},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					}
+				],
+				"strip": {},
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 48
+					}
+				}
+			},
+			"inner": {
+				"type": "Program",
+				"body": [],
+				"strip": {}
+			}
+		},
+		"partialOpcodes": {
+			"layout": {
+				"sourceNode": [],
+				"opcodes": [
+					{
+						"opcode": "getContext",
+						"args": [
+							0
+						]
+					},
+					{
+						"opcode": "pushContext",
+						"args": []
+					},
+					{
+						"opcode": "pushProgram",
+						"args": [
+							0
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"opcode": "pushProgram",
+						"args": [
+							null
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"opcode": "emptyHash",
+						"args": [
+							true
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"opcode": "invokePartial",
+						"args": [
+							false,
+							"inner",
+							""
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"opcode": "append",
+						"args": [],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						}
+					},
+					{
+						"opcode": "getContext",
+						"args": [
+							0
+						]
+					},
+					{
+						"opcode": "pushContext",
+						"args": []
+					},
+					{
+						"opcode": "pushProgram",
+						"args": [
+							null
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					},
+					{
+						"opcode": "pushProgram",
+						"args": [
+							null
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					},
+					{
+						"opcode": "emptyHash",
+						"args": [
+							true
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					},
+					{
+						"opcode": "invokePartial",
+						"args": [
+							false,
+							"@partial-block",
+							""
+						],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					},
+					{
+						"opcode": "append",
+						"args": [],
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 48
+							}
+						}
+					}
+				],
+				"children": [
+					{
+						"sourceNode": [],
+						"opcodes": [
+							{
+								"opcode": "appendContent",
+								"args": [
+									"Inner"
+								],
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 12
+									},
+									"end": {
+										"line": 1,
+										"column": 17
+									}
+								}
+							}
+						],
+						"children": [],
+						"options": {
+							"data": true,
+							"blockParams": [],
+							"knownHelpers": {
+								"helperMissing": true,
+								"blockHelperMissing": true,
+								"each": true,
+								"if": true,
+								"unless": true,
+								"with": true,
+								"log": true,
+								"lookup": true
+							}
+						},
+						"isSimple": true,
+						"blockParams": 0
+					}
+				],
+				"options": {
+					"data": true,
+					"blockParams": [],
+					"knownHelpers": {
+						"helperMissing": true,
+						"blockHelperMissing": true,
+						"each": true,
+						"if": true,
+						"unless": true,
+						"with": true,
+						"log": true,
+						"lookup": true
+					}
+				},
+				"usePartial": true,
+				"guid": 1,
+				"isSimple": false,
+				"blockParams": 0
+			},
+			"inner": {
+				"sourceNode": [],
+				"opcodes": [],
+				"children": [],
+				"options": {
+					"data": true,
+					"blockParams": [],
+					"knownHelpers": {
+						"helperMissing": true,
+						"blockHelperMissing": true,
+						"each": true,
+						"if": true,
+						"unless": true,
+						"with": true,
+						"log": true,
+						"lookup": true
+					}
+				},
+				"isSimple": false,
 				"blockParams": 0
 			}
 		}
