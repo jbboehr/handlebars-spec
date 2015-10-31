@@ -78,18 +78,23 @@ function fixSparseArray(data) {
     return data;
   }
   
+  var x, i;
+  
   if( '!sparsearray' in data ) {
     var newData = [];
-    for( var x in data ) {
-      var i;
-      if( !isNaN(i = parseInt(x)) ) {
-        newData[i] = data[x];
+    for( x in data ) {
+      if( data.hasOwnProperty(x) ) {
+        if( !isNaN(i = parseInt(x)) ) {
+          newData[i] = data[x];
+        }
       }
     }
     data = newData;
   } else {
-    for( var x in data ) {
-      data[x] = fixSparseArray(data[x]);
+    for( x in data ) {
+      if( data.hasOwnProperty(x) ) {
+        data[x] = fixSparseArray(data[x]);
+      }
     }
   }
     
