@@ -569,6 +569,33 @@
 	},
 	{
 		"description": "Tokenizer",
+		"it": "allows escaped literals in []",
+		"template": "{{foo.[bar\\]]}}",
+		"expected": [
+			{
+				"name": "OPEN",
+				"text": "{{"
+			},
+			{
+				"name": "ID",
+				"text": "foo"
+			},
+			{
+				"name": "SEP",
+				"text": "."
+			},
+			{
+				"name": "ID",
+				"text": "[bar]]"
+			},
+			{
+				"name": "CLOSE",
+				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
 		"it": "tokenizes {{.}} as OPEN ID CLOSE",
 		"template": "{{.}}",
 		"expected": [

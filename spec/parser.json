@@ -85,6 +85,18 @@
 	},
 	{
 		"description": "parser",
+		"it": "parses mustaches with escaped [] in a path",
+		"template": "{{[foo[\\]]}}",
+		"expected": "{{ PATH:foo[] [] }}\n"
+	},
+	{
+		"description": "parser",
+		"it": "parses escaped \\\\ in path",
+		"template": "{{[foo\\\\]}}",
+		"expected": "{{ PATH:foo\\ [] }}\n"
+	},
+	{
+		"description": "parser",
 		"it": "parses mustaches with parameters",
 		"template": "{{foo bar}}",
 		"expected": "{{ PATH:foo [PATH:bar] }}\n"

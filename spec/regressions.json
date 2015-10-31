@@ -316,12 +316,11 @@
 		"it": "GH-1065: Sparse arrays",
 		"template": "{{#each array}}{{@index}}{{.}}{{/each}}",
 		"data": {
-			"array": [
-				null,
-				"foo",
-				null,
-				"bar"
-			]
+			"array": {
+				"1": "foo",
+				"3": "bar",
+				"!sparsearray": true
+			}
 		},
 		"expected": "1foo3bar",
 		"compileOptions": {}
@@ -347,6 +346,18 @@
 		"partials": {
 			"doctype": "doctype{{> content}}",
 			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{#> subcontent}}subcontent{{/subcontent}}{{/inline}}{{/doctype}}"
+		},
+		"compileOptions": {}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1099: should support greater than 3 nested levels of inline partials",
+		"template": "{{#> layout}}Outer{{/layout}}",
+		"data": {},
+		"expected": "Outer",
+		"partials": {
+			"layout": "{{#> inner}}Inner{{/inner}}{{> @partial-block }}",
+			"inner": ""
 		},
 		"compileOptions": {}
 	}
