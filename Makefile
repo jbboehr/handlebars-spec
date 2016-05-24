@@ -1,6 +1,7 @@
 
 BASIC_SPECS := basic blocks builtins data helpers partials regressions \
-		 string-params subexpressions track-ids whitespace-control
+		string-params subexpressions strict track-ids \
+		whitespace-control
 SPECS := $(BASIC_SPECS) parser tokenizer
 
 all: spec export

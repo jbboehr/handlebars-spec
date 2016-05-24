@@ -228,7 +228,11 @@ function stripNulls(data) {
   if( typeof data === 'object' ) {
     for( var x in data ) {
       if( data[x] === null ) {
-        delete data[x];
+        if( data['!keepnull'] ) {
+          delete data['!keepnull'];
+        } else {
+          delete data[x];
+        }
       } else if( typeof data === 'object' ) {
         stripNulls(data[x]);
       }
