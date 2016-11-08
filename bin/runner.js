@@ -197,6 +197,7 @@ function runTest(test) {
     case 'helpers':
     case 'partials':
     case 'regressions':
+    case 'strict':
     case 'string-params':
     case 'subexpressions':
     case 'track-ids':
