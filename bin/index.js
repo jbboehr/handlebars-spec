@@ -50,17 +50,17 @@ function addTest(spec) {
     }
     throw new Error('Failed to acquire test index');
   })();
-  
+
   indices.push(name);
-  
+
   var patchFile = path.resolve('./patch/') + '/' + suite + '.json';
   if (fs.existsSync(path.resolve(patchFile))) {
     var patch = require(patchFile);
-    
+
     if (patch.hasOwnProperty(name)) {
       if( patch[name] === null ) {
         // Note: setting to null means to skip the test. These will most
-        // likely be implementation-dependant. Note that it still has to be 
+        // likely be implementation-dependant. Note that it still has to be
         // added to the indices array
         spec = null;
       } else {
@@ -68,7 +68,7 @@ function addTest(spec) {
         // Using nulls in patches to unset things
         stripNulls(spec);
       }
-      
+
       // Track unused patches
       if( unusedPatches === null ) {
         unusedPatches = extend({}, patch);
@@ -87,7 +87,7 @@ function clone(v) {
 }
 
 function detectGlobalHelpers() {
-  var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if', 
+  var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if',
                   'unless', 'with', 'log', 'lookup'];
   var globalHelpers;
   Object.keys(global.handlebarsEnv.helpers).forEach(function(x) {
@@ -246,6 +246,7 @@ function stripNulls(data) {
 
 global.Handlebars    = Handlebars;
 global.handlebarsEnv = Handlebars.create();
+global.sinon = require('sinon');
 
 global.afterEach = function afterEach(fn) {
   afterFns.push(fn);
@@ -260,9 +261,9 @@ global.CompilerContext = {
     // Push template unto context
     context.template = template;
     context.compileOptions = clone(options);
-    
+
     var compiledTemplate = Handlebars.compile(template, options);
-    
+
     return function (data, options) {
       // Note: merging data in the options causes tests to fail, possibly
       // a separate type of data?
@@ -284,7 +285,7 @@ global.CompilerContext = {
         // Push decorators unto context
         context.decorators = options.decorators;
       }
-      
+
       return compiledTemplate(data, options);
     };
   },
@@ -328,15 +329,15 @@ global.equal = global.equals = function equals(actual, expected, message) {
     data        : context.data,
     expected    : expected,
   };
-    
+
   // Remove circular references in data
   removeCircularReferences(spec.data);
-  
+
   // Get message
   if (message) {
     spec.message = message;
   }
-  
+
   // Get options
   if( context.options ) {
     spec.options = context.options;
@@ -344,12 +345,12 @@ global.equal = global.equals = function equals(actual, expected, message) {
       stringifyLambdas(spec.options.data);
     }
   }
-  
+
   // Get compiler options
   if (context.compileOptions) {
     spec.compileOptions = context.compileOptions;
   }
-  
+
   // Get helpers
   if (context.helpers) {
     spec.helpers = extractHelpers(context.helpers);
@@ -359,29 +360,29 @@ global.equal = global.equals = function equals(actual, expected, message) {
   if (context.globalHelpers) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
   }
-  
+
   // Get decorators
   if (context.decorators) {
     spec.decorators = extractHelpers(context.decorators);
   }
-  
+
   // Get global decorators
   if (context.globalDecorators) {
     spec.globalDecorators = extractHelpers(context.globalDecorators);
   }
-  
+
   // If a template is found in the lexer, use it for the spec. This is true in
   // the case of the tokenizer.
   if (!spec.template && Handlebars.Parser.lexer.matched) {
     spec.template = Handlebars.Parser.lexer.matched;
   }
-  
+
   // Convert lambdas to object/strings
   stringifyLambdas(spec.data);
-  
+
   // Add test
   addTest(spec);
-  
+
   // Reset the context
   resetContext();
 };
@@ -398,16 +399,39 @@ global.shouldMatchTokens = function shouldMatchTokens(result /*, tokens*/) {
     template    : context.template,
     expected    : result,
   };
-  
+
   // Add the test
   addTest(spec);
-  
+
   // Reset the context
   resetContext();
 };
 
+global.xit = function () {}; // noop
+
+global.expect = function () {
+  return {
+    to: {
+      equal: function() {
+        console.warn('expect.to.equal called');
+      },
+      be: {
+        true: function () {
+          console.warn('expect.to.be.true called');
+        }
+      }
+    }
+  }
+}
+
+global.expectTemplate = function (template) {
+  return new (require('./expectTemplate'))(template, function (xt) {
+    global.compileWithPartials(xt.template, xt.input, null, xt.expected);
+  })
+};
+
 global.shouldBeToken = function shouldBeToken() {
-  
+
 };
 
 global.shouldCompileTo = function shouldCompileTo(string, hashOrArray, expected) {
@@ -427,7 +451,7 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   var data;
   var compat;
   var compileOptions = extend({}, context.compileOptions);
-  
+
   if (util.isArray(hashOrArray)) {
     data     = hashOrArray[0];
     helpers  = extractHelpers(hashOrArray[1]);
@@ -455,7 +479,7 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
       delete data.decorators;
     }
   }
-  
+
   var spec = {
     description : context.description || context.it,
     it          : context.it,
@@ -463,15 +487,15 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
     data        : data,
     expected    : expected
   };
-  
+
   // Remove circular references in data
   removeCircularReferences(data);
-  
+
   // Check for exception
   if( context.exception ) {
     spec.exception = true;
   }
-  
+
   if (partials) {
     spec.partials = partials;
   }
@@ -487,7 +511,7 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
   if (compat) {
     spec.compat = true;
   }
-  
+
   // Get options
   if( context.options ) {
     spec.options = context.options;
@@ -495,45 +519,45 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
       stringifyLambdas(spec.options.data);
     }
   }
-  
+
   // Get compiler options
   if( compileOptions ) {
     spec.compileOptions = compileOptions;
   }
-  
+
   // Get global partials
   if( context.globalPartials ) {
     spec.globalPartials = context.globalPartials;
   }
-  
+
   // Get global helpers
   if( context.globalHelpers ) {
     spec.globalHelpers = extractHelpers(context.globalHelpers);
   }
-  
+
   // Get global decorators
   if( context.globalDecorators ) {
     spec.globalDecorators = extractHelpers(context.globalDecorators);
   }
-  
+
   // Convert lambdas to object/strings
   stringifyLambdas(spec.data);
   stringifyLambdas(spec.partials);
-  
+
   // Add the test
   addTest(spec);
-  
+
   // Reset the context
   resetContext();
 };
 
 global.shouldThrow = function shouldThrow(callback, error, message) {
   context.exception = true;
-  
+
   try {
     callback();
   } catch (err) {}
-  
+
   delete context.exception;
 
   var spec = {
@@ -542,22 +566,22 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
     template    : context.template,
     exception   : true,
   };
-  
+
   // Add the message
   if (message) {
     spec.message = '' + message;
   }
-  
+
   // If a template is found in the lexer, use it for the spec. This is true in
   // the case of the tokenizer.
   if (!spec.template) {
     spec.template = Handlebars.Parser.lexer.matched +
         Handlebars.Parser.lexer._input;
   }
-  
+
   // Add the test
   addTest(spec);
-  
+
   // Reset the context
   resetContext();
 };
@@ -610,7 +634,7 @@ if( input.match(/bench\/templates/) ) {
       test.decorators = extractHelpers(data.decorators);
     }
     addTest(test);
-    
+
     if( test.mustache ) {
       test = clone(test);
       test.it = x + ' compat';

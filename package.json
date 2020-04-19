@@ -12,9 +12,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.2.x",
+    "commander": "^2.20.3",
     "extend": "^1.2.x",
-    "handlebars": "4.0.5",
-    "jshint": "2.5.x"
+    "handlebars": "4.7.6",
+    "jshint": "2.5.x",
+    "sinon": "^9.0.2"
   }
 }
