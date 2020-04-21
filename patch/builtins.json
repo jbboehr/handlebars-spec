@@ -134,5 +134,7 @@
                 "php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
             }
         }
-    }
+		},
+		"#each-each on iterable-00": null,
+		"#each-each on iterable-01": null
 }

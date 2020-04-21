@@ -1,0 +1,707 @@
+{
+	"function(_undefined,_null,options){return(_undefined===undefined)+\" \"+(_null===null)+\" \"+typeof options};": {
+		"!code": true,
+		"javascript": "function (_undefined, _null, options) {\n            return (_undefined === undefined) + ' ' + (_null === null) + ' ' + (typeof options);\n          }",
+		"php": "function ($_undefined, $_null, $options) {\n            return ($_undefined === null ? 'true' : 'false') . ' ' . ($_null === null ? 'true' : 'false') . ' ' . gettype($options);\n          }"
+	},
+	"function(){return\"undefined!\"};": {
+		"!code": true,
+		"javascript": "function () {\n            return 'undefined!';\n          }",
+		"php": "function() {\n            return 'undefined!';\n          }"
+	},
+	"function(){return\"null!\"};": {
+		"!code": true,
+		"javascript": "function () {\n            return 'null!';\n          }",
+		"php": "function() {\n            return 'null!';\n          }"
+	},
+	"function(){return new Handlebars.SafeString(\"&'\\\\<>\")};": {
+		"!code": true,
+		"javascript": "function () { return new Handlebars.SafeString('&\\'\\\\<>'); }",
+		"php": "function () { return new SafeString('&\\'\\\\<>'); }"
+	},
+	"function(){return\"Awesome\"};": {
+		"!code": true,
+		"javascript": "function () { return 'Awesome'; }",
+		"php": "function () { return \"Awesome\"; }"
+	},
+	"function(){return this.more};": {
+		"!code": true,
+		"javascript": "function () { return this.more; }",
+		"php": "function($options) { return $options->scope['more']; }"
+	},
+	"function(context){return context};": {
+		"!code": true,
+		"javascript": "function (context) { return context; }",
+		"php": "function($context) { return $context; }"
+	},
+	"function(context,options){return options.fn(context)};": {
+		"!code": true,
+		"javascript": "function (context, options) { return options.fn(context); }",
+		"php": "function($context, $options) { return $options->fn($context); }"
+	},
+	"function(options){return options.fn(this)};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.fn(this);\n      }",
+		"php": "function($options) {\n        return $options->fn($options->scope);\n      }"
+	},
+	"function(){return this};": {
+		"!code": true,
+		"javascript": "function () { return this; }",
+		"php": "function($context) { return $context; }"
+	},
+	"function(value){return\"bar \"+value};": {
+		"!code": true,
+		"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
+		"php": "function($value) { return 'bar ' . $value; }"
+	},
+	"function(value){return value};": {
+		"!code": true,
+		"javascript": "function (value) { return value; }",
+		"php": "function($value) { return $value; }"
+	},
+	"function(arg){return\"bar\"+arg};": {
+		"!code": true,
+		"javascript": "function (arg) { return 'bar' + arg; }",
+		"php": "function($arg) { return 'bar' . $arg; }"
+	},
+	"function(){return\"bar\"};": {
+		"!code": true,
+		"javascript": "function () { return 'bar'; }",
+		"php": "function() { return 'bar'; }"
+	},
+	"function(arg){return arg};": {
+		"!code": true,
+		"javascript": "function (arg) { return arg; }",
+		"php": "function() { return 'hello'; }"
+	},
+	"function(){return\"\"};": {
+		"!code": true,
+		"javascript": "function () {\n      return '';\n    }",
+		"php": "function() {\n      return '';\n    }"
+	},
+	"function(){return\"Colors\"};": {
+		"!code": true,
+		"javascript": "function () {\n      return 'Colors';\n    }",
+		"php": "function() {\n      return \"Colors\";\n    }"
+	},
+	"function(value){return\"foo \"+value};": {
+		"!code": true,
+		"javascript": "function (value) {\n      return 'foo ' + value;\n    }",
+		"php": "function($value) {\n      return 'foo ' . $value;\n    }"
+	},
+	"function(options){return options.fn.run};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return options.fn.run;\n        }",
+		"php": "function($options) {\n          return $options->fn->run;\n        }"
+	},
+	"function(fn){fn.run=\"success\";return fn};": {
+		"!code": true,
+		"javascript": "function (fn) {\n          fn.run = 'success';\n          return fn;\n        }",
+		"php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
+	},
+	"function(options){return options.fn()+options.fn.run};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return options.fn() + options.fn.run;\n        }",
+		"php": "function($options) {\n          return $options->fn() . $options->fn->run;\n        }"
+	},
+	"function(fn){fn.run=\"cess\"};": {
+		"!code": true,
+		"javascript": "function (fn) {\n          fn.run = 'cess';\n        }",
+		"php": "function($fn) {\n          $fn->run = 'cess';\n        }"
+	},
+	"function(fn,props,container,options){fn.run=options.fn();return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
+	},
+	"function(fn,props,container,options){fn.run=options.fn.nested+options.fn();return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn.nested + options.fn();\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn->nested . $options->fn();\n          return $fn;\n        }"
+	},
+	"function(fn,props,container,options){props.nested=options.fn()};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          props.nested = options.fn();\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
+	},
+	"function(fn,props,container,options){fn.run=(fn.run||\"\")+options.fn();return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
+	},
+	"function(fn,props,container,options){fn.run=options.args;return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
+	},
+	"function(fn,props,container,options){equals(options.args[0],\"success\");run=true;return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
+	},
+	"function(fn,props,container,options){equals(options.args[0],undefined);run=true;return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
+		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
+	},
+	"function(){return true};": {
+		"!code": true,
+		"javascript": "function () {\n        return true;\n      }",
+		"php": "function() {\n        return true;\n      }"
+	},
+	"function(){return this.world};": {
+		"!code": true,
+		"javascript": "function () {return this.world; }",
+		"php": "function($scope) { return $scope['world']; }"
+	},
+	"function(){return false};": {
+		"!code": true,
+		"javascript": "function () { return false; }",
+		"php": "function() { return false; }"
+	},
+	"function(){return this.foo};": {
+		"!code": true,
+		"javascript": "function () {return this.foo; }",
+		"php": "function($scope) { return isset($scope['foo']) ? $scope['foo'] : null; }"
+	},
+	"function(){return{first:\"Alan\",last:\"Johnson\"}};": {
+		"!code": true,
+		"javascript": "function () { return {first: 'Alan', last: 'Johnson'}; }",
+		"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
+	},
+	"function(options){return options.data&&options.data.exclaim};": {
+		"!code": true,
+		"javascript": "function(options) { return options.data && options.data.exclaim; }",
+		"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+	},
+	"function(){return[{text:\"goodbye\"},{text:\"Goodbye\"},{text:\"GOODBYE\"}]};": {
+		"!code": true,
+		"javascript": "function () { return [{text: 'goodbye'}, {text: 'Goodbye'}, {text: 'GOODBYE'}]; }",
+		"php": "function() { return array(array(\"text\" => \"goodbye\"), array(\"text\" => \"Goodbye\"), array(\"text\" => \"GOODBYE\")); }"
+	},
+	"function(options){return options.data.adjective+\" \"+this.noun};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.data.adjective + ' ' + this.noun;\n      }",
+		"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
+	},
+	"function(options){var frame=Handlebars.createFrame(options.data);for(var prop in options.hash){frame[prop]=options.hash[prop]}return options.fn(this,{data:frame})};": {
+		"!code": true,
+		"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
+		"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
+	},
+	"function(noun){return\"Hello \"+noun};": {
+		"!code": true,
+		"javascript": "function (noun) {\n        return 'Hello ' + noun;\n      }",
+		"php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
+	},
+	"function(options){return\"Hello \"+options.hash.noun};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return 'Hello ' + options.hash.noun;\n      }",
+		"php": "function($options) { return \"Hello \" . $options['hash']['noun']; }"
+	},
+	"function(){return\"hello\"};": {
+		"!code": true,
+		"javascript": "function () { return 'hello'; }",
+		"php": "function() { return 'hello'; }"
+	},
+	"function(options){var frame=Handlebars.createFrame(options.data);for(var prop in options.hash){if(prop in options.hash){frame[prop]=options.hash[prop]}}return options.fn(this,{data:frame})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          if (prop in options.hash) {\n            frame[prop] = options.hash[prop];\n          }\n        }\n        return options.fn(this, {data: frame});\n      }",
+		"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
+	},
+	"function(noun,options){return options.data.adjective+\" \"+noun+(this.exclaim?\"!\":\"\")};": {
+		"!code": true,
+		"javascript": "function (noun, options) {\n        return options.data.adjective + ' ' + noun + (this.exclaim ? '!' : '');\n      }",
+		"php": "function($noun, $options) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
+	},
+	"function(options){return options.data.adjective+\" world\"+(this.exclaim?\"!\":\"\")};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.data.adjective + ' world' + (this.exclaim ? '!' : '');\n      }",
+		"php": "function($options) {\n        return $options['data']['adjective'] . \" world\" . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
+	},
+	"function(options){return options.fn({exclaim:\"?\"})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.fn({exclaim: '?'});\n      }",
+		"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"));\n      }"
+	},
+	"function(thing,options){return options.data.adjective+\" \"+thing+(this.exclaim||\"\")};": {
+		"!code": true,
+		"javascript": "function (thing, options) {\n        return options.data.adjective + ' ' + thing + (this.exclaim || '');\n      }",
+		"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
+	},
+	"function(options){return options.data.accessData+\" \"+options.fn({exclaim:\"?\"})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.data.accessData + ' ' + options.fn({exclaim: '?'});\n      }",
+		"php": "function($options) {\n        return $options['data']['accessData'] . \" \" . $options->fn(array(\"exclaim\" => \"?\"));\n      }"
+	},
+	"function(options){return options.fn({exclaim:\"?\",zomg:\"world\"},{data:{adjective:\"sad\"}})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.fn({exclaim: '?', zomg: 'world'}, { data: {adjective: 'sad'} });\n      }",
+		"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\", \"zomg\" => \"world\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+	},
+	"function(options){return options.fn({exclaim:\"?\"},{data:{adjective:\"sad\"}})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return options.fn({exclaim: '?'}, { data: {adjective: 'sad'} });\n      }",
+		"php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
+	},
+	"function(options){var frame=Handlebars.createFrame(options.data);frame.depth=options.data.depth+1;return options.fn(this,{data:frame})};": {
+		"!code": true,
+		"javascript": "function (options) {\n            var frame = Handlebars.createFrame(options.data);\n            frame.depth = options.data.depth + 1;\n            return options.fn(this, {data: frame});\n          }",
+		"php": "function($options) {\n            $frame = Utils::createFrame($options['data']);\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($options->scope, array(\"data\" => $frame));\n          }"
+	},
+	"function(prefix){return'<a href=\"'+prefix+\"/\"+this.url+'\">'+this.text+\"</a>\"};": {
+		"!code": true,
+		"javascript": "function (prefix) {\n      return '<a href=\"' + prefix + '/' + this.url + '\">' + this.text + '</a>';\n    }",
+		"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
+	},
+	"function(options){return options.fn()};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return options.fn();\n      }",
+		"php": "function($options) {\n          return $options->fn();\n      }"
+	},
+	"function(a,b,c,options){return options.fn()+a+b+c};": {
+		"!code": true,
+		"javascript": "function (a, b, c, options) {\n        return options.fn() + a + b + c;\n    }",
+		"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
+	},
+	"function(options){var out=\"\";var byes=[\"Goodbye\",\"goodbye\",\"GOODBYE\"];for(var i=0,j=byes.length;i<j;i++){out+=byes[i]+\" \"+options.fn(this)+\"! \"}return out};": {
+		"!code": true,
+		"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
+		"php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
+	},
+	"function(options){var out=\"\";var byes=[\"Goodbye\",\"goodbye\",\"GOODBYE\"];for(var i=0,j=byes.length;i<j;i++){out+=byes[i]+\" \"+options.fn({})+\"! \"}return out};": {
+		"!code": true,
+		"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn({}) + '! ';\n      }\n      return out;\n    }",
+		"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
+	},
+	"function(prefix,options){return'<a href=\"'+prefix+\"/\"+this.url+'\">'+options.fn(this)+\"</a>\"};": {
+		"!code": true,
+		"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
+		"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
+	},
+	"function(){};": {
+		"!code": true,
+		"javascript": "function () {}",
+		"php": "function() {}"
+	},
+	"function(options){return options.fn({text:\"GOODBYE\"})};": {
+		"!code": true,
+		"javascript": "function (options) { return options.fn({text: 'GOODBYE'}); }",
+		"php": "function($options) { return $options->fn(array('text' => 'GOODBYE')); }"
+	},
+	"function(options){return\"<form>\"+options.fn(this)+\"</form>\"};": {
+		"!code": true,
+		"javascript": "function (options) { return '<form>' + options.fn(this) + '</form>'; }",
+		"php": "function($options) { $out = '<form>'; $out .= $options->fn($options->scope); return $out . '</form>'; }"
+	},
+	"function link(options){return'<a href=\"/people/'+this.id+'\">'+options.fn(this)+\"</a>\"};": {
+		"!code": true,
+		"javascript": "function link(options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
+		"php": "function($options) {\n    return '<a href=\"/people/'.$options->scope['id'].'\">' . $options->fn($options->scope) . '</a>';\n}"
+	},
+	"function(context,options){return\"<form>\"+options.fn(context)+\"</form>\"};": {
+		"!code": true,
+		"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
+		"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
+	},
+	"function(options){return'<a href=\"'+this.name+'\">'+options.fn(this)+\"</a>\"};": {
+		"!code": true,
+		"javascript": "function (options) { return '<a href=\"' + this.name + '\">' + options.fn(this) + '</a>'; }",
+		"php": "function($options) {\n    $out = '<a href=\"' . $options->scope['name'].'\">';\n    $out .= $options->fn($options->scope);\n    return $out . '</a>';\n}"
+	},
+	"function list(context,options){if(context.length>0){var out=\"<ul>\";for(var i=0,j=context.length;i<j;i++){out+=\"<li>\";out+=options.fn(context[i]);out+=\"</li>\"}out+=\"</ul>\";return out}else{return\"<p>\"+options.inverse(this)+\"</p>\"}};": {
+		"!code": true,
+		"javascript": "function list(context, options) {\n      if (context.length > 0) {\n        var out = '<ul>';\n        for (var i = 0, j = context.length; i < j; i++) {\n          out += '<li>';\n          out += options.fn(context[i]);\n          out += '</li>';\n        }\n        out += '</ul>';\n        return out;\n      } else {\n        return '<p>' + options.inverse(this) + '</p>';\n      }\n    }",
+		"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
+	},
+	"function(){return\"winning\"};": {
+		"php": "function() {\n        return 'winning';\n      }",
+		"!code": true,
+		"javascript": "function () {\n        return 'winning';\n      }"
+	},
+	"function(){return\"fail\"};": {
+		"!code": true,
+		"javascript": "function () { return 'fail'; }",
+		"php": "function() { return 'fail'; }"
+	},
+	"function(){return\"world\"};": {
+		"!code": true,
+		"javascript": "function () { return 'world'; }",
+		"php": "function() { return 'world'; }"
+	},
+	"function(){return\"helpers\"};": {
+		"!code": true,
+		"javascript": "function () { return 'helpers'; }",
+		"php": "function() { return 'helpers'; }"
+	},
+	"function(){return\"helper\"};": {
+		"!code": true,
+		"javascript": "function () { return 'helper'; }",
+		"php": "function() { return 'helper'; }"
+	},
+	"function(){return\"world!\"};": {
+		"!code": true,
+		"javascript": "function () { return 'world!'; }",
+		"php": "function() { return 'world!'; }"
+	},
+	"function(){return\"found it!\"};": {
+		"!code": true,
+		"javascript": "function () { return 'found it!'; }",
+		"php": "function() { return 'found it!'; }"
+	},
+	"function(times,times2){if(typeof times!==\"number\"){times=\"NaN\"}if(typeof times2!==\"number\"){times2=\"NaN\"}return\"Hello \"+times+\" \"+times2+\" times\"};": {
+		"!code": true,
+		"javascript": "function (times, times2) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      if (typeof times2 !== 'number') { times2 = 'NaN'; }\n      return 'Hello ' + times + ' ' + times2 + ' times';\n    }",
+		"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
+	},
+	"function(times){if(typeof times!==\"number\"){times=\"NaN\"}return\"Hello \"+times+\" times\"};": {
+		"!code": true,
+		"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
+		"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
+	},
+	"function(param,times,bool1,bool2){if(typeof times!==\"number\"){times=\"NaN\"}if(typeof bool1!==\"boolean\"){bool1=\"NaB\"}if(typeof bool2!==\"boolean\"){bool2=\"NaB\"}return\"Hello \"+param+\" \"+times+\" times: \"+bool1+\" \"+bool2};": {
+		"!code": true,
+		"javascript": "function (param, times, bool1, bool2) {\n        if (typeof times !== 'number') { times = 'NaN'; }\n        if (typeof bool1 !== 'boolean') { bool1 = 'NaB'; }\n        if (typeof bool2 !== 'boolean') { bool2 = 'NaB'; }\n        return 'Hello ' + param + ' ' + times + ' times: ' + bool1 + ' ' + bool2;\n      }",
+		"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
+	},
+	"function(param){return\"Hello \"+param};": {
+		"!code": true,
+		"javascript": "function (param) { return 'Hello ' + param; }",
+		"php": "function($param) { return \"Hello \" . $param; }"
+	},
+	"function(cruel,world){return\"Goodbye \"+cruel+\" \"+world};": {
+		"!code": true,
+		"javascript": "function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }",
+		"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
+	},
+	"function(cruel,world,options){return options.fn({greeting:\"Goodbye\",adj:cruel,noun:world})};": {
+		"!code": true,
+		"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});\n      }",
+		"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
+	},
+	"function(options){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world+\" \"+options.hash.times+\" TIMES\"};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world + ' ' + options.hash.times + ' TIMES';\n        }",
+		"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
+	},
+	"function(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+		"!code": true,
+		"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
+		"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+	},
+	"function(options){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)+\" \"+options.hash.times+\" TIMES\"};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
+		"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
+	},
+	"function(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+		"!code": true,
+		"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
+		"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+	},
+	"function(mesg,options){if(options.name===\"link_to\"){return new Handlebars.SafeString(\"<a>\"+mesg+\"</a>\")}};": {
+		"!code": true,
+		"javascript": "function (mesg, options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>' + mesg + '</a>');\n          }\n        }",
+		"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
+	},
+	"function(options){if(options.name===\"link_to\"){return new Handlebars.SafeString(\"<a>winning</a>\")}};": {
+		"!code": true,
+		"javascript": "function (options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>winning</a>');\n          }\n        }",
+		"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
+	},
+	"function(){return\"foo\"};": {
+		"!code": true,
+		"javascript": "function () {\n          return 'foo';\n        }",
+		"php": "function() {\n          return 'foo';\n        }"
+	},
+	"function(arg){return typeof arg};": {
+		"!code": true,
+		"javascript": "function (arg) { return typeof arg; }",
+		"php": "function($arg) { return $arg === null ? 'undefined' : gettype($arg); }"
+	},
+	"function(){return this.bar};": {
+		"!code": true,
+		"javascript": "function () { return this.bar; }",
+		"php": "function($context) { return $context['bar']; }"
+	},
+	"function(){return this.truthiness()};": {
+		"!code": true,
+		"javascript": "function () { return this.truthiness(); }",
+		"php": "function($options) { return $options->scope['truthiness'](); }"
+	},
+	"function(){return\"missing: \"+arguments[arguments.length-1].name};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
+		"php": "function() {\n        $arguments = func_get_args();\n        return 'missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+	},
+	"function(){return\"helper missing: \"+arguments[arguments.length-1].name};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'helper missing: ' + arguments[arguments.length - 1].name;\n      }",
+		"php": "function() {\n        $arguments = func_get_args();\n        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];\n      }"
+	},
+	"function(){return\"ran: \"+arguments[arguments.length-1].name};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
+		"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
+	},
+	"function(){return this.goodbye.toUpperCase()};": {
+		"!code": true,
+		"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
+		"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
+	},
+	"function(world){return\"cruel \"+world.toUpperCase()};": {
+		"!code": true,
+		"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
+		"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+	},
+	"function(options){return this.goodbye.toUpperCase()+options.fn(this)};": {
+		"!code": true,
+		"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
+		"php": "function($options) {\n          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);\n        }"
+	},
+	"function(options){equals(options.fn.blockParams,1);return options.fn({value:\"bar\"},{blockParams:[1,2]})};": {
+		"!code": true,
+		"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
+		"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+	},
+	"function(options){equals(options.fn.blockParams,1);return options.fn({},{blockParams:[1,2]})};": {
+		"!code": true,
+		"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({}, {blockParams: [1, 2]});\n        }",
+		"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
+	},
+	"function(options){equals(options.fn.blockParams,1);return options.fn(this,{blockParams:[1,2]})};": {
+		"!code": true,
+		"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
+		"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
+	},
+	"function(options){if(typeof value===\"undefined\"){value=1}return options.fn({value:\"bar\"},{blockParams:options.fn.blockParams===1?[value++,value++]:undefined})};": {
+		"!code": true,
+		"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
+		"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
+	},
+	"function(){return\"dude\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'dude';\n      }",
+		"php": "function() {\n        return 'dude';\n      }"
+	},
+	"function(){return\"missing\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'missing';\n      }",
+		"php": "function() {\n        return 'missing';\n      }"
+	},
+	"function partial(context){return context.name+\" (\"+context.url+\") \"};": {
+		"!code": true,
+		"javascript": "function partial(context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
+		"php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
+	},
+	"function(){return\"blah\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'blah';\n      }",
+		"php": "function() {\n        return \"blah\";\n      }"
+	},
+	"function(block){return block.fn(\"\")};": {
+		"!code": true,
+		"javascript": "function (block) { return block.fn(''); }",
+		"php": "function($block) { return $block/*['fn']*/->fn(''); }"
+	},
+	"function(block){return block.inverse(\"\")};": {
+		"!code": true,
+		"javascript": "function (block) { return block.inverse(''); }",
+		"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
+	},
+	"function(value){return value+\"\"};": {
+		"!code": true,
+		"javascript": "function (value) { return value + ''; }",
+		"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
+	},
+	"function(options){return new Handlebars.SafeString(options.fn())};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return new Handlebars.SafeString(options.fn());\n      }",
+		"php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
+	},
+	"function(options){equals(\"value\"in options.hash,true);equals(options.hash.value,undefined);return\"success\"};": {
+		"!code": true,
+		"javascript": "function (options) {\n          equals('value' in options.hash, true);\n          equals(options.hash.value, undefined);\n          return 'success';\n        }",
+		"php": "function () {\n          return 'success';\n        }"
+	},
+	"function(passiveVoice,noun){return\"HELP ME MY BOSS \"+passiveVoice+\" \"+noun};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun;\n      }",
+		"php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
+	},
+	"function(passiveVoice,noun,options){return\"HELP ME MY BOSS \"+passiveVoice+\" \"+noun+\": \"+options.fn(this)};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, options) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
+		"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
+	},
+	"function(desire,noun,options){return\"STOP ME FROM READING HACKER NEWS I \"+options.contexts[0][desire]+\" \"+noun};": {
+		"!code": true,
+		"javascript": "function (desire, noun, options) {\n        return 'STOP ME FROM READING HACKER NEWS I ' +\n                options.contexts[0][desire] + ' ' + noun;\n      }",
+		"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun;\n      }"
+	},
+	"function(context,options){return options.fn(options.contexts[0][context])};": {
+		"!code": true,
+		"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
+		"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
+	},
+	"function(exclamation,options){return\"Helper called\"};": {
+		"!code": true,
+		"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
+		"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+	},
+	"function(withContext,options){return options.fn(options.contexts[0][withContext])};": {
+		"!code": true,
+		"javascript": "function (withContext, options) {\n        return options.fn(options.contexts[0][withContext]);\n      }",
+		"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
+	},
+	"function(desire,noun,options){return\"STOP ME FROM READING HACKER NEWS I \"+options.contexts[0][desire]+\" \"+noun+\" \"+options.fn(this)};": {
+		"!code": true,
+		"javascript": "function (desire, noun, options) {\n        return 'STOP ME FROM READING HACKER NEWS I ' +\n                options.contexts[0][desire] + ' ' + noun + ' ' +\n                options.fn(this);\n      }",
+		"php": "function($desire, $noun, $options) {\n        return \"STOP ME FROM READING HACKER NEWS I \" .\n                $options['contexts'][0][$desire] . \" \" . $noun . \" \" .\n                $options->fn($options->scope);\n      }"
+	},
+	"function(){return\"WITH\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'WITH';\n      }",
+		"php": "function($options) {\n        return \"WITH\";\n      }"
+	},
+	"function(){return\"VIEW\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'VIEW';\n      }",
+		"php": "function() {\n        return \"VIEW\";\n      }"
+	},
+	"function(bar,options){equal(bar,\"@bar\");equal(options.types[0],\"PathExpression\");return\"Foo!\"};": {
+		"!code": true,
+		"javascript": "function (bar, options) {\n        equal(bar, '@bar');\n        equal(options.types[0], 'PathExpression');\n        return 'Foo!';\n      }",
+		"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
+	},
+	"function(val){return val+val};": {
+		"!code": true,
+		"javascript": "function (val) {\n        return val + val;\n      }",
+		"php": "function($val) {\n        return $val . $val;\n      }"
+	},
+	"function(){return\"LOL\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'LOL';\n      }",
+		"php": "function() {\n        return \"LOL\";\n      }"
+	},
+	"function(val){return\"val is \"+val};": {
+		"!code": true,
+		"javascript": "function (val) {\n        return 'val is ' + val;\n      }",
+		"php": "function($val) {\n        return \"val is \" . (is_bool($val) ? ($val ? 'true' : 'false') : $val);\n      }"
+	},
+	"function(x,y){return x===y};": {
+		"!code": true,
+		"javascript": "function (x, y) {\n        return x === y;\n      }",
+		"php": "function($x, $y) {\n        return $x === $y;\n      }"
+	},
+	"function(val,that,theOther){return\"val is \"+val+\", \"+that+\" and \"+theOther};": {
+		"!code": true,
+		"javascript": "function (val, that, theOther) {\n        return 'val is ' + val + ', ' + that + ' and ' + theOther;\n      }",
+		"php": "function($val, $that, $theOther) {\n        return \"val is \" . $val . ', ' . (is_bool($that) ? ($that ? 'true' : 'false') : $that) . ' and ' . $theOther;\n      }"
+	},
+	"function(a,b){return a+\"-\"+b};": {
+		"!code": true,
+		"javascript": "function (a, b) {\n        return a + '-' + b;\n      }",
+		"php": "function($a, $b) {\n        return $a . \"-\" . $b;\n      }"
+	},
+	"function(a,b){return a+b};": {
+		"!code": true,
+		"javascript": "function (a, b) {\n        return a + b;\n      }",
+		"php": "function($a, $b) {\n        return $a . $b;\n      }"
+	},
+	"function(x,y,options){return x===y};": {
+		"!code": true,
+		"javascript": "function (x, y, options) {\n        return x === y;\n      }",
+		"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+	},
+	"function(options){return\"val is \"+options.hash.fun};": {
+		"!code": true,
+		"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
+		"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
+	},
+	"function(options){var hash=options.hash;var ariaLabel=Handlebars.Utils.escapeExpression(hash[\"aria-label\"]);var placeholder=Handlebars.Utils.escapeExpression(hash.placeholder);return new Handlebars.SafeString('<input aria-label=\"'+ariaLabel+'\" placeholder=\"'+placeholder+'\" />')};": {
+		"!code": true,
+		"javascript": "function (options) {\n        var hash = options.hash;\n        var ariaLabel = Handlebars.Utils.escapeExpression(hash['aria-label']);\n        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);\n        return new Handlebars.SafeString('<input aria-label=\"' + ariaLabel + '\" placeholder=\"' + placeholder + '\" />');\n      }",
+		"php": "function($options) {\n        $hash        = $options['hash'];\n        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));\n        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));\n        return new SafeString('<input aria-label=\"' . $ariaLabel . '\" placeholder=\"' . $placeholder . '\" />');\n      }"
+	},
+	"function(defaultString){return new Handlebars.SafeString(defaultString)};": {
+		"!code": true,
+		"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
+		"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
+	},
+	"function(a,b,options){equals(a,\"foo\");equals(options.types.length,2,\"string params for outer helper processed correctly\");equals(options.types[0],\"SubExpression\",\"string params for outer helper processed correctly\");equals(options.types[1],\"PathExpression\",\"string params for outer helper processed correctly\");return a+b};": {
+		"!code": true,
+		"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, 'string params for outer helper processed correctly');\n        equals(options.types[0], 'SubExpression', 'string params for outer helper processed correctly');\n        equals(options.types[1], 'PathExpression', 'string params for outer helper processed correctly');\n        return a + b;\n      }",
+		"php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
+	},
+	"function(a,options){equals(options.types.length,1,\"string params for inner helper processed correctly\");equals(options.types[0],\"PathExpression\",\"string params for inner helper processed correctly\");return a};": {
+		"!code": true,
+		"javascript": "function (a, options) {\n        equals(options.types.length, 1, 'string params for inner helper processed correctly');\n        equals(options.types[0], 'PathExpression', 'string params for inner helper processed correctly');\n        return a;\n      }",
+		"php": "function($a, $options) {\n        return $a;\n      }"
+	},
+	"function(){return\"BORK\"};": {
+		"!code": true,
+		"javascript": "function () {\n        return 'BORK';\n      }",
+		"php": "function() {\n        return \"BORK\";\n      }"
+	},
+	"function(passiveVoice,noun,options){equal(options.ids,undefined);equal(options.hashIds,undefined);return\"success\"};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }",
+		"php": "function($passiveVoice, $noun, $options) {\n        return 'success';\n      }"
+	},
+	"function(passiveVoice,noun,options){equal(options.ids[0],\"is.a\");equal(options.ids[1],\"slave.driver\");return\"HELP ME MY BOSS \"+options.ids[0]+\":\"+passiveVoice+\" \"+options.ids[1]+\":\"+noun};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+		"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+	},
+	"function(options){equal(options.hashIds.bat,\"is.a\");equal(options.hashIds.baz,\"slave.driver\");return\"HELP ME MY BOSS \"+options.hashIds.bat+\":\"+options.hash.bat+\" \"+options.hashIds.baz+\":\"+options.hash.baz};": {
+		"!code": true,
+		"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
+		"php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
+	},
+	"function(passiveVoice,noun,thiz,thiz2,options){equal(options.ids[0],\"is.a\");equal(options.ids[1],\"../slave.driver\");equal(options.ids[2],\"is.a\");equal(options.ids[3],\"\");return\"HELP ME MY BOSS \"+options.ids[0]+\":\"+passiveVoice+\" \"+options.ids[1]+\":\"+noun};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, thiz, thiz2, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n        equal(options.ids[2], 'is.a');\n        equal(options.ids[3], '');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+		"php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
+	},
+	"function(passiveVoice,noun,options){equal(options.ids[0],\"@is.a\");equal(options.ids[1],\"@slave.driver\");return\"HELP ME MY BOSS \"+options.ids[0]+\":\"+passiveVoice+\" \"+options.ids[1]+\":\"+noun};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+		"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+	},
+	"function(passiveVoice,noun,options){equal(options.ids[0],null);equal(options.ids[1],null);equal(options.hashIds.key,null);return\"HELP ME MY BOSS \"+passiveVoice+\" \"+noun+\" \"+options.hash.key};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
+		"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
+	},
+	"function(){return 1};": {
+		"!code": true,
+		"javascript": "function () { return 1; }",
+		"php": "function() { return 1; }"
+	},
+	"function(passiveVoice,options){equal(options.ids[0],true);return\"HELP ME MY BOSS \"+passiveVoice};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return 'HELP ME MY BOSS ' + passiveVoice;\n      }",
+		"php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
+	},
+	"function(options){var blockParams=[this.is];blockParams.path=[\"zomg\"];return options.fn(this,{blockParams:blockParams})};": {
+		"!code": true,
+		"javascript": "function (options) {\n        var blockParams = [this.is];\n        blockParams.path = ['zomg'];\n        return options.fn(this, {blockParams: blockParams});\n      }",
+		"php": "function($options) {\n        $blockParams = array($options->scope['is']);\n        $blockParams['path'] = array('zomg');\n        return $options->fn($options->scope, array('blockParams' => $blockParams));\n      }"
+	},
+	"function(passiveVoice,noun,blah,options){equal(options.ids[0],\"zomg.a\");equal(options.ids[1],\"slave.driver\");equal(options.ids[2],\"zomg\");return\"HELP ME MY BOSS \"+options.ids[0]+\":\"+passiveVoice+\" \"+options.ids[1]+\":\"+noun};": {
+		"!code": true,
+		"javascript": "function (passiveVoice, noun, blah, options) {\n        equal(options.ids[0], 'zomg.a');\n        equal(options.ids[1], 'slave.driver');\n        equal(options.ids[2], 'zomg');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
+		"php": "function($passiveVoice, $noun, $blah, $options) {\n        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;\n      }"
+	},
+	"function(name,options){return name+\":\"+options.ids[0]+\"\\n\"};": {
+		"!code": true,
+		"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
+		"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
+	},
+	"function(name,options){return name+\":\"+options.data.contextPath+\"\\n\"};": {
+		"!code": true,
+		"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
+		"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+	}
+}

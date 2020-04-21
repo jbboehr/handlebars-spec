@@ -1,4 +1,5 @@
 
+"use strict";
 
 function ExpectTemplate(template, cb) {
   this.template = template;
@@ -21,6 +22,6 @@ ExpectTemplate.prototype = {
     this.cb(this);
     return true;
   },
-}
+};
 
 module.exports = ExpectTemplate;

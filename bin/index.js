@@ -9,6 +9,11 @@ var util = require('util');
 var extend = require('extend');
 var Handlebars = require('handlebars');
 var pkg = require('../package.json');
+var ExpectTemplate = require('./expectTemplate');
+
+var normalizeJavascript = require('../src/utils').normalizeJavascript;
+var clone = require('../src/utils').clone;
+var jsToCode = require('../src/utils').jsToCode;
 
 program
   .version(pkg.version)
@@ -27,6 +32,7 @@ if( !exists ) {
 
 var tests   = [];   // Array containg the actual specs
 var indices = [];   // Temp array for auto-incrementing test indices
+var oldIndices = [];
 var context = {};   // Current test context
 var afterFns = [];  // Functions to execute after a test
 var beforeFns = []; // Functions to execute before a test
@@ -40,40 +46,62 @@ function addTest(spec) {
     return;
   }
 
-  var key = (spec.description + '-' + spec.it).toLowerCase();
+  var key = (spec.description + ' - ' + spec.it).toLowerCase();
+  var oldPatchKey = (spec.oldDescription + '-' + spec.it).toLowerCase();
   var name = (function() {
     for (var i = 0; i < 99; i++) {
-      var name = key + '-' + ('0' + i).slice(-2);
-      if (indices.indexOf(name) === -1) {
-        return name;
+      var n = key + ' - ' + ('0' + i).slice(-2);
+      if (indices.indexOf(n) === -1) {
+        return n;
+      }
+    }
+    throw new Error('Failed to acquire test index');
+  })();
+  var oldName = (function() {
+    for (var i = 0; i < 99; i++) {
+      var n = oldPatchKey + '-' + ('0' + i).slice(-2);
+      if (oldIndices.indexOf(n) === -1) {
+        return n;
       }
     }
     throw new Error('Failed to acquire test index');
   })();
 
   indices.push(name);
+  oldIndices.push(oldName);
 
   var patchFile = path.resolve('./patch/') + '/' + suite + '.json';
   if (fs.existsSync(path.resolve(patchFile))) {
-    var patch = require(patchFile);
+    var patchData = require(patchFile);
+    var patch;
 
-    if (patch.hasOwnProperty(name)) {
-      if( patch[name] === null ) {
+    if (patchData.hasOwnProperty(oldName)) {
+      patch = patchData[oldName];
+      console.warn("Old patch should be renamed: " + JSON.stringify(oldName) + " to " + JSON.stringify(name));
+    }
+
+    else if (patchData.hasOwnProperty(name)) {
+      patch = patchData[name];
+    }
+
+    if (patch) {
+      if( patch === null ) {
         // Note: setting to null means to skip the test. These will most
         // likely be implementation-dependant. Note that it still has to be
         // added to the indices array
         spec = null;
       } else {
-        spec = extend(true, spec, patch[name]);
+        spec = extend(true, spec, patch);
         // Using nulls in patches to unset things
         stripNulls(spec);
       }
 
       // Track unused patches
       if( unusedPatches === null ) {
-        unusedPatches = extend({}, patch);
+        unusedPatches = extend({}, patchData);
       }
       delete unusedPatches[name];
+      delete unusedPatches[oldName];
     }
   }
 
@@ -82,9 +110,6 @@ function addTest(spec) {
   }
 }
 
-function clone(v) {
-    return v === undefined ? undefined : JSON.parse(JSON.stringify(v));
-}
 
 function detectGlobalHelpers() {
   var builtins = ['helperMissing', 'blockHelperMissing', 'each', 'if',
@@ -153,7 +178,7 @@ function extractHelpers(data) {
 
   Object.keys(data).forEach(function (el) {
     if (isFunction(data[el])) {
-      helpers[el] = { "!code" : true, javascript: '' + data[el] };
+      helpers[el] = jsToCode(data[el]);
     }
   });
 
@@ -214,10 +239,7 @@ function stringifyLambdas(data) {
     if( data[x] instanceof Array ) {
       stringifyLambdas(data[x]);
     } else if( typeof data[x] === 'function' || data[x] instanceof Function ) {
-      data[x] = {
-        '!code' : true,
-        'javascript' : data[x].toString()
-      };
+      data[x] = jsToCode(data[x]);
     } else if( typeof data[x] === 'object' ) {
       stringifyLambdas(data[x]);
     }
@@ -297,11 +319,20 @@ global.CompilerContext = {
   }
 };
 
+var descriptionStack = [];
+
 global.describe = function describe(description, next) {
-  // Push suite description unto context
-  context.description = description;
+  descriptionStack.push(description);
+  context.description = descriptionStack.join(' - ');
+  context.oldDescription = description;
   next();
-  delete context.description;
+  descriptionStack.pop();
+  delete context.oldDescription;
+
+  // Push suite description unto context
+  // context.description = description;
+  // next();
+  // delete context.description;
 };
 
 global.it = function it(description, next) {
@@ -314,6 +345,10 @@ global.it = function it(description, next) {
   // Test
   next();
   // Remove test spec from context
+  if (context.extraEquals) {
+    console.warn("extra equals called in unhandled block: " + context.it + ": ", context.extraEquals);
+    delete context.extraEquals;
+  }
   delete context.it;
   // Call after fns
   afterFns.forEach(function(fn) {
@@ -322,8 +357,23 @@ global.it = function it(description, next) {
 };
 
 global.equal = global.equals = function equals(actual, expected, message) {
+  if (!actual && !expected && !message) {
+    return;
+  }
+
+  if (!context.extraEquals) {
+    context.extraEquals = [];
+  }
+  context.extraEquals.push({
+    // actual,
+    expected,
+    message,
+  });
+  //console.warn('equals called in "' + descriptionStack.join(' - ') + ' - ' + context.it + '"');
+  /*
   var spec = {
     description : context.description || context.it,
+    oldDescription: context.oldDescription,
     it          : context.it,
     template    : context.template,
     data        : context.data,
@@ -385,6 +435,7 @@ global.equal = global.equals = function equals(actual, expected, message) {
 
   // Reset the context
   resetContext();
+  */
 };
 
 global.tokenize = function tokenize(template) {
@@ -392,12 +443,20 @@ global.tokenize = function tokenize(template) {
   return global.originalTokenize(template);
 };
 
-global.shouldMatchTokens = function shouldMatchTokens(result /*, tokens*/) {
+global.shouldMatchTokens = function shouldMatchTokens(expected /*, tokens*/) {
+  let { description, oldDescription, it, template, extraEquals } = context;
+
+  if (extraEquals && Object.keys(extraEquals).length >= 0) {
+    console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
+    delete context.extraEquals;
+  }
+
   var spec = {
-    description : context.description || context.it,
-    it          : context.it,
-    template    : context.template,
-    expected    : result,
+    description,
+    oldDescription,
+    it,
+    template,
+    expected,
   };
 
   // Add the test
@@ -421,13 +480,13 @@ global.expect = function () {
         }
       }
     }
-  }
-}
+  };
+};
 
 global.expectTemplate = function (template) {
-  return new (require('./expectTemplate'))(template, function (xt) {
+  return new ExpectTemplate(template, function (xt) {
     global.compileWithPartials(xt.template, xt.input, null, xt.expected);
-  })
+  });
 };
 
 global.shouldBeToken = function shouldBeToken() {
@@ -480,12 +539,20 @@ global.compileWithPartials = function compileWithPartials(string, hashOrArray, p
     }
   }
 
+  let { description, oldDescription, it, extraEquals } = context;
+
+  if (extraEquals && Object.keys(extraEquals).length >= 0) {
+    console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
+    delete context.extraEquals;
+  }
+
   var spec = {
-    description : context.description || context.it,
-    it          : context.it,
+    description,
+    oldDescription,
+    it,
     template    : string,
-    data        : data,
-    expected    : expected
+    data,
+    expected,
   };
 
   // Remove circular references in data
@@ -560,11 +627,19 @@ global.shouldThrow = function shouldThrow(callback, error, message) {
 
   delete context.exception;
 
+  let { description, oldDescription, it, template, extraEquals } = context;
+
+  if (extraEquals && Object.keys(extraEquals).length >= 0) {
+    console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
+    delete context.extraEquals;
+  }
+
   var spec = {
-    description : context.description || context.it,
-    it          : context.it,
-    template    : context.template,
-    exception   : true,
+    description,
+    oldDescription,
+    it,
+    template,
+    exception: true,
   };
 
   // Add the message
