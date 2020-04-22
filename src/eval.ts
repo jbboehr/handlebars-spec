@@ -3,7 +3,7 @@
 
 var _utils = require('handlebars').Utils;
 
-function safeEval(templateSpec) {
+export function safeEval(templateSpec: string): any {
   try {
     /* jshint ignore:start */
     return eval('(' + templateSpec + ')');
@@ -13,5 +13,3 @@ function safeEval(templateSpec) {
     throw err;
   }
 }
-
-module.exports = safeEval;

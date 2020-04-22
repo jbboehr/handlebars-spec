@@ -76,72 +76,72 @@
 	},
 	"function(){return\"\"};": {
 		"!code": true,
-		"javascript": "function () {\n      return '';\n    }",
+		"javascript": "function() {\n      return '';\n    }",
 		"php": "function() {\n      return '';\n    }"
 	},
 	"function(){return\"Colors\"};": {
 		"!code": true,
-		"javascript": "function () {\n      return 'Colors';\n    }",
+		"javascript": "function() {\n      return 'Colors';\n    }",
 		"php": "function() {\n      return \"Colors\";\n    }"
 	},
 	"function(value){return\"foo \"+value};": {
 		"!code": true,
-		"javascript": "function (value) {\n      return 'foo ' + value;\n    }",
+		"javascript": "function(value) {\n      return 'foo ' + value;\n    }",
 		"php": "function($value) {\n      return 'foo ' . $value;\n    }"
 	},
 	"function(options){return options.fn.run};": {
 		"!code": true,
-		"javascript": "function (options) {\n          return options.fn.run;\n        }",
+		"javascript": "function(options) {\n          return options.fn.run;\n        }",
 		"php": "function($options) {\n          return $options->fn->run;\n        }"
 	},
 	"function(fn){fn.run=\"success\";return fn};": {
 		"!code": true,
-		"javascript": "function (fn) {\n          fn.run = 'success';\n          return fn;\n        }",
+		"javascript": "function(fn) {\n          fn.run = 'success';\n          return fn;\n        }",
 		"php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
 	},
 	"function(options){return options.fn()+options.fn.run};": {
 		"!code": true,
-		"javascript": "function (options) {\n          return options.fn() + options.fn.run;\n        }",
+		"javascript": "function(options) {\n          return options.fn() + options.fn.run;\n        }",
 		"php": "function($options) {\n          return $options->fn() . $options->fn->run;\n        }"
 	},
 	"function(fn){fn.run=\"cess\"};": {
 		"!code": true,
-		"javascript": "function (fn) {\n          fn.run = 'cess';\n        }",
+		"javascript": "function(fn) {\n          fn.run = 'cess';\n        }",
 		"php": "function($fn) {\n          $fn->run = 'cess';\n        }"
 	},
 	"function(fn,props,container,options){fn.run=options.fn();return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
 	},
 	"function(fn,props,container,options){fn.run=options.fn.nested+options.fn();return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn.nested + options.fn();\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          fn.run = options.fn.nested + options.fn();\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn->nested . $options->fn();\n          return $fn;\n        }"
 	},
 	"function(fn,props,container,options){props.nested=options.fn()};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          props.nested = options.fn();\n        }",
+		"javascript": "function(fn, props, container, options) {\n          props.nested = options.fn();\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
 	},
 	"function(fn,props,container,options){fn.run=(fn.run||\"\")+options.fn();return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
 	},
 	"function(fn,props,container,options){fn.run=options.args;return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
 	},
 	"function(fn,props,container,options){equals(options.args[0],\"success\");run=true;return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
 	},
 	"function(fn,props,container,options){equals(options.args[0],undefined);run=true;return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
+		"javascript": "function(fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
 	},
 	"function(){return true};": {
