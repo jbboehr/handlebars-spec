@@ -17,8 +17,7 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {}
+		"expected": "goodbye! Goodbye! GOODBYE! cruel world!"
 	},
 	{
 		"description": "blocks",
@@ -28,8 +27,7 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "blocks",
@@ -49,8 +47,7 @@
 			],
 			"world": "world"
 		},
-		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE",
-		"compileOptions": {}
+		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE"
 	},
 	{
 		"description": "blocks",
@@ -91,8 +88,7 @@
 			],
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "blocks",
@@ -102,8 +98,7 @@
 			"goodbyes": [],
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "blocks",
@@ -123,8 +118,7 @@
 				}
 			]
 		},
-		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! ",
-		"compileOptions": {}
+		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
 	},
 	{
 		"description": "blocks",
@@ -144,8 +138,7 @@
 				}
 			]
 		},
-		"expected": "AlanAlanAlanAlanAlanAlan",
-		"compileOptions": {}
+		"expected": "AlanAlanAlanAlanAlanAlan"
 	},
 	{
 		"description": "blocks",
@@ -170,8 +163,7 @@
 				}
 			]
 		},
-		"expected": "Goodbye cruel sad OMG!",
-		"compileOptions": {}
+		"expected": "Goodbye cruel sad OMG!"
 	},
 	{
 		"description": "blocks",
@@ -199,8 +191,7 @@
 		"it": "inverted sections with unset value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {},
-		"expected": "Right On!",
-		"compileOptions": {}
+		"expected": "Right On!"
 	},
 	{
 		"description": "inverted sections",
@@ -209,8 +200,7 @@
 		"data": {
 			"goodbyes": false
 		},
-		"expected": "Right On!",
-		"compileOptions": {}
+		"expected": "Right On!"
 	},
 	{
 		"description": "inverted sections",
@@ -219,8 +209,7 @@
 		"data": {
 			"goodbyes": []
 		},
-		"expected": "Right On!",
-		"compileOptions": {}
+		"expected": "Right On!"
 	},
 	{
 		"description": "inverted sections",
@@ -229,8 +218,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people",
-		"compileOptions": {}
+		"expected": "No people"
 	},
 	{
 		"description": "inverted sections",
@@ -239,8 +227,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people",
-		"compileOptions": {}
+		"expected": "No people"
 	},
 	{
 		"description": "inverted sections",
@@ -249,8 +236,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people",
-		"compileOptions": {}
+		"expected": "No people"
 	},
 	{
 		"description": "inverted sections",
@@ -259,8 +245,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people",
-		"compileOptions": {}
+		"expected": "No people"
 	},
 	{
 		"description": "inverted sections",
@@ -269,8 +254,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"exception": true,
-		"compileOptions": {}
+		"exception": true
 	},
 	{
 		"description": "inverted sections",
@@ -280,8 +264,7 @@
 			"none": "No people",
 			"people": []
 		},
-		"expected": "No people",
-		"compileOptions": {}
+		"expected": "No people"
 	},
 	{
 		"description": "standalone sections",
@@ -290,8 +273,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n",
-		"compileOptions": {}
+		"expected": "No people\n"
 	},
 	{
 		"description": "standalone sections",
@@ -300,8 +282,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n",
-		"compileOptions": {}
+		"expected": "No people\n"
 	},
 	{
 		"description": "standalone sections",
@@ -310,8 +291,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n",
-		"compileOptions": {}
+		"expected": "No people\n"
 	},
 	{
 		"description": "standalone sections",
@@ -346,8 +326,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n",
-		"compileOptions": {}
+		"expected": "No people\n"
 	},
 	{
 		"description": "standalone sections",
@@ -356,8 +335,7 @@
 		"data": {
 			"none": "No people"
 		},
-		"expected": "No people\n",
-		"compileOptions": {}
+		"expected": "No people\n"
 	},
 	{
 		"description": "standalone sections",
@@ -370,8 +348,7 @@
 				5
 			]
 		},
-		"expected": "1\n3\n5\nOK.",
-		"compileOptions": {}
+		"expected": "1\n3\n5\nOK."
 	},
 	{
 		"description": "compat mode",
@@ -464,8 +441,7 @@
 				"javascript": "function (fn) {\n          fn.run = 'success';\n          return fn;\n        }",
 				"php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -486,8 +462,7 @@
 				"javascript": "function (fn) {\n          fn.run = 'cess';\n        }",
 				"php": "function($fn) {\n          $fn->run = 'cess';\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -508,8 +483,7 @@
 				"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -535,8 +509,7 @@
 				"javascript": "function (fn, props, container, options) {\n          props.nested = options.fn();\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -557,8 +530,7 @@
 				"javascript": "function (fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -581,8 +553,7 @@
 				"javascript": "function (fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -598,8 +569,7 @@
 				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "decorators",
@@ -615,7 +585,6 @@
 				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
 			}
-		},
-		"compileOptions": {}
+		}
 	}
 ]

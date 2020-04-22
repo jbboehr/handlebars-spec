@@ -16,8 +16,7 @@
 				"javascript": "function () {\n        return 'LOL';\n      }",
 				"php": "function() {\n        return \"LOL\";\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -38,8 +37,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -64,8 +62,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -86,8 +83,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -116,8 +112,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -146,8 +141,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -176,8 +170,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -206,8 +199,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -236,8 +228,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -252,7 +243,6 @@
 				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
 			}
 		},
-		"compileOptions": {},
 		"note": "Check original spec. Needs other tests, possibly implementation dependant."
 	},
 	{
@@ -274,8 +264,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -294,8 +283,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -314,8 +302,7 @@
 				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -339,8 +326,7 @@
 				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -410,8 +396,7 @@
 				"javascript": "function (val) {\n        return val + val;\n      }",
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -428,8 +413,7 @@
 				"javascript": "function (val) {\n        return val + val;\n      }",
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",

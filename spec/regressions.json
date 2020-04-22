@@ -16,24 +16,21 @@
 				}
 			]
 		},
-		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes",
-		"compileOptions": {}
+		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
-		"expected": "not set :: ",
-		"compileOptions": {}
+		"expected": "not set :: "
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
-		"expected": "not set :: ",
-		"compileOptions": {}
+		"expected": "not set :: "
 	},
 	{
 		"description": "Regressions",
@@ -42,8 +39,7 @@
 		"data": {
 			"set": false
 		},
-		"expected": "not set :: ",
-		"compileOptions": {}
+		"expected": "not set :: "
 	},
 	{
 		"description": "Regressions",
@@ -52,8 +48,7 @@
 		"data": {
 			"set": true
 		},
-		"expected": " :: set",
-		"compileOptions": {}
+		"expected": " :: set"
 	},
 	{
 		"description": "Regressions",
@@ -65,8 +60,7 @@
 				2
 			]
 		},
-		"expected": "1, 2",
-		"compileOptions": {}
+		"expected": "1, 2"
 	},
 	{
 		"description": "Regressions",
@@ -98,8 +92,7 @@
 				"php": "function() {\n        return true;\n      }"
 			}
 		},
-		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n",
-		"compileOptions": {}
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n"
 	},
 	{
 		"description": "Regressions",
@@ -139,8 +132,7 @@
 				"javascript": "function (block) { return block.inverse(''); }",
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -159,8 +151,7 @@
 				"javascript": "function (block) { return block.inverse(''); }",
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -169,16 +160,14 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-375: Unicode line terminators",
 		"template": " ",
 		"data": {},
-		"expected": " ",
-		"compileOptions": {}
+		"expected": " "
 	},
 	{
 		"description": "Regressions",
@@ -187,8 +176,7 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "Regressions",
@@ -212,8 +200,7 @@
 				2
 			]
 		},
-		"expected": "1,2",
-		"compileOptions": {}
+		"expected": "1,2"
 	},
 	{
 		"description": "Regressions",
@@ -225,8 +212,7 @@
 			"taxed_value": 6000,
 			"in_ca": true
 		},
-		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes.",
-		"compileOptions": {}
+		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
 	},
 	{
 		"description": "Regressions",
@@ -236,8 +222,7 @@
 			"foo": 0,
 			"bar": "OK"
 		},
-		"expected": " This is  ~ ",
-		"compileOptions": {}
+		"expected": " This is  ~ "
 	},
 	{
 		"description": "Regressions",
@@ -246,8 +231,7 @@
 		"data": {
 			"foo": 0
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "Regressions",
@@ -261,8 +245,7 @@
 				"javascript": "function (value) { return value + ''; }",
 				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -290,8 +273,7 @@
 				"value": 10000
 			}
 		},
-		"expected": "Key: \nKey: name\nKey: value\n",
-		"compileOptions": {}
+		"expected": "Key: \nKey: name\nKey: value\n"
 	},
 	{
 		"description": "Regressions",
@@ -308,8 +290,7 @@
 				"javascript": "function (options) {\n        return new Handlebars.SafeString(options.fn());\n      }",
 				"php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -322,8 +303,7 @@
 				"!sparsearray": true
 			}
 		},
-		"expected": "1foo3bar",
-		"compileOptions": {}
+		"expected": "1foo3bar"
 	},
 	{
 		"description": "Regressions",
@@ -334,8 +314,7 @@
 		"partials": {
 			"doctype": "doctype{{> content}}",
 			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{> subcontent}}{{/inline}}{{/doctype}}"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -346,8 +325,7 @@
 		"partials": {
 			"doctype": "doctype{{> content}}",
 			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{#> subcontent}}subcontent{{/subcontent}}{{/inline}}{{/doctype}}"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -358,7 +336,6 @@
 		"partials": {
 			"layout": "{{#> inner}}Inner{{/inner}}{{> @partial-block }}",
 			"inner": ""
-		},
-		"compileOptions": {}
+		}
 	}
 ]

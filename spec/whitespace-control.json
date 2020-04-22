@@ -6,8 +6,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar&lt;",
-		"compileOptions": {}
+		"expected": "bar&lt;"
 	},
 	{
 		"description": "whitespace control",
@@ -16,8 +15,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar&lt; ",
-		"compileOptions": {}
+		"expected": "bar&lt; "
 	},
 	{
 		"description": "whitespace control",
@@ -26,8 +24,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar&lt;",
-		"compileOptions": {}
+		"expected": " bar&lt;"
 	},
 	{
 		"description": "whitespace control",
@@ -36,8 +33,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
 		"description": "whitespace control",
@@ -46,16 +42,14 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
 		"template": "1\n{{foo~}} \n\n 23\n{{bar}}4",
 		"data": {},
-		"expected": "1\n23\n4",
-		"compileOptions": {}
+		"expected": "1\n23\n4"
 	},
 	{
 		"description": "blocks",
@@ -64,8 +58,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -74,8 +67,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
 		"description": "blocks",
@@ -84,8 +76,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
 		"description": "blocks",
@@ -94,8 +85,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "  bar  ",
-		"compileOptions": {}
+		"expected": "  bar  "
 	},
 	{
 		"description": "blocks",
@@ -104,8 +94,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -114,48 +103,42 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " abara ",
-		"compileOptions": {}
+		"expected": " abara "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{~^if foo~}} bar {{~/if~}} ",
 		"data": {},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{^if foo~}} bar {{/if~}} ",
 		"data": {},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{~^if foo}} bar {{~/if}} ",
 		"data": {},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{^if foo}} bar {{/if}} ",
 		"data": {},
-		"expected": "  bar  ",
-		"compileOptions": {}
+		"expected": "  bar  "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " \n\n{{~^if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
 		"data": {},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -164,8 +147,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -174,8 +156,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar ",
-		"compileOptions": {}
+		"expected": "bar "
 	},
 	{
 		"description": "blocks",
@@ -184,8 +165,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar",
-		"compileOptions": {}
+		"expected": " bar"
 	},
 	{
 		"description": "blocks",
@@ -194,8 +174,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
 		"description": "blocks",
@@ -204,8 +183,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -214,8 +192,7 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "blocks",
@@ -224,56 +201,49 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo}} bar {{~^~}} baz {{/if}}",
 		"data": {},
-		"expected": "baz ",
-		"compileOptions": {}
+		"expected": "baz "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~^}} baz {{~/if}}",
 		"data": {},
-		"expected": " baz",
-		"compileOptions": {}
+		"expected": " baz"
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~^}} baz {{/if}}",
 		"data": {},
-		"expected": " baz ",
-		"compileOptions": {}
+		"expected": " baz "
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~else~}} baz {{~/if}}",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "should strip whitespace around partials",
@@ -283,8 +253,7 @@
 		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "should strip whitespace around partials",
@@ -294,8 +263,7 @@
 		"expected": "foo bar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "should strip whitespace around partials",
@@ -305,8 +273,7 @@
 		"expected": "foo bar ",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "should strip whitespace around partials",
@@ -316,8 +283,7 @@
 		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "should strip whitespace around partials",
@@ -327,8 +293,7 @@
 		"expected": "foo\n bar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "should only strip whitespace once",
@@ -337,7 +302,6 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "barbar bar ",
-		"compileOptions": {}
+		"expected": "barbar bar "
 	}
 ]

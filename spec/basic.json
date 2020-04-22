@@ -6,8 +6,7 @@
 		"data": {
 			"foo": "foo"
 		},
-		"expected": "foo",
-		"compileOptions": {}
+		"expected": "foo"
 	},
 	{
 		"description": "basic context",
@@ -16,8 +15,7 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "{{foo}}",
-		"compileOptions": {}
+		"expected": "{{foo}}"
 	},
 	{
 		"description": "basic context",
@@ -26,8 +24,7 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "content {{foo}}",
-		"compileOptions": {}
+		"expected": "content {{foo}}"
 	},
 	{
 		"description": "basic context",
@@ -36,8 +33,7 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "\\food",
-		"compileOptions": {}
+		"expected": "\\food"
 	},
 	{
 		"description": "basic context",
@@ -46,8 +42,7 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "content \\food",
-		"compileOptions": {}
+		"expected": "content \\food"
 	},
 	{
 		"description": "basic context",
@@ -56,8 +51,7 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "\\\\ food",
-		"compileOptions": {}
+		"expected": "\\\\ food"
 	},
 	{
 		"description": "basic context",
@@ -67,8 +61,7 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
-		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {}
+		"expected": "Goodbye\ncruel\nworld!"
 	},
 	{
 		"description": "basic context",
@@ -76,7 +69,6 @@
 		"template": "{{.}}{{length}}",
 		"data": "bye",
 		"expected": "bye3",
-		"compileOptions": {},
 		"note": "PHP strings do not have properties",
 		"helpers": {
 			"length": {
@@ -89,15 +81,13 @@
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
-		"expected": "Goodbye\n\n!",
-		"compileOptions": {}
+		"expected": "Goodbye\n\n!"
 	},
 	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
-		"expected": "Goodbye",
-		"compileOptions": {}
+		"expected": "Goodbye"
 	},
 	{
 		"description": "basic context",
@@ -107,56 +97,49 @@
 			"cruel": "cruel",
 			"world": "world"
 		},
-		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {}
+		"expected": "Goodbye\ncruel\nworld!"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{~! comment ~}}      blah",
 		"data": {},
-		"expected": "blah",
-		"compileOptions": {}
+		"expected": "blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{~!-- long-comment --~}}      blah",
 		"data": {},
-		"expected": "blah",
-		"compileOptions": {}
+		"expected": "blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{! comment ~}}      blah",
 		"data": {},
-		"expected": "    blah",
-		"compileOptions": {}
+		"expected": "    blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{!-- long-comment --~}}      blah",
 		"data": {},
-		"expected": "    blah",
-		"compileOptions": {}
+		"expected": "    blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{~! comment}}      blah",
 		"data": {},
-		"expected": "      blah",
-		"compileOptions": {}
+		"expected": "      blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
 		"template": "    {{~!-- long-comment --}}      blah",
 		"data": {},
-		"expected": "      blah",
-		"compileOptions": {}
+		"expected": "      blah"
 	},
 	{
 		"description": "basic context",
@@ -166,8 +149,7 @@
 			"goodbye": true,
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "basic context",
@@ -177,8 +159,7 @@
 			"goodbye": false,
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "basic context",
@@ -188,16 +169,14 @@
 			"num1": 42,
 			"num2": 0
 		},
-		"expected": "num1: 42, num2: 0",
-		"compileOptions": {}
+		"expected": "num1: 42, num2: 0"
 	},
 	{
 		"description": "basic context",
 		"it": "zeros",
 		"template": "num: {{.}}",
 		"data": 0,
-		"expected": "num: 0",
-		"compileOptions": {}
+		"expected": "num: 0"
 	},
 	{
 		"description": "basic context",
@@ -208,8 +187,7 @@
 				"num2": 0
 			}
 		},
-		"expected": "num: 0",
-		"compileOptions": {}
+		"expected": "num: 0"
 	},
 	{
 		"description": "basic context",
@@ -219,16 +197,14 @@
 			"val1": false,
 			"val2": false
 		},
-		"expected": "val1: false, val2: false",
-		"compileOptions": {}
+		"expected": "val1: false, val2: false"
 	},
 	{
 		"description": "basic context",
 		"it": "false",
 		"template": "val: {{.}}",
 		"data": false,
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
@@ -239,8 +215,7 @@
 				"val2": false
 			}
 		},
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
@@ -250,8 +225,7 @@
 			"val1": false,
 			"val2": false
 		},
-		"expected": "val1: false, val2: false",
-		"compileOptions": {}
+		"expected": "val1: false, val2: false"
 	},
 	{
 		"description": "basic context",
@@ -262,8 +236,7 @@
 				"val2": false
 			}
 		},
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
@@ -276,8 +249,7 @@
 				"php": "function ($_undefined, $_null, $options) {\n            return ($_undefined === null ? 'true' : 'false') . ' ' . ($_null === null ? 'true' : 'false') . ' ' . gettype($options);\n          }"
 			}
 		},
-		"expected": "true true object",
-		"compileOptions": {}
+		"expected": "true true object"
 	},
 	{
 		"description": "basic context",
@@ -290,8 +262,7 @@
 				"php": "function() {\n            return 'undefined!';\n          }"
 			}
 		},
-		"expected": "undefined!",
-		"compileOptions": {}
+		"expected": "undefined!"
 	},
 	{
 		"description": "basic context",
@@ -304,48 +275,42 @@
 				"php": "function() {\n            return 'null!';\n          }"
 			}
 		},
-		"expected": "null!",
-		"compileOptions": {}
+		"expected": "null!"
 	},
 	{
 		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
-		"expected": "Alan's\nTest",
-		"compileOptions": {}
+		"expected": "Alan's\nTest"
 	},
 	{
 		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\rTest",
 		"data": {},
-		"expected": "Alan's\rTest",
-		"compileOptions": {}
+		"expected": "Alan's\rTest"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome's",
 		"data": {},
-		"expected": "Awesome's",
-		"compileOptions": {}
+		"expected": "Awesome's"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome\\",
 		"data": {},
-		"expected": "Awesome\\",
-		"compileOptions": {}
+		"expected": "Awesome\\"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": "Awesome\\\\ foo",
 		"data": {},
-		"expected": "Awesome\\\\ foo",
-		"compileOptions": {}
+		"expected": "Awesome\\\\ foo"
 	},
 	{
 		"description": "basic context",
@@ -354,16 +319,14 @@
 		"data": {
 			"foo": "\\"
 		},
-		"expected": "Awesome \\",
-		"compileOptions": {}
+		"expected": "Awesome \\"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
 		"template": " ' ' ",
 		"data": {},
-		"expected": " ' ' ",
-		"compileOptions": {}
+		"expected": " ' ' "
 	},
 	{
 		"description": "basic context",
@@ -372,8 +335,7 @@
 		"data": {
 			"awesome": "&'\\<>"
 		},
-		"expected": "&'\\<>",
-		"compileOptions": {}
+		"expected": "&'\\<>"
 	},
 	{
 		"description": "basic context",
@@ -382,8 +344,7 @@
 		"data": {
 			"awesome": "&'\\<>"
 		},
-		"expected": "&'\\<>",
-		"compileOptions": {}
+		"expected": "&'\\<>"
 	},
 	{
 		"description": "basic context",
@@ -392,8 +353,7 @@
 		"data": {
 			"awesome": "&\"'`\\<>"
 		},
-		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;",
-		"compileOptions": {}
+		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;"
 	},
 	{
 		"description": "basic context",
@@ -402,8 +362,7 @@
 		"data": {
 			"awesome": "Escaped, <b> looks like: &lt;b&gt;"
 		},
-		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;",
-		"compileOptions": {}
+		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;"
 	},
 	{
 		"description": "basic context",
@@ -416,8 +375,7 @@
 				"php": "function () { return new SafeString('&\\'\\\\<>'); }"
 			}
 		},
-		"expected": "&'\\<>",
-		"compileOptions": {}
+		"expected": "&'\\<>"
 	},
 	{
 		"description": "basic context",
@@ -430,8 +388,7 @@
 				"php": "function () { return \"Awesome\"; }"
 			}
 		},
-		"expected": "Awesome",
-		"compileOptions": {}
+		"expected": "Awesome"
 	},
 	{
 		"description": "basic context",
@@ -445,8 +402,7 @@
 			},
 			"more": "More awesome"
 		},
-		"expected": "More awesome",
-		"compileOptions": {}
+		"expected": "More awesome"
 	},
 	{
 		"description": "basic context",
@@ -460,8 +416,7 @@
 			},
 			"frank": "Frank"
 		},
-		"expected": "Frank",
-		"compileOptions": {}
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
@@ -477,8 +432,7 @@
 			},
 			"frank": "Frank"
 		},
-		"expected": "Frank",
-		"compileOptions": {}
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
@@ -492,8 +446,7 @@
 			},
 			"frank": "Frank"
 		},
-		"expected": "Frank",
-		"compileOptions": {}
+		"expected": "Frank"
 	},
 	{
 		"description": "basic context",
@@ -506,8 +459,7 @@
 				"php": "function($context, $options) { return $options->fn($context); }"
 			}
 		},
-		"expected": "inner 1",
-		"compileOptions": {}
+		"expected": "inner 1"
 	},
 	{
 		"description": "basic context",
@@ -521,8 +473,7 @@
 				"php": "function($context, $options) { return $options->fn($context); }"
 			}
 		},
-		"expected": "inner 1",
-		"compileOptions": {}
+		"expected": "inner 1"
 	},
 	{
 		"description": "basic context",
@@ -535,8 +486,7 @@
 				"php": "function($options) { return $options->fn($options->scope); }"
 			}
 		},
-		"expected": "inner",
-		"compileOptions": {}
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",
@@ -551,8 +501,7 @@
 				}
 			}
 		},
-		"expected": "inner",
-		"compileOptions": {}
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",
@@ -566,8 +515,7 @@
 				"php": "function($context) { return $context; }"
 			}
 		},
-		"expected": "inner",
-		"compileOptions": {}
+		"expected": "inner"
 	},
 	{
 		"description": "basic context",
@@ -576,8 +524,7 @@
 		"data": {
 			"foo-bar": "baz"
 		},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "basic context",
@@ -588,8 +535,7 @@
 				"foo-bar": "baz"
 			}
 		},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "basic context",
@@ -600,8 +546,7 @@
 				"foo-bar": "baz"
 			}
 		},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
 		"description": "basic context",
@@ -612,8 +557,7 @@
 				"expression": "beautiful"
 			}
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -624,8 +568,7 @@
 				"expression": ""
 			}
 		},
-		"expected": "Goodbye  world!",
-		"compileOptions": {}
+		"expected": "Goodbye  world!"
 	},
 	{
 		"description": "basic context",
@@ -636,8 +579,7 @@
 				"expression": "beautiful"
 			}
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -648,8 +590,7 @@
 				"expression": "beautiful"
 			}
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -658,8 +599,7 @@
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -668,8 +608,7 @@
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -678,8 +617,7 @@
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -688,8 +626,7 @@
 		"data": {
 			"foo[bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -698,8 +635,7 @@
 		"data": {
 			"foo'bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -708,16 +644,14 @@
 		"data": {
 			"foo\"bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "that current context path ({{.}}) doesn't hit helpers",
 		"template": "test: {{.}}",
 		"data": null,
-		"expected": "test: ",
-		"compileOptions": {}
+		"expected": "test: "
 	},
 	{
 		"description": "basic context",
@@ -728,8 +662,7 @@
 				"name": null
 			}
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -738,8 +671,7 @@
 		"data": {
 			"person": {}
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -752,8 +684,7 @@
 				"GOODBYE"
 			]
 		},
-		"expected": "goodbyeGoodbyeGOODBYE",
-		"compileOptions": {}
+		"expected": "goodbyeGoodbyeGOODBYE"
 	},
 	{
 		"description": "basic context",
@@ -772,8 +703,7 @@
 				}
 			]
 		},
-		"expected": "helloHelloHELLO",
-		"compileOptions": {}
+		"expected": "helloHelloHELLO"
 	},
 	{
 		"description": "basic context",
@@ -789,8 +719,7 @@
 		"data": {
 			"this": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -801,8 +730,7 @@
 				"this": "bar"
 			}
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -822,8 +750,7 @@
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "basic context",
@@ -849,8 +776,7 @@
 				"javascript": "function (value) {\n        return 'bar ' + value;\n    }",
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "basic context",
@@ -871,8 +797,7 @@
 			},
 			"this": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -888,16 +813,14 @@
 				"this": "bar"
 			}
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass string literals",
 		"template": "{{\"foo\"}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -906,8 +829,7 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -919,16 +841,14 @@
 				"baz"
 			]
 		},
-		"expected": "barbaz",
-		"compileOptions": {}
+		"expected": "barbaz"
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
 		"template": "{{12}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -937,16 +857,14 @@
 		"data": {
 			"12": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
 		"template": "{{12.34}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -955,8 +873,7 @@
 		"data": {
 			"12.34": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -969,16 +886,14 @@
 				"php": "function($arg) { return 'bar' . $arg; }"
 			}
 		},
-		"expected": "bar1",
-		"compileOptions": {}
+		"expected": "bar1"
 	},
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
 		"template": "{{true}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -987,8 +902,7 @@
 		"data": {
 			"": "foo"
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -997,8 +911,7 @@
 		"data": {
 			"false": "foo"
 		},
-		"expected": "foo",
-		"compileOptions": {}
+		"expected": "foo"
 	},
 	{
 		"description": "basic context",
@@ -1018,7 +931,6 @@
 				"javascript": "function (arg) {\n        return arg;\n      }",
 				"php": "function($arg) {\n        return $arg;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	}
 ]

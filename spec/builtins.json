@@ -7,8 +7,7 @@
 			"goodbye": true,
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -18,8 +17,7 @@
 			"goodbye": "dummy",
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -29,8 +27,7 @@
 			"goodbye": false,
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -39,8 +36,7 @@
 		"data": {
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -52,8 +48,7 @@
 			],
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -63,8 +58,7 @@
 			"goodbye": [],
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -74,8 +68,7 @@
 			"goodbye": 0,
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -85,8 +78,7 @@
 			"goodbye": 0,
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -100,8 +92,7 @@
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -115,8 +106,7 @@
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#if",
@@ -130,8 +120,7 @@
 			},
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -145,8 +134,7 @@
 			},
 			"world": "world"
 		},
-		"expected": "cruel world!",
-		"compileOptions": {}
+		"expected": "cruel world!"
 	},
 	{
 		"description": "#if",
@@ -158,8 +146,7 @@
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
 		"description": "#with",
@@ -171,8 +158,7 @@
 				"last": "Johnson"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
 		"description": "#with",
@@ -185,16 +171,14 @@
 				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
 		"description": "#with",
 		"it": "with with else",
 		"template": "{{#with person}}Person is present{{else}}Person is not present{{/with}}",
 		"data": {},
-		"expected": "Person is not present",
-		"compileOptions": {}
+		"expected": "Person is not present"
 	},
 	{
 		"description": "#with",
@@ -206,8 +190,7 @@
 				"last": "Johnson"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
 		"description": "#with",
@@ -243,7 +226,6 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -261,7 +243,6 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -289,7 +270,6 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -307,7 +287,6 @@
 			"world": "world"
 		},
 		"expected": "cruelworld",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -321,7 +300,6 @@
 		"it": "each without context",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"expected": "cruel !",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -346,7 +324,6 @@
 			"world": "world"
 		},
 		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
@@ -362,7 +339,6 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -584,7 +560,6 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,
@@ -602,7 +577,6 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"detectDataInsideEach": {
 				"!code": true,

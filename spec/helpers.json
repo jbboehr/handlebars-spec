@@ -19,8 +19,7 @@
 				"javascript": "function (prefix) {\n      return '<a href=\"' + prefix + '/' + this.url + '\">' + this.text + '</a>';\n    }",
 				"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -36,8 +35,7 @@
 				"javascript": "function (options) {\n        return options.fn();\n    }",
 				"php": "function($options) { return $options->fn(); }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -53,8 +51,7 @@
 				"javascript": "function (a, b, c, options) {\n        return options.fn() + a + b + c;\n    }",
 				"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -68,8 +65,7 @@
 				"javascript": "function (options) {\n          return options.fn();\n      }",
 				"php": "function($options) {\n          return $options->fn();\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -85,8 +81,7 @@
 				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
 				"php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -102,8 +97,7 @@
 				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn({}) + '! ';\n      }\n      return out;\n    }",
 				"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -125,8 +119,7 @@
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -148,8 +141,7 @@
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -163,8 +155,7 @@
 				"javascript": "function () {}",
 				"php": "function() {}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -178,8 +169,7 @@
 				"javascript": "function () {}",
 				"php": "function() {}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -238,16 +228,14 @@
 				"javascript": "function link(options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($options) {\n    return '<a href=\"/people/'.$options->scope['id'].'\">' . $options->fn($options->scope) . '</a>';\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
 		"it": "block helper for undefined value",
 		"template": "{{#empty}}shouldn't render{{/empty}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "helpers",
@@ -335,8 +323,7 @@
 				"javascript": "function list(context, options) {\n      if (context.length > 0) {\n        var out = '<ul>';\n        for (var i = 0, j = context.length; i < j; i++) {\n          out += '<li>';\n          out += options.fn(context[i]);\n          out += '</li>';\n        }\n        out += '</ul>';\n        return out;\n      } else {\n        return '<p>' + options.inverse(this) + '</p>';\n      }\n    }",
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -352,8 +339,7 @@
 				"javascript": "function list(context, options) {\n      if (context.length > 0) {\n        var out = '<ul>';\n        for (var i = 0, j = context.length; i < j; i++) {\n          out += '<li>';\n          out += options.fn(context[i]);\n          out += '</li>';\n        }\n        out += '</ul>';\n        return out;\n      } else {\n        return '<p>' + options.inverse(this) + '</p>';\n      }\n    }",
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -370,8 +356,7 @@
 				"javascript": "function list(context, options) {\n      if (context.length > 0) {\n        var out = '<ul>';\n        for (var i = 0, j = context.length; i < j; i++) {\n          out += '<li>';\n          out += options.fn(context[i]);\n          out += '</li>';\n        }\n        out += '</ul>';\n        return out;\n      } else {\n        return '<p>' + options.inverse(this) + '</p>';\n      }\n    }",
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -398,8 +383,7 @@
 				"javascript": "function () {\n        return 'fail';\n      }",
 				"php": "function() {\n        return 'fail';\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -426,8 +410,7 @@
 				"javascript": "function () {\n        return 'fail';\n      }",
 				"php": "function() {\n        return 'fail';\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -443,8 +426,7 @@
 				"javascript": "function () { return 'world'; }",
 				"php": "function() { return 'world'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -464,8 +446,7 @@
 				"javascript": "function () { return 'world'; }",
 				"php": "function() { return 'world'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -481,8 +462,7 @@
 				"javascript": "function () { return 'helpers'; }",
 				"php": "function() { return 'helpers'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -498,8 +478,7 @@
 				"javascript": "function () { return 'helpers'; }",
 				"php": "function() { return 'helpers'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -519,8 +498,7 @@
 				"javascript": "function () { return 'helper'; }",
 				"php": "function() { return 'helper'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers hash",
@@ -542,7 +520,6 @@
 				"php": "function() { return 'found it!'; }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"test_helper": {
 				"!code": true,
@@ -562,7 +539,6 @@
 			"cruel": "cruel"
 		},
 		"expected": "found it! Goodbye cruel world!!",
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -599,7 +575,6 @@
 				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -629,7 +604,6 @@
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -659,7 +633,6 @@
 				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -700,7 +673,6 @@
 				"php": "function($param) { return 'Hello '.$param; }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -730,7 +702,6 @@
 				"php": "function($param) { return \"Hello \" . $param; }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -760,7 +731,6 @@
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -793,7 +763,6 @@
 				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -826,7 +795,6 @@
 				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -971,7 +939,6 @@
 				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1004,7 +971,6 @@
 				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1153,7 +1119,6 @@
 			}
 		},
 		"expected": "yep",
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1187,7 +1152,6 @@
 			}
 		},
 		"expected": "",
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1228,7 +1192,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1268,7 +1231,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1308,7 +1270,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1348,7 +1309,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1388,7 +1348,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1460,7 +1419,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1502,7 +1460,6 @@
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1626,7 +1583,6 @@
 				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1658,7 +1614,6 @@
 				"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1692,7 +1647,6 @@
 				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1721,7 +1675,6 @@
 				"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
@@ -1750,7 +1703,6 @@
 				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"compileOptions": {},
 		"globalHelpers": {
 			"world": {
 				"!code": true,
