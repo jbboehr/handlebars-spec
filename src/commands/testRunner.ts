@@ -306,20 +306,20 @@ function runTestGeneric(test: any) {
         // Execute
         var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
         var template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
-        var opts = test.options || {};
+        var runtimeOptions = test.runtimeOptions || test.options || {};
         //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
         if (test.helpers) {
-            opts.helpers = test.helpers;
+            runtimeOptions.helpers = test.helpers;
         }
         if (test.partials) {
-            opts.partials = test.partials;
+            runtimeOptions.partials = test.partials;
         }
         if (test.decorators) {
-            opts.decorators = test.decorators;
+            runtimeOptions.decorators = test.decorators;
         }
-        test.opts = opts;
+        test.runtimeOptions = runtimeOptions;
 
-        var actual = template(test.data, test.opts);
+        var actual = template(test.data, test.runtimeOptions);
         equals(actual, test.expected);
 
         return checkResult(test);

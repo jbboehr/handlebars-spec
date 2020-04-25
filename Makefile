@@ -2,14 +2,14 @@
 BASIC_SPECS := basic blocks builtins data helpers partials regressions \
 		string-params subexpressions strict track-ids \
 		whitespace-control
-SPECS := $(BASIC_SPECS) parser tokenizer
+SPECS := $(BASIC_SPECS)# parser tokenizer
 
 all: spec export
 
-spec: node_modules
+spec: dist
 	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js;)
 
-export: node_modules
+export: dist
 	$(foreach var, $(BASIC_SPECS), node bin/export spec/$(var).json -o export/$(var).json;)
 
 check_changes:
@@ -20,9 +20,9 @@ stubs:
 
 test: jshint test_node test_php
 
-test_node:
+test_node: dist
 	@echo ---------- Testing spec against handlebars.js ----------
-	node bin/runner.js
+	node dist/cli.js testRunner
 
 test_php:
 	@echo ---------- Linting PHP code ----------
@@ -31,7 +31,10 @@ test_php:
 jshint: node_modules
 	./node_modules/.bin/jshint  bin/*.js
 
-node_modules:
+dist: node_modules src
+	tsc
+
+node_modules: package.json
 	npm install
 
 .PHONY: all spec export check_changes test test_node test_php

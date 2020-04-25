@@ -12,6 +12,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@types/sinon": "^9.0.0",
     "clime": "^0.5.10",
     "deep-equal": "^2.0.2",
     "extend": "^1.2.x",

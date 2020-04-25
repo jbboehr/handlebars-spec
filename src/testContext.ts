@@ -4,20 +4,25 @@ import { jsToCode } from "./utils";
 import { isFunction } from "util";
 
 export class TestContext {
+    template?: string;
+    data?: any;
+    options?: any;
+    compileOptions?: {[key: string]: any}; // Handlebars.CompileOptions
     helpers?: CodeDict;
     partials?: StringDict;
     decorators?: CodeDict;
+    globalHelpers?: CodeDict;
+    globalPartials?: StringDict;
+    globalDecorators?: CodeDict;
+    exception?: boolean;
 
-    template?: string;
-    compileOptions?: {[key: string]: any}; // Handlebars.CompileOptions
-    options?: any;
-    data?: any;
+    extraEquals?: any[];
+
+    // these are copied from globalContext
     description?: string;
     oldDescription?: string;
     it?: string;
     key?: string;
-    extraEquals?: any[];
-    exception?: boolean;
 
     mergeHelpers(data: any): CodeDict | undefined {
         if (!data || typeof data !== 'object') {
@@ -66,5 +71,14 @@ export class TestContext {
         });
 
         return this.decorators;
+    }
+
+    reset() {
+        let self = new TestContext();
+        self.description = this.description;
+        self.it = this.it;
+        self.key = this.key;
+        self.oldDescription = this.oldDescription;
+        return self;
     }
 }

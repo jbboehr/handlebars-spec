@@ -33,7 +33,10 @@ export function jsToCode(fn: Function | string): CodeData {
         };
         console.log("Missing function patch for: " + JSON.stringify(key) + " <- " + JSON.stringify(str));
     }
-    data['javascript'] = str;
+    // Keep the old function for now, if it's already set...
+    if (!data.javascript) {
+        //data['javascript'] = str;
+    }
     return data;
 }
 

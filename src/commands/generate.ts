@@ -41,6 +41,7 @@ export default class extends Command {
         for (let x in mockGlobals) {
             (global as any)[x] = (mockGlobals as any)[x];
         }
+        mockGlobals.globalContext.suite = suite;
 
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
@@ -55,51 +56,7 @@ export default class extends Command {
             });
         }
 
-        // Meh
-
-        if (inputFile.match(/bench\/templates/)) {
-            suite = 'bench';
-            var benches = require(inputFile);
-            Object.keys(benches).forEach(function (x) {
-                var data = benches[x];
-                var expected = Handlebars.compile(data.handlebars)(data.context, {
-                    helpers: data.helpers,
-                    partials: data.partials && data.partials.handlebars,
-                    decorators: data.decorators
-                });
-                stringifyLambdas(data.context);
-                var test: any = {
-                    description: 'Benchmarks',
-                    it: x,
-                    template: data.handlebars,
-                    data: data.context,
-                    expected: expected,
-                    compileOptions: {
-                        data: false
-                    }
-                };
-                if (data.helpers) {
-                    test.helpers = extractHelpers(data.helpers);
-                }
-                if (data.partials && data.partials.handlebars) {
-                    test.partials = data.partials.handlebars;
-                }
-                if (data.decorators) {
-                    test.decorators = extractHelpers(data.decorators);
-                }
-                addTest(test);
-
-                if (test.mustache) {
-                    test = clone(test);
-                    test.it = x + ' compat';
-                    test.template = data.mustache;
-                    test.compileOptions.compat = true;
-                    addTest(test);
-                }
-            });
-        } else {
-            require(path.resolve(inputFile));
-        }
+        require(path.resolve(inputFile));
 
 
         let output;

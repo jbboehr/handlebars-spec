@@ -1,70 +1,21 @@
 
 import * as Handlebars from "handlebars";
 import { jsToCode, isFunction, clone, removeCircularReferences, stringifyLambdas, stripNulls, isEmptyObject } from "./utils";
-import { CodeDict, TestSpec, StringDict } from "./types";
+import { CodeDict, TestSpec, StringDict, FunctionDict } from "./types";
 import { ExpectTemplate } from "./expectTemplate";
 import { isArray } from "util";
 import { resolve as resolvePath } from "path";
 import extend from "extend";
 import {existsSync} from "fs";
 import { GlobalContext } from "./globalContext";
-import { TestContext } from "./testContext";
+import * as sinon from "sinon";
 
-export {Handlebars};
-
-// export interface TestContext {
-//     helpers: CodeDict;
-//     partials: StringDict;
-//     decorators: CodeDict;
-
-//     template?: string;
-//     compileOptions?: {[key: string]: any}; // Handlebars.CompileOptions
-//     options?: any;
-//     data?: any;
-//     description: string;
-//     oldDescription?: string;
-//     it: string;
-//     key?: string;
-//     extraEquals?: any[];
-//     exception?: boolean;
-// }
-
-// export interface GlobalContext {
-//     handlebarsEnv: typeof Handlebars;
-
-//     globalHelpers?: CodeDict;
-//     globalPartials?: StringDict;
-//     globalDecorators?: CodeDict;
-
-//     afterFns: Function[];
-//     beforeFns: Function[];
-//     descriptionStack: string[];
-
-//     testContext: TestContext;
-
-//     indices: StringDict;
-//     oldIndices: StringDict;
-//     suite: string;
-//     unusedPatches: StringDict;
-//     tests: TestSpec[];
-// }
+export {Handlebars, sinon};
 
 export let globalContext: GlobalContext = new GlobalContext();
 
 export function resetContext() {
-    //globalContext = clone(defaultGlobalContext);
-    // globalContext.testContext = new TestContext();
-    delete globalContext.testContext.template;
-    delete globalContext.testContext.data;
-    delete globalContext.testContext.options;
-    delete globalContext.testContext.compileOptions;
-    delete globalContext.testContext.helpers;
-    delete globalContext./*testContext.*/globalHelpers;
-    delete globalContext.testContext.partials;
-    delete globalContext./*testContext.*/globalPartials;
-    delete globalContext.testContext.decorators;
-    delete globalContext./*testContext.*/globalDecorators;
-    delete globalContext.testContext.exception;
+    globalContext.testContext = globalContext.testContext.reset();
 }
 
 
@@ -154,7 +105,11 @@ export function it(description: string, next: Function) {
 
     // Push test spec unto context
     testContext.it = description;
+    testContext.description = globalContext.descriptionStack.join(" - ");
     testContext.key = testContext.description + " - " + testContext.it;
+    testContext.globalHelpers = globalContext.globalHelpers;
+    testContext.globalPartials = globalContext.globalPartials;
+    testContext.globalDecorators = globalContext.globalDecorators;
 
     // Test
     next();
@@ -190,72 +145,6 @@ export function equals(actual: any, expected: any, message?: string) {
         message,
     });
     //console.warn('equals called in "' + descriptionStack.join(' - ') + ' - ' + context.it + '"');
-    /*
-    var spec = {
-      description : context.description || context.it,
-      oldDescription: context.oldDescription,
-      it          : context.it,
-      template    : context.template,
-      data        : context.data,
-      expected    : expected,
-    };
-
-    // Remove circular references in data
-    removeCircularReferences(spec.data);
-
-    // Get message
-    if (message) {
-      spec.message = message;
-    }
-
-    // Get options
-    if( context.options ) {
-      spec.options = context.options;
-      if( spec.options.data ) {
-        stringifyLambdas(spec.options.data);
-      }
-    }
-
-    // Get compiler options
-    if (context.compileOptions) {
-      spec.compileOptions = context.compileOptions;
-    }
-
-    // Get helpers
-    if (context.helpers) {
-      spec.helpers = extractHelpers(context.helpers);
-    }
-
-    // Get global helpers
-    if (context.globalHelpers) {
-      spec.globalHelpers = extractHelpers(context.globalHelpers);
-    }
-
-    // Get decorators
-    if (context.decorators) {
-      spec.decorators = extractHelpers(context.decorators);
-    }
-
-    // Get global decorators
-    if (context.globalDecorators) {
-      spec.globalDecorators = extractHelpers(context.globalDecorators);
-    }
-
-    // If a template is found in the lexer, use it for the spec. This is true in
-    // the case of the tokenizer.
-    if (!spec.template && Handlebars.Parser.lexer.matched) {
-      spec.template = Handlebars.Parser.lexer.matched;
-    }
-
-    // Convert lambdas to object/strings
-    stringifyLambdas(spec.data);
-
-    // Add test
-    addTest(spec);
-
-    // Reset the context
-    resetContext();
-    */
 };
 
 export function tokenize(template: string) {
@@ -269,7 +158,7 @@ export function shouldMatchTokens(expected: any /*, tokens*/) {
     let { description, oldDescription, it, template, extraEquals } = globalContext.testContext;
 
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
-        console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
+        console.warn(globalContext.testContext.key, '|', 'extra equals were called:', extraEquals);
         delete globalContext.testContext.extraEquals;
     }
 
@@ -308,9 +197,55 @@ export function expect() {
     };
 };
 
+function addExpectTemplate(xt: ExpectTemplate) {
+    let { testContext } = globalContext;
+    let { description, oldDescription, it, extraEquals } = testContext;
+
+    if (extraEquals && Object.keys(extraEquals).length >= 0) {
+        console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
+        delete globalContext.testContext.extraEquals;
+    }
+
+    var spec: TestSpec = {
+        description,
+        oldDescription,
+        it,
+        template: xt.template,
+        data: stringifyLambdas(removeCircularReferences(xt.input)),
+        expected: xt.expected,
+        runtimeOptions: stringifyLambdas(xt.runtimeOptions),
+        compileOptions: xt.compileOptions,
+        partials: stringifyLambdas(xt.partials),
+        helpers: stringifyLambdas(xt.helpers),
+        decorators: stringifyLambdas(xt.decorators),
+        message: xt.message,
+        compat: (xt.compileOptions || {}).compat,
+        exception: xt.exception,
+    };
+
+    if (globalContext.globalPartials) {
+        spec.globalPartials = globalContext.globalPartials;
+    }
+
+    if (globalContext.globalHelpers) {
+        spec.globalHelpers = globalContext.globalHelpers;
+    }
+
+    if (globalContext.globalDecorators) {
+        spec.globalDecorators = globalContext.globalDecorators;
+    }
+
+    // Add the test
+    addTest(spec);
+
+    // Reset the context
+    resetContext();
+}
+
 export function expectTemplate(template: string) {
     return new ExpectTemplate(template, (xt: ExpectTemplate) => {
-        compileWithPartials(xt.template, xt.input, null, xt.expected);
+        globalContext.detectGlobals();
+        addExpectTemplate(xt);
     });
 };
 
@@ -318,33 +253,33 @@ export function shouldBeToken() {
     // noop
 };
 
-export function shouldCompileTo(str: string, hashOrArray: any, expected: any) {
-    shouldCompileToWithPartials(str, hashOrArray, null, expected);
+export function shouldCompileTo(str: string, hashOrArray: any, expected: any, message?: string) {
+    shouldCompileToWithPartials(str, hashOrArray, null, expected, message);
 };
 
 export function shouldCompileToWithPartials(str: string, hashOrArray: any, partials: any, expected: any, message?: string) {
-    globalContext.detectGlobals();
     compileWithPartials(str, hashOrArray, partials, expected, message);
 };
 
-export function compileWithPartials(template: string, hashOrArray: any, partials: any, expected: any, message?: string) {
-    let {testContext} = globalContext;
-    let helpers: CodeDict | undefined;
-    let decorators: CodeDict | undefined;
+export function compileWithPartials(template: string, hashOrArray: any, partials?: StringDict, expected?: any, message?: string) {
+    // let {testContext} = globalContext;
+    let helpers: FunctionDict = {};
+    let decorators: FunctionDict = {};
     //let partials: StringDict = {};
-    let data: any;
-    let compat: undefined | true;
+    let input: any;
+    // let compat: undefined | true;
     let compileOptions: any = extend({}, globalContext.testContext.compileOptions);
 
-    partials = testContext.mergePartials(partials);
+    // partials = testContext.mergePartials(partials);
 
     if (isArray(hashOrArray)) {
-        data = hashOrArray[0];
-        helpers = testContext.mergeHelpers(hashOrArray[1]);
+        input = hashOrArray[0];
+        helpers = hashOrArray[1];
+        // helpers = testContext.mergeHelpers(hashOrArray[1]);
         partials = hashOrArray[2];
         if (hashOrArray[3]) {
             if (typeof hashOrArray[3] === 'boolean') {
-                compileOptions.compat = compat = true;
+                compileOptions.compat = true;
             } else if (typeof hashOrArray[3] === 'object') {
                 extend(compileOptions, hashOrArray[3]);
             }
@@ -354,22 +289,35 @@ export function compileWithPartials(template: string, hashOrArray: any, partials
           ary[1].data = hashOrArray[4];
         } */
     } else {
-        data = hashOrArray;
-        if (typeof data === 'object') {
-            data = hashOrArray.hash || hashOrArray;
-            helpers = testContext.mergeHelpers(hashOrArray.helpers);
-            partials = testContext.mergePartials(hashOrArray.partials);
-            decorators = testContext.mergeDecorators(hashOrArray.decorators);
-            delete data.helpers;
-            delete data.partials;
-            delete data.decorators;
+        input = hashOrArray;
+        if (typeof input === 'object') {
+            input = hashOrArray.hash || hashOrArray;
+            helpers = hashOrArray.helpers; //testContext.mergeHelpers(hashOrArray.helpers);
+            partials = hashOrArray.partials; //testContext.mergePartials(hashOrArray.partials);
+            decorators = hashOrArray.decorators; //testContext.mergeDecorators(hashOrArray.decorators);
+            delete input.helpers;
+            delete input.partials;
+            delete input.decorators;
         }
     }
 
+    let xt = expectTemplate(template)
+        .withHelpers(helpers || {})
+        .withPartials(partials || {})
+        .withDecorators(decorators || {})
+        .withCompileOptions(compileOptions)
+        .withInput(input);
+    if (message) {
+        xt.withMessage(message);
+    }
+
+    xt.toCompileTo(expected);
+
+    /*
     let { description, oldDescription, it, extraEquals, exception, options } = globalContext.testContext;
 
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
-        console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
+        console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
         delete globalContext.testContext.extraEquals;
     }
 
@@ -387,7 +335,7 @@ export function compileWithPartials(template: string, hashOrArray: any, partials
 
     var spec: TestSpec = {
         description,
-        // oldDescription,
+        oldDescription,
         it,
         template,
         data,
@@ -419,47 +367,11 @@ export function compileWithPartials(template: string, hashOrArray: any, partials
 
     // Reset the context
     resetContext();
+    */
 };
 
 export function shouldThrow(callback: Function, error: string, message: string) {
-    let {testContext} = globalContext;
-    testContext.exception = true;
-
-    try {
-        callback();
-    } catch (err) { }
-
-    delete testContext.exception;
-
-    let { description, oldDescription, it, template, extraEquals } = globalContext.testContext;
-
-    if (extraEquals && Object.keys(extraEquals).length >= 0) {
-        console.warn('Extra equals were called in ' + description + ' - ' + it + ': ', extraEquals);
-        delete testContext.extraEquals;
-    }
-
-    // If a template is found in the lexer, use it for the spec. This is true in
-    // the case of the tokenizer.
-    if (!template) {
-        template = (Handlebars as any).Parser.lexer.matched + (Handlebars as any).Parser.lexer._input;
-    }
-
-    var spec: TestSpec = {
-        description,
-        // oldDescription,
-        it,
-        template: template as string,
-        exception: true,
-        message,
-        data: undefined,
-        expected: undefined,
-    };
-
-    // Add the test
-    addTest(spec);
-
-    // Reset the context
-    resetContext();
+    console.warn
 };
 
 export function addTest(spec: TestSpec) {
@@ -469,6 +381,13 @@ export function addTest(spec: TestSpec) {
     if (!spec || !spec.template) {
         console.warn("empty template", spec);
         return;
+    }
+
+    // Cleanup a few keys
+    for (var x of ['partials', 'helpers', 'decorators', 'compileOptions', 'runtimeOptions', 'globalPartials', 'globalHelpers', 'globalDecorators']) {
+        if (!(spec as any)[x] || isEmptyObject((spec as any)[x])) {
+            delete (spec as any)[x];
+        }
     }
 
     var key = (spec.description + ' - ' + spec.it).toLowerCase();
@@ -493,11 +412,16 @@ export function addTest(spec: TestSpec) {
         throw new Error('Failed to acquire test index');
     })();
 
+    // @TODO remove me
+    spec.description = spec.oldDescription;
+    delete spec.oldDescription;
+    // @TODO to here
+
     indices[name] = name;;
     oldIndices[oldName] = oldName;
 
-    var patchFile = resolvePath('./patch/') + '/' + suite + '.json';
-    if (existsSync(resolvePath(patchFile))) {
+    var patchFile = resolvePath('./patch/' + '/' + suite + '.json');
+    if (existsSync(patchFile)) {
         var patchData = require(patchFile);
         var patch;
 
@@ -510,12 +434,13 @@ export function addTest(spec: TestSpec) {
             patch = patchData[name];
         }
 
-        if (patch) {
+        if (typeof patch !== 'undefined') {
             if (patch === null) {
                 // Note: setting to null means to skip the test. These will most
                 // likely be implementation-dependant. Note that it still has to be
                 // added to the indices array
                 skip = true;
+                console.log(key, "|", "skipped via patch");
             } else {
                 spec = extend(true, spec, patch);
                 // Using nulls in patches to unset things

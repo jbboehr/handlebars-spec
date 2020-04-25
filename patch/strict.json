@@ -1,107 +1,11 @@
 {
-	"strict mode-should error on missing property lookup-00": {
-		"exception": true,
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should error on missing child-00": null,
-	"strict mode-should error on missing child-01": {
-		"exception": true,
-		"data": {
-			"hello": {
-			}
-		},
-		"compileOptions": {
-			"strict": true
-		}
-	},
 	"strict mode-should handle explicit undefined-00": {
-		"note": "Can't specify undefined in JSON",	
+		"note": "Can't specify undefined in JSON",
 		"data": {
 			"hello": {
 				"!keepnull": true,
 				"bar": null
 			}
-		}
-	},
-	"strict mode-should error on missing property lookup in known helpers mode-00": {
-		"exception": true,
-		"compileOptions": {
-			"knownHelpersOnly": true,
-			"strict": true
-		}
-	},
-	"strict mode-should error on missing context-00": {
-		"exception": true,
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should error on missing data lookup-00": {
-		"expected": null,
-		"exception": true,
-		"options": null
-	},
-	"strict mode-should error on missing data lookup-01": null,
-	"strict mode-should not run helpermissing for helper calls-00": {
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should not run helpermissing for helper calls-01": {
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should throw on ambiguous blocks-00": {
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should throw on ambiguous blocks-01": {
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	"strict mode-should throw on ambiguous blocks-02": {
-		"compileOptions": {
-			"strict": true
-		},
-		"data": {
-			"hello": {}
-		}
-	},
-	"strict mode-should allow undefined hash when passed to helpers-00": {
-		"expected": "success",
-		"helpers": {
-			"helper": {
-				"php": "function () {\n          return 'success';\n        }"
-			}
-		},
-		"compileOptions": {
-			"strict": true,
-			"knownHelpers": {
-				"helper": true
-			}
-		}
-	},
-	"strict mode-should allow undefined hash when passed to helpers-01": null,
-	"strict mode-should allow undefined hash when passed to helpers-02": null,
-	"assume objects-should error on missing object-00": {
-		"data": {},
-		"compileOptions": {
-			"assumeObjects": true
-		}
-	},
-	"assume objects-should error on missing data lookup-00": {
-		"compileOptions": {
-			"assumeObjects": true
-		}
-	},
-	"assume objects-should error on missing context-00": {
-		"compileOptions": {
-			"assumeObjects": true
 		}
 	}
 }
