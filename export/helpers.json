@@ -20,20 +20,6 @@
 				"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -555,24 +541,11 @@
 		"helpers": {
 			"raw": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.fn();\n    }",
-				"php": "function($options) { return $options->fn(); }"
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "raw block helper gets raw content",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -910,20 +883,7 @@
 				"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "raw block helper gets raw content",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -1282,30 +1242,16 @@
 		}
 	},
 	{
-		"description": "helpers",
+		"description": "helpers - raw block parsing (with identity helper-function)",
 		"it": "helper for nested raw block gets raw content",
-		"template": "{{{{a}}}} {{{{b}}}} {{{{/b}}}} {{{{/a}}}}",
+		"template": "{{{{identity}}}} {{{{b}}}} {{{{/b}}}} {{{{/identity}}}}",
 		"data": {},
 		"expected": " {{{{b}}}} {{{{/b}}}} ",
 		"helpers": {
-			"a": {
+			"identity": {
 				"!code": true,
 				"javascript": "function (options) {\n          return options.fn();\n      }",
 				"php": "function($options) {\n          return $options->fn();\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -1318,9 +1264,9 @@
 						"data": false,
 						"depth": 0,
 						"parts": [
-							"a"
+							"identity"
 						],
-						"original": "a",
+						"original": "identity",
 						"loc": {
 							"start": {
 								"line": 1,
@@ -1328,7 +1274,7 @@
 							},
 							"end": {
 								"line": 1,
-								"column": 5
+								"column": 12
 							}
 						}
 					},
@@ -1343,11 +1289,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 9
+										"column": 16
 									},
 									"end": {
 										"line": 1,
-										"column": 10
+										"column": 17
 									}
 								}
 							},
@@ -1358,11 +1304,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 10
+										"column": 17
 									},
 									"end": {
 										"line": 1,
-										"column": 14
+										"column": 21
 									}
 								}
 							},
@@ -1373,11 +1319,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 14
+										"column": 21
 									},
 									"end": {
 										"line": 1,
-										"column": 20
+										"column": 27
 									}
 								}
 							},
@@ -1388,11 +1334,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 20
+										"column": 27
 									},
 									"end": {
 										"line": 1,
-										"column": 30
+										"column": 37
 									}
 								}
 							},
@@ -1403,11 +1349,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 30
+										"column": 37
 									},
 									"end": {
 										"line": 1,
-										"column": 31
+										"column": 38
 									}
 								}
 							}
@@ -1420,7 +1366,7 @@
 							},
 							"end": {
 								"line": 1,
-								"column": 41
+								"column": 55
 							}
 						}
 					},
@@ -1434,7 +1380,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				}
@@ -1447,7 +1393,7 @@
 				},
 				"end": {
 					"line": 1,
-					"column": 41
+					"column": 55
 				}
 			}
 		},
@@ -1466,7 +1412,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1482,7 +1428,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1498,7 +1444,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1514,7 +1460,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 5
+							"column": 12
 						}
 					}
 				},
@@ -1522,7 +1468,7 @@
 					"opcode": "lookupOnContext",
 					"args": [
 						[
-							"a"
+							"identity"
 						],
 						null,
 						true,
@@ -1535,14 +1481,14 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 5
+							"column": 12
 						}
 					}
 				},
 				{
 					"opcode": "invokeAmbiguous",
 					"args": [
-						"a",
+						"identity",
 						true
 					],
 					"loc": {
@@ -1552,7 +1498,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1568,7 +1514,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1584,7 +1530,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1598,7 +1544,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1612,7 +1558,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				},
@@ -1626,7 +1572,7 @@
 						},
 						"end": {
 							"line": 1,
-							"column": 41
+							"column": 55
 						}
 					}
 				}
@@ -1643,11 +1589,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 9
+									"column": 16
 								},
 								"end": {
 									"line": 1,
-									"column": 10
+									"column": 17
 								}
 							}
 						},
@@ -1659,11 +1605,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 10
+									"column": 17
 								},
 								"end": {
 									"line": 1,
-									"column": 14
+									"column": 21
 								}
 							}
 						},
@@ -1675,11 +1621,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 14
+									"column": 21
 								},
 								"end": {
 									"line": 1,
-									"column": 20
+									"column": 27
 								}
 							}
 						},
@@ -1691,11 +1637,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 20
+									"column": 27
 								},
 								"end": {
 									"line": 1,
-									"column": 30
+									"column": 37
 								}
 							}
 						},
@@ -1707,11 +1653,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 30
+									"column": 37
 								},
 								"end": {
 									"line": 1,
-									"column": 31
+									"column": 38
 								}
 							}
 						}
@@ -1755,6 +1701,955 @@
 		}
 	},
 	{
+		"description": "helpers - raw block parsing (with identity helper-function)",
+		"it": "helper for nested raw block works with empty content",
+		"template": "{{{{identity}}}}{{{{/identity}}}}",
+		"data": {},
+		"expected": "",
+		"helpers": {
+			"identity": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
+			}
+		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"identity"
+						],
+						"original": "identity",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 4
+							},
+							"end": {
+								"line": 1,
+								"column": 12
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 33
+							}
+						}
+					},
+					"openStrip": {},
+					"inverseStrip": {},
+					"closeStrip": {},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 33
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"identity"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"identity",
+						true
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 33
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - raw block parsing (with identity helper-function)",
+		"it": "helper for nested raw block closes after first matching close",
+		"template": "{{{{identity}}}}abc{{{{/identity}}}} {{{{identity}}}}abc{{{{/identity}}}}",
+		"data": {},
+		"expected": "abc abc",
+		"helpers": {
+			"identity": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
+			}
+		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"identity"
+						],
+						"original": "identity",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 4
+							},
+							"end": {
+								"line": 1,
+								"column": 12
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [
+							{
+								"type": "ContentStatement",
+								"original": "abc",
+								"value": "abc",
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 16
+									},
+									"end": {
+										"line": 1,
+										"column": 19
+									}
+								}
+							}
+						],
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 0
+							},
+							"end": {
+								"line": 1,
+								"column": 36
+							}
+						}
+					},
+					"openStrip": {},
+					"inverseStrip": {},
+					"closeStrip": {},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"type": "ContentStatement",
+					"original": " ",
+					"value": " ",
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 36
+						},
+						"end": {
+							"line": 1,
+							"column": 37
+						}
+					}
+				},
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"identity"
+						],
+						"original": "identity",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 41
+							},
+							"end": {
+								"line": 1,
+								"column": 49
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [
+							{
+								"type": "ContentStatement",
+								"original": "abc",
+								"value": "abc",
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 53
+									},
+									"end": {
+										"line": 1,
+										"column": 56
+									}
+								}
+							}
+						],
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 37
+							},
+							"end": {
+								"line": 1,
+								"column": 73
+							}
+						}
+					},
+					"openStrip": {},
+					"inverseStrip": {},
+					"closeStrip": {},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 73
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"identity"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"identity",
+						true
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 36
+						}
+					}
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						" "
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 36
+						},
+						"end": {
+							"line": 1,
+							"column": 37
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 41
+						},
+						"end": {
+							"line": 1,
+							"column": 49
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"identity"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 41
+						},
+						"end": {
+							"line": 1,
+							"column": 49
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"identity",
+						true
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						1
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "ambiguousBlockValue",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 73
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"abc"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 16
+								},
+								"end": {
+									"line": 1,
+									"column": 19
+								}
+							}
+						}
+					],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true,
+					"blockParams": 0
+				},
+				{
+					"sourceNode": [],
+					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"abc"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 53
+								},
+								"end": {
+									"line": 1,
+									"column": 56
+								}
+							}
+						}
+					],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": true,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 2,
+			"isSimple": false,
+			"blockParams": 0
+		}
+	},
+	{
 		"description": "helpers",
 		"it": "helper block with identical context",
 		"template": "{{#goodbyes}}{{name}}{{/goodbyes}}",
@@ -1767,20 +2662,6 @@
 				"!code": true,
 				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
 				"php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -2248,20 +3129,6 @@
 				"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2682,20 +3549,6 @@
 				"!code": true,
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -3426,20 +4279,6 @@
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4160,20 +4999,6 @@
 				"php": "function() {}"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4401,6 +5226,7 @@
 	{
 		"description": "helpers",
 		"it": "helper returning undefined value",
+		"number": "01",
 		"template": " {{#nothere}}{{/nothere}}",
 		"data": {},
 		"expected": " ",
@@ -4409,20 +5235,6 @@
 				"!code": true,
 				"javascript": "function () {}",
 				"php": "function() {}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -4748,7 +5560,6 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE! cruel world!",
-		"message": "Block helper executed",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
@@ -4756,6 +5567,7 @@
 				"php": "function($options) { return $options->fn(array('text' => 'GOODBYE')); }"
 			}
 		},
+		"message": "Block helper executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5461,7 +6273,6 @@
 			"name": "Yehuda"
 		},
 		"expected": "<form><p>Yehuda</p></form>",
-		"message": "Block helper executed with current context",
 		"helpers": {
 			"form": {
 				"!code": true,
@@ -5469,6 +6280,7 @@
 				"php": "function($options) { $out = '<form>'; $out .= $options->fn($options->scope); return $out . '</form>'; }"
 			}
 		},
+		"message": "Block helper executed with current context",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -6003,20 +6815,6 @@
 				"!code": true,
 				"javascript": "function link(options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($options) {\n    return '<a href=\"/people/'.$options->scope['id'].'\">' . $options->fn($options->scope) . '</a>';\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -6856,20 +7654,6 @@
 		"template": "{{#empty}}shouldn't render{{/empty}}",
 		"data": {},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7207,14 +7991,14 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p></form>",
-		"message": "Context variable resolved",
 		"helpers": {
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
-				"php": "function($context, $options) {\n    return '<form>' . $options->fn($context) . '</form>';\n}"
+				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
 		},
+		"message": "Context variable resolved",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7738,14 +8522,14 @@
 			}
 		},
 		"expected": "<form><p>Harold</p></form>",
-		"message": "Complex path variable resolved",
 		"helpers": {
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
-				"php": "function($context, $options) {\n    return '<form>' . $options->fn($context) . '</form>';\n}"
+				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
 		},
+		"message": "Complex path variable resolved",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8268,7 +9052,6 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p><a href=\"Yehuda\">Hello</a></form>",
-		"message": "Both blocks executed",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -8281,6 +9064,7 @@
 				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
 		},
+		"message": "Both blocks executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9101,20 +9885,7 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "an inverse wrapper is passed in as a new context",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9639,6 +10410,7 @@
 	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
+		"number": "01",
 		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
 		"data": {
 			"people": []
@@ -9651,20 +10423,7 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "an inverse wrapper can be optionally called",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10189,6 +10948,7 @@
 	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
+		"number": "02",
 		"template": "{{#list people}}Hello{{^}}{{message}}{{/list}}",
 		"data": {
 			"people": [],
@@ -10202,20 +10962,7 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "the context of an inverse is the parent of the block",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10746,35 +11493,14 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'winning';\n      }",
 				"php": "function() {\n        return 'winning';\n      }"
-			},
-			"hash": {
-				"helper": {
-					"php": "function() {\n        return 'winning';\n      }",
-					"!code": true,
-					"javascript": "function () {\n        return 'winning';\n      }"
-				}
 			}
 		},
 		"expected": "winning",
 		"helpers": {
 			"./helper": {
 				"!code": true,
-				"javascript": "function () {\n        return 'fail';\n      }",
-				"php": "function() {\n        return 'fail';\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
+				"javascript": "function () { return 'fail'; }",
+				"php": "function() { return 'fail'; }"
 			}
 		},
 		"ast": {
@@ -11006,6 +11732,7 @@
 	{
 		"description": "helpers",
 		"it": "pathed lambas with parameters",
+		"number": "01",
 		"template": "{{hash/helper 1}}",
 		"data": {
 			"helper": {
@@ -11015,9 +11742,9 @@
 			},
 			"hash": {
 				"helper": {
-					"php": "function() {\n        return 'winning';\n      }",
 					"!code": true,
-					"javascript": "function () {\n        return 'winning';\n      }"
+					"javascript": "function () {\n        return 'winning';\n      }",
+					"php": "function() {\n        return 'winning';\n      }"
 				}
 			}
 		},
@@ -11025,22 +11752,8 @@
 		"helpers": {
 			"./helper": {
 				"!code": true,
-				"javascript": "function () {\n        return 'fail';\n      }",
-				"php": "function() {\n        return 'fail';\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
+				"javascript": "function () { return 'fail'; }",
+				"php": "function() { return 'fail'; }"
 			}
 		},
 		"ast": {
@@ -11272,7 +11985,7 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "providing a helpers hash",
 		"template": "Goodbye {{cruel}} {{world}}!",
 		"data": {
@@ -11286,20 +11999,7 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "helpers hash is available",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -11741,8 +12441,9 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "providing a helpers hash",
+		"number": "01",
 		"template": "Goodbye {{#iter}}{{cruel}} {{world}}{{/iter}}!",
 		"data": {
 			"iter": [
@@ -11759,20 +12460,7 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "helpers hash is available inside other blocks",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12471,7 +13159,7 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "in cases of conflict, helpers win",
 		"template": "{{{lookup}}}",
 		"data": {
@@ -12485,20 +13173,7 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "helpers hash has precedence escaped expansion",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12656,8 +13331,9 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "in cases of conflict, helpers win",
+		"number": "01",
 		"template": "{{lookup}}",
 		"data": {
 			"lookup": "Explicit"
@@ -12670,20 +13346,7 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "helpers hash has precedence simple expansion",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12841,7 +13504,7 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "the helpers hash is available is nested contexts",
 		"template": "{{#outer}}{{#inner}}{{helper}}{{/inner}}{{/outer}}",
 		"data": {
@@ -12859,20 +13522,7 @@
 				"php": "function() { return 'helper'; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "helpers hash is available in nested contexts.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13581,7 +14231,7 @@
 		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "the helper hash should augment the global hash",
 		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
 		"data": {
@@ -13589,39 +14239,15 @@
 		},
 		"expected": "found it! Goodbye cruel world!!",
 		"helpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return 'world!'; }"
-			},
-			"test_helper": {
-				"!code": true,
-				"javascript": "function() { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"test_helper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
 			"world": {
-				"php": "function() { return \"world!\"; }"
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
 			}
 		},
 		"ast": {
@@ -14467,39 +15093,22 @@
 		}
 	},
 	{
-		"description": "registration",
+		"description": "helpers - registration",
 		"it": "allows multiple globals",
 		"template": "{{testHelper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
 		"data": {
 			"cruel": "cruel"
 		},
 		"expected": "found it! Goodbye cruel world!!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
 				"php": "function() { return 'found it!'; }"
 			}
 		},
@@ -15346,851 +15955,29 @@
 		}
 	},
 	{
-		"description": "registration",
-		"it": "fails with multiple and args",
-		"template": "{{#form yehuda}}<p>{{name}}</p>{{#link}}Hello{{/link}}{{/form}}",
-		"exception": true,
-		"message": "Arg not supported with multiple helpers",
-		"ast": {
-			"type": "Program",
-			"body": [
-				{
-					"type": "BlockStatement",
-					"path": {
-						"type": "PathExpression",
-						"data": false,
-						"depth": 0,
-						"parts": [
-							"form"
-						],
-						"original": "form",
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 3
-							},
-							"end": {
-								"line": 1,
-								"column": 7
-							}
-						}
-					},
-					"params": [
-						{
-							"type": "PathExpression",
-							"data": false,
-							"depth": 0,
-							"parts": [
-								"yehuda"
-							],
-							"original": "yehuda",
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 8
-								},
-								"end": {
-									"line": 1,
-									"column": 14
-								}
-							}
-						}
-					],
-					"program": {
-						"type": "Program",
-						"body": [
-							{
-								"type": "ContentStatement",
-								"original": "<p>",
-								"value": "<p>",
-								"loc": {
-									"start": {
-										"line": 1,
-										"column": 16
-									},
-									"end": {
-										"line": 1,
-										"column": 19
-									}
-								}
-							},
-							{
-								"type": "MustacheStatement",
-								"path": {
-									"type": "PathExpression",
-									"data": false,
-									"depth": 0,
-									"parts": [
-										"name"
-									],
-									"original": "name",
-									"loc": {
-										"start": {
-											"line": 1,
-											"column": 21
-										},
-										"end": {
-											"line": 1,
-											"column": 25
-										}
-									}
-								},
-								"params": [],
-								"escaped": true,
-								"strip": {
-									"open": false,
-									"close": false
-								},
-								"loc": {
-									"start": {
-										"line": 1,
-										"column": 19
-									},
-									"end": {
-										"line": 1,
-										"column": 27
-									}
-								}
-							},
-							{
-								"type": "ContentStatement",
-								"original": "</p>",
-								"value": "</p>",
-								"loc": {
-									"start": {
-										"line": 1,
-										"column": 27
-									},
-									"end": {
-										"line": 1,
-										"column": 31
-									}
-								}
-							},
-							{
-								"type": "BlockStatement",
-								"path": {
-									"type": "PathExpression",
-									"data": false,
-									"depth": 0,
-									"parts": [
-										"link"
-									],
-									"original": "link",
-									"loc": {
-										"start": {
-											"line": 1,
-											"column": 34
-										},
-										"end": {
-											"line": 1,
-											"column": 38
-										}
-									}
-								},
-								"params": [],
-								"program": {
-									"type": "Program",
-									"body": [
-										{
-											"type": "ContentStatement",
-											"original": "Hello",
-											"value": "Hello",
-											"loc": {
-												"start": {
-													"line": 1,
-													"column": 40
-												},
-												"end": {
-													"line": 1,
-													"column": 45
-												}
-											}
-										}
-									],
-									"strip": {},
-									"loc": {
-										"start": {
-											"line": 1,
-											"column": 40
-										},
-										"end": {
-											"line": 1,
-											"column": 45
-										}
-									}
-								},
-								"openStrip": {
-									"open": false,
-									"close": false
-								},
-								"closeStrip": {
-									"open": false,
-									"close": false
-								},
-								"loc": {
-									"start": {
-										"line": 1,
-										"column": 31
-									},
-									"end": {
-										"line": 1,
-										"column": 54
-									}
-								}
-							}
-						],
-						"strip": {},
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 16
-							},
-							"end": {
-								"line": 1,
-								"column": 54
-							}
-						}
-					},
-					"openStrip": {
-						"open": false,
-						"close": false
-					},
-					"closeStrip": {
-						"open": false,
-						"close": false
-					},
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				}
-			],
-			"strip": {},
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 63
-				}
-			}
-		},
-		"opcodes": {
-			"sourceNode": [],
-			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 8
-						},
-						"end": {
-							"line": 1,
-							"column": 14
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"yehuda"
-						],
-						null,
-						null,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 8
-						},
-						"end": {
-							"line": 1,
-							"column": 14
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				},
-				{
-					"opcode": "emptyHash",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				},
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 3
-						},
-						"end": {
-							"line": 1,
-							"column": 7
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"form"
-						],
-						true,
-						true,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 3
-						},
-						"end": {
-							"line": 1,
-							"column": 7
-						}
-					}
-				},
-				{
-					"opcode": "invokeHelper",
-					"args": [
-						1,
-						"form",
-						true
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				},
-				{
-					"opcode": "append",
-					"args": [],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 63
-						}
-					}
-				}
-			],
-			"children": [
-				{
-					"sourceNode": [],
-					"opcodes": [
-						{
-							"opcode": "appendContent",
-							"args": [
-								"<p>"
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 16
-								},
-								"end": {
-									"line": 1,
-									"column": 19
-								}
-							}
-						},
-						{
-							"opcode": "getContext",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 19
-								},
-								"end": {
-									"line": 1,
-									"column": 27
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								null
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 19
-								},
-								"end": {
-									"line": 1,
-									"column": 27
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								null
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 19
-								},
-								"end": {
-									"line": 1,
-									"column": 27
-								}
-							}
-						},
-						{
-							"opcode": "getContext",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 21
-								},
-								"end": {
-									"line": 1,
-									"column": 25
-								}
-							}
-						},
-						{
-							"opcode": "lookupOnContext",
-							"args": [
-								[
-									"name"
-								],
-								null,
-								true,
-								false
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 21
-								},
-								"end": {
-									"line": 1,
-									"column": 25
-								}
-							}
-						},
-						{
-							"opcode": "invokeAmbiguous",
-							"args": [
-								"name",
-								false
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 19
-								},
-								"end": {
-									"line": 1,
-									"column": 27
-								}
-							}
-						},
-						{
-							"opcode": "appendEscaped",
-							"args": [],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 19
-								},
-								"end": {
-									"line": 1,
-									"column": 27
-								}
-							}
-						},
-						{
-							"opcode": "appendContent",
-							"args": [
-								"</p>"
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 27
-								},
-								"end": {
-									"line": 1,
-									"column": 31
-								}
-							}
-						},
-						{
-							"opcode": "getContext",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								null
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "getContext",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 34
-								},
-								"end": {
-									"line": 1,
-									"column": 38
-								}
-							}
-						},
-						{
-							"opcode": "lookupOnContext",
-							"args": [
-								[
-									"link"
-								],
-								null,
-								true,
-								false
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 34
-								},
-								"end": {
-									"line": 1,
-									"column": 38
-								}
-							}
-						},
-						{
-							"opcode": "invokeAmbiguous",
-							"args": [
-								"link",
-								true
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								0
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "pushProgram",
-							"args": [
-								null
-							],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "emptyHash",
-							"args": [],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "ambiguousBlockValue",
-							"args": [],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						},
-						{
-							"opcode": "append",
-							"args": [],
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 31
-								},
-								"end": {
-									"line": 1,
-									"column": 54
-								}
-							}
-						}
-					],
-					"children": [
-						{
-							"sourceNode": [],
-							"opcodes": [
-								{
-									"opcode": "appendContent",
-									"args": [
-										"Hello"
-									],
-									"loc": {
-										"start": {
-											"line": 1,
-											"column": 40
-										},
-										"end": {
-											"line": 1,
-											"column": 45
-										}
-									}
-								}
-							],
-							"children": [],
-							"options": {
-								"data": true,
-								"blockParams": [],
-								"knownHelpers": {
-									"helperMissing": true,
-									"blockHelperMissing": true,
-									"each": true,
-									"if": true,
-									"unless": true,
-									"with": true,
-									"log": true,
-									"lookup": true
-								}
-							},
-							"isSimple": true,
-							"blockParams": 0
-						}
-					],
-					"options": {
-						"data": true,
-						"blockParams": [],
-						"knownHelpers": {
-							"helperMissing": true,
-							"blockHelperMissing": true,
-							"each": true,
-							"if": true,
-							"unless": true,
-							"with": true,
-							"log": true,
-							"lookup": true
-						}
-					},
-					"guid": 1,
-					"isSimple": false,
-					"blockParams": 0
-				}
-			],
-			"options": {
-				"data": true,
-				"blockParams": [],
-				"knownHelpers": {
-					"helperMissing": true,
-					"blockHelperMissing": true,
-					"each": true,
-					"if": true,
-					"unless": true,
-					"with": true,
-					"log": true,
-					"lookup": true
-				}
-			},
-			"guid": 1,
-			"isSimple": true,
-			"blockParams": 0
-		}
-	},
-	{
-		"description": "decimal number literals work",
+		"description": "helpers",
 		"it": "decimal number literals work",
 		"template": "Message: {{hello -1.2 1.2}}",
 		"data": {},
 		"expected": "Message: Hello -1.2 1.2 times",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (times, times2) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      if (typeof times2 !== 'number') { times2 = 'NaN'; }\n      return 'Hello ' + times + ' ' + times2 + ' times';\n    }",
-				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (times, times2) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      if (typeof times2 !== 'number') { times2 = 'NaN'; }\n      return 'Hello ' + times + ' ' + times2 + ' times';\n    }",
+				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
+		"message": "template with a negative integer literal",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16480,47 +16267,29 @@
 		}
 	},
 	{
-		"description": "negative number literals work",
+		"description": "helpers",
 		"it": "negative number literals work",
 		"template": "Message: {{hello -12}}",
 		"data": {},
 		"expected": "Message: Hello -12 times",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
-				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
+				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
+		"message": "template with a negative integer literal",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16779,47 +16548,29 @@
 		}
 	},
 	{
-		"description": "String literal parameters",
+		"description": "helpers - String literal parameters",
 		"it": "simple literals work",
 		"template": "Message: {{hello \"world\" 12 true false}}",
 		"data": {},
 		"expected": "Message: Hello world 12 times: true false",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (param, times, bool1, bool2) {\n        if (typeof times !== 'number') { times = 'NaN'; }\n        if (typeof bool1 !== 'boolean') { bool1 = 'NaB'; }\n        if (typeof bool2 !== 'boolean') { bool2 = 'NaB'; }\n        return 'Hello ' + param + ' ' + times + ' times: ' + bool1 + ' ' + bool2;\n      }",
-				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (param, times, bool1, bool2) {\n        if (typeof times !== 'number') { times = 'NaN'; }\n        if (typeof bool1 !== 'boolean') { bool1 = 'NaB'; }\n        if (typeof bool2 !== 'boolean') { bool2 = 'NaB'; }\n        return 'Hello ' + param + ' ' + times + ' times: ' + bool1 + ' ' + bool2;\n      }",
+				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
+		"message": "template with a simple String literal",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17171,47 +16922,29 @@
 		}
 	},
 	{
-		"description": "String literal parameters",
+		"description": "helpers - String literal parameters",
 		"it": "escaping a String is possible",
 		"template": "Message: {{{hello \"\\\"world\\\"\"}}}",
 		"data": {},
 		"expected": "Message: Hello \"world\"",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (param) { return 'Hello ' + param; }",
-				"php": "function($param) { return 'Hello '.$param; }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (param) { return 'Hello ' + param; }",
+				"php": "function($param) { return \"Hello \" . $param; }"
 			}
 		},
+		"message": "template with an escaped String literal",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17470,47 +17203,29 @@
 		}
 	},
 	{
-		"description": "String literal parameters",
+		"description": "helpers - String literal parameters",
 		"it": "it works with ' marks",
 		"template": "Message: {{{hello \"Alan's world\"}}}",
 		"data": {},
 		"expected": "Message: Hello Alan's world",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (param) { return 'Hello ' + param; }",
-				"php": "function($param) { return \"Hello \" . $param; }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (param) { return 'Hello ' + param; }",
+				"php": "function($param) { return \"Hello \" . $param; }"
 			}
 		},
+		"message": "template with a ' mark",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17769,47 +17484,30 @@
 		}
 	},
 	{
-		"description": "negative number literals work",
+		"description": "helpers",
 		"it": "negative number literals work",
+		"number": "01",
 		"template": "Message: {{hello -12}}",
 		"data": {},
 		"expected": "Message: Hello -12 times",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
-				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
+				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
+		"message": "template with a negative integer literal",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18068,7 +17766,7 @@
 		}
 	},
 	{
-		"description": "multiple parameters",
+		"description": "helpers - multiple parameters",
 		"it": "simple multi-params work",
 		"template": "Message: {{goodbye cruel world}}",
 		"data": {
@@ -18077,41 +17775,23 @@
 		},
 		"expected": "Message: Goodbye cruel world",
 		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }",
-				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }",
+				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
 		},
+		"message": "regular helpers with multiple params",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18451,7 +18131,7 @@
 		}
 	},
 	{
-		"description": "multiple parameters",
+		"description": "helpers - multiple parameters",
 		"it": "block multi-params work",
 		"template": "Message: {{#goodbye cruel world}}{{greeting}} {{adj}} {{noun}}{{/goodbye}}",
 		"data": {
@@ -18460,41 +18140,23 @@
 		},
 		"expected": "Message: Goodbye cruel world",
 		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});\n      }",
-				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});\n      }",
+				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
 			}
 		},
+		"message": "block helpers with multiple params",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -19401,19 +19063,29 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" times=12}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD 12 TIMES",
-		"message": "Helper output hash",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
 			}
 		},
+		"message": "Helper output hash",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -19819,19 +19491,28 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash with booleans",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=true}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD",
-		"message": "Helper output hash",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
+		"message": "Helper output hash",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20237,19 +19918,29 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash with booleans",
+		"number": "01",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=false}}",
 		"data": {},
 		"expected": "NOT PRINTING",
-		"message": "Boolean helper parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
+		"message": "Boolean helper parameter honored",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20655,19 +20346,29 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash",
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
-		"message": "Hash parameters output",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
 			}
 		},
+		"message": "Hash parameters output",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21086,19 +20787,29 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with single quoted stings",
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
-		"message": "Hash parameters output",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
 			}
 		},
+		"message": "Hash parameters output",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21517,19 +21228,28 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with booleans",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=true}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world",
-		"message": "Boolean hash parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
+		"message": "Boolean hash parameter honored",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21948,19 +21668,29 @@
 		}
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with booleans",
+		"number": "01",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=false}}world{{/goodbye}}",
 		"data": {},
 		"expected": "NOT PRINTING",
-		"message": "Boolean hash parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
+		"message": "Boolean hash parameter honored",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22379,11 +22109,23 @@
 		}
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a context is not found, helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
-		"exception": true,
-		"message": "/Missing helper: \"link_to\"/",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/Missing helper: \"link_to\"/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22821,7 +22563,7 @@
 		}
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a context is not found, custom helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
 		"data": {
@@ -22830,39 +22572,20 @@
 		},
 		"expected": "Hello <a>world</a>",
 		"helpers": {
-			"helperMissing": {
-				"!code": true,
-				"javascript": "function (mesg, options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>' + mesg + '</a>');\n          }\n        }",
-				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function (mesg, options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>' + mesg + '</a>');\n          }\n        }",
+				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
 			}
 		},
 		"ast": {
@@ -23302,7 +23025,7 @@
 		}
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a value is not found, custom helperMissing is used",
 		"template": "{{hello}} {{link_to}}",
 		"data": {
@@ -23311,39 +23034,20 @@
 		},
 		"expected": "Hello <a>winning</a>",
 		"helpers": {
-			"helperMissing": {
-				"!code": true,
-				"javascript": "function (options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>winning</a>');\n          }\n        }",
-				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function (options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>winning</a>');\n          }\n        }",
+				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
 			}
 		},
 		"ast": {
@@ -23725,12 +23429,11 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Known helper should render helper",
 		"template": "{{hello}}",
 		"data": {},
 		"expected": "foo",
-		"message": "'foo' should === 'foo",
 		"compileOptions": {
 			"knownHelpers": {
 				"helperMissing": true,
@@ -23747,10 +23450,20 @@
 			"blockParams": []
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"hello": {
 				"!code": true,
-				"javascript": "function () { return 'foo'; }",
-				"php": "function() { return \"foo\"; }"
+				"javascript": "function () {\n          return 'foo';\n        }",
+				"php": "function() {\n          return 'foo';\n        }"
 			}
 		},
 		"ast": {
@@ -23911,12 +23624,11 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Unknown helper in knownHelpers only mode should be passed as undefined",
 		"template": "{{typeof hello}}",
 		"data": {},
 		"expected": "undefined",
-		"message": "'undefined' should === 'undefined",
 		"compileOptions": {
 			"knownHelpers": {
 				"helperMissing": true,
@@ -23934,6 +23646,16 @@
 			"blockParams": []
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"typeof": {
 				"!code": true,
 				"javascript": "function (arg) { return typeof arg; }",
@@ -23941,8 +23663,8 @@
 			},
 			"hello": {
 				"!code": true,
-				"javascript": "function () { return 'foo'; }",
-				"php": "function() { return \"foo\"; }"
+				"javascript": "function () {\n          return 'foo';\n        }",
+				"php": "function() {\n          return 'foo';\n        }"
 			}
 		},
 		"ast": {
@@ -24161,12 +23883,11 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Builtin helpers available in knownHelpers only mode",
 		"template": "{{#unless foo}}bar{{/unless}}",
 		"data": {},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true,
 			"data": true,
@@ -24180,6 +23901,18 @@
 				"with": true,
 				"log": true,
 				"lookup": true
+			}
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -24472,14 +24205,13 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Field lookup works in knownHelpers only mode",
 		"template": "{{foo}}",
 		"data": {
 			"foo": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true,
 			"data": true,
@@ -24493,6 +24225,18 @@
 				"with": true,
 				"log": true,
 				"lookup": true
+			}
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -24639,14 +24383,13 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Conditional blocks work in knownHelpers only mode",
 		"template": "{{#foo}}bar{{/foo}}",
 		"data": {
 			"foo": "baz"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true,
 			"data": true,
@@ -24660,6 +24403,18 @@
 				"with": true,
 				"log": true,
 				"lookup": true
+			}
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -24943,14 +24698,13 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Invert blocks work in knownHelpers only mode",
 		"template": "{{^foo}}bar{{/foo}}",
 		"data": {
 			"foo": false
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true,
 			"data": true,
@@ -24964,6 +24718,18 @@
 				"with": true,
 				"log": true,
 				"lookup": true
+			}
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -25247,7 +25013,7 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Functions are bound to the context in knownHelpers only mode",
 		"template": "{{foo}}",
 		"data": {
@@ -25259,7 +25025,6 @@
 			"bar": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true,
 			"data": true,
@@ -25273,6 +25038,18 @@
 				"with": true,
 				"log": true,
 				"lookup": true
+			}
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -25419,299 +25196,26 @@
 		}
 	},
 	{
-		"description": "knownHelpers",
-		"it": "Unknown helper call in knownHelpers only mode should throw",
-		"template": "{{typeof hello}}",
-		"exception": true,
-		"ast": {
-			"type": "Program",
-			"body": [
-				{
-					"type": "MustacheStatement",
-					"path": {
-						"type": "PathExpression",
-						"data": false,
-						"depth": 0,
-						"parts": [
-							"typeof"
-						],
-						"original": "typeof",
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 2
-							},
-							"end": {
-								"line": 1,
-								"column": 8
-							}
-						}
-					},
-					"params": [
-						{
-							"type": "PathExpression",
-							"data": false,
-							"depth": 0,
-							"parts": [
-								"hello"
-							],
-							"original": "hello",
-							"loc": {
-								"start": {
-									"line": 1,
-									"column": 9
-								},
-								"end": {
-									"line": 1,
-									"column": 14
-								}
-							}
-						}
-					],
-					"escaped": true,
-					"strip": {
-						"open": false,
-						"close": false
-					},
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				}
-			],
-			"strip": {},
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 16
-				}
-			}
-		},
-		"opcodes": {
-			"sourceNode": [],
-			"opcodes": [
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 9
-						},
-						"end": {
-							"line": 1,
-							"column": 14
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"hello"
-						],
-						null,
-						null,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 9
-						},
-						"end": {
-							"line": 1,
-							"column": 14
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "emptyHash",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 2
-						},
-						"end": {
-							"line": 1,
-							"column": 8
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"typeof"
-						],
-						true,
-						true,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 2
-						},
-						"end": {
-							"line": 1,
-							"column": 8
-						}
-					}
-				},
-				{
-					"opcode": "invokeHelper",
-					"args": [
-						1,
-						"typeof",
-						true
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "appendEscaped",
-					"args": [],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				}
-			],
-			"children": [],
-			"options": {
-				"data": true,
-				"blockParams": [],
-				"knownHelpers": {
-					"helperMissing": true,
-					"blockHelperMissing": true,
-					"each": true,
-					"if": true,
-					"unless": true,
-					"with": true,
-					"log": true,
-					"lookup": true
-				}
-			},
-			"isSimple": true,
-			"blockParams": 0
-		}
-	},
-	{
-		"description": "blockHelperMissing",
+		"description": "helpers - blockHelperMissing",
 		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {
 			"truthy": {
 				"!code": true,
-				"javascript": "function () { return true; }",
-				"php": "function() { return true; }"
+				"javascript": "function () {\n        return true;\n      }",
+				"php": "function() {\n        return true;\n      }"
 			}
 		},
 		"expected": "yep",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
 				"php": "function() { return 'found it!'; }"
 			}
 		},
@@ -26043,7 +25547,7 @@
 		}
 	},
 	{
-		"description": "blockHelperMissing",
+		"description": "helpers - blockHelperMissing",
 		"it": "lambdas resolved by blockHelperMissing are bound to the context",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {
@@ -26059,36 +25563,18 @@
 			}
 		},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -26417,12 +25903,22 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in ambiguous mustache calls",
 		"template": "{{helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -26437,35 +25933,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -26662,12 +26129,22 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in helper mustache calls",
 		"template": "{{helper 1}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -26682,35 +26159,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -26940,12 +26388,22 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in ambiguous block calls",
 		"template": "{{#helper}}{{/helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -26960,35 +26418,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -27276,12 +26705,22 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in simple block calls",
 		"template": "{{#./helper}}{{/./helper}}",
 		"data": {},
 		"expected": "missing: ./helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -27296,35 +26735,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -27563,12 +26973,22 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in helper block calls",
 		"template": "{{#helper 1}}{{/helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -27583,35 +27003,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -27872,7 +27263,7 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in known helper calls",
 		"template": "{{helper}}",
 		"data": {},
@@ -27894,6 +27285,16 @@
 			"blockParams": []
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -28069,7 +27470,7 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include full id",
 		"template": "{{#foo.helper}}{{/foo.helper}}",
 		"data": {
@@ -28077,6 +27478,16 @@
 		},
 		"expected": "missing: foo.helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -28091,35 +27502,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -28360,7 +27742,7 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include full id if a hash is passed",
 		"template": "{{#foo.helper bar=baz}}{{/foo.helper}}",
 		"data": {
@@ -28368,6 +27750,16 @@
 		},
 		"expected": "helper missing: foo.helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -28382,35 +27774,6 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
 		},
 		"ast": {
@@ -28754,7 +28117,7 @@
 		}
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "helpers take precedence over same-named context properties",
 		"template": "{{goodbye}} {{cruel world}}",
 		"data": {
@@ -28762,12 +28125,21 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
-		"message": "Helper executed",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
-				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']);\n        }"
+				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
 			},
 			"cruel": {
 				"!code": true,
@@ -28775,6 +28147,7 @@
 				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
 			}
 		},
+		"message": "Helper executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -29212,7 +28585,7 @@
 		}
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "helpers take precedence over same-named context properties$",
 		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}}",
 		"data": {
@@ -29220,8 +28593,17 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
-		"message": "Helper executed",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
@@ -29233,6 +28615,7 @@
 				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
 			}
 		},
+		"message": "Helper executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -29773,7 +29156,7 @@
 		}
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "Scoped names take precedence over helpers",
 		"template": "{{this.goodbye}} {{cruel world}} {{cruel this.goodbye}}",
 		"data": {
@@ -29781,8 +29164,17 @@
 			"world": "world"
 		},
 		"expected": "goodbye cruel WORLD cruel GOODBYE",
-		"message": "Helper not executed",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
@@ -29794,6 +29186,7 @@
 				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
 			}
 		},
+		"message": "Helper not executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -30423,7 +29816,7 @@
 		}
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "Scoped names take precedence over block helpers",
 		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}} {{this.goodbye}}",
 		"data": {
@@ -30431,8 +29824,17 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD goodbye",
-		"message": "Helper executed",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
@@ -30444,6 +29846,7 @@
 				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
 			}
 		},
+		"message": "Helper executed",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -31118,7 +30521,7 @@
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should take presedence over context values",
 		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
 		"data": {
@@ -31126,27 +30529,6 @@
 		},
 		"expected": "1foo",
 		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -31156,6 +30538,11 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
+				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
 		"ast": {
@@ -31716,12 +31103,22 @@
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should take presedence over helper values",
 		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
 		"data": {},
 		"expected": "1foo",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"value": {
 				"!code": true,
 				"javascript": "function () {\n          return 'foo';\n        }",
@@ -31733,32 +31130,6 @@
 				"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return 'world!'; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -32317,7 +31688,7 @@
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should not take presedence over pathed values",
 		"template": "{{#goodbyes as |value|}}{{./value}}{{/goodbyes}}{{value}}",
 		"data": {
@@ -32325,32 +31696,6 @@
 		},
 		"expected": "barfoo",
 		"helpers": {
-			"value": {
-				"!code": true,
-				"javascript": "function () {\n          return 'foo';\n        }",
-				"php": "function() {\n          return 'foo';\n        }"
-			},
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -32360,6 +31705,16 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"value": {
+				"!code": true,
+				"javascript": "function () {\n          return 'foo';\n        }",
+				"php": "function() {\n          return 'foo';\n        }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
+				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
 		"ast": {
@@ -32919,7 +32274,7 @@
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should take presednece over parent block params",
 		"template": "{{#goodbyes as |value|}}{{#goodbyes}}{{value}}{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{/goodbyes}}{{/goodbyes}}{{value}}",
 		"data": {
@@ -32927,27 +32282,6 @@
 		},
 		"expected": "13foo",
 		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
-				"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -32957,6 +32291,10 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }"
 			}
 		},
 		"ast": {
@@ -34138,7 +33476,7 @@
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should allow block params on chained helpers",
 		"template": "{{#if bar}}{{else goodbyes as |value|}}{{value}}{{/if}}{{value}}",
 		"data": {
@@ -34146,27 +33484,6 @@
 		},
 		"expected": "1foo",
 		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -34176,6 +33493,11 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
+				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		},
 		"ast": {
@@ -34980,6 +34302,2296 @@
 			},
 			"guid": 2,
 			"isSimple": false,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too few arguments",
+		"template": "{{#if}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 5
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 14
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						0,
+						"if"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, string",
+		"template": "{{#if test \"string\"}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 5
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"test"
+							],
+							"original": "test",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 6
+								},
+								"end": {
+									"line": 1,
+									"column": 10
+								}
+							}
+						},
+						{
+							"type": "StringLiteral",
+							"value": "string",
+							"original": "string",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 11
+								},
+								"end": {
+									"line": 1,
+									"column": 19
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 28
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"test"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"string"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 19
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						2,
+						"if"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 28
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, undefined",
+		"template": "{{#if test undefined}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 5
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"test"
+							],
+							"original": "test",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 6
+								},
+								"end": {
+									"line": 1,
+									"column": 10
+								}
+							}
+						},
+						{
+							"type": "UndefinedLiteral",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 11
+								},
+								"end": {
+									"line": 1,
+									"column": 20
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"test"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"undefined"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 20
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						2,
+						"if"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 29
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, null",
+		"template": "{{#if test null}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"if"
+						],
+						"original": "if",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 5
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"test"
+							],
+							"original": "test",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 6
+								},
+								"end": {
+									"line": 1,
+									"column": 10
+								}
+							}
+						},
+						{
+							"type": "NullLiteral",
+							"original": null,
+							"value": null,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 11
+								},
+								"end": {
+									"line": 1,
+									"column": 15
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 24
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"test"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"null"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 15
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						2,
+						"if"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "unless helper - too few arguments",
+		"template": "{{#unless}}{{/unless}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#unless requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"unless"
+						],
+						"original": "unless",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 9
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 22
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						0,
+						"unless"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 22
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "unless helper - too many arguments",
+		"template": "{{#unless test null}}{{/unless}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#unless requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"unless"
+						],
+						"original": "unless",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 9
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"test"
+							],
+							"original": "test",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 10
+								},
+								"end": {
+									"line": 1,
+									"column": 14
+								}
+							}
+						},
+						{
+							"type": "NullLiteral",
+							"original": null,
+							"value": null,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 15
+								},
+								"end": {
+									"line": 1,
+									"column": 19
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 32
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 10
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"test"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 10
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "pushLiteral",
+					"args": [
+						"null"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 15
+						},
+						"end": {
+							"line": 1,
+							"column": 19
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						2,
+						"unless"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "with helper - too few arguments",
+		"template": "{{#with}}{{/with}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#with requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"with"
+						],
+						"original": "with",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 7
+							}
+						}
+					},
+					"params": [],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 18
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						0,
+						"with"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 18
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "with helper - too many arguments",
+		"template": "{{#with test \"string\"}}{{/with}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#with requires exactly one argument/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"with"
+						],
+						"original": "with",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 7
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"test"
+							],
+							"original": "test",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 8
+								},
+								"end": {
+									"line": 1,
+									"column": 12
+								}
+							}
+						},
+						{
+							"type": "StringLiteral",
+							"value": "string",
+							"original": "string",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 13
+								},
+								"end": {
+									"line": 1,
+									"column": 21
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [],
+						"strip": {}
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 32
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 8
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"test"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 8
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "pushString",
+					"args": [
+						"string"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 13
+						},
+						"end": {
+							"line": 1,
+							"column": 21
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						2,
+						"with"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [],
+					"children": [],
+					"options": {
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 0
+				}
+			],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "helpers - the lookupProperty-option",
+		"it": "should be passed to custom helpers",
+		"template": "{{testHelper}}",
+		"data": {
+			"testProperty": "abc"
+		},
+		"expected": "abc",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }"
+			}
+		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "MustacheStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"testHelper"
+						],
+						"original": "testHelper",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 2
+							},
+							"end": {
+								"line": 1,
+								"column": 12
+							}
+						}
+					},
+					"params": [],
+					"escaped": true,
+					"strip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 14
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"testHelper"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"testHelper",
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					}
+				}
+			],
+			"children": [],
+			"options": {
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true,
 			"blockParams": 0
 		}
 	}

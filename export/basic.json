@@ -7,20 +7,6 @@
 			"foo": "foo"
 		},
 		"expected": "foo",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -222,20 +208,6 @@
 			"foo": "food"
 		},
 		"expected": "{{foo}}",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -309,25 +281,12 @@
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "01",
 		"template": "content \\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
 		"expected": "content {{foo}}",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -432,25 +391,12 @@
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "02",
 		"template": "\\\\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
 		"expected": "\\food",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -678,25 +624,12 @@
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "03",
 		"template": "content \\\\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
 		"expected": "content \\food",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -924,25 +857,12 @@
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "04",
 		"template": "\\\\ {{foo}}",
 		"data": {
 			"foo": "food"
 		},
 		"expected": "\\\\ food",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -1176,20 +1096,7 @@
 			"world": "world"
 		},
 		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "It works if all the required keys are provided",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -1636,20 +1543,6 @@
 		"template": "{{.}}{{length}}",
 		"data": "bye",
 		"expected": "bye3",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"note": "PHP strings do not have properties",
 		"helpers": {
 			"length": {
@@ -1948,21 +1841,8 @@
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
+		"data": null,
 		"expected": "Goodbye\n\n!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2357,22 +2237,10 @@
 	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
+		"number": "01",
 		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
+		"data": null,
 		"expected": "Goodbye",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2928,20 +2796,7 @@
 			"world": "world"
 		},
 		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "comments are ignored",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3403,23 +3258,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "01",
 		"template": "    {{~! comment ~}}      blah",
 		"data": {},
 		"expected": "blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3528,23 +3370,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "02",
 		"template": "    {{~!-- long-comment --~}}      blah",
 		"data": {},
 		"expected": "blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3653,23 +3482,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "03",
 		"template": "    {{! comment ~}}      blah",
 		"data": {},
 		"expected": "    blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3793,23 +3609,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "04",
 		"template": "    {{!-- long-comment --~}}      blah",
 		"data": {},
 		"expected": "    blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3933,23 +3736,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "05",
 		"template": "    {{~! comment}}      blah",
 		"data": {},
 		"expected": "      blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4057,23 +3847,10 @@
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "06",
 		"template": "    {{~!-- long-comment --}}      blah",
 		"data": {},
 		"expected": "      blah",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4187,20 +3964,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "booleans show the contents when true",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4747,26 +4511,14 @@
 	{
 		"description": "basic context",
 		"it": "boolean",
+		"number": "01",
 		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
 		"data": {
 			"goodbye": false,
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "booleans do not show the contents when false",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5319,20 +5071,6 @@
 			"num2": 0
 		},
 		"expected": "num1: 42, num2: 0",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5745,23 +5483,10 @@
 	{
 		"description": "basic context",
 		"it": "zeros",
+		"number": "01",
 		"template": "num: {{.}}",
 		"data": 0,
 		"expected": "num: 0",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5929,6 +5654,7 @@
 	{
 		"description": "basic context",
 		"it": "zeros",
+		"number": "02",
 		"template": "num: {{num1/num2}}",
 		"data": {
 			"num1": {
@@ -5936,20 +5662,6 @@
 			}
 		},
 		"expected": "num: 0",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -6134,20 +5846,6 @@
 			"val2": false
 		},
 		"expected": "val1: false, val2: false",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -6560,23 +6258,10 @@
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "01",
 		"template": "val: {{.}}",
 		"data": false,
 		"expected": "val: false",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -6744,6 +6429,7 @@
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "02",
 		"template": "val: {{val1/val2}}",
 		"data": {
 			"val1": {
@@ -6751,20 +6437,6 @@
 			}
 		},
 		"expected": "val: false",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -6943,26 +6615,13 @@
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "03",
 		"template": "val1: {{{val1}}}, val2: {{{val2}}}",
 		"data": {
 			"val1": false,
 			"val2": false
 		},
 		"expected": "val1: false, val2: false",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7375,6 +7034,7 @@
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "04",
 		"template": "val: {{{val1/val2}}}",
 		"data": {
 			"val1": {
@@ -7382,20 +7042,6 @@
 			}
 		},
 		"expected": "val: false",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7583,20 +7229,6 @@
 			}
 		},
 		"expected": "true true object",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7855,6 +7487,7 @@
 	{
 		"description": "basic context",
 		"it": "should handle undefined and null",
+		"number": "01",
 		"template": "{{undefined}}",
 		"data": {
 			"undefined": {
@@ -7864,20 +7497,6 @@
 			}
 		},
 		"expected": "undefined!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8068,6 +7687,7 @@
 	{
 		"description": "basic context",
 		"it": "should handle undefined and null",
+		"number": "02",
 		"template": "{{null}}",
 		"data": {
 			"null": {
@@ -8077,20 +7697,6 @@
 			}
 		},
 		"expected": "null!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8286,20 +7892,6 @@
 		"template": "Alan's\nTest",
 		"data": {},
 		"expected": "Alan's\nTest",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8373,23 +7965,10 @@
 	{
 		"description": "basic context",
 		"it": "newlines",
+		"number": "01",
 		"template": "Alan's\rTest",
 		"data": {},
 		"expected": "Alan's\rTest",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8466,20 +8045,7 @@
 		"template": "Awesome's",
 		"data": {},
 		"expected": "Awesome's",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "text is escaped so that it doesn't get caught on single quotes",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8553,23 +8119,11 @@
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "01",
 		"template": "Awesome\\",
 		"data": {},
 		"expected": "Awesome\\",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "text is escaped so that the closing quote can't be ignored",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8643,23 +8197,11 @@
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "02",
 		"template": "Awesome\\\\ foo",
 		"data": {},
 		"expected": "Awesome\\\\ foo",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "text is escaped so that it doesn't mess up backslashes",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8733,25 +8275,13 @@
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "03",
 		"template": "Awesome {{foo}}",
 		"data": {
 			"foo": "\\"
 		},
 		"expected": "Awesome \\",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "text is escaped so that it doesn't mess up backslashes",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8979,23 +8509,11 @@
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "04",
 		"template": " ' ' ",
 		"data": {},
 		"expected": " ' ' ",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "double quotes never produce invalid javascript",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9074,20 +8592,7 @@
 			"awesome": "&'\\<>"
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "expressions with 3 handlebars aren't escaped",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9284,25 +8789,13 @@
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "01",
 		"template": "{{&awesome}}",
 		"data": {
 			"awesome": "&'\\<>"
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "expressions with {{& handlebars aren't escaped",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9499,25 +8992,13 @@
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "02",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": "&\"'`\\<>"
 		},
 		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "by default expressions should be escaped",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9714,25 +9195,13 @@
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "03",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": "Escaped, <b> looks like: &lt;b&gt;"
 		},
 		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "escaping should properly handle amperstands",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9938,20 +9407,7 @@
 			}
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions returning safestrings aren't escaped",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10157,20 +9613,7 @@
 			}
 		},
 		"expected": "Awesome",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions are called and render their output",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10367,6 +9810,7 @@
 	{
 		"description": "basic context",
 		"it": "functions",
+		"number": "01",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": {
@@ -10377,20 +9821,7 @@
 			"more": "More awesome"
 		},
 		"expected": "More awesome",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions are bound to the context",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10597,20 +10028,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions are called with context arguments",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10877,20 +10295,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions are called with context arguments",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -11157,20 +10562,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "functions are called with context arguments",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -11644,20 +11036,7 @@
 			}
 		},
 		"expected": "inner 1",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "block functions are called with context and options",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12065,20 +11444,7 @@
 			}
 		},
 		"expected": "inner 1",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "block functions are called with context and options",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12699,25 +12065,12 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (options) { return options.fn(this); }",
-				"php": "function($options) { return $options->fn($options->scope); }"
+				"javascript": "function (options) {\n        return options.fn(this);\n      }",
+				"php": "function($options) {\n        return $options->fn($options->scope);\n      }"
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "block functions are called with options",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13054,25 +12407,12 @@
 				"awesome": {
 					"!code": true,
 					"javascript": "function () { return this; }",
-					"php": "function($scope) { return $scope; }"
+					"php": "function($context) { return $context; }"
 				}
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "block functions are called with options",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13366,20 +12706,7 @@
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "block functions are called with options",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13885,20 +13212,7 @@
 			"foo-bar": "baz"
 		},
 		"expected": "baz",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Paths can contain hyphens (-)",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14095,6 +13409,7 @@
 	{
 		"description": "basic context",
 		"it": "paths with hyphens",
+		"number": "01",
 		"template": "{{foo.foo-bar}}",
 		"data": {
 			"foo": {
@@ -14102,20 +13417,7 @@
 			}
 		},
 		"expected": "baz",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Paths can contain hyphens (-)",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14263,6 +13565,7 @@
 	{
 		"description": "basic context",
 		"it": "paths with hyphens",
+		"number": "02",
 		"template": "{{foo/foo-bar}}",
 		"data": {
 			"foo": {
@@ -14270,20 +13573,7 @@
 			}
 		},
 		"expected": "baz",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Paths can contain hyphens (-)",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14438,20 +13728,7 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Nested paths access nested objects",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14668,20 +13945,7 @@
 			}
 		},
 		"expected": "Goodbye  world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Nested paths access nested objects with empty string",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14898,20 +14162,7 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Literal paths can be used",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15121,6 +14372,7 @@
 	{
 		"description": "basic context",
 		"it": "literal paths",
+		"number": "01",
 		"template": "Goodbye {{[foo bar]/expression}} world!",
 		"data": {
 			"foo bar": {
@@ -15128,20 +14380,7 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Literal paths can be used",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15356,20 +14595,6 @@
 			"foo bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15628,25 +14853,12 @@
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "01",
 		"template": "Goodbye {{\"foo bar\"}} world!",
 		"data": {
 			"foo bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15901,25 +15113,12 @@
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "02",
 		"template": "Goodbye {{'foo bar'}} world!",
 		"data": {
 			"foo bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16174,25 +15373,12 @@
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "03",
 		"template": "Goodbye {{\"foo[bar\"}} world!",
 		"data": {
 			"foo[bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16447,25 +15633,12 @@
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "04",
 		"template": "Goodbye {{\"foo'bar\"}} world!",
 		"data": {
 			"foo'bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16720,25 +15893,12 @@
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "05",
 		"template": "Goodbye {{'foo\"bar'}} world!",
 		"data": {
 			"foo\"bar": "beautiful"
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -16996,19 +16156,8 @@
 		"template": "test: {{.}}",
 		"data": null,
 		"expected": "test: ",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
+		"helpers": {
+			"helper": "awesome"
 		},
 		"ast": {
 			"type": "Program",
@@ -17184,20 +16333,6 @@
 			}
 		},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17345,25 +16480,12 @@
 	{
 		"description": "basic context",
 		"it": "complex but empty paths",
+		"number": "01",
 		"template": "{{person/name}}",
 		"data": {
 			"person": {}
 		},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17520,20 +16642,7 @@
 			]
 		},
 		"expected": "goodbyeGoodbyeGOODBYE",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "This keyword in paths evaluates to current context",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -17927,6 +17036,7 @@
 	{
 		"description": "basic context",
 		"it": "this keyword in paths",
+		"number": "01",
 		"template": "{{#hellos}}{{this/text}}{{/hellos}}",
 		"data": {
 			"hellos": [
@@ -17942,20 +17052,7 @@
 			]
 		},
 		"expected": "helloHelloHELLO",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "This keyword evaluates in more complex paths",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18358,25 +17455,12 @@
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
+		"number": "01",
 		"template": "{{[this]}}",
 		"data": {
 			"this": "bar"
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18522,6 +17606,7 @@
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
+		"number": "02",
 		"template": "{{text/[this]}}",
 		"data": {
 			"text": {
@@ -18529,20 +17614,6 @@
 			}
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18706,20 +17777,7 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "This keyword in paths evaluates to current context",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -19222,6 +18280,7 @@
 	{
 		"description": "basic context",
 		"it": "this keyword in helpers",
+		"number": "01",
 		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
 		"data": {
 			"hellos": [
@@ -19244,20 +18303,7 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "This keyword evaluates in more complex paths",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -19769,6 +18815,7 @@
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
+		"number": "01",
 		"template": "{{foo [this]}}",
 		"data": {
 			"foo": {
@@ -19779,20 +18826,6 @@
 			"this": "bar"
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20047,6 +19080,7 @@
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
+		"number": "02",
 		"template": "{{foo text/[this]}}",
 		"data": {
 			"foo": {
@@ -20059,20 +19093,6 @@
 			}
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20332,20 +19352,6 @@
 		"template": "{{\"foo\"}}",
 		"data": {},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20538,25 +19544,12 @@
 	{
 		"description": "basic context",
 		"it": "pass string literals",
+		"number": "01",
 		"template": "{{\"foo\"}}",
 		"data": {
 			"foo": "bar"
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20749,6 +19742,7 @@
 	{
 		"description": "basic context",
 		"it": "pass string literals",
+		"number": "02",
 		"template": "{{#\"foo\"}}{{.}}{{/\"foo\"}}",
 		"data": {
 			"foo": [
@@ -20757,20 +19751,6 @@
 			]
 		},
 		"expected": "barbaz",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21163,20 +20143,6 @@
 		"template": "{{12}}",
 		"data": {},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21369,25 +20335,12 @@
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "01",
 		"template": "{{12}}",
 		"data": {
 			"12": "bar"
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21580,23 +20533,10 @@
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "02",
 		"template": "{{12.34}}",
 		"data": {},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -21789,25 +20729,12 @@
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "03",
 		"template": "{{12.34}}",
 		"data": {
 			"12.34": "bar"
 		},
 		"expected": "bar",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22000,6 +20927,7 @@
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "04",
 		"template": "{{12.34 1}}",
 		"data": {
 			"12.34": {
@@ -22009,20 +20937,6 @@
 			}
 		},
 		"expected": "bar1",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22251,20 +21165,6 @@
 		"template": "{{true}}",
 		"data": {},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22457,25 +21357,12 @@
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
+		"number": "01",
 		"template": "{{true}}",
 		"data": {
 			"": "foo"
 		},
 		"expected": "",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22668,25 +21555,12 @@
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
+		"number": "02",
 		"template": "{{false}}",
 		"data": {
 			"false": "foo"
 		},
 		"expected": "foo",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -22891,22 +21765,8 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (arg) {\n        return arg;\n      }",
-				"php": "function($arg) {\n        return $arg;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
+				"javascript": "function (arg) { return arg; }",
+				"php": "function($arg) { return $arg; }"
 			}
 		},
 		"ast": {

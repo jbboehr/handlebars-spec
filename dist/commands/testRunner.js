@@ -117,7 +117,7 @@ function tokenize(template) {
     return out;
 }
 function unstringifyHelpers(helpers) {
-    if (!helpers || helpers === null || typeof helpers !== "object") {
+    if (!helpers || helpers === null || typeof helpers !== 'object') {
         return {};
     }
     const ret = {};
