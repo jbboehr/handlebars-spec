@@ -79,7 +79,7 @@ function expectTemplate(template) {
 }
 exports.expectTemplate = expectTemplate;
 function addExpectTemplate(xt) {
-    const { testContext, indices, tests } = exports.globalContext;
+    const { testContext, indices, tests, isParser } = exports.globalContext;
     const { description, it, extraEquals } = testContext;
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
         console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
@@ -120,6 +120,9 @@ function addExpectTemplate(xt) {
     }
     if (number === '00') {
         delete spec.number;
+    }
+    if (isParser) {
+        delete spec.data;
     }
     // Apply patches and push to tests
     try {
@@ -211,11 +214,70 @@ function detectGlobalPartials() {
     });
     return globalPartials;
 }
-// these functions don't need to do anything, just warn and ignore
-function equals(...args) {
-    log('equals called', ...args);
+// only used by parser and tokenizer
+function equals(actual, expected) {
+    let { testContext, isParser } = exports.globalContext;
+    if (isParser) {
+        // Read the template from the lexer
+        let template = testContext.template || Handlebars.Parser.lexer.matched;
+        expectTemplate(template)
+            .withInput(undefined)
+            .toCompileTo(expected);
+    }
+    else {
+        log('equals called', actual, expected);
+    }
 }
 exports.equals = equals;
+function shouldThrow(cb, a, b) {
+    let { testContext, isParser } = exports.globalContext;
+    if (isParser) {
+        testContext.exception = b || true;
+        let ex = null;
+        try {
+            cb();
+        }
+        catch (e) {
+            ex = e;
+        }
+        if (!ex) {
+            throw new Error("test did not throw but should have");
+        }
+        // Read the template from the lexer
+        let template = testContext.template || Handlebars.Parser.lexer.matched;
+        expectTemplate(template)
+            .withInput(undefined)
+            .toThrow(a, b);
+        delete testContext.exception;
+    }
+    else {
+        log('shouldThrow called', a, b);
+    }
+}
+exports.shouldThrow = shouldThrow;
+function tokenize(template) {
+    let { testContext, isParser } = exports.globalContext;
+    if (isParser) {
+        testContext.template = template;
+    }
+    else {
+        log('tokenize called', template);
+    }
+    return global.originalTokenize(template);
+}
+exports.tokenize = tokenize;
+function shouldMatchTokens(actual, expected) {
+    let { testContext, isParser } = exports.globalContext;
+    if (isParser) {
+        expectTemplate(testContext.template || '')
+            .toCompileTo(actual);
+    }
+    else {
+        log('shouldMatchTokens called', actual, expected);
+    }
+}
+exports.shouldMatchTokens = shouldMatchTokens;
+// these functions don't need to do anything, just warn and ignore
 function xit(...args) {
     log('xit called', ...args);
 }
@@ -257,16 +319,4 @@ function compileWithPartials(...args) {
     log('compileWithPartials called', ...args);
 }
 exports.compileWithPartials = compileWithPartials;
-function shouldThrow(...args) {
-    log('shouldThrow called', ...args);
-}
-exports.shouldThrow = shouldThrow;
-function tokenize(...args) {
-    log('tokenize called', ...args);
-}
-exports.tokenize = tokenize;
-function shouldMatchTokens(...args) {
-    log('shouldMatchTokens called', ...args);
-}
-exports.shouldMatchTokens = shouldMatchTokens;
 //# sourceMappingURL=mockGlobals.js.map

@@ -8,48 +8,56 @@
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "01",
 		"template": "{{\"foo\"}}",
 		"expected": "{{ \"foo\" [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "02",
 		"template": "{{false}}",
 		"expected": "{{ BOOLEAN{false} [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "03",
 		"template": "{{true}}",
 		"expected": "{{ BOOLEAN{true} [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "04",
 		"template": "{{foo}}",
 		"expected": "{{ PATH:foo [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "05",
 		"template": "{{foo?}}",
 		"expected": "{{ PATH:foo? [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "06",
 		"template": "{{foo_}}",
 		"expected": "{{ PATH:foo_ [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "07",
 		"template": "{{foo-}}",
 		"expected": "{{ PATH:foo- [] }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses simple mustaches",
+		"number": "08",
 		"template": "{{foo:}}",
 		"expected": "{{ PATH:foo: [] }}\n"
 	},
@@ -122,6 +130,7 @@
 	{
 		"description": "parser",
 		"it": "parses mustaches with BOOLEAN parameters",
+		"number": "01",
 		"template": "{{foo false}}",
 		"expected": "{{ PATH:foo [BOOLEAN{false}] }}\n"
 	},
@@ -134,6 +143,7 @@
 	{
 		"description": "parser",
 		"it": "parses mustaches with undefined and null paths",
+		"number": "01",
 		"template": "{{null}}",
 		"expected": "{{ NULL [] }}\n"
 	},
@@ -158,66 +168,77 @@
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "01",
 		"template": "{{foo bar=1}}",
 		"expected": "{{ PATH:foo [] HASH{bar=NUMBER{1}} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "02",
 		"template": "{{foo bar=true}}",
 		"expected": "{{ PATH:foo [] HASH{bar=BOOLEAN{true}} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "03",
 		"template": "{{foo bar=false}}",
 		"expected": "{{ PATH:foo [] HASH{bar=BOOLEAN{false}} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "04",
 		"template": "{{foo bar=@baz}}",
 		"expected": "{{ PATH:foo [] HASH{bar=@PATH:baz} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "05",
 		"template": "{{foo bar=baz bat=bam}}",
 		"expected": "{{ PATH:foo [] HASH{bar=PATH:baz, bat=PATH:bam} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "06",
 		"template": "{{foo bar=baz bat=\"bam\"}}",
 		"expected": "{{ PATH:foo [] HASH{bar=PATH:baz, bat=\"bam\"} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "07",
 		"template": "{{foo bat='bam'}}",
 		"expected": "{{ PATH:foo [] HASH{bat=\"bam\"} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "08",
 		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": "{{ PATH:foo [PATH:omg] HASH{bar=PATH:baz, bat=\"bam\"} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "09",
 		"template": "{{foo omg bar=baz bat=\"bam\" baz=1}}",
 		"expected": "{{ PATH:foo [PATH:omg] HASH{bar=PATH:baz, bat=\"bam\", baz=NUMBER{1}} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "10",
 		"template": "{{foo omg bar=baz bat=\"bam\" baz=true}}",
 		"expected": "{{ PATH:foo [PATH:omg] HASH{bar=PATH:baz, bat=\"bam\", baz=BOOLEAN{true}} }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses mustaches with hash arguments",
+		"number": "11",
 		"template": "{{foo omg bar=baz bat=\"bam\" baz=false}}",
 		"expected": "{{ PATH:foo [PATH:omg] HASH{bar=PATH:baz, bat=\"bam\", baz=BOOLEAN{false}} }}\n"
 	},
@@ -236,12 +257,14 @@
 	{
 		"description": "parser",
 		"it": "parses a partial",
+		"number": "01",
 		"template": "{{> \"foo\" }}",
 		"expected": "{{> PARTIAL:foo }}\n"
 	},
 	{
 		"description": "parser",
 		"it": "parses a partial",
+		"number": "02",
 		"template": "{{> 1 }}",
 		"expected": "{{> PARTIAL:1 }}\n"
 	},
@@ -279,8 +302,7 @@
 		"description": "parser",
 		"it": "should handle parser block mismatch",
 		"template": "{{#> goodbyes}}{{/hellos}}",
-		"exception": true,
-		"message": "/goodbyes doesn't match hellos/"
+		"exception": "/goodbyes doesn't match hellos/"
 	},
 	{
 		"description": "parser",
@@ -369,7 +391,7 @@
 	{
 		"description": "parser",
 		"it": "throws on old inverse section",
-		"template": "{{else foo}}bar{{/foo}}",
+		"template": "{{else",
 		"exception": true
 	},
 	{
@@ -393,97 +415,92 @@
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
-		"template": "foo{{^}}bar",
-		"exception": true,
-		"message": "/Parse error on line 1/"
+		"template": "foo{{^}}",
+		"exception": "/Parse error on line 1/"
 	},
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
+		"number": "01",
 		"template": "{{foo}",
-		"exception": true,
-		"message": "/Parse error on line 1/"
+		"exception": "/Parse error on line 1/"
 	},
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
-		"template": "{{foo &}}",
-		"exception": true,
-		"message": "/Parse error on line 1/"
+		"number": "02",
+		"template": "{{foo &",
+		"exception": "/Parse error on line 1/"
 	},
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
+		"number": "03",
 		"template": "{{#goodbyes}}{{/hellos}}",
-		"exception": true,
-		"message": "/goodbyes doesn't match hellos/"
+		"exception": "/goodbyes doesn't match hellos/"
 	},
 	{
 		"description": "parser",
 		"it": "raises if there's a Parse error",
+		"number": "04",
 		"template": "{{{{goodbyes}}}} {{{{/hellos}}}}",
-		"exception": true,
-		"message": "/goodbyes doesn't match hellos/"
+		"exception": "/goodbyes doesn't match hellos/"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"template": "{{foo/../bar}}",
-		"exception": true,
-		"message": "/Invalid path: foo\\/\\.\\./"
+		"exception": "/Invalid path: foo\\/\\.\\. - 1:2/"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
+		"number": "01",
 		"template": "{{foo/./bar}}",
-		"exception": true,
-		"message": "/Invalid path: foo\\/\\./"
+		"exception": "/Invalid path: foo\\/\\. - 1:2/"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
+		"number": "02",
 		"template": "{{foo/this/bar}}",
-		"exception": true,
-		"message": "/Invalid path: foo\\/this/"
+		"exception": "/Invalid path: foo\\/this - 1:2/"
 	},
 	{
 		"description": "parser",
 		"it": "knows how to report the correct line number in errors",
 		"template": "hello\nmy\n{{foo}",
-		"exception": true,
-		"message": "/Parse error on line 3/"
+		"exception": "/Parse error on line 3/"
 	},
 	{
 		"description": "parser",
 		"it": "knows how to report the correct line number in errors",
+		"number": "01",
 		"template": "hello\n\nmy\n\n{{foo}",
-		"exception": true,
-		"message": "/Parse error on line 5/"
+		"exception": "/Parse error on line 5/"
 	},
 	{
 		"description": "parser",
 		"it": "knows how to report the correct line number in errors when the first character is a newline",
 		"template": "\n\nhello\n\nmy\n\n{{foo}",
-		"exception": true,
-		"message": "/Parse error on line 7/"
+		"exception": "/Parse error on line 7/"
 	},
 	{
-		"description": "directives",
+		"description": "parser - directives",
 		"it": "should parse block directives",
 		"template": "{{#* foo}}{{/foo}}",
 		"expected": "DIRECTIVE BLOCK:\n  PATH:foo []\n  PROGRAM:\n"
 	},
 	{
-		"description": "directives",
+		"description": "parser - directives",
 		"it": "should parse directives",
 		"template": "{{* foo}}",
 		"expected": "{{ DIRECTIVE PATH:foo [] }}\n"
 	},
 	{
-		"description": "directives",
+		"description": "parser - directives",
 		"it": "should fail if directives have inverse",
 		"template": "{{#* foo}}{{^}}{{/foo}}",
-		"exception": true,
-		"message": "/Unexpected inverse/"
+		"exception": "/Unexpected inverse/"
 	}
 ]

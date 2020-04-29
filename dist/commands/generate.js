@@ -57,8 +57,12 @@ let default_1 = class default_1 extends clime_1.Command {
             global[x] = mockGlobals[x];
         }
         mockGlobals.globalContext.suite = suite;
+        if (inputFile.match(/parser\.js$/)) {
+            mockGlobals.globalContext.isParser = true;
+        }
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
+            mockGlobals.globalContext.isParser = true;
             const tokenizerData = ('' + fs_1.readFileSync(inputFile))
                 .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
                 .replace(/function shouldBeToken/, 'function REMshouldBeToken')
