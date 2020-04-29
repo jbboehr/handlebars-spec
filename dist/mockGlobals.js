@@ -216,10 +216,10 @@ function detectGlobalPartials() {
 }
 // only used by parser and tokenizer
 function equals(actual, expected) {
-    let { testContext, isParser } = exports.globalContext;
+    const { testContext, isParser } = exports.globalContext;
     if (isParser) {
         // Read the template from the lexer
-        let template = testContext.template || Handlebars.Parser.lexer.matched;
+        const template = testContext.template || Handlebars.Parser.lexer.matched;
         expectTemplate(template)
             .withInput(undefined)
             .toCompileTo(expected);
@@ -230,7 +230,7 @@ function equals(actual, expected) {
 }
 exports.equals = equals;
 function shouldThrow(cb, a, b) {
-    let { testContext, isParser } = exports.globalContext;
+    const { testContext, isParser } = exports.globalContext;
     if (isParser) {
         testContext.exception = b || true;
         let ex = null;
@@ -241,10 +241,10 @@ function shouldThrow(cb, a, b) {
             ex = e;
         }
         if (!ex) {
-            throw new Error("test did not throw but should have");
+            throw new Error('test did not throw but should have');
         }
         // Read the template from the lexer
-        let template = testContext.template || Handlebars.Parser.lexer.matched;
+        const template = testContext.template || Handlebars.Parser.lexer.matched;
         expectTemplate(template)
             .withInput(undefined)
             .toThrow(a, b);
@@ -256,7 +256,7 @@ function shouldThrow(cb, a, b) {
 }
 exports.shouldThrow = shouldThrow;
 function tokenize(template) {
-    let { testContext, isParser } = exports.globalContext;
+    const { testContext, isParser } = exports.globalContext;
     if (isParser) {
         testContext.template = template;
     }
@@ -267,7 +267,7 @@ function tokenize(template) {
 }
 exports.tokenize = tokenize;
 function shouldMatchTokens(actual, expected) {
-    let { testContext, isParser } = exports.globalContext;
+    const { testContext, isParser } = exports.globalContext;
     if (isParser) {
         expectTemplate(testContext.template || '')
             .toCompileTo(actual);
