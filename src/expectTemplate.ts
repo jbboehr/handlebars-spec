@@ -83,7 +83,7 @@ export class ExpectTemplate implements ExpectTemplateInterface {
         return true;
     }
 
-    toThrow(errorLike: any, errMsgMatcher: any, msg: any): boolean {
+    toThrow(errorLike: any, errMsgMatcher: any, msg?: any): boolean {
         const args = [errorLike, errMsgMatcher, msg];
 
         // Look for string

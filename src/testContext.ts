@@ -20,6 +20,9 @@ export class TestContext {
     it?: string;
     key?: string;
 
+    isParser?: true;
+    expected?: any;
+
     reset(): TestContext {
         const self = new TestContext();
         self.description = this.description;

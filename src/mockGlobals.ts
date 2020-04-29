@@ -79,7 +79,7 @@ export function expectTemplate(template: string): ExpectTemplate {
 }
 
 function addExpectTemplate(xt: ExpectTemplate): void {
-    const { testContext, indices, tests} = globalContext;
+    const { testContext, indices, tests, isParser } = globalContext;
     const { description, it, extraEquals } = testContext;
 
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
@@ -124,6 +124,9 @@ function addExpectTemplate(xt: ExpectTemplate): void {
     }
     if (number === '00') {
         delete spec.number;
+    }
+    if (isParser) {
+        delete spec.data;
     }
 
     // Apply patches and push to tests
@@ -233,11 +236,76 @@ function detectGlobalPartials(): StringDict {
 
 
 
-// these functions don't need to do anything, just warn and ignore
+// only used by parser and tokenizer
 
-export function equals(...args: any[]): void {
-    log('equals called', ...args);
+export function equals(actual: any, expected: any): void {
+    let { testContext, isParser } = globalContext;
+
+    if (isParser) {
+        // Read the template from the lexer
+        let template = testContext.template || (Handlebars as any).Parser.lexer.matched;
+        expectTemplate(template)
+            .withInput(undefined)
+            .toCompileTo(expected);
+    } else {
+        log('equals called', actual, expected);
+    }
 }
+
+export function shouldThrow(cb: Function, a: any, b: any): void {
+    let { testContext, isParser } = globalContext;
+
+    if (isParser) {
+        testContext.exception = b || true;
+
+        let ex = null;
+        try {
+            cb();
+        } catch (e) {
+            ex = e;
+        }
+        if (!ex) {
+            throw new Error("test did not throw but should have");
+        }
+
+        // Read the template from the lexer
+        let template = testContext.template || (Handlebars as any).Parser.lexer.matched;
+        expectTemplate(template)
+            .withInput(undefined)
+            .toThrow(a, b);
+
+        delete testContext.exception;
+    } else {
+        log('shouldThrow called', a, b);
+    }
+}
+
+export function tokenize(template: string): string[] {
+    let { testContext, isParser } = globalContext;
+
+    if (isParser) {
+        testContext.template = template;
+    } else {
+        log('tokenize called', template);
+    }
+
+    return (global as any).originalTokenize(template);
+}
+
+export function shouldMatchTokens(actual: string[], expected: string[]): void {
+    let { testContext, isParser } = globalContext;
+
+    if (isParser) {
+        expectTemplate(testContext.template || '')
+            .toCompileTo(actual);
+    } else {
+        log('shouldMatchTokens called', actual, expected);
+    }
+}
+
+
+
+// these functions don't need to do anything, just warn and ignore
 
 export function xit(...args: any[]): void {
     log('xit called', ...args);
@@ -278,16 +346,4 @@ export function shouldCompileToWithPartials(...args: any[]): void {
 
 export function compileWithPartials(...args: any[]): void {
     log('compileWithPartials called', ...args);
-}
-
-export function shouldThrow(...args: any[]): void {
-    log('shouldThrow called', ...args);
-}
-
-export function tokenize(...args: any[]): void {
-    log('tokenize called', ...args);
-}
-
-export function shouldMatchTokens(...args: any[]): void {
-    log('shouldMatchTokens called', ...args);
 }

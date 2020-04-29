@@ -1,6 +1,6 @@
 
-SPECS := basic blocks builtins data helpers partials regressions \
-		string-params subexpressions strict track-ids \
+SPECS := basic blocks builtins data helpers parser partials regressions \
+		string-params subexpressions strict tokenizer track-ids \
 		whitespace-control
 
 all: spec export

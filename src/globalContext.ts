@@ -12,4 +12,5 @@ export class GlobalContext {
     suite = '';
     unusedPatches: StringDict = {};
     tests: TestSpec[] = [];
+    isParser?: true;
 }

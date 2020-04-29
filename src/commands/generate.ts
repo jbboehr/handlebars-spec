@@ -47,8 +47,13 @@ export default class extends Command {
         }
         mockGlobals.globalContext.suite = suite;
 
+        if (inputFile.match(/parser\.js$/)) {
+            mockGlobals.globalContext.isParser = true;
+        }
+
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
+            mockGlobals.globalContext.isParser = true;
             const tokenizerData = ('' + readFileSync(inputFile))
                 .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
                 .replace(/function shouldBeToken/, 'function REMshouldBeToken')

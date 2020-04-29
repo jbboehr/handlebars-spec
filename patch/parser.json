@@ -1,8 +1,8 @@
 {
-    "externally compiled ast-can pass through an already-compiled ast-00": null,
-    "gh1024 - should track program location properly-gh1024 - should track program location properly-00": null,
-    "gh1024 - should track program location properly-gh1024 - should track program location properly-01": null,
-    "gh1024 - should track program location properly-gh1024 - should track program location properly-02": null,
+    "parser - externally compiled ast - can pass through an already-compiled ast - 00": null,
+    "parser - gh1024 - should track program location properly - 00": null,
+    "parser - gh1024 - should track program location properly - 01": null,
+    "parser - gh1024 - should track program location properly - 02": null,
     "parser-should handle invalid paths-00": {
         "message": "\/Invalid path: foo\\\/\\.\\.\/"
     },
