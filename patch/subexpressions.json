@@ -5,7 +5,5 @@
     "subexpressions-in string params mode,-00": {
         "note": "Check original spec. Needs other tests, possibly implementation dependant."
     },
-    "subexpressions-provides each nested helper invocation its own options hash-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    }
+    "subexpressions-provides each nested helper invocation its own options hash-00": null
 }

@@ -688,5 +688,97 @@
 		"!code": true,
 		"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
 		"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
+	},
+	"function(context,options){var inverse=options.inverse,fn=options.fn;if(context===true){return fn(this)}else if(context===false||context==null){return inverse(this)}else if(_utils.isArray(context)){if(context.length>0){if(options.ids){options.ids=[options.name]}return instance.helpers.each(context,options)}else{return inverse(this)}}else{if(options.data&&options.ids){var data=_utils.createFrame(options.data);data.contextPath=_utils.appendContextPath(options.data.contextPath,options.name);options={data:data}}return fn(context,options)}};": {
+		"!code": true,
+		"javascript": "function (context, options) {\n    var inverse = options.inverse,\n        fn = options.fn;\n\n    if (context === true) {\n      return fn(this);\n    } else if (context === false || context == null) {\n      return inverse(this);\n    } else if (_utils.isArray(context)) {\n      if (context.length > 0) {\n        if (options.ids) {\n          options.ids = [options.name];\n        }\n\n        return instance.helpers.each(context, options);\n      } else {\n        return inverse(this);\n      }\n    } else {\n      if (options.data && options.ids) {\n        var data = _utils.createFrame(options.data);\n        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);\n        options = { data: data };\n      }\n\n      return fn(context, options);\n    }\n  }"
+	},
+	"function(context,options){if(!options){throw new _exception2[\"default\"](\"Must pass iterator to #each\")}var fn=options.fn,inverse=options.inverse,i=0,ret=\"\",data=undefined,contextPath=undefined;if(options.data&&options.ids){contextPath=_utils.appendContextPath(options.data.contextPath,options.ids[0])+\".\"}if(_utils.isFunction(context)){context=context.call(this)}if(options.data){data=_utils.createFrame(options.data)}function execIteration(field,index,last){if(data){data.key=field;data.index=index;data.first=index===0;data.last=!!last;if(contextPath){data.contextPath=contextPath+field}}ret=ret+fn(context[field],{data:data,blockParams:_utils.blockParams([context[field],field],[contextPath+field,null])})}if(context&&typeof context===\"object\"){if(_utils.isArray(context)){for(var j=context.length;i<j;i++){if(i in context){execIteration(i,i,i===context.length-1)}}}else if(global.Symbol&&context[global.Symbol.iterator]){var newContext=[];var iterator=context[global.Symbol.iterator]();for(var it=iterator.next();!it.done;it=iterator.next()){newContext.push(it.value)}context=newContext;for(var j=context.length;i<j;i++){execIteration(i,i,i===context.length-1)}}else{(function(){var priorKey=undefined;Object.keys(context).forEach(function(key){if(priorKey!==undefined){execIteration(priorKey,i-1)}priorKey=key;i++});if(priorKey!==undefined){execIteration(priorKey,i-1,true)}})()}}if(i===0){ret=inverse(this)}return ret};": {
+		"!code": true,
+		"javascript": "function (context, options) {\n    if (!options) {\n      throw new _exception2['default']('Must pass iterator to #each');\n    }\n\n    var fn = options.fn,\n        inverse = options.inverse,\n        i = 0,\n        ret = '',\n        data = undefined,\n        contextPath = undefined;\n\n    if (options.data && options.ids) {\n      contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]) + '.';\n    }\n\n    if (_utils.isFunction(context)) {\n      context = context.call(this);\n    }\n\n    if (options.data) {\n      data = _utils.createFrame(options.data);\n    }\n\n    function execIteration(field, index, last) {\n      if (data) {\n        data.key = field;\n        data.index = index;\n        data.first = index === 0;\n        data.last = !!last;\n\n        if (contextPath) {\n          data.contextPath = contextPath + field;\n        }\n      }\n\n      ret = ret + fn(context[field], {\n        data: data,\n        blockParams: _utils.blockParams([context[field], field], [contextPath + field, null])\n      });\n    }\n\n    if (context && typeof context === 'object') {\n      if (_utils.isArray(context)) {\n        for (var j = context.length; i < j; i++) {\n          if (i in context) {\n            execIteration(i, i, i === context.length - 1);\n          }\n        }\n      } else if (global.Symbol && context[global.Symbol.iterator]) {\n        var newContext = [];\n        var iterator = context[global.Symbol.iterator]();\n        for (var it = iterator.next(); !it.done; it = iterator.next()) {\n          newContext.push(it.value);\n        }\n        context = newContext;\n        for (var j = context.length; i < j; i++) {\n          execIteration(i, i, i === context.length - 1);\n        }\n      } else {\n        (function () {\n          var priorKey = undefined;\n\n          Object.keys(context).forEach(function (key) {\n            // We're running the iterations one step out of sync so we can detect\n            // the last iteration without have to scan the object twice and create\n            // an itermediate keys array.\n            if (priorKey !== undefined) {\n              execIteration(priorKey, i - 1);\n            }\n            priorKey = key;\n            i++;\n          });\n          if (priorKey !== undefined) {\n            execIteration(priorKey, i - 1, true);\n          }\n        })();\n      }\n    }\n\n    if (i === 0) {\n      ret = inverse(this);\n    }\n\n    return ret;\n  }"
+	},
+	"function(){if(arguments.length===1){return undefined}else{throw new _exception2[\"default\"]('Missing helper: \"'+arguments[arguments.length-1].name+'\"')}};": {
+		"!code": true,
+		"javascript": "function () /* [args, ]options */{\n    if (arguments.length === 1) {\n      // A missing field in a {{foo}} construct.\n      return undefined;\n    } else {\n      // Someone is actually trying to call something, blow up.\n      throw new _exception2['default']('Missing helper: \"' + arguments[arguments.length - 1].name + '\"');\n    }\n  }"
+	},
+	"function(conditional,options){if(arguments.length!=2){throw new _exception2[\"default\"](\"#if requires exactly one argument\")}if(_utils.isFunction(conditional)){conditional=conditional.call(this)}if(!options.hash.includeZero&&!conditional||_utils.isEmpty(conditional)){return options.inverse(this)}else{return options.fn(this)}};": {
+		"!code": true,
+		"javascript": "function (conditional, options) {\n    if (arguments.length != 2) {\n      throw new _exception2['default']('#if requires exactly one argument');\n    }\n    if (_utils.isFunction(conditional)) {\n      conditional = conditional.call(this);\n    }\n\n    // Default behavior is to render the positive path if the value is truthy and not empty.\n    // The `includeZero` option may be set to treat the condtional as purely not empty based on the\n    // behavior of isEmpty. Effectively this determines if 0 is handled by the positive path or negative.\n    if (!options.hash.includeZero && !conditional || _utils.isEmpty(conditional)) {\n      return options.inverse(this);\n    } else {\n      return options.fn(this);\n    }\n  }"
+	},
+	"function(conditional,options){if(arguments.length!=2){throw new _exception2[\"default\"](\"#unless requires exactly one argument\")}return instance.helpers[\"if\"].call(this,conditional,{fn:options.inverse,inverse:options.fn,hash:options.hash})};": {
+		"!code": true,
+		"javascript": "function (conditional, options) {\n    if (arguments.length != 2) {\n      throw new _exception2['default']('#unless requires exactly one argument');\n    }\n    return instance.helpers['if'].call(this, conditional, {\n      fn: options.inverse,\n      inverse: options.fn,\n      hash: options.hash\n    });\n  }"
+	},
+	"function(){var args=[undefined],options=arguments[arguments.length-1];for(var i=0;i<arguments.length-1;i++){args.push(arguments[i])}var level=1;if(options.hash.level!=null){level=options.hash.level}else if(options.data&&options.data.level!=null){level=options.data.level}args[0]=level;instance.log.apply(instance,args)};": {
+		"!code": true,
+		"javascript": "function () /* message, options */{\n    var args = [undefined],\n        options = arguments[arguments.length - 1];\n    for (var i = 0; i < arguments.length - 1; i++) {\n      args.push(arguments[i]);\n    }\n\n    var level = 1;\n    if (options.hash.level != null) {\n      level = options.hash.level;\n    } else if (options.data && options.data.level != null) {\n      level = options.data.level;\n    }\n    args[0] = level;\n\n    instance.log.apply(instance, args);\n  }"
+	},
+	"function(obj,field,options){if(!obj){return obj}return options.lookupProperty(obj,field)};": {
+		"!code": true,
+		"javascript": "function (obj, field, options) {\n    if (!obj) {\n      // Note for 5.0: Change to \"obj == null\" in 5.0\n      return obj;\n    }\n    return options.lookupProperty(obj, field);\n  }"
+	},
+	"function(context,options){if(arguments.length!=2){throw new _exception2[\"default\"](\"#with requires exactly one argument\")}if(_utils.isFunction(context)){context=context.call(this)}var fn=options.fn;if(!_utils.isEmpty(context)){var data=options.data;if(options.data&&options.ids){data=_utils.createFrame(options.data);data.contextPath=_utils.appendContextPath(options.data.contextPath,options.ids[0])}return fn(context,{data:data,blockParams:_utils.blockParams([context],[data&&data.contextPath])})}else{return options.inverse(this)}};": {
+		"!code": true,
+		"javascript": "function (context, options) {\n    if (arguments.length != 2) {\n      throw new _exception2['default']('#with requires exactly one argument');\n    }\n    if (_utils.isFunction(context)) {\n      context = context.call(this);\n    }\n\n    var fn = options.fn;\n\n    if (!_utils.isEmpty(context)) {\n      var data = options.data;\n      if (options.data && options.ids) {\n        data = _utils.createFrame(options.data);\n        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.ids[0]);\n      }\n\n      return fn(context, {\n        data: data,\n        blockParams: _utils.blockParams([context], [data && data.contextPath])\n      });\n    } else {\n      return options.inverse(this);\n    }\n  }"
+	},
+	"function(data,options){if(options&&options.hasOwnProperty(\"data\")){testContext.options=testContext.options||{};testContext.options.data=options.data}testContext.data=data;if(options&&options.hasOwnProperty(\"helpers\")){testContext.helpers=options.helpers}if(options&&options.hasOwnProperty(\"decorators\")){testContext.decorators=options.decorators}return compiledTemplate(data,options)};": {
+		"!code": true,
+		"javascript": "function (data, options) {\n        // Note: merging data in the options causes tests to fail, possibly\n        // a separate type of data?\n        if (options && options.hasOwnProperty('data')) {\n            //data = extend(true, data, options.data);\n            testContext.options = testContext.options || {};\n            testContext.options.data = options.data;\n        }\n        // Push template data unto context\n        testContext.data = data;\n        if (options && options.hasOwnProperty('helpers')) {\n            // Push helpers unto context\n            testContext.helpers = options.helpers;\n        }\n        if (options && options.hasOwnProperty('decorators')) {\n            // Push decorators unto context\n            testContext.decorators = options.decorators;\n        }\n        return compiledTemplate(data, options);\n    }"
+	},
+	"function(options){return options.fn({value:\"bar\"},{blockParams:options.fn.blockParams===1?[value++,value++]:undefined})};": {
+		"!code": true,
+		"javascript": "function(options) {\n          return options.fn(\n            { value: 'bar' },\n            {\n              blockParams:\n                options.fn.blockParams === 1 ? [value++, value++] : undefined\n            }\n          );\n        }"
+	},
+	"function testHelper(options){return options.lookupProperty(this,\"testProperty\")};": {
+		"!code": true,
+		"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }"
+	},
+	"function(){for(var name in this){if(Object.prototype.hasOwnProperty.call(this,name)){return\"found\"}}return this===\"bat\"?\"found\":\"not\"};": {
+		"!code": true,
+		"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }"
+	},
+	"function(conditional,options){if(conditional){return options.fn(this)}else{return options.inverse(this)}};": {
+		"!code": true,
+		"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }"
+	},
+	"function(options){return options.hash.length};": {
+		"!code": true,
+		"javascript": "function(options) {\n        return options.hash.length;\n      }"
+	},
+	"function(desire,noun,trueBool,falseBool,options){equal(options.types[0],\"StringLiteral\",\"the string type is passed\");equal(options.types[1],\"PathExpression\",\"the expression type is passed\");equal(options.types[2],\"BooleanLiteral\",\"the expression type is passed\");equal(desire,\"need\",\"the string form is passed for strings\");equal(noun,\"dad.joke\",\"the string form is passed for expressions\");equal(trueBool,true,\"raw booleans are passed through\");equal(falseBool,false,\"raw booleans are passed through\");return\"Helper called\"};": {
+		"!code": true,
+		"javascript": "function(desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'StringLiteral', 'the string type is passed');\n        equal(\n          options.types[1],\n          'PathExpression',\n          'the expression type is passed'\n        );\n        equal(\n          options.types[2],\n          'BooleanLiteral',\n          'the expression type is passed'\n        );\n        equal(desire, 'need', 'the string form is passed for strings');\n        equal(noun, 'dad.joke', 'the string form is passed for expressions');\n        equal(trueBool, true, 'raw booleans are passed through');\n        equal(falseBool, false, 'raw booleans are passed through');\n        return 'Helper called';\n      }"
+	},
+	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.hashTypes.desire,\"StringLiteral\");equal(options.hashTypes.noun,\"PathExpression\");equal(options.hashTypes.bool,\"BooleanLiteral\");equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
+		"!code": true,
+		"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.hashTypes.desire, 'StringLiteral');\n        equal(options.hashTypes.noun, 'PathExpression');\n        equal(options.hashTypes.bool, 'BooleanLiteral');\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
+	},
+	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.contexts.length,1);equal(options.hashContexts.noun,context);equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
+		"!code": true,
+		"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.contexts.length, 1);\n        equal(options.hashContexts.noun, context);\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
+	},
+	"function(x,y,options){if(!options||options===lastOptions){throw new Error(\"options hash was reused\")}lastOptions=options;return x===y};": {
+		"!code": true,
+		"javascript": "function(x, y, options) {\n        if (!options || options === lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        lastOptions = options;\n        return x === y;\n      }"
+	},
+	"function(options){equals(options.hashTypes.fun,\"SubExpression\");return\"val is \"+options.hash.fun};": {
+		"!code": true,
+		"javascript": "function(options) {\n        equals(options.hashTypes.fun, 'SubExpression');\n        return 'val is ' + options.hash.fun;\n      }"
+	},
+	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+		"!code": true,
+		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+	},
+	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+		"!code": true,
+		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+	},
+	"function(element){return[element]};": {
+		"!code": true,
+		"javascript": "function(element) {\n          return [element];\n        }"
+	},
+	"function(){return\"functionInData\"};": {
+		"!code": true,
+		"javascript": "function() {\n              return 'functionInData';\n            }"
 	}
 }

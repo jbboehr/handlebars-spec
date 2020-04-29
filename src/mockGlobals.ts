@@ -1,7 +1,7 @@
 
 import * as Handlebars from "handlebars";
-import { jsToCode, isFunction, clone, removeCircularReferences, stringifyLambdas, stripNulls, isEmptyObject } from "./utils";
-import { CodeDict, TestSpec, StringDict, FunctionDict } from "./types";
+import { clone, stripNulls, serialize, jsToCode, isEmptyObject } from "./utils";
+import { TestSpec, StringDict, FunctionDict, CodeDict } from "./types";
 import { ExpectTemplate } from "./expectTemplate";
 import { isArray } from "util";
 import { resolve as resolvePath } from "path";
@@ -17,9 +17,6 @@ export let globalContext: GlobalContext = new GlobalContext();
 export function resetContext() {
     globalContext.testContext = globalContext.testContext.reset();
 }
-
-
-
 
 
 
@@ -107,9 +104,6 @@ export function it(description: string, next: Function) {
     testContext.it = description;
     testContext.description = globalContext.descriptionStack.join(" - ");
     testContext.key = testContext.description + " - " + testContext.it;
-    testContext.globalHelpers = globalContext.globalHelpers;
-    testContext.globalPartials = globalContext.globalPartials;
-    testContext.globalDecorators = globalContext.globalDecorators;
 
     // Test
     next();
@@ -192,6 +186,12 @@ export function expect() {
                 true: function () {
                     console.warn('expect.to.be.true called');
                 }
+            },
+            "throw": function () {
+                console.warn('expect.to.throw called');
+            },
+            match: function () {
+                console.warn('expect.to.match called');
             }
         }
     };
@@ -206,34 +206,22 @@ function addExpectTemplate(xt: ExpectTemplate) {
         delete globalContext.testContext.extraEquals;
     }
 
-    var spec: TestSpec = {
+    var spec: TestSpec = serialize({
         description,
         oldDescription,
         it,
         template: xt.template,
-        data: stringifyLambdas(removeCircularReferences(xt.input)),
+        data: xt.input,
         expected: xt.expected,
-        runtimeOptions: stringifyLambdas(xt.runtimeOptions),
+        runtimeOptions: xt.runtimeOptions,
         compileOptions: xt.compileOptions,
-        partials: stringifyLambdas(xt.partials),
-        helpers: stringifyLambdas(xt.helpers),
-        decorators: stringifyLambdas(xt.decorators),
+        partials: extend({}, detectGlobalPartials(), xt.partials || {}),
+        helpers: extend({}, detectGlobalHelpers(), xt.helpers || {}),
+        decorators: extend({}, detectGlobalDecorators(), xt.decorators || {}),
         message: xt.message,
         compat: (xt.compileOptions || {}).compat,
         exception: xt.exception,
-    };
-
-    if (globalContext.globalPartials) {
-        spec.globalPartials = globalContext.globalPartials;
-    }
-
-    if (globalContext.globalHelpers) {
-        spec.globalHelpers = globalContext.globalHelpers;
-    }
-
-    if (globalContext.globalDecorators) {
-        spec.globalDecorators = globalContext.globalDecorators;
-    }
+    });
 
     // Add the test
     addTest(spec);
@@ -244,7 +232,6 @@ function addExpectTemplate(xt: ExpectTemplate) {
 
 export function expectTemplate(template: string) {
     return new ExpectTemplate(template, (xt: ExpectTemplate) => {
-        globalContext.detectGlobals();
         addExpectTemplate(xt);
     });
 };
@@ -266,7 +253,7 @@ export function compileWithPartials(template: string, hashOrArray: any, partials
     let helpers: FunctionDict = {};
     let decorators: FunctionDict = {};
     //let partials: StringDict = {};
-    let input: any;
+    let input: any = {};
     // let compat: undefined | true;
     let compileOptions: any = extend({}, globalContext.testContext.compileOptions);
 
@@ -371,7 +358,7 @@ export function compileWithPartials(template: string, hashOrArray: any, partials
 };
 
 export function shouldThrow(callback: Function, error: string, message: string) {
-    console.warn
+    console.warn('shouldThrow called');
 };
 
 export function addTest(spec: TestSpec) {
@@ -381,13 +368,6 @@ export function addTest(spec: TestSpec) {
     if (!spec || !spec.template) {
         console.warn("empty template", spec);
         return;
-    }
-
-    // Cleanup a few keys
-    for (var x of ['partials', 'helpers', 'decorators', 'compileOptions', 'runtimeOptions', 'globalPartials', 'globalHelpers', 'globalDecorators']) {
-        if (!(spec as any)[x] || isEmptyObject((spec as any)[x])) {
-            delete (spec as any)[x];
-        }
     }
 
     var key = (spec.description + ' - ' + spec.it).toLowerCase();
@@ -459,4 +439,53 @@ export function addTest(spec: TestSpec) {
     if (!skip) {
         tests.push(spec);
     }
+}
+
+function detectGlobalHelpers() {
+    let { handlebarsEnv } = (global as any);
+    const builtins = [
+        'helperMissing', 'blockHelperMissing', 'each', 'if',
+        'unless', 'with', 'log', 'lookup'
+    ];
+    let globalHelpers: CodeDict = {};
+
+    Object.keys(handlebarsEnv.helpers).forEach((x) => {
+        if (builtins.indexOf(x) !== -1) {
+            return;
+        }
+        globalHelpers[x] = /*jsToCode(*/handlebarsEnv.helpers[x]/*)*/;
+    });
+
+    return globalHelpers;
+}
+
+function detectGlobalDecorators() {
+    let { handlebarsEnv } = (global as any);
+    const builtins = ['inline'];
+    let globalDecorators: CodeDict = {};
+
+    Object.keys(handlebarsEnv.decorators).forEach((x) => {
+        if (builtins.indexOf(x) !== -1) {
+            return;
+        }
+        globalDecorators[x] = /*jsToCode(*/handlebarsEnv.decorators[x]/*)*/;
+    });
+
+    return globalDecorators;
+}
+
+function detectGlobalPartials() {
+    let { handlebarsEnv } = (global as any);
+    // This should never be null, but it is in one case
+    if (!handlebarsEnv) {
+        return {};
+    }
+
+    let globalPartials: StringDict = {};
+
+    Object.keys(handlebarsEnv.partials).forEach((x) => {
+        globalPartials[x] = handlebarsEnv.partials[x];
+    });
+
+    return globalPartials;
 }

@@ -1,5 +1,5 @@
 {
-    "data-deep @foo triggers automatic top-level data-00": {
+    "data - deep @foo triggers automatic top-level data - 00": {
         "helpers": {
             "helperMissing": null,
             "blockHelperMissing": null,
@@ -9,13 +9,10 @@
             "with": null,
             "log": null,
             "lookup": null,
-            "let": {
-                "javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
-                "php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
-            }
+			"_parent": null
         }
     },
-    "data-passing in data to a compiled function that expects data - works with helpers in partials-00": {
+    "data - passing in data to a compiled function that expects data - works with helpers in partials - 00": {
         "helpers": {
             "helperMissing": null,
             "blockHelperMissing": null,
@@ -24,10 +21,7 @@
             "unless": null,
             "with": null,
             "log": null,
-            "lookup": null,
-            "hello": {
-                "php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
-            }
+            "lookup": null
         },
         "decorators": null
     }

@@ -19,6 +19,7 @@ export class ExpectTemplate implements IExpectTemplate {
 
     constructor(template: string, cb: Function) {
         this.template = template;
+        this.input = {};
         this.cb = cb;
     }
 
@@ -81,6 +82,7 @@ export class ExpectTemplate implements IExpectTemplate {
     toCompileTo(expected: any) {
         this.expected = expected;
         this.cb(this);
+        delete this.expected; // MEH
         return true;
     }
 
@@ -90,17 +92,19 @@ export class ExpectTemplate implements IExpectTemplate {
             if (arguments[i] instanceof RegExp) {
                 this.exception = arguments[i];
                 this.cb(this);
+                delete this.exception; // MEH
                 return true;
             } else if (typeof arguments[i] === "string") {
                 this.exception = arguments[i];
                 this.cb(this);
+                delete this.exception; // MEH
                 return true;
             }
         }
 
-        //console.warn("Unhandled toThrow", arguments);
         this.exception = true;
         this.cb(this);
+        delete this.exception; // MEH
         return true;
     }
 

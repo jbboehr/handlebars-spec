@@ -1,11 +1,2 @@
 {
-	"strict mode-should handle explicit undefined-00": {
-		"note": "Can't specify undefined in JSON",
-		"data": {
-			"hello": {
-				"!keepnull": true,
-				"bar": null
-			}
-		}
-	}
 }

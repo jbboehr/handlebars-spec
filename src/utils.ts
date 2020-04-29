@@ -1,10 +1,16 @@
 
 import UglifyJS from "uglify-js";
 import { CodeData, CodeDict } from "./types";
+import { readFileSync, writeFileSync } from "fs";
+import { resolve as resolvePath } from "path";
+import { isArray } from "util";
+import { safeEval } from "./eval";
+
+const PATCH_FILE = resolvePath(__dirname + "/../patch/_functions.json");
 
 var functionPatches: CodeDict;
 try {
-    functionPatches = require("../patch/_functions.json");
+    functionPatches = require(PATCH_FILE);
 } catch (e) {
     console.warn(e);
 }
@@ -24,13 +30,21 @@ export function isEmptyObject(obj: object) {
 export function jsToCode(fn: Function | string): CodeData {
     var str = ('' + fn);
     var key = normalizeJavascript(str);
-    var data;
+    var data: CodeData;
     if (key in functionPatches) {
         data = clone(functionPatches[key]);
     } else {
         data = {
-            '!code': true
+            '!code': true,
+            'javascript': str,
         };
+        functionPatches[key] = data;
+        // write it out to _functions
+        let tmp = JSON.parse(readFileSync(PATCH_FILE).toString());
+        tmp[key] = data;
+        writeFileSync(PATCH_FILE, JSON.stringify(tmp, null, '\t'));
+    }
+    if (!('php' in data)) {
         console.log("Missing function patch for: " + JSON.stringify(key) + " <- " + JSON.stringify(str));
     }
     // Keep the old function for now, if it's already set...
@@ -119,4 +133,137 @@ export function stripNulls(data: any): any {
     }
 
     return data;
+}
+
+function serializeInner(data: any, ctx: any): any {
+    switch (typeof data) {
+        case "boolean":
+        case "number":
+        case "string":
+            return data;
+
+        default:
+        case "bigint":
+        case "symbol":
+            throw new Error("unimplemented");
+
+        case "function":
+            return jsToCode(data);
+
+        case "undefined":
+            return null;
+            /*
+            if (ctx.key === "input" || ctx.key === "data") {
+                return {
+                    "!undefined": true,
+                };
+            }
+            return undefined;
+            */
+
+        case "object":
+            // fallthrough
+            break;
+    }
+
+    // Handle null
+    if (data === null) {
+        return null;
+    }
+
+    // Handle arrays
+    if (isArray(data)) {
+        var arv: any[] = [];
+        data.forEach((value, index) => {
+            arv[index] = value;
+        });
+        return arv;
+    }
+
+    // Handle RegExp
+    if (data instanceof RegExp) {
+        return '' + data;
+    }
+
+    // Handle objects
+    const ignoreEmptyObjectKeys: {[key: string]: true} = {
+        'partials': true,
+        'helpers': true,
+        'decorators': true,
+        'compileOptions': true,
+        'runtimeOptions': true,
+        'globalPartials': true,
+        'globalHelpers': true,
+        'globalDecorators': true,
+        'compat': true,
+        'message': true,
+    };
+
+    // Recurse
+    var rv: any = {};
+    Object.keys(data).forEach((key) => {
+        // Ignore some empty objects
+        if (ignoreEmptyObjectKeys[key] === true && (!data[key] || (typeof data[key] === "object" && isEmptyObject(data[key])))) {
+            return;
+        } else if (key === 'exception' && !data[key]) {
+            return;
+        }
+        // serialize and append
+        rv[key] = serializeInner(data[key], {
+            key,
+        });
+    });
+    return rv;
+}
+
+export function serialize(data: any): any {
+    removeCircularReferences(data);
+    return serializeInner(data, {});
+}
+
+export function deserialize(data: any): any {
+    switch (typeof data) {
+        case "boolean":
+        case "number":
+        case "string":
+        case "undefined":
+            return data;
+
+        default:
+            throw new Error("unimplemented: " + typeof data);
+
+        case "object":
+            // fallthrough
+            break;
+    }
+
+    // Handle null
+    if (data === null) {
+        return null;
+    }
+
+    if ("!undefined" in data) {
+        return undefined;
+    } else if ("!code" in data) {
+        return safeEval(data['javascript']);
+    } else if ("!sparsearray" in data) {
+        let newData = [];
+        for (let x in data) {
+            let i;
+            if (data.hasOwnProperty(x)) {
+                if (!isNaN(i = parseInt(x))) {
+                    newData[i] = data[x];
+                }
+            }
+        }
+        return newData;
+    }
+
+    // Recurse
+    var rv: any = {};
+    Object.keys(data).forEach((key) => {
+        // serialize and append
+        rv[key] = deserialize(data[key]);
+    });
+    return rv;
 }

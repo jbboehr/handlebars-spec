@@ -1,8 +1,8 @@
 
 export interface CodeData {
-    "!code": string;
+    "!code": true;
     "javascript": string;
-    "php": string | null;
+    "php"?: string;
 }
 
 export interface CodeDict {
