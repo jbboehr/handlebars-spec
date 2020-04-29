@@ -4,7 +4,6 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 import { isArray } from 'util';
 import { safeEval } from './eval';
-import {createHash} from 'crypto';
 
 const PATCH_FILE = resolvePath(__dirname + '/../patch/_functions.json');
 
@@ -15,19 +14,11 @@ try {
     console.warn(e);
 }
 
-export function clone(v: any): any {
-    return v === undefined ? undefined : JSON.parse(JSON.stringify(v));
-}
-
-export function isFunction(obj: any): boolean {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
-}
-
-export function isEmptyObject(obj: object): boolean {
+function isEmptyObject(obj: object): boolean {
     return !Object.keys(obj).length;
 }
 
-export function isSparseArray(arr: any[]): boolean {
+function isSparseArray(arr: any[]): boolean {
     let i = 0;
     const l = arr.length;
     for (; i < l; i++) {
@@ -86,12 +77,6 @@ export function normalizeJavascript(js: Function | string): string {
     return r.code.replace('var x=', '');
 }
 
-export function normalizeAndHashJavascript(js: Function | string): string {
-    return createHash('sha256')
-        .update(normalizeJavascript(js))
-        .digest('hex');
-}
-
 export function removeCircularReferences(data: any, prev: any[] = []): any {
     if (typeof data !== 'object') {
         return data;
@@ -114,24 +99,6 @@ export function removeCircularReferences(data: any, prev: any[] = []): any {
             delete data[x];
         } else if (typeof data[x] === 'object') {
             removeCircularReferences(data[x]);
-        }
-    }
-
-    return data;
-}
-
-export function stringifyLambdas(data: any): any {
-    if (typeof data !== 'object') {
-        return data;
-    }
-
-    for (const x in data) {
-        if (data[x] instanceof Array) {
-            stringifyLambdas(data[x]);
-        } else if (typeof data[x] === 'function' || data[x] instanceof Function) {
-            data[x] = jsToCode(data[x]);
-        } else if (typeof data[x] === 'object') {
-            stringifyLambdas(data[x]);
         }
     }
 

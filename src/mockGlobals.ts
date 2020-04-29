@@ -1,10 +1,10 @@
 
 import * as Handlebars from 'handlebars';
-import { clone, stripNulls, serialize } from './utils';
+import { stripNulls, serialize } from './utils';
 import { ExpectTemplate } from './expectTemplate';
 import { resolve as resolvePath } from 'path';
 import extend from 'extend';
-import {existsSync, readFileSync} from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { GlobalContext } from './globalContext';
 import * as sinon from 'sinon';
 
@@ -12,17 +12,9 @@ export {Handlebars, sinon};
 
 export const globalContext: GlobalContext = new GlobalContext();
 
-export function resetContext(): void {
-    globalContext.testContext = globalContext.testContext.reset();
-}
-
-function currentTestName(): string {
-    return globalContext.testContext.key || '';
-}
-
 function log(message?: any, ...optionalParams: any[]): void {
     console.warn.apply(null, [
-        currentTestName(),
+        globalContext.testContext.key || '',
         '|',
         message,
         // ...optionalParams
@@ -34,10 +26,6 @@ function log(message?: any, ...optionalParams: any[]): void {
 
 class SkipError extends Error {}
 
-
-
-// env
-
 export function afterEach(fn: Function): void {
     globalContext.afterFns.push(fn);
 }
@@ -45,55 +33,6 @@ export function afterEach(fn: Function): void {
 export function beforeEach(fn: Function): void {
     globalContext.beforeFns.push(fn);
 }
-
-export function CompilerContextCompile(template: string, options: object): Function {
-    const {testContext} = globalContext;
-
-    // Push template unto context
-    testContext.template = template;
-    testContext.compileOptions = clone(options);
-
-    const compiledTemplate = Handlebars.compile(template, options);
-
-    return function (data: any, options: any): string {
-        // Note: merging data in the options causes tests to fail, possibly
-        // a separate type of data?
-        if (options && options.hasOwnProperty('data')) {
-            //data = extend(true, data, options.data);
-            testContext.options = testContext.options || {};
-            testContext.options.data = options.data;
-        }
-
-        // Push template data unto context
-        testContext.data = data;
-
-        if (options && options.hasOwnProperty('helpers')) {
-            // Push helpers unto context
-            testContext.helpers = options.helpers;
-        }
-
-        if (options && options.hasOwnProperty('decorators')) {
-            // Push decorators unto context
-            testContext.decorators = options.decorators;
-        }
-
-        return compiledTemplate(data, options);
-    };
-}
-
-function CompilerContextCompileWithPartial(template: string, options: any): Function {
-    const {testContext} = globalContext;
-
-    // Push template unto context
-    testContext.template = template;
-    testContext.compileOptions = clone(options);
-    return Handlebars.compile(template, options);
-}
-
-export const CompilerContext = {
-    compile: CompilerContextCompile,
-    compileWithPartial: CompilerContextCompileWithPartial,
-};
 
 export function describe(description: string, next: Function): void {
     const {testContext, descriptionStack} = globalContext;
@@ -133,63 +72,6 @@ export function it(description: string, next: Function): void {
     globalContext.afterFns.forEach((fn: Function) => {
         fn();
     });
-}
-
-export function equals(...args: any[]): void {
-    log('equals called', ...args);
-}
-
-export function xit(...args: any[]): void {
-    log('xit called', ...args);
-}
-
-export function expect(): any {
-    return {
-        to: {
-            equal(...args: any[]): void {
-                log('expect.to.equal called', ...args);
-            },
-            be: {
-                true(...args: any[]): void {
-                    log('expect.to.be.true called', ...args);
-                }
-            },
-            throw(...args: any[]): void {
-                log('expect.to.throw called', ...args);
-            },
-            match(...args: any[]): void {
-                log('expect.to.match called', ...args);
-            }
-        }
-    };
-}
-
-export function shouldBeToken(...args: any[]): void {
-    log('shouldBeToken called', ...args);
-}
-
-export function shouldCompileTo(...args: any[]): void {
-    log('shouldCompileTo called', ...args);
-}
-
-export function shouldCompileToWithPartials(...args: any[]): void {
-    log('shouldCompileToWithPartials called', ...args);
-}
-
-export function compileWithPartials(...args: any[]): void {
-    log('compileWithPartials called', ...args);
-}
-
-export function shouldThrow(...args: any[]): void {
-    log('shouldThrow called', ...args);
-}
-
-export function tokenize(...args: any[]): void {
-    log('tokenize called', ...args);
-}
-
-export function shouldMatchTokens(...args: any[]): void {
-    log('shouldMatchTokens called', ...args);
 }
 
 export function expectTemplate(template: string): ExpectTemplate {
@@ -257,7 +139,7 @@ function addExpectTemplate(xt: ExpectTemplate): void {
     }
 
     // Reset the context
-    resetContext();
+    globalContext.testContext = globalContext.testContext.reset();
 }
 
 function applyPatches(name: string, spec: TestSpec): TestSpec {
@@ -347,4 +229,65 @@ function detectGlobalPartials(): StringDict {
     });
 
     return globalPartials;
+}
+
+
+
+// these functions don't need to do anything, just warn and ignore
+
+export function equals(...args: any[]): void {
+    log('equals called', ...args);
+}
+
+export function xit(...args: any[]): void {
+    log('xit called', ...args);
+}
+
+export function expect(): any {
+    return {
+        to: {
+            equal(...args: any[]): void {
+                log('expect.to.equal called', ...args);
+            },
+            be: {
+                true(...args: any[]): void {
+                    log('expect.to.be.true called', ...args);
+                }
+            },
+            throw(...args: any[]): void {
+                log('expect.to.throw called', ...args);
+            },
+            match(...args: any[]): void {
+                log('expect.to.match called', ...args);
+            }
+        }
+    };
+}
+
+export function shouldBeToken(...args: any[]): void {
+    log('shouldBeToken called', ...args);
+}
+
+export function shouldCompileTo(...args: any[]): void {
+    log('shouldCompileTo called', ...args);
+}
+
+export function shouldCompileToWithPartials(...args: any[]): void {
+    log('shouldCompileToWithPartials called', ...args);
+}
+
+export function compileWithPartials(...args: any[]): void {
+    log('compileWithPartials called', ...args);
+}
+
+export function shouldThrow(...args: any[]): void {
+    log('shouldThrow called', ...args);
+}
+
+export function tokenize(...args: any[]): void {
+    log('tokenize called', ...args);
+}
+
+export function shouldMatchTokens(...args: any[]): void {
+    log('shouldMatchTokens called', ...args);
 }

@@ -3,7 +3,7 @@ import { Command, command, param } from 'clime';
 import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
 import { isArray } from 'util';
-import { clone, serialize } from '../utils';
+import { serialize } from '../utils';
 import { resolve as resolvePath } from 'path';
 import { readdirSync, readFileSync } from 'fs';
 import * as assert from 'assert';
@@ -108,7 +108,7 @@ function tokenize(template: string): HandlebarsToken[] { // borrowed from spec/t
 }
 
 function unstringifyHelpers(helpers: any): FunctionDict {
-    if (!helpers || helpers === null) {
+    if (!helpers || helpers === null || typeof helpers !== "object") {
         return {};
     }
     const ret: { [key: string]: any } = {};
@@ -201,7 +201,7 @@ function prepareTestGeneric(test: any): any {
     // Exception
     spec.exception = test.exception ? true : false;
     // Data
-    spec.data = fixSparseArray(clone(test.data));
+    spec.data = fixSparseArray(test.data);
     unstringifyLambdas(spec.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
@@ -214,8 +214,8 @@ function prepareTestGeneric(test: any): any {
     spec.decorators = unstringifyHelpers(test.decorators);
     spec.globalDecorators = test.globalDecorators || undefined;
     // Options
-    spec.runtimeOptions = unstringifyLambdas(clone(test.runtimeOptions));
-    spec.compileOptions = clone(test.compileOptions);
+    spec.runtimeOptions = unstringifyLambdas(test.runtimeOptions);
+    spec.compileOptions = test.compileOptions;
     if (spec.options && typeof spec.options.data === 'object') {
         unstringifyLambdas(spec.options.data);
     }
@@ -231,7 +231,7 @@ function prepareTestParser(test: any): any {
     // Template
     spec.template = test.template;
     // Expected
-    spec.expected = clone(test.expected);
+    spec.expected = test.expected;
     // Exception
     spec.exception = test.exception ? true : false;
     // Message
@@ -246,7 +246,7 @@ function prepareTestTokenizer(test: any): any {
     // Template
     spec.template = test.template;
     // Expected
-    spec.expected = clone(test.expected);
+    spec.expected = test.expected;
     return spec;
 }
 
@@ -305,7 +305,7 @@ function runTestGeneric(test: any): boolean {
 
         // Execute
         const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
-        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
+        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, test.compileOptions);
         const runtimeOptions = test.runtimeOptions || test.options || {};
         //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
         if (test.helpers) {

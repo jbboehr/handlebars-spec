@@ -11,6 +11,7 @@ stdenv.mkDerivation {
   buildInputs = [ nodejs jq ];
   shellHook = ''
       export PATH="${nodeModulesBinPath}:$PATH"
+      export TS_NODE_FILES=true
     '';
 }
 
