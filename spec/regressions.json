@@ -16,39 +16,49 @@
 				}
 			]
 		},
-		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes"
+		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes",
+		"message": "Renders without an undefined property error"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
-		"expected": "not set :: "
+		"expected": "not set :: ",
+		"message": "inverted sections run when property isn't present in context"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "01",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
-		"data": {},
-		"expected": "not set :: "
+		"data": {
+			"set": null
+		},
+		"expected": "not set :: ",
+		"message": "inverted sections run when property is undefined"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "02",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {
 			"set": false
 		},
-		"expected": "not set :: "
+		"expected": "not set :: ",
+		"message": "inverted sections run when property is false"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "03",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {
 			"set": true
 		},
-		"expected": " :: set"
+		"expected": " :: set",
+		"message": "inverted sections don't run when property is true"
 	},
 	{
 		"description": "Regressions",
@@ -60,7 +70,8 @@
 				2
 			]
 		},
-		"expected": "1, 2"
+		"expected": "1, 2",
+		"message": "it works as expected"
 	},
 	{
 		"description": "Regressions",
@@ -137,6 +148,7 @@
 	{
 		"description": "Regressions",
 		"it": "GS-428: Nested if else rendering",
+		"number": "01",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}} {{#blk}} Expected {{/blk}} {{/inverse}}",
 		"data": {},
 		"expected": "  Expected  ",
@@ -182,13 +194,16 @@
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
 		"template": "{{{a}}",
-		"exception": true
+		"data": {},
+		"exception": "/Parse error on/"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
+		"number": "01",
 		"template": "{{a}}}",
-		"exception": true
+		"data": {},
+		"exception": "/Parse error on/"
 	},
 	{
 		"description": "Regressions",
@@ -200,7 +215,8 @@
 				2
 			]
 		},
-		"expected": "1,2"
+		"expected": "1,2",
+		"message": "it works as expected"
 	},
 	{
 		"description": "Regressions",
@@ -212,7 +228,8 @@
 			"taxed_value": 6000,
 			"in_ca": true
 		},
-		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes."
+		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes.",
+		"message": "the hello world mustache example works"
 	},
 	{
 		"description": "Regressions",
@@ -307,6 +324,24 @@
 	},
 	{
 		"description": "Regressions",
+		"it": "GH-1093: Undefined helper context",
+		"template": "{{#each obj}}{{{helper}}}{{.}}{{/each}}",
+		"data": {
+			"obj": {
+				"foo": null,
+				"bar": "bat"
+			}
+		},
+		"expected": "notfoundbat",
+		"helpers": {
+			"helper": {
+				"!code": true,
+				"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }"
+			}
+		}
+	},
+	{
+		"description": "Regressions",
 		"it": "should support multiple levels of inline partials",
 		"template": "{{#> layout}}{{#*inline \"subcontent\"}}subcontent{{/inline}}{{/layout}}",
 		"data": {},
@@ -337,5 +372,88 @@
 			"layout": "{{#> inner}}Inner{{/inner}}{{> @partial-block }}",
 			"inner": ""
 		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1135 : Context handling within each iteration",
+		"template": "{{#each array}}\n 1. IF: {{#if true}}{{../name}}-{{../../name}}-{{../../../name}}{{/if}}\n 2. MYIF: {{#myif true}}{{../name}}={{../../name}}={{../../../name}}{{/myif}}\n{{/each}}",
+		"data": {
+			"array": [
+				1
+			],
+			"name": "John"
+		},
+		"expected": " 1. IF: John--\n 2. MYIF: John==\n",
+		"helpers": {
+			"myif": {
+				"!code": true,
+				"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }"
+			}
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1186: Support block params for existing programs",
+		"template": "{{#*inline \"test\"}}{{> @partial-block }}{{/inline}}{{#>test }}{{#each listOne as |item|}}{{ item }}{{/each}}{{/test}}{{#>test }}{{#each listTwo as |item|}}{{ item }}{{/each}}{{/test}}",
+		"data": {
+			"listOne": [
+				"a"
+			],
+			"listTwo": [
+				"b"
+			]
+		},
+		"expected": "ab"
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1319: \"unless\" breaks when \"each\" value equals \"null\"",
+		"template": "{{#each list}}{{#unless ./prop}}parent={{../value}} {{/unless}}{{/each}}",
+		"data": {
+			"value": "parent",
+			"list": [
+				null,
+				"a"
+			]
+		},
+		"expected": "parent=parent parent=parent "
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1341: 4.0.7 release breaks {{#if @partial-block}} usage",
+		"template": "template {{>partial}} template",
+		"data": {},
+		"expected": "template  block  partial  block  template",
+		"partials": {
+			"partialWithBlock": "{{#if @partial-block}} block {{> @partial-block}} block {{/if}}",
+			"partial": "{{#> partialWithBlock}} partial {{/partialWithBlock}}"
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "should allow hash with protected array names",
+		"template": "{{helpa length=\"foo\"}}",
+		"data": {
+			"array": [
+				1
+			],
+			"name": "John"
+		},
+		"expected": "foo",
+		"helpers": {
+			"helpa": {
+				"!code": true,
+				"javascript": "function(options) {\n        return options.hash.length;\n      }"
+			}
+		}
+	},
+	{
+		"description": "Regressions - GH-1639: TypeError: Cannot read property 'apply' of undefined\" when handlebars version > 4.6.0 (undocumented, deprecated usage)",
+		"it": "should treat undefined helpers like non-existing helpers",
+		"template": "{{foo}}",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "bar"
 	}
 ]

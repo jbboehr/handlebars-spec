@@ -11,8 +11,7 @@
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return 'success';\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -36,8 +35,7 @@
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -61,8 +59,7 @@
 				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
 				"php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -86,8 +83,7 @@
 				"javascript": "function (passiveVoice, noun, thiz, thiz2, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n        equal(options.ids[2], 'is.a');\n        equal(options.ids[3], '');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -95,7 +91,7 @@
 		"template": "{{wycats @is.a @slave.driver}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS @is.a:foo @slave.driver:bar",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"is": {
 					"a": "foo"
@@ -114,8 +110,7 @@
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -139,8 +134,7 @@
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -169,8 +163,7 @@
 				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return 'HELP ME MY BOSS ' + passiveVoice;\n      }",
 				"php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "track ids",
@@ -202,7 +195,7 @@
 		}
 	},
 	{
-		"description": "#each",
+		"description": "track ids - builtin helpers - #each",
 		"it": "should track contextPath for arrays",
 		"template": "{{#each array}}{{wycats name}}{{/each}}",
 		"data": {
@@ -223,7 +216,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -233,7 +226,7 @@
 		}
 	},
 	{
-		"description": "#each",
+		"description": "track ids - builtin helpers - #each",
 		"it": "should track contextPath for keys",
 		"template": "{{#each object}}{{wycats name}}{{/each}}",
 		"data": {
@@ -254,7 +247,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -264,7 +257,7 @@
 		}
 	},
 	{
-		"description": "#each",
+		"description": "track ids - builtin helpers - #each",
 		"it": "should handle nesting",
 		"template": "{{#each .}}{{#each .}}{{wycats name}}{{/each}}{{/each}}",
 		"data": {
@@ -285,7 +278,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -295,7 +288,7 @@
 		}
 	},
 	{
-		"description": "#each",
+		"description": "track ids - builtin helpers - #each",
 		"it": "should handle block params",
 		"template": "{{#each array as |value|}}{{blockParams value.name}}{{/each}}",
 		"data": {
@@ -321,12 +314,12 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->data['contextPath'] . '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 			}
 		}
 	},
 	{
-		"description": "#with",
+		"description": "track ids - builtin helpers - #with",
 		"it": "should track contextPath",
 		"template": "{{#with field}}{{wycats name}}{{/with}}",
 		"data": {
@@ -342,7 +335,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -352,7 +345,7 @@
 		}
 	},
 	{
-		"description": "#with",
+		"description": "track ids - builtin helpers - #with",
 		"it": "should handle nesting",
 		"template": "{{#with bat}}{{#with field}}{{wycats name}}{{/with}}{{/with}}",
 		"data": {
@@ -370,7 +363,7 @@
 			"blockParams": {
 				"!code": true,
 				"javascript": "function (name, options) {\n        return name + ':' + options.ids[0] + '\\n';\n      }",
-				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] + '\\n';\n      }"
+				"php": "function($name, $options) {\n        return $name . ':' . $options->ids[0] . \"\\n\";\n      }"
 			},
 			"wycats": {
 				"!code": true,
@@ -380,7 +373,7 @@
 		}
 	},
 	{
-		"description": "#blockHelperMissing",
+		"description": "track ids - builtin helpers - #blockHelperMissing",
 		"it": "should track contextPath for arrays",
 		"template": "{{#field}}{{wycats name}}{{/field}}",
 		"data": {
@@ -408,7 +401,7 @@
 		}
 	},
 	{
-		"description": "#blockHelperMissing",
+		"description": "track ids - builtin helpers - #blockHelperMissing",
 		"it": "should track contextPath for keys",
 		"template": "{{#field}}{{wycats name}}{{/field}}",
 		"data": {
@@ -434,7 +427,7 @@
 		}
 	},
 	{
-		"description": "#blockHelperMissing",
+		"description": "track ids - builtin helpers - #blockHelperMissing",
 		"it": "should handle nesting",
 		"template": "{{#bat}}{{#field}}{{wycats name}}{{/field}}{{/bat}}",
 		"data": {

@@ -23,6 +23,7 @@
 	{
 		"description": "partials",
 		"it": "basic partials",
+		"number": "01",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
 		"data": {
 			"dudes": [
@@ -37,6 +38,12 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"runtimeOptions": {
+			"data": false
+		},
+		"compileOptions": {
+			"data": false
+		},
 		"partials": {
 			"dude": "{{name}} ({{url}}) "
 		}
@@ -72,6 +79,7 @@
 	{
 		"description": "partials",
 		"it": "dynamic partials",
+		"number": "01",
 		"template": "Dudes: {{#dudes}}{{> (partial)}}{{/dudes}}",
 		"data": {
 			"dudes": [
@@ -86,6 +94,12 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) Alan (http://alan) ",
+		"runtimeOptions": {
+			"data": false
+		},
+		"compileOptions": {
+			"data": false
+		},
 		"partials": {
 			"dude": "{{name}} ({{url}}) "
 		},
@@ -113,7 +127,6 @@
 				}
 			]
 		},
-		"exception": true,
 		"partials": {
 			"dude": "{{name}} ({{url}}) "
 		},
@@ -123,7 +136,8 @@
 				"javascript": "function () {\n        return 'missing';\n      }",
 				"php": "function() {\n        return 'missing';\n      }"
 			}
-		}
+		},
+		"exception": "The partial missing could not be found"
 	},
 	{
 		"description": "partials",
@@ -164,16 +178,17 @@
 			]
 		},
 		"expected": "Dudes:  ()  () ",
-		"partials": {
-			"dude": "{{name}} ({{url}}) "
-		},
 		"compileOptions": {
 			"explicitPartialContext": true
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
 		}
 	},
 	{
 		"description": "partials",
 		"it": "partials with no context",
+		"number": "01",
 		"template": "Dudes: {{#dudes}}{{>dude name=\"foo\"}}{{/dudes}}",
 		"data": {
 			"dudes": [
@@ -188,11 +203,11 @@
 			]
 		},
 		"expected": "Dudes: foo () foo () ",
-		"partials": {
-			"dude": "{{name}} ({{url}}) "
-		},
 		"compileOptions": {
 			"explicitPartialContext": true
+		},
+		"partials": {
+			"dude": "{{name}} ({{url}}) "
 		}
 	},
 	{
@@ -219,8 +234,8 @@
 		"description": "partials",
 		"it": "partials with duplicate parameters",
 		"template": "Dudes: {{>dude dudes foo bar=baz}}",
-		"exception": true,
-		"message": "Unsupported number of partial arguments: 2 - 1:7"
+		"data": {},
+		"exception": "Unsupported number of partial arguments: 2 - 1:7"
 	},
 	{
 		"description": "partials",
@@ -272,22 +287,15 @@
 		"description": "partials",
 		"it": "rendering undefined partial throws an exception",
 		"template": "{{> whatever}}",
-		"exception": true,
-		"message": "The partial whatever could not be found"
-	},
-	{
-		"description": "partials",
-		"it": "registering undefined partial throws an exception",
-		"template": "{{> whatever}}",
-		"exception": true,
-		"message": "Attempting to register a partial called \"undefined_test\" as undefined"
+		"data": {},
+		"exception": "The partial whatever could not be found"
 	},
 	{
 		"description": "partials",
 		"it": "rendering template partial in vm mode throws an exception",
 		"template": "{{> whatever}}",
-		"exception": true,
-		"message": "The partial whatever could not be found"
+		"data": {},
+		"exception": "The partial whatever could not be found"
 	},
 	{
 		"description": "partials",
@@ -312,7 +320,8 @@
 				"javascript": "function partial(context) {\n      return context.name + ' (' + context.url + ') ';\n    }",
 				"php": "function($context) {\n      return $context['name'] . ' (' . $context['url'] . ') ';\n    }"
 			}
-		}
+		},
+		"message": "Function partials output based in VM."
 	},
 	{
 		"description": "partials",
@@ -366,12 +375,10 @@
 		},
 		"expected": "Dudes: Jeepers Creepers",
 		"partials": {
+			"globalTest": "{{anotherDude}}",
 			"shared/dude": "{{name}}"
 		},
-		"message": "Partials can use globals or passed",
-		"globalPartials": {
-			"globalTest": "{{anotherDude}}"
-		}
+		"message": "Partials can use globals or passed"
 	},
 	{
 		"description": "partials",
@@ -382,11 +389,12 @@
 			"anotherDude": "Creepers"
 		},
 		"expected": "Dudes: Jeepers Creepers",
-		"message": "Partials can use globals or passed",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
-		}
+			"globalTest": "{{anotherDude}}",
+			"notused": "notused"
+		},
+		"message": "Partials can use globals or passed"
 	},
 	{
 		"description": "partials",
@@ -398,13 +406,11 @@
 		},
 		"expected": "Dudes: Jeepers",
 		"partials": {
-			"404": "{{name}}"
-		},
-		"message": "Partials can use literal paths",
-		"globalPartials": {
+			"404": "{{name}}",
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
-		}
+		},
+		"message": "Partials can use literal paths"
 	},
 	{
 		"description": "partials",
@@ -416,13 +422,11 @@
 		},
 		"expected": "Dudes: Jeepers",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"404/asdf?.bar": "{{name}}"
 		},
-		"message": "Partials can use literal paths",
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
-		}
+		"message": "Partials can use literal paths"
 	},
 	{
 		"description": "partials",
@@ -434,13 +438,11 @@
 		},
 		"expected": "Dudes: Jeepers",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"+404/asdf?.bar": "{{name}}"
 		},
-		"message": "Partials can use literal paths",
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
-		}
+		"message": "Partials can use literal paths"
 	},
 	{
 		"description": "partials",
@@ -452,13 +454,11 @@
 		},
 		"expected": "Dudes: Jeepers",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"+404/asdf?.bar": "{{name}}"
 		},
-		"message": "Partials can use literal paths",
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
-		}
+		"message": "Partials can use literal paths"
 	},
 	{
 		"description": "partials",
@@ -478,27 +478,36 @@
 		},
 		"expected": "Dudes: ",
 		"partials": {
-			"dude": ""
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": ""
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials",
+		"it": "throw on missing partial",
+		"template": "{{> dude}}",
+		"data": {},
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"dude": "fail"
+		},
+		"exception": "/The partial dude could not be compiled/"
+	},
+	{
+		"description": "partials - partial blocks",
 		"it": "should render partial block as default",
 		"template": "{{#> dude}}success{{/dude}}",
 		"data": {},
 		"expected": "success",
-		"partials": {},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
 		"it": "should execute default block with proper context",
 		"template": "{{#> dude context}}{{value}}{{/dude}}",
 		"data": {
@@ -507,14 +516,13 @@
 			}
 		},
 		"expected": "success",
-		"partials": {},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
 		"it": "should propagate block parameters to default block",
 		"template": "{{#with context as |me|}}{{#> dude}}{{me.value}}{{/dude}}{{/with}}",
 		"data": {
@@ -523,42 +531,49 @@
 			}
 		},
 		"expected": "success",
-		"partials": {},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
 		"it": "should not use partial block if partial exists",
 		"template": "{{#> dude}}fail{{/dude}}",
 		"data": {},
 		"expected": "success",
 		"partials": {
-			"dude": "success"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "success"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
 		"it": "should render block from partial",
 		"template": "{{#> dude}}success{{/dude}}",
 		"data": {},
 		"expected": "success",
 		"partials": {
-			"dude": "{{> @partial-block }}"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{> @partial-block }}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
+		"it": "should be able to render the partial-block twice",
+		"template": "{{#> dude}}success{{/dude}}",
+		"data": {},
+		"expected": "success success",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{> @partial-block }} {{> @partial-block }}"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
 		"it": "should render block from partial with context",
 		"template": "{{#> dude}}{{value}}{{/dude}}",
 		"data": {
@@ -568,16 +583,63 @@
 		},
 		"expected": "success",
 		"partials": {
-			"dude": "{{#with context}}{{> @partial-block }}{{/with}}"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{#with context}}{{> @partial-block }}{{/with}}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
+		"it": "should be able to access the @data frame from a partial-block",
+		"template": "{{#> dude}}in-block: {{@root/value}}{{/dude}}",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<code>before-block: success in-block: success</code>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"dude": "<code>before-block: {{@root/value}} {{>   @partial-block }}</code>"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
+		"it": "should allow the #each-helper to be used along with partial-blocks",
+		"template": "<template>{{#> list value}}value = {{.}}{{/list}}</template>",
+		"data": {
+			"value": [
+				"a",
+				"b",
+				"c"
+			]
+		},
+		"expected": "<template><list><item>value = a</item><item>value = b</item><item>value = c</item></list></template>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"list": "<list>{{#each .}}<item>{{> @partial-block}}</item>{{/each}}</list>"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
+		"it": "should render block from partial with context (twice)",
+		"template": "{{#> dude}}{{value}}{{/dude}}",
+		"data": {
+			"context": {
+				"value": "success"
+			}
+		},
+		"expected": "success success",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{#with context}}{{> @partial-block }} {{> @partial-block }}{{/with}}"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
 		"it": "should render block from partial with context",
+		"number": "01",
 		"template": "{{#> dude}}{{../context/value}}{{/dude}}",
 		"data": {
 			"context": {
@@ -586,15 +648,13 @@
 		},
 		"expected": "success",
 		"partials": {
-			"dude": "{{#with context}}{{> @partial-block }}{{/with}}"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{#with context}}{{> @partial-block }}{{/with}}"
 		}
 	},
 	{
-		"description": "partial blocks",
+		"description": "partials - partial blocks",
 		"it": "should render block from partial with block params",
 		"template": "{{#with context as |me|}}{{#> dude}}{{me.value}}{{/dude}}{{/with}}",
 		"data": {
@@ -604,135 +664,219 @@
 		},
 		"expected": "success",
 		"partials": {
-			"dude": "{{> @partial-block }}"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{> @partial-block }}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - partial blocks",
+		"it": "should render nested partial blocks",
+		"template": "<template>{{#> outer}}{{value}}{{/outer}}</template>",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<template><outer><nested><outer-block>success</outer-block></nested></outer></template>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"outer": "<outer>{{#> nested}}<outer-block>{{> @partial-block}}</outer-block>{{/nested}}</outer>",
+			"nested": "<nested>{{> @partial-block}}</nested>"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
+		"it": "should render nested partial blocks at different nesting levels",
+		"template": "<template>{{#> outer}}{{value}}{{/outer}}</template>",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<template><outer><nested><outer-block>success</outer-block></nested>success</outer></template>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"outer": "<outer>{{#> nested}}<outer-block>{{> @partial-block}}</outer-block>{{/nested}}{{> @partial-block}}</outer>",
+			"nested": "<nested>{{> @partial-block}}</nested>"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
+		"it": "should render nested partial blocks at different nesting levels (twice)",
+		"template": "<template>{{#> outer}}{{value}}{{/outer}}</template>",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<template><outer><nested><outer-block>success success</outer-block></nested>success+success</outer></template>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"outer": "<outer>{{#> nested}}<outer-block>{{> @partial-block}} {{> @partial-block}}</outer-block>{{/nested}}{{> @partial-block}}+{{> @partial-block}}</outer>",
+			"nested": "<nested>{{> @partial-block}}</nested>"
+		}
+	},
+	{
+		"description": "partials - partial blocks",
+		"it": "should render nested partial blocks (twice at each level)",
+		"template": "<template>{{#> outer}}{{value}}{{/outer}}</template>",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<template><outer><nested><outer-block>success success</outer-block><outer-block>success success</outer-block></nested></outer></template>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
+			"outer": "<outer>{{#> nested}}<outer-block>{{> @partial-block}} {{> @partial-block}}</outer-block>{{/nested}}</outer>",
+			"nested": "<nested>{{> @partial-block}}{{> @partial-block}}</nested>"
+		}
+	},
+	{
+		"description": "partials - inline partials",
 		"it": "should define inline partials for template",
 		"template": "{{#*inline \"myPartial\"}}success{{/inline}}{{> myPartial}}",
 		"data": {},
 		"expected": "success",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should overwrite multiple partials in the same template",
 		"template": "{{#*inline \"myPartial\"}}fail{{/inline}}{{#*inline \"myPartial\"}}success{{/inline}}{{> myPartial}}",
 		"data": {},
 		"expected": "success",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should define inline partials for block",
 		"template": "{{#with .}}{{#*inline \"myPartial\"}}success{{/inline}}{{> myPartial}}{{/with}}",
 		"data": {},
 		"expected": "success",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should define inline partials for block",
+		"number": "01",
 		"template": "{{#with .}}{{#*inline \"myPartial\"}}success{{/inline}}{{/with}}{{> myPartial}}",
 		"data": {},
-		"expected": "success",
-		"exception": true,
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
-		}
+		},
+		"exception": "/myPartial could not/"
 	},
 	{
-		"description": "inline partials",
-		"it": "should define inline partials for block",
-		"template": "{{> whatever}}",
-		"exception": true,
-		"message": "/myPartial could not/"
-	},
-	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should override global partials",
 		"template": "{{#*inline \"myPartial\"}}success{{/inline}}{{> myPartial}}",
 		"data": {},
 		"expected": "success",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"myPartial": {
 				"!code": true,
 				"javascript": "function () { return 'fail'; }",
 				"php": "function() { return 'fail'; }"
 			}
-		},
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should override template partials",
 		"template": "{{#*inline \"myPartial\"}}fail{{/inline}}{{#with .}}{{#*inline \"myPartial\"}}success{{/inline}}{{> myPartial}}{{/with}}",
 		"data": {},
 		"expected": "success",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should override partials down the entire stack",
 		"template": "{{#with .}}{{#*inline \"myPartial\"}}success{{/inline}}{{#with .}}{{#with .}}{{> myPartial}}{{/with}}{{/with}}{{/with}}",
 		"data": {},
 		"expected": "success",
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should define inline partials for partial call",
 		"template": "{{#*inline \"myPartial\"}}success{{/inline}}{{> dude}}",
 		"data": {},
 		"expected": "success",
 		"partials": {
-			"dude": "{{> myPartial }}"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{> myPartial }}"
 		}
 	},
 	{
-		"description": "inline partials",
+		"description": "partials - inline partials",
 		"it": "should define inline partials in partial block call",
 		"template": "{{#> dude}}{{#*inline \"myPartial\"}}success{{/inline}}{{/dude}}",
 		"data": {},
 		"expected": "success",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"dude": "{{> myPartial }}"
+		}
+	},
+	{
+		"description": "partials - inline partials",
+		"it": "should render nested inline partials",
+		"template": "{{#*inline \"outer\"}}{{#>inner}}<outer-block>{{>@partial-block}}</outer-block>{{/inner}}{{/inline}}{{#*inline \"inner\"}}<inner>{{>@partial-block}}</inner>{{/inline}}{{#>outer}}{{value}}{{/outer}}",
+		"data": {
+			"value": "success"
 		},
-		"globalPartials": {
+		"expected": "<inner><outer-block>success</outer-block></inner>",
+		"partials": {
 			"shared/dude": "{{name}}",
 			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "standalone partials",
+		"description": "partials - inline partials",
+		"it": "should render nested inline partials with partial-blocks on different nesting levels",
+		"template": "{{#*inline \"outer\"}}{{#>inner}}<outer-block>{{>@partial-block}}</outer-block>{{/inner}}{{>@partial-block}}{{/inline}}{{#*inline \"inner\"}}<inner>{{>@partial-block}}</inner>{{/inline}}{{#>outer}}{{value}}{{/outer}}",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<inner><outer-block>success</outer-block></inner>success",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}"
+		}
+	},
+	{
+		"description": "partials - inline partials",
+		"it": "should render nested inline partials (twice at each level)",
+		"template": "{{#*inline \"outer\"}}{{#>inner}}<outer-block>{{>@partial-block}} {{>@partial-block}}</outer-block>{{/inner}}{{/inline}}{{#*inline \"inner\"}}<inner>{{>@partial-block}}{{>@partial-block}}</inner>{{/inline}}{{#>outer}}{{value}}{{/outer}}",
+		"data": {
+			"value": "success"
+		},
+		"expected": "<inner><outer-block>success success</outer-block><outer-block>success success</outer-block></inner>",
+		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}"
+		}
+	},
+	{
+		"description": "partials - standalone partials",
 		"it": "indented partials",
 		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
 		"data": {
@@ -749,15 +893,13 @@
 		},
 		"expected": "Dudes:\n  Yehuda\n  Alan\n",
 		"partials": {
-			"dude": "{{name}}\n"
-		},
-		"globalPartials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{name}}\n"
 		}
 	},
 	{
-		"description": "standalone partials",
+		"description": "partials - standalone partials",
 		"it": "nested indented partials",
 		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
 		"data": {
@@ -774,16 +916,14 @@
 		},
 		"expected": "Dudes:\n  Yehuda\n   http://yehuda!\n  Alan\n   http://alan!\n",
 		"partials": {
+			"shared/dude": "{{name}}",
+			"globalTest": "{{anotherDude}}",
 			"dude": "{{name}}\n {{> url}}",
 			"url": "{{url}}!\n"
-		},
-		"globalPartials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
 		}
 	},
 	{
-		"description": "standalone partials",
+		"description": "partials - standalone partials",
 		"it": "prevent nested indented partials",
 		"template": "Dudes:\n{{#dudes}}\n  {{>dude}}\n{{/dudes}}",
 		"data": {
@@ -799,20 +939,18 @@
 			]
 		},
 		"expected": "Dudes:\n  Yehuda\n http://yehuda!\n  Alan\n http://alan!\n",
-		"partials": {
-			"dude": "{{name}}\n {{> url}}",
-			"url": "{{url}}!\n"
-		},
 		"compileOptions": {
 			"preventIndent": true
 		},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{name}}\n {{> url}}",
+			"url": "{{url}}!\n"
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "partials - compat mode",
 		"it": "partials can access parents",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
 		"data": {
@@ -829,20 +967,17 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
-		"partials": {
-			"dude": "{{name}} ({{url}}) {{root}} "
-		},
-		"compat": true,
 		"compileOptions": {
 			"compat": true
 		},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{name}} ({{url}}) {{root}} "
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "partials - compat mode",
 		"it": "partials can access parents with custom context",
 		"template": "Dudes: {{#dudes}}{{> dude \"test\"}}{{/dudes}}",
 		"data": {
@@ -859,20 +994,17 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
-		"partials": {
-			"dude": "{{name}} ({{url}}) {{root}} "
-		},
-		"compat": true,
 		"compileOptions": {
 			"compat": true
 		},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{name}} ({{url}}) {{root}} "
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "partials - compat mode",
 		"it": "partials can access parents without data",
 		"template": "Dudes: {{#dudes}}{{> dude}}{{/dudes}}",
 		"data": {
@@ -889,20 +1021,21 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
-		"partials": {
-			"dude": "{{name}} ({{url}}) {{root}} "
+		"runtimeOptions": {
+			"data": false
 		},
-		"compat": true,
 		"compileOptions": {
+			"data": false,
 			"compat": true
 		},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{name}} ({{url}}) {{root}} "
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "partials - compat mode",
 		"it": "partials inherit compat",
 		"template": "Dudes: {{> dude}}",
 		"data": {
@@ -919,16 +1052,13 @@
 			]
 		},
 		"expected": "Dudes: Yehuda (http://yehuda) yes Alan (http://alan) yes ",
-		"partials": {
-			"dude": "{{#dudes}}{{name}} ({{url}}) {{root}} {{/dudes}}"
-		},
-		"compat": true,
 		"compileOptions": {
 			"compat": true
 		},
-		"globalPartials": {
+		"partials": {
 			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}"
+			"globalTest": "{{anotherDude}}",
+			"dude": "{{#dudes}}{{name}} ({{url}}) {{root}} {{/dudes}}"
 		}
 	}
 ]
