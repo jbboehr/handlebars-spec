@@ -1,9 +1,10 @@
-import { Command, command, params } from 'clime';
+import { Command, command, params, Options, option } from 'clime';
 import { OutputFileOptions } from './generate';
 import { readFileSync, writeFileSync } from 'fs';
 import { CodeDict } from '../types';
-import { normalizeJavascript } from '../utils';
+import { normalizeAndHashJavascript } from '../utils';
 import deepEqual from "deep-equal";
+import * as hjson from "hjson";
 
 @command({
     description: 'This extracts functions from the existing spec files into a translation table',
@@ -21,12 +22,25 @@ export default class extends Command {
         let fns: CodeDict = {};
 
         for (var i = 0; i < args.length; i++) {
-            var filestr = readFileSync(args[i]);
-            var data = JSON.parse(filestr.toString());
+            let filestr = readFileSync(args[i]).toString();
+            let data;
+            if (args[i].endsWith(".hjson")) {
+                data = hjson.parse(filestr);
+            } else {
+                data = JSON.parse(filestr);
+            }
             fns = this.extract(data, fns);
         }
 
-        const output = JSON.stringify(fns, null, '\t');
+        let output;
+        if (options.outputFormat === "hjson") {
+            output = hjson.stringify(fns, {
+                bracesSameLine: true,
+                space: "\t"
+            });
+        } else {
+            output = JSON.stringify(fns, null, '\t');
+        }
 
         if (options.outputFile) {
             writeFileSync(options.outputFile, output);
@@ -46,7 +60,7 @@ export default class extends Command {
                 console.warn('js key not set');
                 return prev;
             }
-            var key = normalizeJavascript(js);
+            var key = normalizeAndHashJavascript(js);
             if (key in prev) {
                 if (!deepEqual(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);

@@ -31,24 +31,20 @@ export interface IExpectTemplate {
 }
 
 export interface TestSpec {
-    description?: string;
-    oldDescription?: string;
-    it?: string;
+    description: string;
+    it: string
+    number: string
     template: string;
     data: any;
-    expected?: any;
-
-    exception?: true | string | RegExp;
-    helpers?: CodeDict;
-    partials?: StringDict;
-    decorators?: CodeDict;
+    expected: string;
+    runtimeOptions?: RuntimeOptions;
+    compileOptions?: CompileOptions;
+    partials: CodeDict;
+    helpers: StringDict;
+    decorators: CodeDict;
     message?: string;
-    compat?: boolean;
-    runtimeOptions?: any;
-    compileOptions?: any;
-    globalPartials?: any;
-    globalHelpers?: any;
-    globalDecorators?: any;
+    compat?: true,
+    exception?: true | string;
 }
 
 // copied from handlebars since they don't fucking export it

@@ -780,5 +780,9 @@
 	"function(){return\"functionInData\"};": {
 		"!code": true,
 		"javascript": "function() {\n              return 'functionInData';\n            }"
+	},
+	"function(fn,props,container,options){equals(options.args[0],undefined);global.run=true;return fn};": {
+		"!code": true,
+		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }"
 	}
 }

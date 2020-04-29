@@ -1,10 +1,11 @@
 
 import UglifyJS from "uglify-js";
 import { CodeData, CodeDict } from "./types";
-import { readFileSync, writeFileSync, truncateSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { resolve as resolvePath } from "path";
 import { isArray } from "util";
 import { safeEval } from "./eval";
+import {createHash} from "crypto";
 
 const PATCH_FILE = resolvePath(__dirname + "/../patch/_functions.json");
 
@@ -84,6 +85,12 @@ export function normalizeJavascript(js: Function | string): string {
         console.warn(r.warnings);
     }
     return r.code.replace("var x=", "");
+}
+
+export function normalizeAndHashJavascript(js: Function | string): string {
+    return createHash('sha256')
+        .update(normalizeJavascript(js))
+        .digest('hex');
 }
 
 export function removeCircularReferences(data: any, prev: any[] = []): any {
@@ -214,6 +221,12 @@ function serializeInner(data: any, ctx: any): any {
     }
 
     // Handle objects
+    const ignoreEmptyKeys: {[key: string]: true} = {
+        // 'expected': true,
+        'exception': true,
+        'compat': true,
+        'message': true,
+    };
     const ignoreEmptyObjectKeys: {[key: string]: true} = {
         'partials': true,
         'helpers': true,
@@ -223,18 +236,20 @@ function serializeInner(data: any, ctx: any): any {
         'globalPartials': true,
         'globalHelpers': true,
         'globalDecorators': true,
-        'compat': true,
-        'message': true,
     };
 
     // Recurse
     var rv: any = {};
     Object.keys(data).forEach((key) => {
         // Ignore some empty objects
-        if (ignoreEmptyObjectKeys[key] === true && (!data[key] || (typeof data[key] === "object" && isEmptyObject(data[key])))) {
-            return;
-        } else if (key === 'exception' && !data[key]) {
-            return;
+        if (ignoreEmptyKeys[key] === true) {
+            if (!data[key]) {
+                return;
+            }
+        } else if (ignoreEmptyObjectKeys[key] === true) {
+            if (!data[key] || (typeof data[key] === "object" && isEmptyObject(data[key]))) {
+                return;
+            }
         }
         // serialize and append
         rv[key] = serializeInner(data[key], {

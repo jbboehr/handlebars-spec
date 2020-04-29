@@ -12,6 +12,11 @@ export class OutputFileOptions extends Options {
         required: false,
     })
     outputFile?: string;
+    @option({
+        description: 'Output format',
+        required: false,
+    })
+    outputFormat?: string;
 }
 
 @command({
@@ -92,19 +97,3 @@ export default class extends Command {
 
     }
 }
-
-function extractHelpers(data: any) {
-    var helpers: any = {};
-
-    if (!data || typeof data !== 'object') {
-      return false;
-    }
-
-    Object.keys(data).forEach(function (el) {
-      if (isFunction(data[el])) {
-        helpers[el] = jsToCode(data[el]);
-      }
-    });
-
-    return isEmptyObject(helpers) ? false : helpers;
-  }

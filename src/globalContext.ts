@@ -10,7 +10,6 @@ export class GlobalContext {
     testContext: TestContext = new TestContext();
 
     indices: StringDict = {};
-    oldIndices: StringDict = {};
     suite: string = "";
     unusedPatches: StringDict = {};
     tests: TestSpec[] = [];

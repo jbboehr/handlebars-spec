@@ -25,11 +25,6 @@ let handlebarsEnv = Handlebars;
 };
 require('../../handlebars.js/spec/env/common.js');
 
-// Sigh - not sure why this isn't working right (for builtins #each)
-Handlebars.registerHelper('detectDataInsideEach', function (options) {
-    return options.data && options.data.exclaim;
-});
-
 
 
 @command({

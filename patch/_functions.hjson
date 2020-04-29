@@ -1,0 +1,1916 @@
+{
+	60c3298c07ce4402215463991a9d1b8e1b44ef67c1fdc140ad42ddcfe27a48f3: {
+		!code: true
+		javascript:
+			'''
+			function (_undefined, _null, options) {
+			            return (_undefined === undefined) + ' ' + (_null === null) + ' ' + (typeof options);
+			          }
+			'''
+		php:
+			'''
+			function ($_undefined, $_null, $options) {
+			            return ($_undefined === null ? 'true' : 'false') . ' ' . ($_null === null ? 'true' : 'false') . ' ' . gettype($options);
+			          }
+			'''
+	}
+	106e221d4d6b54b1ce2e475a2d26306cfe368ce933947a435138f23e36602d22: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			            return 'undefined!';
+			          }
+			'''
+		php:
+			'''
+			function() {
+			            return 'undefined!';
+			          }
+			'''
+	}
+	1808e8728d328c2c4ece64afb9a2ad635867f2af372c7871f8ca409bcdc89b1a: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			            return 'null!';
+			          }
+			'''
+		php:
+			'''
+			function() {
+			            return 'null!';
+			          }
+			'''
+	}
+	f830db4b32192145a58fdaf92b47ff2172961c89c3b716e37a2924d5e59aab49: {
+		!code: true
+		javascript: function () { return new Handlebars.SafeString('&\'\\<>'); }
+		php: function () { return new SafeString('&\'\\<>'); }
+	}
+	9d33f29ad01c7ba5f63139aa64c4aa00623fa2fe0039059bbd02d2a2453cfa04: {
+		!code: true
+		javascript: function () { return 'Awesome'; }
+		php: function () { return "Awesome"; }
+	}
+	61578ae47aff45fbef79730dea357dd16e0ab3434c5426ceb1e5867100e50dfa: {
+		!code: true
+		javascript: function () { return this.more; }
+		php: function($options) { return $options->scope['more']; }
+	}
+	aa4c6d3a0b8f5ee65e6cc23ab674542a9ab57080e732cf9e8a3745aa5f13f4c7: {
+		!code: true
+		javascript: function (context) { return context; }
+		php: function($context) { return $context; }
+	}
+	25f988e3f0572a3ee3c73647bd5f72a0934527a3e412e7ad9c71b772377a6313: {
+		!code: true
+		javascript: function (context, options) { return options.fn(context); }
+		php: function($context, $options) { return $options->fn($context); }
+	}
+	a8d9b7aeaec51d00da75e9ef23a252c038f1a8bf2dcd7e916424f32cfe76a8cb: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.fn(this);
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options->fn($options->scope);
+			      }
+			'''
+	}
+	0839c50ebd520c914f56fd2c467bac2d584a5f331dc088d652eda5f0277db538: {
+		!code: true
+		javascript: function () { return this; }
+		php: function($context) { return $context; }
+	}
+	92e79773d13df1124800429cb3e0f94ab57f179e66697637fabb1bf0d68a8113: {
+		!code: true
+		javascript:
+			'''
+			function (value) {
+			        return 'bar ' + value;
+			    }
+			'''
+		php: function($value) { return 'bar ' . $value; }
+	}
+	10188315ae808478e22f335de99fc2d9cded1268977749a96691acf496b8d636: {
+		!code: true
+		javascript: function (value) { return value; }
+		php: function($value) { return $value; }
+	}
+	c1af41f7d161a02d90026cb7b8c5cae579f599b1a90f68c1c9cce9b845263087: {
+		!code: true
+		javascript: function (arg) { return 'bar' + arg; }
+		php: function($arg) { return 'bar' . $arg; }
+	}
+	71eeb3c3a4efbd1cdd1282bbe90d3a001e1ad4221186a5100849c2b9c73871ac: {
+		!code: true
+		javascript: function () { return 'bar'; }
+		php: function() { return 'bar'; }
+	}
+	c24488d7c8d9df47c898c1a23d0024aec490c7592d085447ce866fe113d7b84e: {
+		!code: true
+		javascript: function (arg) { return arg; }
+		php: function($arg) { return $arg; }
+	}
+	25261a45f1060f288553b9fe0ab1df8bb0f1e3d8664c4970f3be0b719f802954: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return options.fn.run;
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn->run;
+			        }
+			'''
+	}
+	4428921e6f8c44d65cd754d2b5f1c10651012f22b7430361a0d4d3403f6210d9: {
+		!code: true
+		javascript:
+			'''
+			function (fn) {
+			          fn.run = 'success';
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn) {
+			          $fn->run = 'success';
+			          return $fn;
+			        }
+			'''
+	}
+	641cf8bc93bfb6eed417c98a64d76f02c200f3b76e99531b7dc4fda51870c115: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return options.fn() + options.fn.run;
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn() . $options->fn->run;
+			        }
+			'''
+	}
+	f694e61969fafbe7f20418b9ee3d9d880abcfb7a012757ae0477f33c1bb64738: {
+		!code: true
+		javascript:
+			'''
+			function (fn) {
+			          fn.run = 'cess';
+			        }
+			'''
+		php:
+			'''
+			function($fn) {
+			          $fn->run = 'cess';
+			        }
+			'''
+	}
+	75f544cede30942624294c5d6d200cf85a9363933998809f06db02d88d754a52: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          fn.run = options.fn();
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          $fn->run = $options->fn();
+			          return $fn;
+			        }
+			'''
+	}
+	a5126b989f058d689c04376a2b546e15cea10731fb6cd30f19c3b5ae94e03108: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          fn.run = options.fn.nested + options.fn();
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          $fn->run = $options->fn->nested . $options->fn();
+			          return $fn;
+			        }
+			'''
+	}
+	0a571979dea96ddd0386068d9b3719ede164003fd1ff0972ece2b004d372f45c: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          props.nested = options.fn();
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          $props->nested = $options->fn();
+			        }
+			'''
+	}
+	a3150c2b42ef7c3cb2fc3c3aabd2aa8d2cecc42c4f69e383401103ac589f413e: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          fn.run = (fn.run || '') + options.fn();
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();
+			          return $fn;
+			        }
+			'''
+	}
+	aafd1c547ca75887371909f3203439dd754c6c513c1ebf9d4fe15a1b054cd32d: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          fn.run = options.args;
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          $fn->run = $options->args;
+			          return $fn;
+			        }
+			'''
+	}
+	cd1ac0ebf67df563d96accffcbf8806a7790db21ac3e3dccd54776fc71d5884b: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          equals(options.args[0], 'success');
+			          run = true;
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          assert('$options->args[0] === "success"');
+			          return $fn;
+			        }
+			'''
+	}
+	9e7e6a3da62849b3d383d46e2e555dbb19bd10603f5116d9faae8cf2547a8000: {
+		!code: true
+		javascript:
+			'''
+			function (fn, props, container, options) {
+			          equals(options.args[0], undefined);
+			          global.run = true;
+			          return fn;
+			        }
+			'''
+		php:
+			'''
+			function($fn, $props, $container, $options) {
+			          assert('$options->args[0] === null');
+			          return $fn;
+			        }
+			'''
+	}
+	36b811b2101d247f9e31880788dbb4db1f30298401250f6722401f3a34606847: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return true;
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return true;
+			      }
+			'''
+	}
+	4b54d7f2428d868105ea4d5fda056fea1d709333823c57dee45a7d687c37c677: {
+		!code: true
+		javascript: function () {return this.world; }
+		php: function($scope) { return $scope['world']; }
+	}
+	65619c1605ffa310cfd6a82a3e5acacec8161263a807877ea0b78c0a4266b56d: {
+		!code: true
+		javascript: function () { return false; }
+		php: function() { return false; }
+	}
+	4bfae5fe1fafa2ba3031b1d3cf01f1a8928e0823f94a5315edd7e498418c9f5e: {
+		!code: true
+		javascript: function () {return this.foo; }
+		php: function($scope) { return isset($scope['foo']) ? $scope['foo'] : null; }
+	}
+	12ae2e00c7bb8487afd8f41e239671779152770e24f86633fa25a622bff7c2e1: {
+		!code: true
+		javascript: function () { return {first: 'Alan', last: 'Johnson'}; }
+		php: function() { return array("first" => "Alan", "last" => "Johnson"); }
+	}
+	d9407cc397f1e0fd3e23930af10aff7813f3381632795ab4ecc2d72d393d59f6: {
+		!code: true
+		javascript: function(options) { return options.data && options.data.exclaim; }
+		php: function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }
+	}
+	b04353ba403067cb5b46da2f996e71d141c3513bb7bce7c6ffec3f2eb41c42ba: {
+		!code: true
+		javascript: function () { return [{text: 'goodbye'}, {text: 'Goodbye'}, {text: 'GOODBYE'}]; }
+		php: function() { return array(array("text" => "goodbye"), array("text" => "Goodbye"), array("text" => "GOODBYE")); }
+	}
+	f5f56d3e3f910806e38161d224b8757ee1449c566ba751dc84c144df8debee2f: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.data.adjective + ' ' + this.noun;
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options['data']['adjective'] . " "  . $options->scope['noun'];
+			      }
+			'''
+	}
+	c8ba4497aa2c4acacec048116ebc49e1890caefe045e8c5319a3fdfe484ae3a9: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        var frame = Handlebars.createFrame(options.data);
+			        for (var prop in options.hash) {
+			          if (prop in options.hash) {
+			            frame[prop] = options.hash[prop];
+			          }
+			        }
+			        return options.fn(this, {data: frame});
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        $frame = Utils::createFrame($options['data']);
+			        foreach( $options['hash'] as $prop => $v ) {
+			          $frame[$prop] = $options['hash'][$prop];
+			        }
+			        return $options->fn($options->scope, array("data" => $frame));
+			      }
+			'''
+	}
+	54b422fbee53d7987f72e1cb03fc6a580c0c08a100e91e9f70ae770904bcd586: {
+		!code: true
+		javascript:
+			'''
+			function (noun) {
+			        return 'Hello ' + noun;
+			      }
+			'''
+		php: function($noun) { return "Hello " . ($noun === null ? 'undefined' : $noun); }
+	}
+	b46ece7363f54b381c810762890f6ee6ce7410055f51f38e60ae4a3a9e277487: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return 'Hello ' + options.hash.noun;
+			      }
+			'''
+		php: function($options) { return "Hello " . $options['hash']['noun']; }
+	}
+	1e5145733b6ef41d4411b7a28dec0258ca451bf781e5f9ad8210a950d4ddd65a: {
+		!code: true
+		javascript: function () { return 'hello'; }
+		php: function() { return 'hello'; }
+	}
+	99170d7cd56c14bb6fa1b0a3ca628bb95622fe046c7c9af6f8048ec7f2ee2d14: {
+		!code: true
+		javascript:
+			'''
+			function (noun, options) {
+			        return options.data.adjective + ' ' + noun + (this.exclaim ? '!' : '');
+			      }
+			'''
+		php:
+			'''
+			function($noun, $options) {
+			        return $options['data']['adjective'] . " "  . $noun . ($options->scope['exclaim'] ? "!" : "");
+			      }
+			'''
+	}
+	227fa94c6fdd7ba3fd505ca40fd184ddbe581f062a857873a65bb99e6ffeaabd: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.data.adjective + ' world' + (this.exclaim ? '!' : '');
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options['data']['adjective'] . " world" . ($options->scope['exclaim'] ? "!" : "");
+			      }
+			'''
+	}
+	7648092273e781b404d017ecfd5219185875456f05e42bbd0c1994973c81c56c: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.fn({exclaim: '?'});
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options->fn(array("exclaim" => "?"));
+			      }
+			'''
+	}
+	741c1fbc3f27c0cecc3263c801bf18e0b755d0457e7bbf8f401bbd21ff9f5503: {
+		!code: true
+		javascript:
+			'''
+			function (thing, options) {
+			        return options.data.adjective + ' ' + thing + (this.exclaim || '');
+			      }
+			'''
+		php:
+			'''
+			function($thing, $options) {
+			        return $options['data']['adjective'] . " " . $thing . ($options->scope['exclaim'] ?: "");
+			      }
+			'''
+	}
+	82a3c2f2af5f09d88db2a5a076d4401b8313bdc8380a1570bde3a9b55cd0d4b2: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.data.accessData + ' ' + options.fn({exclaim: '?'});
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options['data']['accessData'] . " " . $options->fn(array("exclaim" => "?"));
+			      }
+			'''
+	}
+	c80177ff5cb1fef819fcc77cf2a64f4d27cce359a7b78d7b21063a8c745ae299: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.fn({exclaim: '?', zomg: 'world'}, { data: {adjective: 'sad'} });
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options->fn(array("exclaim" => "?", "zomg" => "world"), array("data" => array("adjective" => "sad")));
+			      }
+			'''
+	}
+	98015616ad42292ec9f79692b88989b1b49786482d37e96ed4fab9a052f3e4c3: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return options.fn({exclaim: '?'}, { data: {adjective: 'sad'} });
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return $options->fn(array("exclaim" => "?"), array("data" => array("adjective" => "sad")));
+			      }
+			'''
+	}
+	67ee5008bc0a8ce25ecddde06dbe802b02634acbd03fc4615f70226546c29373: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			            var frame = Handlebars.createFrame(options.data);
+			            frame.depth = options.data.depth + 1;
+			            return options.fn(this, {data: frame});
+			          }
+			'''
+		php:
+			'''
+			function($options) {
+			            $frame = Utils::createFrame($options['data']);
+			            $frame['depth'] = $options['data']['depth'] + 1;
+			            return $options->fn($options->scope, array("data" => $frame));
+			          }
+			'''
+	}
+	4c375be2103864d3a9a4998320862526f2b2dfa60eea60765d6344040a570c71: {
+		!code: true
+		javascript:
+			'''
+			function (prefix) {
+			      return '<a href="' + prefix + '/' + this.url + '">' + this.text + '</a>';
+			    }
+			'''
+		php: function($prefix, $options) { return '<a href="' . $prefix . '/' . $options->scope['url'] . '">' . $options->scope['text'] . '</a>'; }
+	}
+	f1c418c0a229048fa127bda83100ea5103be1da838b37b6a33dd5ae0e8307623: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return options.fn();
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn();
+			      }
+			'''
+	}
+	854d6edf83c137800edf7c06fdcc2b56832a3bf5dc45aaaae8ad5d5fb17fb707: {
+		!code: true
+		javascript:
+			'''
+			function (a, b, c, options) {
+			        return options.fn() + a + b + c;
+			    }
+			'''
+		php:
+			'''
+			function($a, $b, $c, $options) {
+			        return $options->fn() . $a . $b . $c;
+			    }
+			'''
+	}
+	29ab8e17939e06beafdcce9fbfe47de2557629f0d0e1d876cee031ed227a843d: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			      var out = '';
+			      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];
+			      for (var i = 0, j = byes.length; i < j; i++) {
+			        out += byes[i] + ' ' + options.fn(this) + '! ';
+			      }
+			      return out;
+			    }
+			'''
+		php:
+			'''
+			function($options) {
+			      $out = '';
+			      $byes = array('Goodbye', 'goodbye', 'GOODBYE');
+			      for ($i = 0, $j = count($byes); $i < $j; $i++) {
+			        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';
+			      }
+			      return $out;
+			    }
+			'''
+	}
+	2ce5ba6864d8e21b6e26ea42d4ba733f28476c7fa832f42959e13c0d506c2864: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			      var out = '';
+			      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];
+			      for (var i = 0, j = byes.length; i < j; i++) {
+			        out += byes[i] + ' ' + options.fn({}) + '! ';
+			      }
+			      return out;
+			    }
+			'''
+		php:
+			'''
+			function($options) {
+			$byes = array('Goodbye', 'goodbye', 'GOODBYE');
+			$out = '';
+			foreach ($byes as $bye) {
+			$out .= $bye.' ';
+			$out .= $options->fn();
+			$out .= '! ';
+			}
+			return $out;
+			}
+			'''
+	}
+	078f243500aab0a2456a257a3e7fa9855ad0d241341c253ea277b25748adc043: {
+		!code: true
+		javascript:
+			'''
+			function (prefix, options) {
+			        return '<a href="' + prefix + '/' + this.url + '">' + options.fn(this) + '</a>';
+			    }
+			'''
+		php: function($prefix, $options) { $out = '<a href="' . $prefix . '/' . $options->scope['url'] . '">'; $out .= $options->fn($options->scope); return $out . '</a>'; }
+	}
+	80ffcd38544b906486158391b0f4dd58b80c3e7444e928c690b9774c9b1e5026: {
+		!code: true
+		javascript: function () {}
+		php: function() {}
+	}
+	04d29c91fa215f428057b757de420b650c61e037b02b9e5975fa810de5eb5d4d: {
+		!code: true
+		javascript: function (options) { return options.fn({text: 'GOODBYE'}); }
+		php: function($options) { return $options->fn(array('text' => 'GOODBYE')); }
+	}
+	2591d67069a8cc6b61435987e0675693b01f1665cc24e38bbf3c3844979197e9: {
+		!code: true
+		javascript: function (options) { return '<form>' + options.fn(this) + '</form>'; }
+		php: function($options) { $out = '<form>'; $out .= $options->fn($options->scope); return $out . '</form>'; }
+	}
+	cba6ec555444777b96df583f0ce6c69c43a04197ec6f70eab6347139540980db: {
+		!code: true
+		javascript:
+			'''
+			function link(options) {
+			      return '<a href="/people/' + this.id + '">' + options.fn(this) + '</a>';
+			    }
+			'''
+		php:
+			'''
+			function($options) {
+			    return '<a href="/people/'.$options->scope['id'].'">' . $options->fn($options->scope) . '</a>';
+			}
+			'''
+	}
+	0bcd126f49c6e00814d3b31c0dd7e4ed050c80c329b8f883af7fd0755c8d63e7: {
+		!code: true
+		javascript: function (context, options) { return '<form>' + options.fn(context) + '</form>'; }
+		php:
+			'''
+			function($context, $options) {
+			    $out = '<form>';
+			    $out .= $options->fn($context);
+			    return $out . '</form>';
+			}
+			'''
+	}
+	9a261005ee9cdac43e664d4cf5819983806eab7b35392514ad3bebb3a7f6429d: {
+		!code: true
+		javascript: function (options) { return '<a href="' + this.name + '">' + options.fn(this) + '</a>'; }
+		php:
+			'''
+			function($options) {
+			    $out = '<a href="' . $options->scope['name'].'">';
+			    $out .= $options->fn($options->scope);
+			    return $out . '</a>';
+			}
+			'''
+	}
+	65d6ae3fb370c2e37eb07e1d539f39ff1ae9313e429dfe61ab399a8efdf008a2: {
+		!code: true
+		javascript:
+			'''
+			function list(context, options) {
+			      if (context.length > 0) {
+			        var out = '<ul>';
+			        for (var i = 0, j = context.length; i < j; i++) {
+			          out += '<li>';
+			          out += options.fn(context[i]);
+			          out += '</li>';
+			        }
+			        out += '</ul>';
+			        return out;
+			      } else {
+			        return '<p>' + options.inverse(this) + '</p>';
+			      }
+			    }
+			'''
+		php:
+			'''
+			function($context, $options) {
+			    $out = '';
+			    if (count($context) > 0) {
+			        $out .= '<ul>';
+			        foreach ($context as $row) {
+			            $out .= '<li>';
+			            $out .= $options->fn($row);
+			            $out .= '</li>';
+			        }
+			        $out .= '</ul>';
+			    } elseif (isset($options->inverse)) {
+			        $out .= '<p>';
+			        $out .= $options->inverse($options->scope);
+			        $out .= '</p>';
+			    }
+			    return $out;
+			}
+			'''
+	}
+	ad1b355c3c7ff3ff709999995a417a14a2dba50bf49469b0e308e5bb22456771: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'winning';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return 'winning';
+			      }
+			'''
+	}
+	f27673e6e67fd07111ff101b57937112d27dab2453ad0257925f155ac2b63661: {
+		!code: true
+		javascript: function () { return 'fail'; }
+		php: function() { return 'fail'; }
+	}
+	4536dc29375c9e169299921ed966c3c54a99295b81028d0b86da9af3f52566dc: {
+		!code: true
+		javascript: function () { return 'world'; }
+		php: function() { return 'world'; }
+	}
+	f258fcc7dbdc95bc9aa2359ca469071056a1147017dba638c87fd52bacf32134: {
+		!code: true
+		javascript: function () { return 'helpers'; }
+		php: function() { return 'helpers'; }
+	}
+	37de90c9b8672b7a06e15675e3c1d57ad86c360e48d5164ec958fe5636eb4d6c: {
+		!code: true
+		javascript: function () { return 'helper'; }
+		php: function() { return 'helper'; }
+	}
+	af2544976fc79e067d65b905b447c7ddd64ae716567018f0943baba496ed32df: {
+		!code: true
+		javascript: function () { return 'found it!'; }
+		php: function() { return 'found it!'; }
+	}
+	85650bd73030c99a05c0ebaa4c37d9e1e68f2a1aad7ca4d9af6fba4bde5eac11: {
+		!code: true
+		javascript: function () { return 'world!'; }
+		php: function() { return 'world!'; }
+	}
+	787d483a966f2850a1e6ee2e5c66f3bad31a258bde2d3c66ec28e470163e10b6: {
+		!code: true
+		javascript:
+			'''
+			function (times, times2) {
+			      if (typeof times !== 'number') { times = 'NaN'; }
+			      if (typeof times2 !== 'number') { times2 = 'NaN'; }
+			      return 'Hello ' + times + ' ' + times2 + ' times';
+			    }
+			'''
+		php:
+			'''
+			function($times, $times2) {
+			    if (!is_numeric($times)) {
+			        $times = 'NaN';
+			    }
+			    if (!is_numeric($times2)) {
+			        $times2 = "NaN";
+			    }
+			    return "Hello $times $times2 times";
+			}
+			'''
+	}
+	e657476ab866e177a9472e82955f7194f9cac527b3205c3d49c9790060ce87ed: {
+		!code: true
+		javascript:
+			'''
+			function (times) {
+			      if (typeof times !== 'number') { times = 'NaN'; }
+			      return 'Hello ' + times + ' times';
+			    }
+			'''
+		php:
+			'''
+			function($times) {
+			    if(!is_numeric($times)) {
+			        $times = "NaN";
+			    }
+			    return "Hello $times times";
+			}
+			'''
+	}
+	a23c5e6cc9d5277197b0f45961dcf30c9aa8d4f0bea69dc3117f5e5b20538da7: {
+		!code: true
+		javascript:
+			'''
+			function (param, times, bool1, bool2) {
+			        if (typeof times !== 'number') { times = 'NaN'; }
+			        if (typeof bool1 !== 'boolean') { bool1 = 'NaB'; }
+			        if (typeof bool2 !== 'boolean') { bool2 = 'NaB'; }
+			        return 'Hello ' + param + ' ' + times + ' times: ' + bool1 + ' ' + bool2;
+			      }
+			'''
+		php:
+			'''
+			function($param, $times, $bool1, $bool2) {
+			    if(!is_numeric($times)) { $times = "NaN"; }
+			    if(!is_bool($bool1)) {
+			        $bool1 = "NaB";
+			    } else {
+			        $bool1 = ($bool1 ? 'true' : 'false');
+			    }
+			    if(!is_bool($bool2)) {
+			        $bool2 = "NaB";
+			    } else {
+			        $bool2 = ($bool2 ? 'true' : 'false');
+			    }
+
+			    return "Hello $param $times times: $bool1 $bool2";
+			}
+			'''
+	}
+	dcd56b60e394737981482a61acccfd2cb72a6fea2143bea3fca64ab79dd9ede9: {
+		!code: true
+		javascript: function (param) { return 'Hello ' + param; }
+		php: function($param) { return "Hello " . $param; }
+	}
+	d09b0e9c5e639eb0603da64d6c2470e8d4ba0b8a77bccc03af6f1005cbd4485e: {
+		!code: true
+		javascript: function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }
+		php: function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }
+	}
+	fce197455bf4ffc21adc3fe89e9e74bf674ff054f74a0daa903e4259b005dffd: {
+		!code: true
+		javascript:
+			'''
+			function (cruel, world, options) {
+			        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});
+			      }
+			'''
+		php:
+			'''
+			function($cruel, $world, $options) {
+			    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));
+			}
+			'''
+	}
+	00edfdf921dd7c5112e6d48018966cefffda368ea2865753051fc4962fba90d0: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world + ' ' + options.hash.times + ' TIMES';
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			    $r = 'GOODBYE ';
+			    $r .= $options['hash']['cruel'].' ';
+			    $r .= $options['hash']['world'].' ';
+			    $r .= $options['hash']['times'].' TIMES';
+
+			    return $r;
+			}
+			'''
+	}
+	b4392fcc35e138499acdb349335f6d0fb8cb77f5d2df7aa2f06565b6f421556b: {
+		!code: true
+		javascript:
+			'''
+			function goodbye(options) {
+			        if (options.hash.print === true) {
+			          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;
+			        } else if (options.hash.print === false) {
+			          return 'NOT PRINTING';
+			        } else {
+			          return 'THIS SHOULD NOT HAPPEN';
+			        }
+			      }
+			'''
+	}
+	d5e2d1042a3d20744a912240b68ac02191c8a47b824a0ba80a7a00f0ab1a1783: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			    return "GOODBYE {$options['hash']['cruel']} " . $options->fn($options->scope) . " {$options['hash']['times']} TIMES";
+			}
+			'''
+	}
+	a4f8e2e6a4ee5d335f1b1fca88ac752a6f29cd852975f188b07545635667f084: {
+		!code: true
+		javascript:
+			'''
+			function goodbye(options) {
+			        if (options.hash.print === true) {
+			          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);
+			        } else if (options.hash.print === false) {
+			          return 'NOT PRINTING';
+			        } else {
+			          return 'THIS SHOULD NOT HAPPEN';
+			        }
+			      }
+			'''
+	}
+	00ab44cdf621b78e8c4c9cd51beb8569622baf932e7df644f9ffd07048712dd1: {
+		!code: true
+		javascript:
+			'''
+			function (mesg, options) {
+			          if (options.name === 'link_to') {
+			            return new Handlebars.SafeString('<a>' + mesg + '</a>');
+			          }
+			        }
+			'''
+		php:
+			'''
+			function($mesg, $options = null) {
+			          if($options && $options['name'] === "link_to") {
+			            return new SafeString("<a>" . $mesg . "</a>");
+			          }
+			        }
+			'''
+	}
+	78ca9c45353200671de60e86e1492c7ba7a8b14dc3bd29afaf51944bf4295898: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          if (options.name === 'link_to') {
+			            return new Handlebars.SafeString('<a>winning</a>');
+			          }
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          if($options['name'] === "link_to") {
+			            return new SafeString("<a>winning</a>");
+			          }
+			        }
+			'''
+	}
+	a17a40e8b4a06da1dad00d3007bb97780b1ffa9d6fe1248358386351f9caa6c9: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			          return 'foo';
+			        }
+			'''
+		php:
+			'''
+			function() {
+			          return 'foo';
+			        }
+			'''
+	}
+	0c76c65ee548f99ff18e76177d27f37e06d8f58317e540fd25a26f934ea41be7: {
+		!code: true
+		javascript: function (arg) { return typeof arg; }
+		php: function($arg) { return $arg === null ? 'undefined' : gettype($arg); }
+	}
+	ce1019b7a5afea8d4edc63ab2983ab3d6c6a1a444e99cb9b3c3f372a293df3d9: {
+		!code: true
+		javascript: function () { return this.bar; }
+		php: function($context) { return $context['bar']; }
+	}
+	c0306002c26092449683e2f7fa7632cc2c6eda77c8198d06384d04c843918b01: {
+		!code: true
+		javascript: function () { return this.truthiness(); }
+		php: function($options) { return $options->scope['truthiness'](); }
+	}
+	ab5e9d5fe5c14c3e1e96dd45a838225da5efadb2632234a587265db76c6fe197: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'missing: ' + arguments[arguments.length - 1].name;
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        $arguments = func_get_args();
+			        return 'missing: ' . $arguments[count($arguments)-1]['name'];
+			      }
+			'''
+	}
+	5bee11cd30b303250e29e5116314c01143a08d4c4870c2862751c3b832bc77a1: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'helper missing: ' + arguments[arguments.length - 1].name;
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        $arguments = func_get_args();
+			        return 'helper missing: ' . $arguments[count($arguments)-1]['name'];
+			      }
+			'''
+	}
+	14b0414908f7ab48afeca612ee2d4a99da0d948e7e22637bf3aebbcbcfa93268: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'ran: ' + arguments[arguments.length - 1].name;
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        $arguments = func_get_args();
+			        return 'ran: ' . $arguments[count($arguments)-1]['name'];
+			      }
+			'''
+	}
+	362ed28bfd92dee09a83bfe5dad958706c55229985d5f212d6a60c617b8d0146: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			          return this.goodbye.toUpperCase();
+			        }
+			'''
+		php:
+			'''
+			function($options, $scope) {
+			          return strtoupper($scope['goodbye']);
+			        }
+			'''
+	}
+	44a12b4f35c945e00ae1e1a02012cee857a605b5acfdbde466d84cba80fd27b0: {
+		!code: true
+		javascript:
+			'''
+			function (world) {
+			          return 'cruel ' + world.toUpperCase();
+			        }
+			'''
+		php:
+			'''
+			function($world) {
+			          return "cruel " . strtoupper($world);
+			        }
+			'''
+	}
+	409798516d73d1fa30a5058943fd0dbf50ec1220daf0dc8f4a8d31a1173fecd4: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          return this.goodbye.toUpperCase() + options.fn(this);
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);
+			        }
+			'''
+	}
+	15c01d8b6f2395dc4d3976a1d0f2b7b0042e58347e535af6005df5c8fee963de: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          equals(options.fn.blockParams, 1);
+			          return options.fn({value: 'bar'}, {blockParams: [1, 2]});
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));
+			        }
+			'''
+	}
+	ccab082d5f6460c8d5fcf576c764b5c1e8f91e10198d65262f954d2975d94717: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          equals(options.fn.blockParams, 1);
+			          return options.fn({}, {blockParams: [1, 2]});
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn(array(), array('blockParams' => array(1, 2)));
+			        }
+			'''
+	}
+	158d9e9ba22112de1ef0516058f49e9b4b473271ee7575992d5386cf62e9bec9: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          equals(options.fn.blockParams, 1);
+			          return options.fn(this, {blockParams: [1, 2]});
+			        }
+			'''
+		php:
+			'''
+			function($options) {
+			          return $options->fn($options->scope, array('blockParams' => array(1, 2)));
+			        }
+			'''
+	}
+	0328af65bcd2216b28e18942cda6fb79d651747055301c796d51b6929e0cac6d: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});
+			        }
+			'''
+	}
+	53133e1437a336751e1def121327f023d68d46f576978089e081a73e5b55e6cd: {
+		!code: true
+		javascript:
+			'''
+			function testHelper(options) {
+			          return options.lookupProperty(this, 'testProperty');
+			        }
+			'''
+	}
+	9a3cb2a05c4f7fb8f5e6e9112ccb4ea23982c151a9c8c5ee78f20008d6198ee1: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'dude';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return 'dude';
+			      }
+			'''
+	}
+	57b839d5dcb521140ba2455456851de74f4ba3a2441d9814be75f0512f93cb1e: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'missing';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return 'missing';
+			      }
+			'''
+	}
+	37698ec1eb0f80f91783c6e7b81ffd23433e87ea3749196c5cf5262a8538ab18: {
+		!code: true
+		javascript:
+			'''
+			function partial(context) {
+			      return context.name + ' (' + context.url + ') ';
+			    }
+			'''
+		php:
+			'''
+			function($context) {
+			      return $context['name'] . ' (' . $context['url'] . ') ';
+			    }
+			'''
+	}
+	c9b13c33e2be1f30f01a2646ebf43bbe2623b9e1f0f7d51c568a636ea4c90eaf: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'blah';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return "blah";
+			      }
+			'''
+	}
+	8e0b4d2fc886e0fc0001aaf7b4abd1a065932ffeb06f2447f10d91205e919fde: {
+		!code: true
+		javascript: function (block) { return block.fn(''); }
+		php: function($block) { return $block/*['fn']*/->fn(''); }
+	}
+	710b9def59d1f3bd9cc6d36a6f8496060b5293bd46d599c45961d742f6b4b886: {
+		!code: true
+		javascript: function (block) { return block.inverse(''); }
+		php: function($block) { return $block/*['inverse']*/->inverse(''); }
+	}
+	e52fdcc5b0f7695aa0f95875b1b16ccca97bf497f42e7d55e29dffd7373ded1f: {
+		!code: true
+		javascript: function (value) { return value + ''; }
+		php: function($value) { return $value === null ? 'undefined' : (string) $value; }
+	}
+	57ea5d930a3826c76f34b3aade0d16cb235f5f7aa0127a0c59ad8499db5931da: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return new Handlebars.SafeString(options.fn());
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return new \Handlebars\SafeString($options->fn());
+			      }
+			'''
+	}
+	7f34477a909fa2983b51edc8ec44cc5453c77775bb99e7ef6b1a5208f1517551: {
+		!code: true
+		javascript:
+			'''
+			function() {
+			        // It's valid to execute a block against an undefined context, but
+			        // helpers can not do so, so we expect to have an empty object here;
+			        for (var name in this) {
+			          if (Object.prototype.hasOwnProperty.call(this, name)) {
+			            return 'found';
+			          }
+			        }
+			        // And to make IE happy, check for the known string as length is not enumerated.
+			        return this === 'bat' ? 'found' : 'not';
+			      }
+			'''
+	}
+	b255c899f117761c0e052c38fe134f249067726b80b21cdf6c4e62a7eb6c9edf: {
+		!code: true
+		javascript:
+			'''
+			function(conditional, options) {
+			        if (conditional) {
+			          return options.fn(this);
+			        } else {
+			          return options.inverse(this);
+			        }
+			      }
+			'''
+	}
+	db00d853e998fe8833ccc9b563cdf4fa4eb8811c11bddb5c15b28f3f6f6e137c: {
+		!code: true
+		javascript:
+			'''
+			function(options) {
+			        return options.hash.length;
+			      }
+			'''
+	}
+	d75e51a9f98bd44b50b49dcabf3cb1641ac5978b9f2a4fb8d06b0ec2b22be46a: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			          equals('value' in options.hash, true);
+			          equals(options.hash.value, undefined);
+			          return 'success';
+			        }
+			'''
+		php:
+			'''
+			function () {
+			          return 'success';
+			        }
+			'''
+	}
+	b5cbc25fcac2e88168c858609d2f4f87915506226797a17fb29d21138a0699a4: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun) {
+			        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun) {
+			        return "HELP ME MY BOSS " . $passiveVoice . ' ' . $noun;
+			      }
+			'''
+	}
+	811143d6679c20c228040b9a196334d8fd59428740cd17e6fd374a84ac4ed357: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, options) {
+			        return 'HELP ME MY BOSS ' + passiveVoice + ' ' +
+			                noun + ': ' + options.fn(this);
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $options) {
+			        return "HELP ME MY BOSS " . $passiveVoice . ' ' .
+			                $noun . ': ' . $options->fn($options->scope);
+			      }
+			'''
+	}
+	eaef5b4ab1d75c8732998fa7ea67bec815e16d137ae4d4014ee7a69b1899c8d5: {
+		!code: true
+		javascript:
+			'''
+			function (desire, noun, options) {
+			        return 'STOP ME FROM READING HACKER NEWS I ' +
+			                options.contexts[0][desire] + ' ' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($desire, $noun, $options) {
+			        return "STOP ME FROM READING HACKER NEWS I " .
+			                $options['contexts'][0][$desire] . " " . $noun;
+			      }
+			'''
+	}
+	4157ecae573acddd4c7bf7d13150c96e4b62bef4c1a4fae9d56e01dbdbf5cf01: {
+		!code: true
+		javascript:
+			'''
+			function (context, options) {
+			        return options.fn(options.contexts[0][context]);
+			      }
+			'''
+		php:
+			'''
+			function($context, $options) {
+			        return $options->fn($options['contexts'][0][$context]);
+			      }
+			'''
+	}
+	27c933b5558647385e366e8d7d062a9e52a4640e2b29ee1aa42727e9abda8010: {
+		!code: true
+		javascript:
+			'''
+			function(desire, noun, trueBool, falseBool, options) {
+			        equal(options.types[0], 'StringLiteral', 'the string type is passed');
+			        equal(
+			          options.types[1],
+			          'PathExpression',
+			          'the expression type is passed'
+			        );
+			        equal(
+			          options.types[2],
+			          'BooleanLiteral',
+			          'the expression type is passed'
+			        );
+			        equal(desire, 'need', 'the string form is passed for strings');
+			        equal(noun, 'dad.joke', 'the string form is passed for expressions');
+			        equal(trueBool, true, 'raw booleans are passed through');
+			        equal(falseBool, false, 'raw booleans are passed through');
+			        return 'Helper called';
+			      }
+			'''
+	}
+	ca64e536fc5ca32dc4dbdff74ac802dff96a372f55e6f1bdb4b3ad2c6a0ee9ea: {
+		!code: true
+		javascript:
+			'''
+			function(exclamation, options) {
+			        equal(exclamation, 'he.says');
+			        equal(options.types[0], 'PathExpression');
+
+			        equal(options.hashTypes.desire, 'StringLiteral');
+			        equal(options.hashTypes.noun, 'PathExpression');
+			        equal(options.hashTypes.bool, 'BooleanLiteral');
+			        equal(options.hash.desire, 'need');
+			        equal(options.hash.noun, 'dad.joke');
+			        equal(options.hash.bool, true);
+			        return 'Helper called';
+			      }
+			'''
+	}
+	f4bda77bb0efa034924aee8502453a075acb5eb4556196597961575dd375d0a5: {
+		!code: true
+		javascript:
+			'''
+			function (desire, noun, options) {
+			        return 'STOP ME FROM READING HACKER NEWS I ' +
+			                options.contexts[0][desire] + ' ' + noun + ' ' +
+			                options.fn(this);
+			      }
+			'''
+		php:
+			'''
+			function($desire, $noun, $options) {
+			        return "STOP ME FROM READING HACKER NEWS I " .
+			                $options['contexts'][0][$desire] . " " . $noun . " " .
+			                $options->fn($options->scope);
+			      }
+			'''
+	}
+	0c6d414a1a513cb1e2720c89b1a33d63ddda31debd46be2291bcb847bd95609b: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'WITH';
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return "WITH";
+			      }
+			'''
+	}
+	7880af4278f92977ab585442613c6340dc3a7ff5a6bb016a84029c32fd8cea6b: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'VIEW';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return "VIEW";
+			      }
+			'''
+	}
+	a7b5968d19df582ef210ce06c8ccc5baed32afc11e95dabb0f6bf47cca6f552b: {
+		!code: true
+		javascript:
+			'''
+			function (bar, options) {
+			        equal(bar, '@bar');
+			        equal(options.types[0], 'PathExpression');
+			        return 'Foo!';
+			      }
+			'''
+		php:
+			'''
+			function($bar, $options) {
+			        return 'Foo!';
+			      }
+			'''
+	}
+	687e0671695ddae5b02fc8804236ccca00ed26bd9bfaae8f00d20b0a2e37721f: {
+		!code: true
+		javascript:
+			'''
+			function (val) {
+			        return val + val;
+			      }
+			'''
+		php:
+			'''
+			function($val) {
+			        return $val . $val;
+			      }
+			'''
+	}
+	c4e9d2b653451dd47a0b9768ef44d5713691a612f5d2f8460812cf81a48dc9a1: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'LOL';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return "LOL";
+			      }
+			'''
+	}
+	b42c05fd0cbab211139e47db2c762096a43944fd7f3e1fe5d487fb7df75c4e2c: {
+		!code: true
+		javascript:
+			'''
+			function (val) {
+			        return 'val is ' + val;
+			      }
+			'''
+		php:
+			'''
+			function($val) {
+			        return "val is " . (is_bool($val) ? ($val ? 'true' : 'false') : $val);
+			      }
+			'''
+	}
+	9f5f0351b3a8d7d1a09f94f83cd8d9820bfc106de32c9abe3e540ae23b7f54cb: {
+		!code: true
+		javascript:
+			'''
+			function (x, y) {
+			        return x === y;
+			      }
+			'''
+		php:
+			'''
+			function($x, $y) {
+			        return $x === $y;
+			      }
+			'''
+	}
+	10f1928d00c80867e30ac75478c0c13442ecba837a5eb08d1c0fbe52126fe2fe: {
+		!code: true
+		javascript:
+			'''
+			function (val, that, theOther) {
+			        return 'val is ' + val + ', ' + that + ' and ' + theOther;
+			      }
+			'''
+		php:
+			'''
+			function($val, $that, $theOther) {
+			        return "val is " . $val . ', ' . (is_bool($that) ? ($that ? 'true' : 'false') : $that) . ' and ' . $theOther;
+			      }
+			'''
+	}
+	faf22175074e247092835a67f14a91af5bda47bcd85cca7ca29209d9bb199eb4: {
+		!code: true
+		javascript:
+			'''
+			function (a, b) {
+			        return a + '-' + b;
+			      }
+			'''
+		php:
+			'''
+			function($a, $b) {
+			        return $a . "-" . $b;
+			      }
+			'''
+	}
+	84dd296a16c98e4883a5fd964ca3207c0bd445ba0820f55b74f4b659bba1ca3f: {
+		!code: true
+		javascript:
+			'''
+			function (a, b) {
+			        return a + b;
+			      }
+			'''
+		php:
+			'''
+			function($a, $b) {
+			        return $a . $b;
+			      }
+			'''
+	}
+	1e24170835454fdb46afde2ff96eb4ba2a2bb2ea726051357d2cd8026fd3730f: {
+		!code: true
+		javascript:
+			'''
+			function(x, y, options) {
+			        if (!options || options === global.lastOptions) {
+			          throw new Error('options hash was reused');
+			        }
+			        global.lastOptions = options;
+			        return x === y;
+			      }
+			'''
+	}
+	6bd3626dc1903e54ecde11f4283b74dc9aff7f510fbae9e9a7ed2d8976b534d1: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        return "val is " + options.hash.fun;
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return "val is " . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);
+			      }
+			'''
+	}
+	9a43a2ef3bdb65f53594d00caf2f6442f1bad3ad53ce7dd5382338850e841b4b: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        var hash = options.hash;
+			        var ariaLabel = Handlebars.Utils.escapeExpression(hash['aria-label']);
+			        var placeholder = Handlebars.Utils.escapeExpression(hash.placeholder);
+			        return new Handlebars.SafeString('<input aria-label="' + ariaLabel + '" placeholder="' + placeholder + '" />');
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        $hash        = $options['hash'];
+			        $ariaLabel   = (string) ($hash['aria-label'] instanceof SafeString ? $hash['aria-label'] : htmlspecialchars($hash['aria-label']));
+			        $placeholder = (string) ($hash['placeholder'] instanceof SafeString ? $hash['placeholder'] : htmlspecialchars($hash['placeholder']));
+			        return new SafeString('<input aria-label="' . $ariaLabel . '" placeholder="' . $placeholder . '" />');
+			      }
+			'''
+	}
+	4013545e6cd1c7f4685df0916e5144498dc8226e37150952159b89e7900f17f2: {
+		!code: true
+		javascript:
+			'''
+			function (defaultString) {
+			        return new Handlebars.SafeString(defaultString);
+			      }
+			'''
+		php:
+			'''
+			function($defaultString) {
+			        return new SafeString($defaultString);
+			      }
+			'''
+	}
+	f2c93a1cab2ce5baa926348823e991a66b4633a234f8eb610c1d1b50acd011ad: {
+		!code: true
+		javascript:
+			'''
+			function (a, b, options) {
+			        equals(a, 'foo');
+			        equals(options.types.length, 2, 'string params for outer helper processed correctly');
+			        equals(options.types[0], 'SubExpression', 'string params for outer helper processed correctly');
+			        equals(options.types[1], 'PathExpression', 'string params for outer helper processed correctly');
+			        return a + b;
+			      }
+			'''
+		php:
+			'''
+			function($a, $b, $options) {
+			        return $a . $b;
+			      }
+			'''
+	}
+	382c79bb0b4d6397e19e002eab2daf91e289b5ce5d06cc41c90957787cdd0e15: {
+		!code: true
+		javascript:
+			'''
+			function (a, options) {
+			        equals(options.types.length, 1, 'string params for inner helper processed correctly');
+			        equals(options.types[0], 'PathExpression', 'string params for inner helper processed correctly');
+			        return a;
+			      }
+			'''
+		php:
+			'''
+			function($a, $options) {
+			        return $a;
+			      }
+			'''
+	}
+	76f99694c5586d54c4c798a029a47558a8a06bc04eb6a4d78a7c7104d8cbe104: {
+		!code: true
+		javascript:
+			'''
+			function(options) {
+			        equals(options.hashTypes.fun, 'SubExpression');
+			        return 'val is ' + options.hash.fun;
+			      }
+			'''
+	}
+	58f8ecc14a6e6a739976335848d851f2a45c9ba9558efbffbabb379aff634663: {
+		!code: true
+		javascript:
+			'''
+			function () {
+			        return 'BORK';
+			      }
+			'''
+		php:
+			'''
+			function() {
+			        return "BORK";
+			      }
+			'''
+	}
+	c331d90f66c80362a96fd958054bef612e2b8baddd798f6ed64b8ba166bf11cb: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, options) {
+			        equal(options.ids, undefined);
+			        equal(options.hashIds, undefined);
+
+			        return 'success';
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $options) {
+			        return 'success';
+			      }
+			'''
+	}
+	7d630e851af9f48a2f08224f685fc074df97a92b8275666c06c69a94af9bbf9c: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, options) {
+			        equal(options.ids[0], 'is.a');
+			        equal(options.ids[1], 'slave.driver');
+
+			        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $options) {
+			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;
+			      }
+			'''
+	}
+	68d3440c018d169179f6273bc0b8117fd3c78c050e70a880daf7ec23d1af9c9c: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        equal(options.hashIds.bat, 'is.a');
+			        equal(options.hashIds.baz, 'slave.driver');
+
+			        return 'HELP ME MY BOSS ' + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        return "HELP ME MY BOSS " . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];
+			      }
+			'''
+	}
+	3c09e4b4dc2e3a24697571cf3c82d24c974518325a090a4ae6ba19512ae2de14: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, thiz, thiz2, options) {
+			        equal(options.ids[0], 'is.a');
+			        equal(options.ids[1], '../slave.driver');
+			        equal(options.ids[2], 'is.a');
+			        equal(options.ids[3], '');
+
+			        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $thiz, $thiz2, $options) {
+			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);
+			      }
+			'''
+	}
+	9f6a8b093a183e0f17a3212646dc097a7be83b9d2ffba74eebc17d3139b3689b: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, options) {
+			        equal(options.ids[0], '@is.a');
+			        equal(options.ids[1], '@slave.driver');
+
+			        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $options) {
+			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;
+			      }
+			'''
+	}
+	1e1b5c2d2e23ccaa194035b918be82e42a437c390cc1a95b965a820287e5e652: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, options) {
+			        equal(options.ids[0], null);
+			        equal(options.ids[1], null);
+			        equal(options.hashIds.key, null);
+
+			        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun + ' ' + options.hash.key;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $options) {
+			        return "HELP ME MY BOSS " . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);
+			      }
+			'''
+	}
+	686ca6c06f857f45ddcb0ca4be84a45c54a0857ae100b5fa461a584f01a72eff: {
+		!code: true
+		javascript: function () { return 1; }
+		php: function() { return 1; }
+	}
+	403e5d0c63fbbd6becee4a7703e0bf51f0370e513887342728b8898ca72e5047: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, options) {
+			        equal(options.ids[0], true);
+
+			        return 'HELP ME MY BOSS ' + passiveVoice;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $options) {
+			        return "HELP ME MY BOSS " . $passiveVoice;
+			      }
+			'''
+	}
+	6d931769d4949bb3289071283b06eebfe9cd8450f627dbce646f02f69aecb310: {
+		!code: true
+		javascript:
+			'''
+			function (options) {
+			        var blockParams = [this.is];
+			        blockParams.path = ['zomg'];
+			        return options.fn(this, {blockParams: blockParams});
+			      }
+			'''
+		php:
+			'''
+			function($options) {
+			        $blockParams = array($options->scope['is']);
+			        $blockParams['path'] = array('zomg');
+			        return $options->fn($options->scope, array('blockParams' => $blockParams));
+			      }
+			'''
+	}
+	82af63e885c855773e309619441acc088742fa7dd3759a6bc6d5d51d4e9d5277: {
+		!code: true
+		javascript:
+			'''
+			function (passiveVoice, noun, blah, options) {
+			        equal(options.ids[0], 'zomg.a');
+			        equal(options.ids[1], 'slave.driver');
+			        equal(options.ids[2], 'zomg');
+
+			        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;
+			      }
+			'''
+		php:
+			'''
+			function($passiveVoice, $noun, $blah, $options) {
+			        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;
+			      }
+			'''
+	}
+	26774bbc47f8c11ea3fb6d510072c658a26f25de940c67713a0a36e347734f1b: {
+		!code: true
+		javascript:
+			'''
+			function (name, options) {
+			        return name + ':' + options.ids[0] + '\n';
+			      }
+			'''
+		php:
+			'''
+			function($name, $options) {
+			        return $name . ':' . $options->ids[0] . "\n";
+			      }
+			'''
+	}
+	c9f73f5e00eeb0fc79656695bc507732b8a510cf858a4c1419dc950d8836738d: {
+		!code: true
+		javascript:
+			'''
+			function (name, options) {
+			        return name + ':' + options.data.contextPath + '\n';
+			      }
+			'''
+		php:
+			'''
+			function($name, $options) {
+			        return $name . ':' . $options['data']['contextPath'] . "\n";
+			      }
+			'''
+	}
+}
