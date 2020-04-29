@@ -239,11 +239,11 @@ function detectGlobalPartials(): StringDict {
 // only used by parser and tokenizer
 
 export function equals(actual: any, expected: any): void {
-    let { testContext, isParser } = globalContext;
+    const { testContext, isParser } = globalContext;
 
     if (isParser) {
         // Read the template from the lexer
-        let template = testContext.template || (Handlebars as any).Parser.lexer.matched;
+        const template = testContext.template || (Handlebars as any).Parser.lexer.matched;
         expectTemplate(template)
             .withInput(undefined)
             .toCompileTo(expected);
@@ -253,7 +253,7 @@ export function equals(actual: any, expected: any): void {
 }
 
 export function shouldThrow(cb: Function, a: any, b: any): void {
-    let { testContext, isParser } = globalContext;
+    const { testContext, isParser } = globalContext;
 
     if (isParser) {
         testContext.exception = b || true;
@@ -265,11 +265,11 @@ export function shouldThrow(cb: Function, a: any, b: any): void {
             ex = e;
         }
         if (!ex) {
-            throw new Error("test did not throw but should have");
+            throw new Error('test did not throw but should have');
         }
 
         // Read the template from the lexer
-        let template = testContext.template || (Handlebars as any).Parser.lexer.matched;
+        const template = testContext.template || (Handlebars as any).Parser.lexer.matched;
         expectTemplate(template)
             .withInput(undefined)
             .toThrow(a, b);
@@ -281,7 +281,7 @@ export function shouldThrow(cb: Function, a: any, b: any): void {
 }
 
 export function tokenize(template: string): string[] {
-    let { testContext, isParser } = globalContext;
+    const { testContext, isParser } = globalContext;
 
     if (isParser) {
         testContext.template = template;
@@ -293,7 +293,7 @@ export function tokenize(template: string): string[] {
 }
 
 export function shouldMatchTokens(actual: string[], expected: string[]): void {
-    let { testContext, isParser } = globalContext;
+    const { testContext, isParser } = globalContext;
 
     if (isParser) {
         expectTemplate(testContext.template || '')
