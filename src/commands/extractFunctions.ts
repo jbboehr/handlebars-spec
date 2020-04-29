@@ -2,7 +2,7 @@ import { Command, command, params, Options, option } from 'clime';
 import { OutputFileOptions } from './generate';
 import { readFileSync, writeFileSync } from 'fs';
 import { CodeDict } from '../types';
-import { normalizeAndHashJavascript } from '../utils';
+import { normalizeJavascript } from '../utils';
 import deepEqual from "deep-equal";
 import * as hjson from "hjson";
 
@@ -60,7 +60,7 @@ export default class extends Command {
                 console.warn('js key not set');
                 return prev;
             }
-            var key = normalizeAndHashJavascript(js);
+            var key = normalizeJavascript(js);
             if (key in prev) {
                 if (!deepEqual(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);

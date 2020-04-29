@@ -124,9 +124,9 @@
 		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
 	},
-	"function(fn,props,container,options){equals(options.args[0],undefined);run=true;return fn};": {
+	"function(fn,props,container,options){equals(options.args[0],undefined);global.run=true;return fn};": {
 		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
+		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }",
 		"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
 	},
 	"function(){return true};": {
@@ -169,9 +169,9 @@
 		"javascript": "function (options) {\n        return options.data.adjective + ' ' + this.noun;\n      }",
 		"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 	},
-	"function(options){var frame=Handlebars.createFrame(options.data);for(var prop in options.hash){frame[prop]=options.hash[prop]}return options.fn(this,{data:frame})};": {
+	"function(options){var frame=Handlebars.createFrame(options.data);for(var prop in options.hash){if(prop in options.hash){frame[prop]=options.hash[prop]}}return options.fn(this,{data:frame})};": {
 		"!code": true,
-		"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
+		"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          if (prop in options.hash) {\n            frame[prop] = options.hash[prop];\n          }\n        }\n        return options.fn(this, {data: frame});\n      }",
 		"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 	},
 	"function(noun){return\"Hello \"+noun};": {
@@ -188,11 +188,6 @@
 		"!code": true,
 		"javascript": "function () { return 'hello'; }",
 		"php": "function() { return 'hello'; }"
-	},
-	"function(options){var frame=Handlebars.createFrame(options.data);for(var prop in options.hash){if(prop in options.hash){frame[prop]=options.hash[prop]}}return options.fn(this,{data:frame})};": {
-		"!code": true,
-		"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          if (prop in options.hash) {\n            frame[prop] = options.hash[prop];\n          }\n        }\n        return options.fn(this, {data: frame});\n      }",
-		"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 	},
 	"function(noun,options){return options.data.adjective+\" \"+noun+(this.exclaim?\"!\":\"\")};": {
 		"!code": true,
@@ -300,9 +295,9 @@
 		"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 	},
 	"function(){return\"winning\"};": {
-		"php": "function() {\n        return 'winning';\n      }",
 		"!code": true,
-		"javascript": "function () {\n        return 'winning';\n      }"
+		"javascript": "function () {\n        return 'winning';\n      }",
+		"php": "function() {\n        return 'winning';\n      }"
 	},
 	"function(){return\"fail\"};": {
 		"!code": true,
@@ -324,15 +319,15 @@
 		"javascript": "function () { return 'helper'; }",
 		"php": "function() { return 'helper'; }"
 	},
-	"function(){return\"world!\"};": {
-		"!code": true,
-		"javascript": "function () { return 'world!'; }",
-		"php": "function() { return 'world!'; }"
-	},
 	"function(){return\"found it!\"};": {
 		"!code": true,
 		"javascript": "function () { return 'found it!'; }",
 		"php": "function() { return 'found it!'; }"
+	},
+	"function(){return\"world!\"};": {
+		"!code": true,
+		"javascript": "function () { return 'world!'; }",
+		"php": "function() { return 'world!'; }"
 	},
 	"function(times,times2){if(typeof times!==\"number\"){times=\"NaN\"}if(typeof times2!==\"number\"){times2=\"NaN\"}return\"Hello \"+times+\" \"+times2+\" times\"};": {
 		"!code": true,
@@ -369,20 +364,18 @@
 		"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world + ' ' + options.hash.times + ' TIMES';\n        }",
 		"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
 	},
-	"function(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
 		"!code": true,
-		"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-		"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 	},
 	"function(options){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)+\" \"+options.hash.times+\" TIMES\"};": {
 		"!code": true,
 		"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
 		"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
 	},
-	"function(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
+	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
 		"!code": true,
-		"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-		"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 	},
 	"function(mesg,options){if(options.name===\"link_to\"){return new Handlebars.SafeString(\"<a>\"+mesg+\"</a>\")}};": {
 		"!code": true,
@@ -459,10 +452,13 @@
 		"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
 		"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 	},
-	"function(options){if(typeof value===\"undefined\"){value=1}return options.fn({value:\"bar\"},{blockParams:options.fn.blockParams===1?[value++,value++]:undefined})};": {
+	"function(options){if(typeof value===\"undefined\"){value=1}return options.fn({value:\"bar\"},{blockParams:options.fn.blockParams===1?[global.value++,global.value++]:undefined})};": {
 		"!code": true,
-		"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
-		"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
+		"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }"
+	},
+	"function testHelper(options){return options.lookupProperty(this,\"testProperty\")};": {
+		"!code": true,
+		"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }"
 	},
 	"function(){return\"dude\"};": {
 		"!code": true,
@@ -504,6 +500,18 @@
 		"javascript": "function (options) {\n        return new Handlebars.SafeString(options.fn());\n      }",
 		"php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
 	},
+	"function(){for(var name in this){if(Object.prototype.hasOwnProperty.call(this,name)){return\"found\"}}return this===\"bat\"?\"found\":\"not\"};": {
+		"!code": true,
+		"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }"
+	},
+	"function(conditional,options){if(conditional){return options.fn(this)}else{return options.inverse(this)}};": {
+		"!code": true,
+		"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }"
+	},
+	"function(options){return options.hash.length};": {
+		"!code": true,
+		"javascript": "function(options) {\n        return options.hash.length;\n      }"
+	},
 	"function(options){equals(\"value\"in options.hash,true);equals(options.hash.value,undefined);return\"success\"};": {
 		"!code": true,
 		"javascript": "function (options) {\n          equals('value' in options.hash, true);\n          equals(options.hash.value, undefined);\n          return 'success';\n        }",
@@ -529,15 +537,13 @@
 		"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
 		"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 	},
-	"function(exclamation,options){return\"Helper called\"};": {
+	"function(desire,noun,trueBool,falseBool,options){equal(options.types[0],\"StringLiteral\",\"the string type is passed\");equal(options.types[1],\"PathExpression\",\"the expression type is passed\");equal(options.types[2],\"BooleanLiteral\",\"the expression type is passed\");equal(desire,\"need\",\"the string form is passed for strings\");equal(noun,\"dad.joke\",\"the string form is passed for expressions\");equal(trueBool,true,\"raw booleans are passed through\");equal(falseBool,false,\"raw booleans are passed through\");return\"Helper called\"};": {
 		"!code": true,
-		"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
-		"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+		"javascript": "function(desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'StringLiteral', 'the string type is passed');\n        equal(\n          options.types[1],\n          'PathExpression',\n          'the expression type is passed'\n        );\n        equal(\n          options.types[2],\n          'BooleanLiteral',\n          'the expression type is passed'\n        );\n        equal(desire, 'need', 'the string form is passed for strings');\n        equal(noun, 'dad.joke', 'the string form is passed for expressions');\n        equal(trueBool, true, 'raw booleans are passed through');\n        equal(falseBool, false, 'raw booleans are passed through');\n        return 'Helper called';\n      }"
 	},
-	"function(withContext,options){return options.fn(options.contexts[0][withContext])};": {
+	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.hashTypes.desire,\"StringLiteral\");equal(options.hashTypes.noun,\"PathExpression\");equal(options.hashTypes.bool,\"BooleanLiteral\");equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
 		"!code": true,
-		"javascript": "function (withContext, options) {\n        return options.fn(options.contexts[0][withContext]);\n      }",
-		"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
+		"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.hashTypes.desire, 'StringLiteral');\n        equal(options.hashTypes.noun, 'PathExpression');\n        equal(options.hashTypes.bool, 'BooleanLiteral');\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
 	},
 	"function(desire,noun,options){return\"STOP ME FROM READING HACKER NEWS I \"+options.contexts[0][desire]+\" \"+noun+\" \"+options.fn(this)};": {
 		"!code": true,
@@ -594,10 +600,9 @@
 		"javascript": "function (a, b) {\n        return a + b;\n      }",
 		"php": "function($a, $b) {\n        return $a . $b;\n      }"
 	},
-	"function(x,y,options){return x===y};": {
+	"function(x,y,options){if(!options||options===global.lastOptions){throw new Error(\"options hash was reused\")}global.lastOptions=options;return x===y};": {
 		"!code": true,
-		"javascript": "function (x, y, options) {\n        return x === y;\n      }",
-		"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+		"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }"
 	},
 	"function(options){return\"val is \"+options.hash.fun};": {
 		"!code": true,
@@ -623,6 +628,10 @@
 		"!code": true,
 		"javascript": "function (a, options) {\n        equals(options.types.length, 1, 'string params for inner helper processed correctly');\n        equals(options.types[0], 'PathExpression', 'string params for inner helper processed correctly');\n        return a;\n      }",
 		"php": "function($a, $options) {\n        return $a;\n      }"
+	},
+	"function(options){equals(options.hashTypes.fun,\"SubExpression\");return\"val is \"+options.hash.fun};": {
+		"!code": true,
+		"javascript": "function(options) {\n        equals(options.hashTypes.fun, 'SubExpression');\n        return 'val is ' + options.hash.fun;\n      }"
 	},
 	"function(){return\"BORK\"};": {
 		"!code": true,
@@ -689,6 +698,10 @@
 		"javascript": "function (name, options) {\n        return name + ':' + options.data.contextPath + '\\n';\n      }",
 		"php": "function($name, $options) {\n        return $name . ':' . $options['data']['contextPath'] . \"\\n\";\n      }"
 	},
+	"function(fn,props,container,options){equals(options.args[0],undefined);run=true;return fn};": {
+		"!code": true,
+		"javascript": "function(fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }"
+	},
 	"function(context,options){var inverse=options.inverse,fn=options.fn;if(context===true){return fn(this)}else if(context===false||context==null){return inverse(this)}else if(_utils.isArray(context)){if(context.length>0){if(options.ids){options.ids=[options.name]}return instance.helpers.each(context,options)}else{return inverse(this)}}else{if(options.data&&options.ids){var data=_utils.createFrame(options.data);data.contextPath=_utils.appendContextPath(options.data.contextPath,options.name);options={data:data}}return fn(context,options)}};": {
 		"!code": true,
 		"javascript": "function (context, options) {\n    var inverse = options.inverse,\n        fn = options.fn;\n\n    if (context === true) {\n      return fn(this);\n    } else if (context === false || context == null) {\n      return inverse(this);\n    } else if (_utils.isArray(context)) {\n      if (context.length > 0) {\n        if (options.ids) {\n          options.ids = [options.name];\n        }\n\n        return instance.helpers.each(context, options);\n      } else {\n        return inverse(this);\n      }\n    } else {\n      if (options.data && options.ids) {\n        var data = _utils.createFrame(options.data);\n        data.contextPath = _utils.appendContextPath(options.data.contextPath, options.name);\n        options = { data: data };\n      }\n\n      return fn(context, options);\n    }\n  }"
@@ -729,60 +742,16 @@
 		"!code": true,
 		"javascript": "function(options) {\n          return options.fn(\n            { value: 'bar' },\n            {\n              blockParams:\n                options.fn.blockParams === 1 ? [value++, value++] : undefined\n            }\n          );\n        }"
 	},
-	"function testHelper(options){return options.lookupProperty(this,\"testProperty\")};": {
-		"!code": true,
-		"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }"
-	},
-	"function(){for(var name in this){if(Object.prototype.hasOwnProperty.call(this,name)){return\"found\"}}return this===\"bat\"?\"found\":\"not\"};": {
-		"!code": true,
-		"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }"
-	},
-	"function(conditional,options){if(conditional){return options.fn(this)}else{return options.inverse(this)}};": {
-		"!code": true,
-		"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }"
-	},
-	"function(options){return options.hash.length};": {
-		"!code": true,
-		"javascript": "function(options) {\n        return options.hash.length;\n      }"
-	},
-	"function(desire,noun,trueBool,falseBool,options){equal(options.types[0],\"StringLiteral\",\"the string type is passed\");equal(options.types[1],\"PathExpression\",\"the expression type is passed\");equal(options.types[2],\"BooleanLiteral\",\"the expression type is passed\");equal(desire,\"need\",\"the string form is passed for strings\");equal(noun,\"dad.joke\",\"the string form is passed for expressions\");equal(trueBool,true,\"raw booleans are passed through\");equal(falseBool,false,\"raw booleans are passed through\");return\"Helper called\"};": {
-		"!code": true,
-		"javascript": "function(desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'StringLiteral', 'the string type is passed');\n        equal(\n          options.types[1],\n          'PathExpression',\n          'the expression type is passed'\n        );\n        equal(\n          options.types[2],\n          'BooleanLiteral',\n          'the expression type is passed'\n        );\n        equal(desire, 'need', 'the string form is passed for strings');\n        equal(noun, 'dad.joke', 'the string form is passed for expressions');\n        equal(trueBool, true, 'raw booleans are passed through');\n        equal(falseBool, false, 'raw booleans are passed through');\n        return 'Helper called';\n      }"
-	},
-	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.hashTypes.desire,\"StringLiteral\");equal(options.hashTypes.noun,\"PathExpression\");equal(options.hashTypes.bool,\"BooleanLiteral\");equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
-		"!code": true,
-		"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.hashTypes.desire, 'StringLiteral');\n        equal(options.hashTypes.noun, 'PathExpression');\n        equal(options.hashTypes.bool, 'BooleanLiteral');\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
-	},
 	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.contexts.length,1);equal(options.hashContexts.noun,context);equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
 		"!code": true,
 		"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.contexts.length, 1);\n        equal(options.hashContexts.noun, context);\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
 	},
+	"function(withContext,options){return options.fn(options.contexts[0][withContext])};": {
+		"!code": true,
+		"javascript": "function(withContext, options) {\n        return options.fn(options.contexts[0][withContext]);\n      }"
+	},
 	"function(x,y,options){if(!options||options===lastOptions){throw new Error(\"options hash was reused\")}lastOptions=options;return x===y};": {
 		"!code": true,
 		"javascript": "function(x, y, options) {\n        if (!options || options === lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        lastOptions = options;\n        return x === y;\n      }"
-	},
-	"function(options){equals(options.hashTypes.fun,\"SubExpression\");return\"val is \"+options.hash.fun};": {
-		"!code": true,
-		"javascript": "function(options) {\n        equals(options.hashTypes.fun, 'SubExpression');\n        return 'val is ' + options.hash.fun;\n      }"
-	},
-	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.hash.world}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
-		"!code": true,
-		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
-	},
-	"function goodbye(options){if(options.hash.print===true){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)}else if(options.hash.print===false){return\"NOT PRINTING\"}else{return\"THIS SHOULD NOT HAPPEN\"}};": {
-		"!code": true,
-		"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
-	},
-	"function(element){return[element]};": {
-		"!code": true,
-		"javascript": "function(element) {\n          return [element];\n        }"
-	},
-	"function(){return\"functionInData\"};": {
-		"!code": true,
-		"javascript": "function() {\n              return 'functionInData';\n            }"
-	},
-	"function(fn,props,container,options){equals(options.args[0],undefined);global.run=true;return fn};": {
-		"!code": true,
-		"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }"
 	}
 }
