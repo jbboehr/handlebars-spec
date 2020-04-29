@@ -31,10 +31,10 @@ const hjson = __importStar(require("hjson"));
 let default_1 = class default_1 extends clime_1.Command {
     execute(args, options) {
         let fns = {};
-        for (var i = 0; i < args.length; i++) {
-            let filestr = fs_1.readFileSync(args[i]).toString();
+        for (let i = 0; i < args.length; i++) {
+            const filestr = fs_1.readFileSync(args[i]).toString();
             let data;
-            if (args[i].endsWith(".hjson")) {
+            if (args[i].endsWith('.hjson')) {
                 data = hjson.parse(filestr);
             }
             else {
@@ -43,10 +43,10 @@ let default_1 = class default_1 extends clime_1.Command {
             fns = this.extract(data, fns);
         }
         let output;
-        if (options.outputFormat === "hjson") {
+        if (options.outputFormat === 'hjson') {
             output = hjson.stringify(fns, {
                 bracesSameLine: true,
-                space: "\t"
+                space: '\t'
             });
         }
         else {
@@ -60,16 +60,16 @@ let default_1 = class default_1 extends clime_1.Command {
         }
     }
     extract(data, prev) {
-        if (typeof data !== "object" || !data) {
+        if (typeof data !== 'object' || !data) {
             return prev;
         }
-        if (data.hasOwnProperty("!code")) {
-            var js = data['javascript'];
+        if (data.hasOwnProperty('!code')) {
+            const js = data['javascript'];
             if (!js) {
                 console.warn('js key not set');
                 return prev;
             }
-            var key = utils_1.normalizeJavascript(js);
+            const key = utils_1.normalizeJavascript(js);
             if (key in prev) {
                 if (!deep_equal_1.default(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);
@@ -77,7 +77,7 @@ let default_1 = class default_1 extends clime_1.Command {
             }
             prev[key] = data;
         }
-        for (var x in data) {
+        for (const x in data) {
             if (data.hasOwnProperty(x)) {
                 this.extract(data[x], prev);
             }

@@ -43,23 +43,23 @@ __decorate([
 exports.OutputFileOptions = OutputFileOptions;
 let default_1 = class default_1 extends clime_1.Command {
     execute(inputFile, options) {
-        let suite = path.basename(inputFile).replace(/\.js$/, '');
+        const suite = path.basename(inputFile).replace(/\.js$/, '');
         if (!fs_1.existsSync(inputFile)) {
             console.error('The input file does not exist');
             return process.exit(66);
         }
         // Patch globals
-        let origGlobals = {};
-        for (let x in mockGlobals) {
+        const origGlobals = {};
+        for (const x in mockGlobals) {
             origGlobals[x] = global[x];
         }
-        for (let x in mockGlobals) {
+        for (const x in mockGlobals) {
             global[x] = mockGlobals[x];
         }
         mockGlobals.globalContext.suite = suite;
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
-            let tokenizerData = ('' + fs_1.readFileSync(inputFile))
+            const tokenizerData = ('' + fs_1.readFileSync(inputFile))
                 .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
                 .replace(/function shouldBeToken/, 'function REMshouldBeToken')
                 .replace(/function tokenize/, 'global.originalTokenize = function');
@@ -81,7 +81,7 @@ let default_1 = class default_1 extends clime_1.Command {
         if (!options.outputFile) {
             return console.log(output);
         }
-        let outputFile = path.resolve(options.outputFile);
+        const outputFile = path.resolve(options.outputFile);
         try {
             fs_1.writeFileSync(outputFile, output);
             console.log('JSON saved to ' + options.outputFile);

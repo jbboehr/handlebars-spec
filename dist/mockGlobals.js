@@ -26,12 +26,12 @@ function resetContext() {
 }
 exports.resetContext = resetContext;
 function currentTestName() {
-    return exports.globalContext.testContext.key;
+    return exports.globalContext.testContext.key || '';
 }
 function log(message, ...optionalParams) {
     console.warn.apply(null, [
         currentTestName(),
-        "|",
+        '|',
         message,
     ]);
     if (optionalParams && optionalParams.length >= 1) {
@@ -50,7 +50,7 @@ function beforeEach(fn) {
 }
 exports.beforeEach = beforeEach;
 function CompilerContextCompile(template, options) {
-    let { testContext } = exports.globalContext;
+    const { testContext } = exports.globalContext;
     // Push template unto context
     testContext.template = template;
     testContext.compileOptions = utils_1.clone(options);
@@ -78,7 +78,7 @@ function CompilerContextCompile(template, options) {
 }
 exports.CompilerContextCompile = CompilerContextCompile;
 function CompilerContextCompileWithPartial(template, options) {
-    let { testContext } = exports.globalContext;
+    const { testContext } = exports.globalContext;
     // Push template unto context
     testContext.template = template;
     testContext.compileOptions = utils_1.clone(options);
@@ -89,7 +89,8 @@ exports.CompilerContext = {
     compileWithPartial: CompilerContextCompileWithPartial,
 };
 function describe(description, next) {
-    let { testContext, descriptionStack, beforeFns, afterFns } = exports.globalContext;
+    const { testContext, descriptionStack } = exports.globalContext;
+    let { beforeFns, afterFns } = exports.globalContext;
     beforeFns = [...beforeFns];
     afterFns = [...afterFns];
     descriptionStack.push(description);
@@ -102,17 +103,16 @@ function describe(description, next) {
     exports.globalContext.afterFns = afterFns;
 }
 exports.describe = describe;
-;
 function it(description, next) {
-    let { testContext } = exports.globalContext;
+    const { testContext } = exports.globalContext;
     // Call before fns
     exports.globalContext.beforeFns.forEach((fn) => {
         fn();
     });
     // Push test spec unto context
     testContext.it = description;
-    testContext.description = exports.globalContext.descriptionStack.join(" - ");
-    testContext.key = testContext.description + " - " + testContext.it;
+    testContext.description = exports.globalContext.descriptionStack.join(' - ');
+    testContext.key = testContext.description + ' - ' + testContext.it;
     // Test
     next();
     // Call after fns
@@ -121,100 +121,90 @@ function it(description, next) {
     });
 }
 exports.it = it;
-;
-function equals(actual, expected, message) {
-    log("equals called", ...arguments);
+function equals(...args) {
+    log('equals called', ...args);
 }
 exports.equals = equals;
-;
-function xit() {
-    log("xit called", ...arguments);
+function xit(...args) {
+    log('xit called', ...args);
 }
 exports.xit = xit;
 function expect() {
     return {
         to: {
-            equal: function () {
-                log("expect.to.equal called", ...arguments);
+            equal(...args) {
+                log('expect.to.equal called', ...args);
             },
             be: {
-                true: function () {
-                    log("expect.to.be.true called", ...arguments);
+                true(...args) {
+                    log('expect.to.be.true called', ...args);
                 }
             },
-            "throw": function () {
-                log("expect.to.throw called", ...arguments);
+            throw(...args) {
+                log('expect.to.throw called', ...args);
             },
-            match: function () {
-                log("expect.to.match called", ...arguments);
+            match(...args) {
+                log('expect.to.match called', ...args);
             }
         }
     };
 }
 exports.expect = expect;
-;
-function shouldBeToken() {
-    log("shouldBeToken called", ...arguments);
+function shouldBeToken(...args) {
+    log('shouldBeToken called', ...args);
 }
 exports.shouldBeToken = shouldBeToken;
-;
-function shouldCompileTo(str, hashOrArray, expected, message) {
-    log("shouldCompileTo called", ...arguments);
+function shouldCompileTo(...args) {
+    log('shouldCompileTo called', ...args);
 }
 exports.shouldCompileTo = shouldCompileTo;
-;
-function shouldCompileToWithPartials(str, hashOrArray, partials, expected, message) {
-    log("shouldCompileToWithPartials called", ...arguments);
+function shouldCompileToWithPartials(...args) {
+    log('shouldCompileToWithPartials called', ...args);
 }
 exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
-;
-function compileWithPartials(template, hashOrArray, partials, expected, message) {
-    log('compileWithPartials called', ...arguments);
+function compileWithPartials(...args) {
+    log('compileWithPartials called', ...args);
 }
 exports.compileWithPartials = compileWithPartials;
-;
-function shouldThrow(callback, error, message) {
-    log('shouldThrow called', ...arguments);
+function shouldThrow(...args) {
+    log('shouldThrow called', ...args);
 }
 exports.shouldThrow = shouldThrow;
-;
-function tokenize(template) {
-    log('tokenize called', ...arguments);
+function tokenize(...args) {
+    log('tokenize called', ...args);
 }
 exports.tokenize = tokenize;
-;
-function shouldMatchTokens(expected /*, tokens*/) {
-    log('shouldMatchTokens called', ...arguments);
+function shouldMatchTokens(...args) {
+    log('shouldMatchTokens called', ...args);
 }
 exports.shouldMatchTokens = shouldMatchTokens;
-;
 function expectTemplate(template) {
     return new expectTemplate_1.ExpectTemplate(template, addExpectTemplate);
 }
 exports.expectTemplate = expectTemplate;
-;
 function addExpectTemplate(xt) {
-    let { testContext, suite, indices, tests } = exports.globalContext;
-    let { description, it, extraEquals } = testContext;
+    const { testContext, indices, tests } = exports.globalContext;
+    const { description, it, extraEquals } = testContext;
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
         console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
         delete exports.globalContext.testContext.extraEquals;
     }
     // Generate key
-    var key = (description + ' - ' + it).toLowerCase();
-    let [name, number] = (() => {
+    const key = (description + ' - ' + it).toLowerCase();
+    function generateName() {
         for (let i = 0; i < 99; i++) {
-            let j = ('0' + i).slice(-2);
-            let n = key + ' - ' + j;
+            const j = ('0' + i).slice(-2);
+            const n = key + ' - ' + j;
             if (!indices.hasOwnProperty(n)) {
                 return [n, j];
             }
         }
         throw new Error('Failed to acquire test index');
-    })();
+    }
+    const [name, number] = generateName();
     indices[name] = name;
     // Make test spec
-    var spec = utils_1.serialize({
+    let spec = utils_1.serialize({
         description,
         it,
         number,
@@ -232,7 +222,7 @@ function addExpectTemplate(xt) {
     if (spec.exception) {
         delete spec.expected;
     }
-    if (number === "00") {
+    if (number === '00') {
         delete spec.number;
     }
     // Apply patches and push to tests
@@ -252,12 +242,13 @@ function addExpectTemplate(xt) {
     resetContext();
 }
 function applyPatches(name, spec) {
-    let { suite, unusedPatches } = exports.globalContext;
-    let patchFile = path_1.resolve('./patch/' + '/' + suite + '.json');
+    const { suite, unusedPatches } = exports.globalContext;
+    const patchFile = path_1.resolve('./patch/' + '/' + suite + '.json');
     if (!fs_1.existsSync(patchFile)) {
         return spec;
     }
-    let patchData = require(patchFile);
+    // @todo only read once
+    const patchData = JSON.parse(fs_1.readFileSync(patchFile).toString());
     let patch;
     if (patchData.hasOwnProperty(name)) {
         patch = patchData[name];
@@ -269,29 +260,29 @@ function applyPatches(name, spec) {
         // Note: setting to null means to skip the test. These will most
         // likely be implementation-dependant. Note that it still has to be
         // added to the indices array
-        log("skipped via patch");
+        log('skipped via patch');
         throw new SkipError();
     }
     else {
         spec = extend_1.default(true, spec, patch);
         // Using nulls in patches to unset things
         utils_1.stripNulls(spec);
-        log("applied patch", spec);
+        log('applied patch', spec);
     }
     // Track unused patches
     if (unusedPatches === null) {
-        unusedPatches = extend_1.default({}, patchData);
+        extend_1.default(unusedPatches, patchData);
     }
     delete unusedPatches[name];
     return spec;
 }
 function detectGlobalHelpers() {
-    let { handlebarsEnv } = global;
+    const { handlebarsEnv } = global;
     const builtins = [
         'helperMissing', 'blockHelperMissing', 'each', 'if',
         'unless', 'with', 'log', 'lookup'
     ];
-    let globalHelpers = {};
+    const globalHelpers = {};
     Object.keys(handlebarsEnv.helpers).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
             return;
@@ -301,9 +292,9 @@ function detectGlobalHelpers() {
     return globalHelpers;
 }
 function detectGlobalDecorators() {
-    let { handlebarsEnv } = global;
+    const { handlebarsEnv } = global;
     const builtins = ['inline'];
-    let globalDecorators = {};
+    const globalDecorators = {};
     Object.keys(handlebarsEnv.decorators).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
             return;
@@ -313,12 +304,12 @@ function detectGlobalDecorators() {
     return globalDecorators;
 }
 function detectGlobalPartials() {
-    let { handlebarsEnv } = global;
+    const { handlebarsEnv } = global;
     // This should never be null, but it is in one case
     if (!handlebarsEnv) {
         return {};
     }
-    let globalPartials = {};
+    const globalPartials = {};
     Object.keys(handlebarsEnv.partials).forEach((x) => {
         globalPartials[x] = handlebarsEnv.partials[x];
     });

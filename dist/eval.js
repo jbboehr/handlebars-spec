@@ -1,7 +1,6 @@
 "use strict";
 /*jshint strict: false, unused: false */
 Object.defineProperty(exports, "__esModule", { value: true });
-var _utils = require('handlebars').Utils;
 function safeEval(templateSpec) {
     try {
         /* jshint ignore:start */
@@ -9,7 +8,7 @@ function safeEval(templateSpec) {
         /* jshint ignore:end */
     }
     catch (err) {
-        console.error("SPEC:" + templateSpec);
+        console.error('SPEC:' + templateSpec);
         throw err;
     }
 }

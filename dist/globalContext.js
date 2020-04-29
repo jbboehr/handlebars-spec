@@ -8,7 +8,7 @@ class GlobalContext {
         this.descriptionStack = [];
         this.testContext = new testContext_1.TestContext();
         this.indices = {};
-        this.suite = "";
+        this.suite = '';
         this.unusedPatches = {};
         this.tests = [];
     }

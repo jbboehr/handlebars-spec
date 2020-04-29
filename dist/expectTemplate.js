@@ -62,16 +62,17 @@ class ExpectTemplate {
         return true;
     }
     toThrow(errorLike, errMsgMatcher, msg) {
+        const args = [errorLike, errMsgMatcher, msg];
         // Look for string
-        for (let i = 0; i < arguments.length; i++) {
-            if (arguments[i] instanceof RegExp) {
-                this.exception = arguments[i];
+        for (let i = 0; i < args.length; i++) {
+            if (args[i] instanceof RegExp) {
+                this.exception = args[i];
                 this.cb(this);
                 delete this.exception; // MEH
                 return true;
             }
-            else if (typeof arguments[i] === "string") {
-                this.exception = arguments[i];
+            else if (typeof args[i] === 'string') {
+                this.exception = args[i];
                 this.cb(this);
                 delete this.exception; // MEH
                 return true;

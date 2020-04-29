@@ -9,8 +9,8 @@ const path_1 = require("path");
 const util_1 = require("util");
 const eval_1 = require("./eval");
 const crypto_1 = require("crypto");
-const PATCH_FILE = path_1.resolve(__dirname + "/../patch/_functions.json");
-var functionPatches;
+const PATCH_FILE = path_1.resolve(__dirname + '/../patch/_functions.json');
+let functionPatches;
 try {
     functionPatches = require(PATCH_FILE);
 }
@@ -22,7 +22,7 @@ function clone(v) {
 }
 exports.clone = clone;
 function isFunction(obj) {
-    return Boolean(obj && obj.constructor && obj.call && obj.apply);
+    return !!(obj && obj.constructor && obj.call && obj.apply);
 }
 exports.isFunction = isFunction;
 function isEmptyObject(obj) {
@@ -31,7 +31,7 @@ function isEmptyObject(obj) {
 exports.isEmptyObject = isEmptyObject;
 function isSparseArray(arr) {
     let i = 0;
-    let l = arr.length;
+    const l = arr.length;
     for (; i < l; i++) {
         if (!arr.hasOwnProperty(i)) {
             return true;
@@ -41,14 +41,14 @@ function isSparseArray(arr) {
 }
 exports.isSparseArray = isSparseArray;
 function jsToCode(fn) {
-    var str = ('' + fn);
-    var key = normalizeJavascript(str);
-    var data;
+    const str = ('' + fn);
+    const key = normalizeJavascript(str);
+    let data;
     if (key in functionPatches) {
         data = {
-            "!code": true,
-            "javascript": functionPatches[key].javascript,
-            "php": functionPatches[key].php,
+            '!code': true,
+            'javascript': functionPatches[key].javascript,
+            'php': functionPatches[key].php,
         };
     }
     else {
@@ -58,12 +58,12 @@ function jsToCode(fn) {
         };
         functionPatches[key] = data;
         // write it out to _functions
-        let tmp = JSON.parse(fs_1.readFileSync(PATCH_FILE).toString());
+        const tmp = JSON.parse(fs_1.readFileSync(PATCH_FILE).toString());
         tmp[key] = data;
         fs_1.writeFileSync(PATCH_FILE, JSON.stringify(tmp, null, '\t'));
     }
     if (!('php' in data)) {
-        console.log("Missing function patch for: " + JSON.stringify(key) + " <- " + JSON.stringify(str));
+        console.log('Missing function patch for: ' + JSON.stringify(key) + ' <- ' + JSON.stringify(str));
     }
     // Keep the old function for now, if it's already set...
     if (!data.javascript) {
@@ -73,12 +73,12 @@ function jsToCode(fn) {
 }
 exports.jsToCode = jsToCode;
 function normalizeJavascript(js) {
-    var str = 'var x = ' + js;
-    var r = uglify_js_1.default.minify(str, {
+    const str = 'var x = ' + js;
+    const r = uglify_js_1.default.minify(str, {
         compress: false,
         mangle: false,
         toplevel: true,
-        keep_fnames: true,
+        'keep_fnames': true,
     });
     if (r.error) {
         console.warn(js, str);
@@ -87,7 +87,7 @@ function normalizeJavascript(js) {
     else if (r.warnings) {
         console.warn(r.warnings);
     }
-    return r.code.replace("var x=", "");
+    return r.code.replace('var x=', '');
 }
 exports.normalizeJavascript = normalizeJavascript;
 function normalizeAndHashJavascript(js) {
@@ -103,7 +103,7 @@ function removeCircularReferences(data, prev = []) {
     prev = prev || [];
     prev.push(data);
     function checkCircularRef(v) {
-        for (var y in prev) {
+        for (const y in prev) {
             if (v === prev[y]) {
                 return true;
             }
@@ -125,7 +125,7 @@ function stringifyLambdas(data) {
     if (typeof data !== 'object') {
         return data;
     }
-    for (var x in data) {
+    for (const x in data) {
         if (data[x] instanceof Array) {
             stringifyLambdas(data[x]);
         }
@@ -141,7 +141,7 @@ function stringifyLambdas(data) {
 exports.stringifyLambdas = stringifyLambdas;
 function stripNulls(data) {
     if (typeof data === 'object') {
-        for (var x in data) {
+        for (const x in data) {
             if (data[x] === null) {
                 if (data['!keepnull']) {
                     delete data['!keepnull'];
@@ -158,29 +158,21 @@ function stripNulls(data) {
     return data;
 }
 exports.stripNulls = stripNulls;
-function serializeInner(data, ctx) {
+function serializeInner(data) {
     switch (typeof data) {
-        case "boolean":
-        case "number":
-        case "string":
+        case 'boolean':
+        case 'number':
+        case 'string':
             return data;
         default:
-        case "bigint":
-        case "symbol":
-            throw new Error("unimplemented");
-        case "function":
+        case 'bigint':
+        case 'symbol':
+            throw new Error('unimplemented');
+        case 'function':
             return jsToCode(data);
-        case "undefined":
+        case 'undefined':
             return null;
-        /*
-        if (ctx.key === "input" || ctx.key === "data") {
-            return {
-                "!undefined": true,
-            };
-        }
-        return undefined;
-        */
-        case "object":
+        case 'object':
             // fallthrough
             break;
     }
@@ -191,14 +183,14 @@ function serializeInner(data, ctx) {
     // Handle arrays
     if (util_1.isArray(data)) {
         if (isSparseArray(data)) {
-            var orv = { "!sparsearray": true };
+            const orv = { '!sparsearray': true };
             Object.keys(data).forEach((key) => {
                 orv[key] = data[key];
             });
             return orv;
         }
         else {
-            var arv = [];
+            const arv = [];
             data.forEach((value, index) => {
                 arv[index] = value;
             });
@@ -231,7 +223,7 @@ function serializeInner(data, ctx) {
         'globalDecorators': true,
     };
     // Recurse
-    var rv = {};
+    const rv = {};
     Object.keys(data).forEach((key) => {
         // Ignore some empty objects
         if (ignoreEmptyKeys[key] === true) {
@@ -240,32 +232,30 @@ function serializeInner(data, ctx) {
             }
         }
         else if (ignoreEmptyObjectKeys[key] === true) {
-            if (!data[key] || (typeof data[key] === "object" && isEmptyObject(data[key]))) {
+            if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
                 return;
             }
         }
         // serialize and append
-        rv[key] = serializeInner(data[key], {
-            key,
-        });
+        rv[key] = serializeInner(data[key]);
     });
     return rv;
 }
 function serialize(data) {
     removeCircularReferences(data);
-    return serializeInner(data, {});
+    return serializeInner(data);
 }
 exports.serialize = serialize;
 function deserialize(data) {
     switch (typeof data) {
-        case "boolean":
-        case "number":
-        case "string":
-        case "undefined":
+        case 'boolean':
+        case 'number':
+        case 'string':
+        case 'undefined':
             return data;
         default:
-            throw new Error("unimplemented: " + typeof data);
-        case "object":
+            throw new Error('unimplemented: ' + typeof data);
+        case 'object':
             // fallthrough
             break;
     }
@@ -273,15 +263,15 @@ function deserialize(data) {
     if (data === null) {
         return null;
     }
-    if ("!undefined" in data) {
+    if ('!undefined' in data) {
         return undefined;
     }
-    else if ("!code" in data) {
+    else if ('!code' in data) {
         return eval_1.safeEval(data['javascript']);
     }
-    else if ("!sparsearray" in data) {
-        let newData = [];
-        for (let x in data) {
+    else if ('!sparsearray' in data) {
+        const newData = [];
+        for (const x in data) {
             let i;
             if (data.hasOwnProperty(x)) {
                 if (!isNaN(i = parseInt(x))) {
@@ -292,7 +282,7 @@ function deserialize(data) {
         return newData;
     }
     // Recurse
-    var rv = {};
+    const rv = {};
     Object.keys(data).forEach((key) => {
         // serialize and append
         rv[key] = deserialize(data[key]);

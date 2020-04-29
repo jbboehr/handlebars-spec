@@ -28,32 +28,32 @@ const path_1 = require("path");
 const fs_1 = require("fs");
 const assert = __importStar(require("assert"));
 // Patch globals
-let handlebarsEnv = Handlebars;
+const handlebarsEnv = Handlebars;
 global.Handlebars = Handlebars;
 global.handlebarsEnv = handlebarsEnv;
 global.CompilerContext = {
-    compile: function (template, options) {
-        var templateSpec = global.handlebarsEnv.precompile(template, options);
+    compile(template, options) {
+        const templateSpec = global.handlebarsEnv.precompile(template, options);
         return handlebarsEnv.template(eval_1.safeEval(templateSpec));
     },
-    compileWithPartial: function (template, options) {
+    compileWithPartial(template, options) {
         return handlebarsEnv.compile(template, options);
     }
 };
 require('../../handlebars.js/spec/env/common.js');
 let default_1 = class default_1 extends clime_1.Command {
     execute(inputFile) {
-        var successes = [];
-        var failures = [];
-        var skipped = [];
-        var dir = '.';
+        const successes = [];
+        const failures = [];
+        const skipped = [];
+        let dir = '.';
         function runSpec(spec) {
-            var tmp = spec.replace(/\.json$/, '').split("/");
-            var suite = tmp[tmp.length - 1];
-            var data = require(path_1.resolve(dir + '/' + spec));
+            const tmp = spec.replace(/\.json$/, '').split('/');
+            const suite = tmp[tmp.length - 1];
+            const data = JSON.parse(fs_1.readFileSync(path_1.resolve(dir + '/' + spec)).toString());
             Object.keys(data).forEach(function (y) {
                 data[y].suite = suite;
-                var result = runTest(data[y]);
+                const result = runTest(data[y]);
                 if (result === null) {
                     skipped.push(data[y]);
                 }
@@ -70,7 +70,7 @@ let default_1 = class default_1 extends clime_1.Command {
         }
         else {
             dir = path_1.resolve('./spec/');
-            var specs = fs_1.readdirSync(dir);
+            const specs = fs_1.readdirSync(dir);
             Object.values(specs).forEach(runSpec);
         }
         console.log('Summary');
@@ -96,19 +96,19 @@ default_1 = __decorate([
 ], default_1);
 exports.default = default_1;
 function astFor(template) {
-    var ast = Handlebars.parse(template);
+    const ast = Handlebars.parse(template);
     return Handlebars.print(ast);
 }
 function tokenize(template) {
-    var parser = Handlebars.Parser, lexer = parser.lexer;
+    const parser = Handlebars.Parser, lexer = parser.lexer;
     lexer.setInput(template);
-    var out = [];
+    const out = [];
     for (;;) {
-        var token = lexer.lex();
+        const token = lexer.lex();
         if (!token) {
             break;
         }
-        var result = parser.terminals_[token] || token;
+        const result = parser.terminals_[token] || token;
         if (!result || result === 'EOF' || result === 'INVALID') {
             break;
         }
@@ -118,9 +118,9 @@ function tokenize(template) {
 }
 function unstringifyHelpers(helpers) {
     if (!helpers || helpers === null) {
-        return;
+        return {};
     }
-    var ret = {};
+    const ret = {};
     Object.keys(helpers).forEach(function (x) {
         ret[x] = eval_1.safeEval(helpers[x].javascript);
     });
@@ -130,7 +130,7 @@ function unstringifyLambdas(data) {
     if (!data || data === null) {
         return data;
     }
-    for (var x in data) {
+    for (const x in data) {
         if (util_1.isArray(data[x])) {
             unstringifyLambdas(data[x]);
         }
@@ -149,9 +149,9 @@ function fixSparseArray(data) {
     if (!data || typeof data !== 'object') {
         return data;
     }
-    var x, i;
+    let x, i;
     if ('!sparsearray' in data) {
-        var newData = [];
+        const newData = [];
         for (x in data) {
             if (data.hasOwnProperty(x)) {
                 if (!isNaN(i = parseInt(x))) {
@@ -172,15 +172,15 @@ function fixSparseArray(data) {
 }
 // Test utils
 function checkResult(test, e) {
-    var shouldExcept = test.exception === true;
-    var didExcept = e !== undefined;
+    const shouldExcept = test.exception === true;
+    const didExcept = e !== undefined;
     if (shouldExcept === didExcept) {
-        console.log(test.prefix, "|", 'OK');
+        console.log(test.prefix, '|', 'OK');
         return true;
     }
     else {
-        var msg = e || 'Error: should have thrown, did not';
-        console.log(test.prefix, "|", 'FAIL');
+        const msg = e || 'Error: should have thrown, did not';
+        console.log(test.prefix, '|', 'FAIL');
         console.log(msg);
         if (e) {
             console.error(e.stack);
@@ -193,7 +193,7 @@ function makePrefix(test) {
     return (test.suite) + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
 function prepareTestGeneric(test) {
-    var spec = {};
+    const spec = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -226,7 +226,7 @@ function prepareTestGeneric(test) {
     return spec;
 }
 function prepareTestParser(test) {
-    var spec = {};
+    const spec = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -240,7 +240,7 @@ function prepareTestParser(test) {
     return spec;
 }
 function prepareTestTokenizer(test) {
-    var spec = {};
+    const spec = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -250,7 +250,7 @@ function prepareTestTokenizer(test) {
     return spec;
 }
 function runTest(test) {
-    var result = null;
+    let result = null;
     switch (test.suite) {
         case 'basic':
         case 'bench':
@@ -277,9 +277,9 @@ function runTest(test) {
     return result;
 }
 function runTestGeneric(test) {
-    let handlebarsEnv = global.handlebarsEnv;
-    let CompilerContext = global.CompilerContext;
-    let equals = global.equals;
+    const handlebarsEnv = global.handlebarsEnv;
+    const CompilerContext = global.CompilerContext;
+    const equals = global.equals;
     global.value = 1; // for helpers - block params - should take presednece over parent block params - 00
     global.lastOptions = undefined; // for subexpressions - provides each nested helper invocation its own options hash - 00
     global.run = false; // for blocks - decorators - should fail when accessing variables from root - 00
@@ -298,9 +298,9 @@ function runTestGeneric(test) {
         //     handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
         // });
         // Execute
-        var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
-        var template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, utils_1.clone(test.compileOptions));
-        var runtimeOptions = test.runtimeOptions || test.options || {};
+        const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
+        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, utils_1.clone(test.compileOptions));
+        const runtimeOptions = test.runtimeOptions || test.options || {};
         //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
         if (test.helpers) {
             runtimeOptions.helpers = test.helpers;
@@ -312,7 +312,7 @@ function runTestGeneric(test) {
             runtimeOptions.decorators = test.decorators;
         }
         test.runtimeOptions = runtimeOptions;
-        var actual = template(test.data, test.runtimeOptions);
+        const actual = template(test.data, test.runtimeOptions);
         equals(actual, test.expected);
         return checkResult(test);
     }
@@ -322,7 +322,7 @@ function runTestGeneric(test) {
 }
 function runTestParser(test) {
     try {
-        var actual = astFor(test.template);
+        const actual = astFor(test.template);
         assert.equal(actual, test.expected);
         return checkResult(test);
     }
@@ -332,7 +332,7 @@ function runTestParser(test) {
 }
 function runTestTokenizer(test) {
     try {
-        var actual = tokenize(test.template);
+        const actual = tokenize(test.template);
         assert.deepEqual(actual, test.expected);
         return checkResult(test);
     }

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class TestContext {
     reset() {
-        let self = new TestContext();
+        const self = new TestContext();
         self.description = this.description;
         self.it = this.it;
         self.key = this.key;
