@@ -8,7 +8,6 @@ const fs_1 = require("fs");
 const path_1 = require("path");
 const util_1 = require("util");
 const eval_1 = require("./eval");
-const crypto_1 = require("crypto");
 const PATCH_FILE = path_1.resolve(__dirname + '/../patch/_functions.json');
 let functionPatches;
 try {
@@ -17,18 +16,9 @@ try {
 catch (e) {
     console.warn(e);
 }
-function clone(v) {
-    return v === undefined ? undefined : JSON.parse(JSON.stringify(v));
-}
-exports.clone = clone;
-function isFunction(obj) {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
-}
-exports.isFunction = isFunction;
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
-exports.isEmptyObject = isEmptyObject;
 function isSparseArray(arr) {
     let i = 0;
     const l = arr.length;
@@ -39,7 +29,6 @@ function isSparseArray(arr) {
     }
     return false;
 }
-exports.isSparseArray = isSparseArray;
 function jsToCode(fn) {
     const str = ('' + fn);
     const key = normalizeJavascript(str);
@@ -90,12 +79,6 @@ function normalizeJavascript(js) {
     return r.code.replace('var x=', '');
 }
 exports.normalizeJavascript = normalizeJavascript;
-function normalizeAndHashJavascript(js) {
-    return crypto_1.createHash('sha256')
-        .update(normalizeJavascript(js))
-        .digest('hex');
-}
-exports.normalizeAndHashJavascript = normalizeAndHashJavascript;
 function removeCircularReferences(data, prev = []) {
     if (typeof data !== 'object') {
         return data;
@@ -121,24 +104,6 @@ function removeCircularReferences(data, prev = []) {
     return data;
 }
 exports.removeCircularReferences = removeCircularReferences;
-function stringifyLambdas(data) {
-    if (typeof data !== 'object') {
-        return data;
-    }
-    for (const x in data) {
-        if (data[x] instanceof Array) {
-            stringifyLambdas(data[x]);
-        }
-        else if (typeof data[x] === 'function' || data[x] instanceof Function) {
-            data[x] = jsToCode(data[x]);
-        }
-        else if (typeof data[x] === 'object') {
-            stringifyLambdas(data[x]);
-        }
-    }
-    return data;
-}
-exports.stringifyLambdas = stringifyLambdas;
 function stripNulls(data) {
     if (typeof data === 'object') {
         for (const x in data) {

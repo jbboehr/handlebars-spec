@@ -117,7 +117,7 @@ function tokenize(template) {
     return out;
 }
 function unstringifyHelpers(helpers) {
-    if (!helpers || helpers === null) {
+    if (!helpers || helpers === null || typeof helpers !== "object") {
         return {};
     }
     const ret = {};
@@ -203,7 +203,7 @@ function prepareTestGeneric(test) {
     // Exception
     spec.exception = test.exception ? true : false;
     // Data
-    spec.data = fixSparseArray(utils_1.clone(test.data));
+    spec.data = fixSparseArray(test.data);
     unstringifyLambdas(spec.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
@@ -216,8 +216,8 @@ function prepareTestGeneric(test) {
     spec.decorators = unstringifyHelpers(test.decorators);
     spec.globalDecorators = test.globalDecorators || undefined;
     // Options
-    spec.runtimeOptions = unstringifyLambdas(utils_1.clone(test.runtimeOptions));
-    spec.compileOptions = utils_1.clone(test.compileOptions);
+    spec.runtimeOptions = unstringifyLambdas(test.runtimeOptions);
+    spec.compileOptions = test.compileOptions;
     if (spec.options && typeof spec.options.data === 'object') {
         unstringifyLambdas(spec.options.data);
     }
@@ -232,7 +232,7 @@ function prepareTestParser(test) {
     // Template
     spec.template = test.template;
     // Expected
-    spec.expected = utils_1.clone(test.expected);
+    spec.expected = test.expected;
     // Exception
     spec.exception = test.exception ? true : false;
     // Message
@@ -246,7 +246,7 @@ function prepareTestTokenizer(test) {
     // Template
     spec.template = test.template;
     // Expected
-    spec.expected = utils_1.clone(test.expected);
+    spec.expected = test.expected;
     return spec;
 }
 function runTest(test) {
@@ -299,7 +299,7 @@ function runTestGeneric(test) {
         // });
         // Execute
         const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
-        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, utils_1.clone(test.compileOptions));
+        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, test.compileOptions);
         const runtimeOptions = test.runtimeOptions || test.options || {};
         //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
         if (test.helpers) {

@@ -21,16 +21,9 @@ const globalContext_1 = require("./globalContext");
 const sinon = __importStar(require("sinon"));
 exports.sinon = sinon;
 exports.globalContext = new globalContext_1.GlobalContext();
-function resetContext() {
-    exports.globalContext.testContext = exports.globalContext.testContext.reset();
-}
-exports.resetContext = resetContext;
-function currentTestName() {
-    return exports.globalContext.testContext.key || '';
-}
 function log(message, ...optionalParams) {
     console.warn.apply(null, [
-        currentTestName(),
+        exports.globalContext.testContext.key || '',
         '|',
         message,
     ]);
@@ -40,7 +33,6 @@ function log(message, ...optionalParams) {
 }
 class SkipError extends Error {
 }
-// env
 function afterEach(fn) {
     exports.globalContext.afterFns.push(fn);
 }
@@ -49,45 +41,6 @@ function beforeEach(fn) {
     exports.globalContext.beforeFns.push(fn);
 }
 exports.beforeEach = beforeEach;
-function CompilerContextCompile(template, options) {
-    const { testContext } = exports.globalContext;
-    // Push template unto context
-    testContext.template = template;
-    testContext.compileOptions = utils_1.clone(options);
-    const compiledTemplate = Handlebars.compile(template, options);
-    return function (data, options) {
-        // Note: merging data in the options causes tests to fail, possibly
-        // a separate type of data?
-        if (options && options.hasOwnProperty('data')) {
-            //data = extend(true, data, options.data);
-            testContext.options = testContext.options || {};
-            testContext.options.data = options.data;
-        }
-        // Push template data unto context
-        testContext.data = data;
-        if (options && options.hasOwnProperty('helpers')) {
-            // Push helpers unto context
-            testContext.helpers = options.helpers;
-        }
-        if (options && options.hasOwnProperty('decorators')) {
-            // Push decorators unto context
-            testContext.decorators = options.decorators;
-        }
-        return compiledTemplate(data, options);
-    };
-}
-exports.CompilerContextCompile = CompilerContextCompile;
-function CompilerContextCompileWithPartial(template, options) {
-    const { testContext } = exports.globalContext;
-    // Push template unto context
-    testContext.template = template;
-    testContext.compileOptions = utils_1.clone(options);
-    return Handlebars.compile(template, options);
-}
-exports.CompilerContext = {
-    compile: CompilerContextCompile,
-    compileWithPartial: CompilerContextCompileWithPartial,
-};
 function describe(description, next) {
     const { testContext, descriptionStack } = exports.globalContext;
     let { beforeFns, afterFns } = exports.globalContext;
@@ -121,63 +74,6 @@ function it(description, next) {
     });
 }
 exports.it = it;
-function equals(...args) {
-    log('equals called', ...args);
-}
-exports.equals = equals;
-function xit(...args) {
-    log('xit called', ...args);
-}
-exports.xit = xit;
-function expect() {
-    return {
-        to: {
-            equal(...args) {
-                log('expect.to.equal called', ...args);
-            },
-            be: {
-                true(...args) {
-                    log('expect.to.be.true called', ...args);
-                }
-            },
-            throw(...args) {
-                log('expect.to.throw called', ...args);
-            },
-            match(...args) {
-                log('expect.to.match called', ...args);
-            }
-        }
-    };
-}
-exports.expect = expect;
-function shouldBeToken(...args) {
-    log('shouldBeToken called', ...args);
-}
-exports.shouldBeToken = shouldBeToken;
-function shouldCompileTo(...args) {
-    log('shouldCompileTo called', ...args);
-}
-exports.shouldCompileTo = shouldCompileTo;
-function shouldCompileToWithPartials(...args) {
-    log('shouldCompileToWithPartials called', ...args);
-}
-exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
-function compileWithPartials(...args) {
-    log('compileWithPartials called', ...args);
-}
-exports.compileWithPartials = compileWithPartials;
-function shouldThrow(...args) {
-    log('shouldThrow called', ...args);
-}
-exports.shouldThrow = shouldThrow;
-function tokenize(...args) {
-    log('tokenize called', ...args);
-}
-exports.tokenize = tokenize;
-function shouldMatchTokens(...args) {
-    log('shouldMatchTokens called', ...args);
-}
-exports.shouldMatchTokens = shouldMatchTokens;
 function expectTemplate(template) {
     return new expectTemplate_1.ExpectTemplate(template, addExpectTemplate);
 }
@@ -239,7 +135,7 @@ function addExpectTemplate(xt) {
         }
     }
     // Reset the context
-    resetContext();
+    exports.globalContext.testContext = exports.globalContext.testContext.reset();
 }
 function applyPatches(name, spec) {
     const { suite, unusedPatches } = exports.globalContext;
@@ -315,4 +211,62 @@ function detectGlobalPartials() {
     });
     return globalPartials;
 }
+// these functions don't need to do anything, just warn and ignore
+function equals(...args) {
+    log('equals called', ...args);
+}
+exports.equals = equals;
+function xit(...args) {
+    log('xit called', ...args);
+}
+exports.xit = xit;
+function expect() {
+    return {
+        to: {
+            equal(...args) {
+                log('expect.to.equal called', ...args);
+            },
+            be: {
+                true(...args) {
+                    log('expect.to.be.true called', ...args);
+                }
+            },
+            throw(...args) {
+                log('expect.to.throw called', ...args);
+            },
+            match(...args) {
+                log('expect.to.match called', ...args);
+            }
+        }
+    };
+}
+exports.expect = expect;
+function shouldBeToken(...args) {
+    log('shouldBeToken called', ...args);
+}
+exports.shouldBeToken = shouldBeToken;
+function shouldCompileTo(...args) {
+    log('shouldCompileTo called', ...args);
+}
+exports.shouldCompileTo = shouldCompileTo;
+function shouldCompileToWithPartials(...args) {
+    log('shouldCompileToWithPartials called', ...args);
+}
+exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
+function compileWithPartials(...args) {
+    log('compileWithPartials called', ...args);
+}
+exports.compileWithPartials = compileWithPartials;
+function shouldThrow(...args) {
+    log('shouldThrow called', ...args);
+}
+exports.shouldThrow = shouldThrow;
+function tokenize(...args) {
+    log('tokenize called', ...args);
+}
+exports.tokenize = tokenize;
+function shouldMatchTokens(...args) {
+    log('shouldMatchTokens called', ...args);
+}
+exports.shouldMatchTokens = shouldMatchTokens;
 //# sourceMappingURL=mockGlobals.js.map
