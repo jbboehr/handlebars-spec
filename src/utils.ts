@@ -1,7 +1,7 @@
 
 import UglifyJS from "uglify-js";
 import { CodeData, CodeDict } from "./types";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, truncateSync } from "fs";
 import { resolve as resolvePath } from "path";
 import { isArray } from "util";
 import { safeEval } from "./eval";
@@ -27,12 +27,27 @@ export function isEmptyObject(obj: object) {
     return !Object.keys(obj).length;
 }
 
+export function isSparseArray(arr: any[]): boolean {
+    let i = 0;
+    let l = arr.length;
+    for (; i < l; i++) {
+        if (!arr.hasOwnProperty(i)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 export function jsToCode(fn: Function | string): CodeData {
     var str = ('' + fn);
     var key = normalizeJavascript(str);
     var data: CodeData;
     if (key in functionPatches) {
-        data = clone(functionPatches[key]);
+        data = {
+            "!code": true,
+            "javascript": functionPatches[key].javascript,
+            "php": functionPatches[key].php,
+        };
     } else {
         data = {
             '!code': true,
@@ -173,16 +188,29 @@ function serializeInner(data: any, ctx: any): any {
 
     // Handle arrays
     if (isArray(data)) {
-        var arv: any[] = [];
-        data.forEach((value, index) => {
-            arv[index] = value;
-        });
-        return arv;
+        if (isSparseArray(data)) {
+            var orv: any = {"!sparsearray": true};
+            Object.keys(data).forEach((key) => {
+                orv[key] = (data as any)[key];
+            });
+            return orv;
+        } else {
+            var arv: any[] = [];
+            data.forEach((value, index) => {
+                arv[index] = value;
+            });
+            return arv;
+        }
     }
 
     // Handle RegExp
     if (data instanceof RegExp) {
         return '' + data;
+    }
+
+    // Handle boxed Boolean
+    if (data instanceof Boolean) {
+        return data.valueOf();
     }
 
     // Handle objects

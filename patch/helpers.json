@@ -1,2 +1,20 @@
 {
+	"helpers - pathed lambas with parameters - 01": {
+		"data": {
+			"hash": {
+				"helper": {
+					"!code": true,
+					"javascript": "function () {\n        return 'winning';\n      }",
+				  	"php": "function() {\n        return 'winning';\n      }"
+				}
+			}
+		}
+	},
+	"helpers - block params - should take presednece over parent block params - 00": {
+		"helpers": {
+			"goodbyes": {
+				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }"
+			}
+		}
+	}
 }

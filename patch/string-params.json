@@ -4,16 +4,7 @@
 			"tomdale": {
 				"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.contexts.length, 1);\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
 			}
-		},
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    },
-    "string params mode-hash parameters get type information-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    },
-    "string params mode-information about the types is passed along-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    },
-    "string params mode-should handle data-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    }
+		}
+	},
+	"string params mode - hash parameters get context information - 00": null
 }

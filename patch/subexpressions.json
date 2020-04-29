@@ -1,9 +1,9 @@
 {
-    "subexpressions-as hashes in string params mode-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    },
-    "subexpressions-in string params mode,-00": {
-        "note": "Check original spec. Needs other tests, possibly implementation dependant."
-    },
-    "subexpressions-provides each nested helper invocation its own options hash-00": null
+	"subexpressions - provides each nested helper invocation its own options hash - 00": {
+		"helpers": {
+			"equal": {
+				"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }"
+			}
+		}
+	}
 }

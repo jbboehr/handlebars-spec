@@ -1,2 +1,15 @@
 {
+	"builtin helpers - #each - each on iterable - 00": null,
+	"builtin helpers - #each - each on iterable - 01": null,
+	"builtin helpers - #log - should call logger at default level - 00": null,
+	"builtin helpers - #log - should call logger at data level - 00": null,
+	"builtin helpers - #log - should output to info - 00": null,
+	"builtin helpers - #log - should log at data level - 00": null,
+	"builtin helpers - #log - should handle missing logger - 00": null,
+	"builtin helpers - #log - should handle string log levels - 00": null,
+	"builtin helpers - #log - should handle string log levels - 01": null,
+	"builtin helpers - #log - should handle hash log levels - 00": null,
+	"builtin helpers - #log - should handle hash log levels - 01": null,
+	"builtin helpers - #log - should pass multiple log arguments - 00": null,
+	"builtin helpers - #log - should pass zero log arguments - 00": null
 }

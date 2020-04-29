@@ -23,6 +23,9 @@
             "log": null,
             "lookup": null
         },
-        "decorators": null
+		"decorators": null,
+		"partials": {
+			"myPartial": "{{hello}}"
+		}
     }
 }

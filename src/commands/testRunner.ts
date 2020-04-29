@@ -2,7 +2,7 @@ import { Command, command, param } from 'clime';
 import * as Handlebars from "handlebars";
 import { safeEval } from '../eval';
 import { isArray } from 'util';
-import { clone } from '../utils';
+import { clone, serialize } from '../utils';
 import { resolve as resolvePath } from "path";
 import { readdirSync } from 'fs';
 import * as assert from "assert";
@@ -176,21 +176,22 @@ function checkResult(test: any, e?: Error) {
     var shouldExcept = test.exception === true;
     var didExcept = e !== undefined;
     if (shouldExcept === didExcept) {
-        console.log(test.prefix + 'OK');
+        console.log(test.prefix, "|", 'OK');
         return true;
     } else {
         var msg = e || 'Error: should have thrown, did not';
-        console.log(test.prefix + msg);
+        console.log(test.prefix, "|", 'FAIL');
+        console.log(msg);
         if (e) {
             console.error(e.stack);
         }
-        console.error('Test Data: ', test);
+        console.error(require('util').inspect(serialize(test), false, null, true));
         return false;
     }
 }
 
 function makePrefix(test: any) {
-    return '(' + test.suite + ' - ' + test.it + ' - ' + test.description + '): ';
+    return (test.suite) + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
 
 function prepareTestGeneric(test: any) {
@@ -217,7 +218,7 @@ function prepareTestGeneric(test: any) {
     spec.decorators = unstringifyHelpers(test.decorators);
     spec.globalDecorators = test.globalDecorators || undefined;
     // Options
-    spec.options = clone(test.options);
+    spec.runtimeOptions = unstringifyLambdas(clone(test.runtimeOptions));
     spec.compileOptions = clone(test.compileOptions);
     if (spec.options && typeof spec.options.data === 'object') {
         unstringifyLambdas(spec.options.data);
@@ -285,23 +286,26 @@ function runTestGeneric(test: any) {
     let handlebarsEnv = (global as any).handlebarsEnv;
     let CompilerContext = (global as any).CompilerContext;
     let equals = (global as any).equals;
+    (global as any).value = 1; // for helpers - block params - should take presednece over parent block params - 00
+    (global as any).lastOptions = undefined; // for subexpressions - provides each nested helper invocation its own options hash - 00
+    (global as any).run = false; // for blocks - decorators - should fail when accessing variables from root - 00
 
     try {
         // Register global partials
         handlebarsEnv.partials = {};
-        Object.keys(test.globalPartials || {}).forEach(function (x) {
-            handlebarsEnv.registerPartial(x, test.globalPartials[x]);
-        });
+        // Object.keys(test.globalPartials || {}).forEach(function (x) {
+        //     handlebarsEnv.registerPartial(x, test.globalPartials[x]);
+        // });
 
-        // Register global helpers
-        Object.keys(test.globalHelpers || {}).forEach(function (x) {
-            handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
-        });
+        // // Register global helpers
+        // Object.keys(test.globalHelpers || {}).forEach(function (x) {
+        //     handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
+        // });
 
-        // Register global decorators
-        Object.keys(test.globalDecorators || {}).forEach(function (x) {
-            handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
-        });
+        // // Register global decorators
+        // Object.keys(test.globalDecorators || {}).forEach(function (x) {
+        //     handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
+        // });
 
         // Execute
         var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
