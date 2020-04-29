@@ -233,7 +233,6 @@ function addExpectTemplate(xt: ExpectTemplate) {
         helpers: extend({}, detectGlobalHelpers(), xt.helpers || {}),
         decorators: extend({}, detectGlobalDecorators(), xt.decorators || {}),
         message: xt.message,
-        compat: (xt.compileOptions || {}).compat,
         exception: xt.exception,
     });
 
