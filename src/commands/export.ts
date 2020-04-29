@@ -1,107 +1,100 @@
-#!/usr/bin/env node
 
-"use strict";
+import { Command, command, option, Options, param } from 'clime';
+import { resolve as resolvePath } from 'path';
+import { existsSync, writeFileSync, readFileSync } from 'fs';
 
-var program = require('commander');
-var fs = require('fs');
-var path = require('path');
-var Handlebars = require('handlebars');
-var pkg = require('../package.json');
-
-program
-  .version(pkg.version)
-  .usage('[options] <spec file ...>')
-  .option('-o, --output [file]', 'write JSON output to a file')
-  .option('-v, --verbose', 'verbose')
-  .parse(process.argv);
-
-var input = path.resolve(program.args[0]);
-//var suite = path.basename(input).replace(/\.js$/, '');
-var exists = fs.existsSync(input);
-
-if( !exists ) {
-  console.error('The input file does not exist');
-  return process.exit(66);
+class ExportOptions extends Options {
+    @option({
+        flag: 'o',
+        description: 'Output file',
+        required: false,
+    })
+    outputFile?: string;
+    @option({
+        description: 'Output format',
+        required: false,
+    })
+    outputFormat?: string;
 }
 
-function compile(input, options) {
-    var env = Handlebars;
-    
-    options = options || {};
-    if (!('data' in options)) {  // jshint ignore:line
-        options.data = true;
-    }
-    if (options.compat) {
-        options.useDepths = true;
-    }
-    
-    var ast = env.parse(input);
-    var astCopy = JSON.parse(JSON.stringify(ast));
-    var opcodes = new env.Compiler().compile(ast, options);
-    return {
-        ast: astCopy,
-        opcodes: opcodes
-    };
-    //return new env.JavaScriptCompiler().compile(environment, options);
-}
+@command({
+    description: 'This exports stuff',
+})
+export default class extends Command {
+    execute(
+        @param({
+            name: 'Input file',
+            required: true,
+        })
+            inputFile: string,
+            options: ExportOptions,
+    ): void {
+        inputFile = resolvePath(inputFile);
 
-var inputTests = require(input);
-var tests = [];
+        if (!existsSync(inputFile)) {
+            throw new Error(inputFile + ' does not exist');
+        }
 
-Object.keys(inputTests).forEach(function(x) {
-    var test = inputTests[x];
-    try {
-        var res = compile(test.template, test.compileOptions);
-        test.ast = res.ast;
-        test.opcodes = res.opcodes;
+        const inputData = JSON.parse(readFileSync(inputFile).toString());
+        const tests: TestSpecWithAst[] = [];
+
+        for (const test of inputData) {
+            try {
+                tests.push(this.handleTest(test));
+            } catch (e) {
+                if( !test.exception ) {
+                    console.warn(test.description, '-', test.it, '|', 'caught exception, skipping test', e.stack);
+                }
+            }
+        }
+
+        const outputText = JSON.stringify(tests, null, '\t');
+
+        if (options.outputFile) {
+            writeFileSync(options.outputFile, outputText);
+        } else {
+            process.stdout.write(outputText);
+        }
+    }
+
+    private handleTest(test: TestSpec): TestSpecWithAst {
+        const spec: TestSpecWithAst = test;
+        const res = this.compile(test.template, test.compileOptions || {});
+
+        spec.ast = res.ast;
+        spec.opcodes = res.opcodes;
+
         if( test.partials ) {
-            var partialAsts = {};
-            var partialOpcodes = {};
-            Object.keys(test.partials).forEach(function(y) {
-                var res = compile(test.partials[y], test.compileOptions);
+            const partialAsts: any = {};
+            const partialOpcodes: any = {};
+            Object.keys(test.partials).forEach((y) => {
+                const res = this.compile(test.partials[y], test.compileOptions || {});
                 partialAsts[y] = res.ast;
                 partialOpcodes[y] = res.opcodes;
             });
-            test.partialAsts = partialAsts;
-            test.partialOpcodes = partialOpcodes;
+            spec.partialAsts = partialAsts;
+            spec.partialOpcodes = partialOpcodes;
         }
-        if( test.globalPartials ) {
-            var globalPartialAsts = {};
-            var globalPartialOpcodes = {};
-            Object.keys(test.globalPartials).forEach(function(y) {
-                var res = compile(test.globalPartials[y], test.compileOptions);
-                globalPartialAsts[y] = res.ast;
-                globalPartialOpcodes[y] = res.opcodes;
-            });
-            test.globalPartialAsts = globalPartialAsts;
-            test.globalPartialOpcodes = globalPartialOpcodes;
-        }
-        tests.push(test);
-    } catch(e) {
-        if( !test.exception ) {
-            console.log('Caught exception, skipping test ', 
-                test.description, '-', test.it, program.verbose ? e.stack : e);
-        }
+
+        return spec;
     }
-});
 
-try {
-  var output = JSON.stringify(tests, null, '\t');
-} catch(e) {
-  console.log('Failed converting to JSON: ' + input + ' (' + e + ')');
-  return process.exit(70);
-}
+    private compile(input: string, options: CompileOptions): any {
+        options = options || {};
+        if (!('data' in options)) {  // jshint ignore:line
+            options.data = true;
+        }
+        if (options.compat) {
+            options.useDepths = true;
+        }
 
-if (!program.output) {
-  return console.log(output);
-}
-
-var outputFile = path.resolve(program.output);
-
-try {
-    fs.writeFileSync(outputFile, output);
-    console.log('JSON saved to ' + program.output);
-} catch(e) {
-    console.log(e);
-    return process.exit(73);
+        const ast = Handlebars.parse(input);
+        const astCopy = JSON.parse(JSON.stringify(ast));
+        const opcodes = new (Handlebars as any).Compiler().compile(ast, options);
+        return {
+            ast: astCopy,
+            opcodes: opcodes
+        };
+        //return new env.JavaScriptCompiler().compile(environment, options);
+    }
 }

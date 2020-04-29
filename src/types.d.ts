@@ -39,12 +39,19 @@ interface TestSpec {
     expected: string;
     runtimeOptions?: RuntimeOptions;
     compileOptions?: CompileOptions;
-    partials: CodeDict;
-    helpers: StringDict;
+    partials: StringDict;
+    helpers: CodeDict;
     decorators: CodeDict;
     message?: string;
     compat?: true;
     exception?: true | string;
+}
+
+interface TestSpecWithAst extends TestSpec {
+    ast?: any;
+    opcodes?: any;
+    partialAsts?: any;
+    partialOpcodes?: any;
 }
 
 // copied from handlebars since they don't fucking export it
@@ -59,6 +66,9 @@ interface CompileOptions {
     preventIndent?: boolean;
     ignoreStandalone?: boolean;
     explicitPartialContext?: boolean;
+
+    // is this a real option?
+    useDepths?: boolean;
 }
 
 interface HandlebarsToken {

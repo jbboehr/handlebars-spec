@@ -9,7 +9,7 @@ spec: dist
 	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js;)
 
 export: dist
-	$(foreach var, $(SPECS), node bin/export spec/$(var).json -o export/$(var).json;)
+	$(foreach var, $(SPECS), node dist/cli.js export -o export/$(var).json spec/$(var).json;)
 
 check_changes:
 	@git status --porcelain | grep 'spec/' && return 1 || return 0
@@ -17,7 +17,7 @@ check_changes:
 stubs:
 	$(foreach var, $(SPECS), php bin/stubs.php spec/$(var).json patch/$(var).json;)
 
-test: jshint test_node test_php
+test: test_eslint test_node test_php
 check: test
 
 test_node: dist
@@ -28,8 +28,8 @@ test_php:
 	@echo ---------- Linting PHP code ----------
 	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
 
-jshint: node_modules
-	./node_modules/.bin/jshint  bin/*.js
+test_eslint: node_modules
+	eslint --ext .js,.ts --fix .
 
 dist: node_modules src
 	tsc
@@ -37,4 +37,5 @@ dist: node_modules src
 node_modules: package.json
 	npm install
 
-.PHONY: all spec export check_changes test test_node test_php
+.PHONY: all spec export check_changes eslint test test_node test_php
+.DEFAULT_GOAL: all

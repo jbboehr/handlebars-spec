@@ -108,7 +108,7 @@ function tokenize(template: string): HandlebarsToken[] { // borrowed from spec/t
 }
 
 function unstringifyHelpers(helpers: any): FunctionDict {
-    if (!helpers || helpers === null || typeof helpers !== "object") {
+    if (!helpers || helpers === null || typeof helpers !== 'object') {
         return {};
     }
     const ret: { [key: string]: any } = {};

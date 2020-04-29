@@ -10,7 +10,7 @@
   "dependencies": {
     "clime": "^0.5.10",
     "deep-equal": "^2.0.3",
-    "extend": "^1.2.x",
+    "extend": "^3.0.2",
     "handlebars": "4.7.6",
     "hjson": "^3.2.1",
     "sha1": "^1.1.1",
