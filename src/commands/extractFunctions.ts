@@ -1,10 +1,10 @@
-import { Command, command, params, Options, option } from 'clime';
+
+import { Command, command, params } from 'clime';
 import { OutputFileOptions } from './generate';
 import { readFileSync, writeFileSync } from 'fs';
-import { CodeDict } from '../types';
 import { normalizeJavascript } from '../utils';
-import deepEqual from "deep-equal";
-import * as hjson from "hjson";
+import deepEqual from 'deep-equal';
+import * as hjson from 'hjson';
 
 @command({
     description: 'This extracts functions from the existing spec files into a translation table',
@@ -12,19 +12,19 @@ import * as hjson from "hjson";
 export default class extends Command {
     execute(
         @params({
-          type: String,
-          description: 'input files',
-          required: true,
+            type: String,
+            description: 'input files',
+            required: true,
         })
-        args: string[],
-        options: OutputFileOptions,
-    ) {
+            args: string[],
+            options: OutputFileOptions,
+    ): void {
         let fns: CodeDict = {};
 
-        for (var i = 0; i < args.length; i++) {
-            let filestr = readFileSync(args[i]).toString();
+        for (let i = 0; i < args.length; i++) {
+            const filestr = readFileSync(args[i]).toString();
             let data;
-            if (args[i].endsWith(".hjson")) {
+            if (args[i].endsWith('.hjson')) {
                 data = hjson.parse(filestr);
             } else {
                 data = JSON.parse(filestr);
@@ -33,10 +33,10 @@ export default class extends Command {
         }
 
         let output;
-        if (options.outputFormat === "hjson") {
+        if (options.outputFormat === 'hjson') {
             output = hjson.stringify(fns, {
                 bracesSameLine: true,
-                space: "\t"
+                space: '\t'
             });
         } else {
             output = JSON.stringify(fns, null, '\t');
@@ -50,17 +50,17 @@ export default class extends Command {
     }
 
     private extract(data: any, prev: CodeDict): CodeDict {
-        if (typeof data !== "object" || !data) {
+        if (typeof data !== 'object' || !data) {
             return prev;
         }
 
-        if (data.hasOwnProperty("!code")) {
-            var js = data['javascript'];
+        if (data.hasOwnProperty('!code')) {
+            const js = data['javascript'];
             if (!js) {
                 console.warn('js key not set');
                 return prev;
             }
-            var key = normalizeJavascript(js);
+            const key = normalizeJavascript(js);
             if (key in prev) {
                 if (!deepEqual(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);
@@ -69,7 +69,7 @@ export default class extends Command {
             prev[key] = data;
         }
 
-        for (var x in data) {
+        for (const x in data) {
             if (data.hasOwnProperty(x)) {
                 this.extract(data[x], prev);
             }

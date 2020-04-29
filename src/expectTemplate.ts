@@ -1,10 +1,7 @@
 
-"use strict";
+import { RuntimeOptions } from 'handlebars';
 
-import { FunctionDict, StringDict, IExpectTemplate } from "./types";
-import { RuntimeOptions } from "handlebars";
-
-export class ExpectTemplate implements IExpectTemplate {
+export class ExpectTemplate implements ExpectTemplateInterface {
     template: string;
     helpers: FunctionDict = {};
     partials: StringDict = {};
@@ -23,79 +20,81 @@ export class ExpectTemplate implements IExpectTemplate {
         this.cb = cb;
     }
 
-    withHelper(name: string, helper: Function | string) {
+    withHelper(name: string, helper: Function | string): ExpectTemplate {
         this.helpers[name] = helper;
         return this;
     }
 
-    withHelpers(helpers: FunctionDict) {
+    withHelpers(helpers: FunctionDict): ExpectTemplate {
         Object.keys(helpers).forEach((name) => {
             this.withHelper(name, helpers[name]);
         });
         return this;
     }
 
-    withPartial(name: string, partial: string) {
+    withPartial(name: string, partial: string): ExpectTemplate {
         this.partials[name] = partial;
         return this;
     }
 
-    withPartials(partials: StringDict) {
+    withPartials(partials: StringDict): ExpectTemplate {
         Object.keys(partials).forEach((name) => {
             this.withPartial(name, partials[name]);
         });
         return this;
     }
 
-    withDecorator(name: string, decorator: Function | string) {
+    withDecorator(name: string, decorator: Function | string): ExpectTemplate {
         this.decorators[name] = decorator;
         return this;
     }
 
-    withDecorators(decorators: FunctionDict) {
+    withDecorators(decorators: FunctionDict): ExpectTemplate {
         Object.keys(decorators).forEach((name) => {
             this.withDecorator(name, decorators[name]);
         });
         return this;
     }
 
-    withMessage(message: string) {
+    withMessage(message: string): ExpectTemplate {
         this.message = message;
         return this;
     }
 
-    withInput(input: any) {
+    withInput(input: any): ExpectTemplate {
         this.input = input;
         return this;
     }
 
-    withCompileOptions(compileOptions: CompileOptions) {
+    withCompileOptions(compileOptions: CompileOptions): ExpectTemplate {
         this.compileOptions = compileOptions;
         return this;
     }
 
-    withRuntimeOptions(runtimeOptions: RuntimeOptions) {
+    withRuntimeOptions(runtimeOptions: RuntimeOptions): ExpectTemplate {
         this.runtimeOptions = runtimeOptions;
         return this;
     }
 
-    toCompileTo(expected: any) {
+    toCompileTo(expected: any): boolean {
         this.expected = expected;
         this.cb(this);
         delete this.expected; // MEH
         return true;
     }
 
-    toThrow(errorLike: any, errMsgMatcher: any, msg: any) {
+    toThrow(errorLike: any, errMsgMatcher: any, msg: any): boolean {
+        const args = [errorLike, errMsgMatcher, msg];
+
         // Look for string
-        for( let i = 0; i < arguments.length; i++ ) {
-            if (arguments[i] instanceof RegExp) {
-                this.exception = arguments[i];
+        for( let i = 0; i < args.length; i++ ) {
+            if (args[i] instanceof RegExp) {
+                this.exception = args[i];
                 this.cb(this);
                 delete this.exception; // MEH
                 return true;
-            } else if (typeof arguments[i] === "string") {
-                this.exception = arguments[i];
+            } else if (typeof args[i] === 'string') {
+                this.exception = args[i];
                 this.cb(this);
                 delete this.exception; // MEH
                 return true;
@@ -108,7 +107,7 @@ export class ExpectTemplate implements IExpectTemplate {
         return true;
     }
 
-    toJSON(): IExpectTemplate {
+    toJSON(): ExpectTemplateInterface {
         return {
             template: this.template,
             helpers: this.helpers,
@@ -120,6 +119,6 @@ export class ExpectTemplate implements IExpectTemplate {
             compileOptions: this.compileOptions,
             runtimeOptions: this.runtimeOptions,
             exception: this.exception,
-        }
+        };
     }
 }

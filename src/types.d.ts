@@ -1,23 +1,23 @@
 
-export interface CodeData {
-    "!code": true;
-    "javascript": string;
-    "php"?: string;
+interface CodeData {
+    '!code': true;
+    'javascript': string;
+    'php'?: string;
 }
 
-export interface CodeDict {
+interface CodeDict {
     [key: string]: CodeData;
 }
 
-export interface FunctionDict {
+interface FunctionDict {
     [key: string]: Function | string;
 }
 
-export interface StringDict {
+interface StringDict {
     [key: string]: string;
 }
 
-export interface IExpectTemplate {
+interface ExpectTemplateInterface {
     template: string;
     helpers: FunctionDict;
     partials: StringDict;
@@ -30,10 +30,10 @@ export interface IExpectTemplate {
     exception?: true | string | RegExp;
 }
 
-export interface TestSpec {
+interface TestSpec {
     description: string;
-    it: string
-    number: string
+    it: string;
+    number: string;
     template: string;
     data: any;
     expected: string;
@@ -43,12 +43,12 @@ export interface TestSpec {
     helpers: StringDict;
     decorators: CodeDict;
     message?: string;
-    compat?: true,
+    compat?: true;
     exception?: true | string;
 }
 
 // copied from handlebars since they don't fucking export it
-export interface CompileOptions {
+interface CompileOptions {
     data?: boolean;
     compat?: boolean;
     knownHelpers?: {[key: string]: boolean};
@@ -59,4 +59,9 @@ export interface CompileOptions {
     preventIndent?: boolean;
     ignoreStandalone?: boolean;
     explicitPartialContext?: boolean;
+}
+
+interface HandlebarsToken {
+    name: string;
+    text: string;
 }

@@ -1,9 +1,8 @@
+
 import { Command, command, option, Options, param } from 'clime';
-import * as path from "path";
+import * as path from 'path';
 import { existsSync, writeFileSync, unlinkSync, readFileSync } from 'fs';
-import * as mockGlobals from "../mockGlobals";
-import { stringifyLambdas, clone, isEmptyObject, jsToCode } from '../utils';
-import { isFunction } from 'util';
+import * as mockGlobals from '../mockGlobals';
 
 export class OutputFileOptions extends Options {
     @option({
@@ -28,10 +27,10 @@ export default class extends Command {
             name: 'Input file',
             required: true,
         })
-        inputFile: string,
-        options: OutputFileOptions,
-    ) {
-        let suite = path.basename(inputFile).replace(/\.js$/, '');
+            inputFile: string,
+            options: OutputFileOptions,
+    ): void {
+        const suite = path.basename(inputFile).replace(/\.js$/, '');
 
         if (!existsSync(inputFile)) {
             console.error('The input file does not exist');
@@ -39,18 +38,18 @@ export default class extends Command {
         }
 
         // Patch globals
-        let origGlobals: { [key: string]: any } = {};
-        for (let x in mockGlobals) {
+        const origGlobals: { [key: string]: any } = {};
+        for (const x in mockGlobals) {
             origGlobals[x] = (global as any)[x];
         }
-        for (let x in mockGlobals) {
+        for (const x in mockGlobals) {
             (global as any)[x] = (mockGlobals as any)[x];
         }
         mockGlobals.globalContext.suite = suite;
 
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
-            let tokenizerData = ('' + readFileSync(inputFile))
+            const tokenizerData = ('' + readFileSync(inputFile))
                 .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
                 .replace(/function shouldBeToken/, 'function REMshouldBeToken')
                 .replace(/function tokenize/, 'global.originalTokenize = function');
@@ -76,7 +75,7 @@ export default class extends Command {
             return console.log(output);
         }
 
-        let outputFile = path.resolve(options.outputFile);
+        const outputFile = path.resolve(options.outputFile);
 
         try {
             writeFileSync(outputFile, output);

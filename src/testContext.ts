@@ -1,6 +1,4 @@
 
-import { CodeDict, StringDict } from "./types";
-
 export class TestContext {
     template?: string;
     data?: any;
@@ -22,8 +20,8 @@ export class TestContext {
     it?: string;
     key?: string;
 
-    reset() {
-        let self = new TestContext();
+    reset(): TestContext {
+        const self = new TestContext();
         self.description = this.description;
         self.it = this.it;
         self.key = this.key;

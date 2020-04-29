@@ -1,25 +1,26 @@
+
 import { Command, command, param } from 'clime';
-import * as Handlebars from "handlebars";
+import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
 import { isArray } from 'util';
 import { clone, serialize } from '../utils';
-import { resolve as resolvePath } from "path";
-import { readdirSync } from 'fs';
-import * as assert from "assert";
+import { resolve as resolvePath } from 'path';
+import { readdirSync, readFileSync } from 'fs';
+import * as assert from 'assert';
 
 
 
 // Patch globals
-let handlebarsEnv = Handlebars;
+const handlebarsEnv = Handlebars;
 (global as any).Handlebars = Handlebars;
 (global as any).handlebarsEnv = handlebarsEnv;
 
 (global as any).CompilerContext = { // borrowed from spec/env/node.js
-    compile: function (template: string, options?: any) {
-        var templateSpec = (global as any).handlebarsEnv.precompile(template, options);
+    compile(template: string, options?: any): Function {
+        const templateSpec = (global as any).handlebarsEnv.precompile(template, options);
         return handlebarsEnv.template(safeEval(templateSpec));
     },
-    compileWithPartial: function (template: string, options?: any) {
+    compileWithPartial(template: string, options?: any): Function {
         return handlebarsEnv.compile(template, options);
     }
 };
@@ -36,20 +37,20 @@ export default class extends Command {
             name: 'Input file',
             required: false,
         })
-        inputFile?: string,
-    ) {
-        var successes = [];
-        var failures = [];
-        var skipped = [];
-        var dir = '.';
+            inputFile?: string,
+    ): void {
+        const successes = [];
+        const failures = [];
+        const skipped = [];
+        let dir = '.';
 
-        function runSpec(spec: string) {
-            var tmp = spec.replace(/\.json$/, '').split("/");
-            var suite = tmp[tmp.length - 1];
-            var data = require(resolvePath(dir + '/' + spec));
+        function runSpec(spec: string): void {
+            const tmp = spec.replace(/\.json$/, '').split('/');
+            const suite = tmp[tmp.length - 1];
+            const data = JSON.parse(readFileSync(resolvePath(dir + '/' + spec)).toString());
             Object.keys(data).forEach(function (y) {
                 data[y].suite = suite;
-                var result = runTest(data[y]);
+                const result = runTest(data[y]);
                 if (result === null) {
                     skipped.push(data[y]);
                 } else if (result === true) {
@@ -64,7 +65,7 @@ export default class extends Command {
             runSpec(inputFile);
         } else {
             dir = resolvePath('./spec/');
-            var specs = readdirSync(dir);
+            const specs = readdirSync(dir);
 
             Object.values(specs).forEach(runSpec);
         }
@@ -79,49 +80,49 @@ export default class extends Command {
 
 }
 
-function astFor(template: string) { // borrowed from spec/parser.js
-    var ast = Handlebars.parse(template);
+function astFor(template: string): string { // borrowed from spec/parser.js
+    const ast = Handlebars.parse(template);
     return (Handlebars as any).print(ast);
 }
 
-function tokenize(template: string) { // borrowed from spec/tokenizer.js
-    var parser = (Handlebars as any).Parser,
+function tokenize(template: string): HandlebarsToken[] { // borrowed from spec/tokenizer.js
+    const parser = (Handlebars as any).Parser,
         lexer = parser.lexer;
 
     lexer.setInput(template);
-    var out = [];
+    const out: HandlebarsToken[] = [];
 
     for (; ;) {
-        var token = lexer.lex();
+        const token = lexer.lex();
         if (!token) {
             break;
         }
-        var result = parser.terminals_[token] || token;
+        const result = parser.terminals_[token] || token;
         if (!result || result === 'EOF' || result === 'INVALID') {
             break;
         }
-        out.push({ name: result, text: lexer.yytext });
+        out.push({ name: result, text: lexer.yytext } as HandlebarsToken);
     }
 
     return out;
 }
 
-function unstringifyHelpers(helpers: any) {
+function unstringifyHelpers(helpers: any): FunctionDict {
     if (!helpers || helpers === null) {
-        return;
+        return {};
     }
-    var ret: { [key: string]: any } = {};
+    const ret: { [key: string]: any } = {};
     Object.keys(helpers).forEach(function (x) {
         ret[x] = safeEval(helpers[x].javascript);
     });
     return ret;
 }
 
-function unstringifyLambdas(data: any) {
+function unstringifyLambdas(data: any): any {
     if (!data || data === null) {
         return data;
     }
-    for (var x in data) {
+    for (const x in data) {
         if (isArray(data[x])) {
             unstringifyLambdas(data[x]);
         } else if (typeof data[x] === 'object' && data[x] !== null) {
@@ -135,15 +136,15 @@ function unstringifyLambdas(data: any) {
     return data;
 }
 
-function fixSparseArray(data: any) {
+function fixSparseArray(data: any): any {
     if (!data || typeof data !== 'object') {
         return data;
     }
 
-    var x, i;
+    let x, i;
 
     if ('!sparsearray' in data) {
-        var newData = [];
+        const newData = [];
         for (x in data) {
             if (data.hasOwnProperty(x)) {
                 if (!isNaN(i = parseInt(x))) {
@@ -167,15 +168,15 @@ function fixSparseArray(data: any) {
 
 // Test utils
 
-function checkResult(test: any, e?: Error) {
-    var shouldExcept = test.exception === true;
-    var didExcept = e !== undefined;
+function checkResult(test: any, e?: Error): boolean {
+    const shouldExcept = test.exception === true;
+    const didExcept = e !== undefined;
     if (shouldExcept === didExcept) {
-        console.log(test.prefix, "|", 'OK');
+        console.log(test.prefix, '|', 'OK');
         return true;
     } else {
-        var msg = e || 'Error: should have thrown, did not';
-        console.log(test.prefix, "|", 'FAIL');
+        const msg = e || 'Error: should have thrown, did not';
+        console.log(test.prefix, '|', 'FAIL');
         console.log(msg);
         if (e) {
             console.error(e.stack);
@@ -185,12 +186,12 @@ function checkResult(test: any, e?: Error) {
     }
 }
 
-function makePrefix(test: any) {
+function makePrefix(test: any): string {
     return (test.suite) + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
 
-function prepareTestGeneric(test: any) {
-    var spec: any = {};
+function prepareTestGeneric(test: any): any {
+    const spec: any = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -223,8 +224,8 @@ function prepareTestGeneric(test: any) {
     return spec;
 }
 
-function prepareTestParser(test: any) {
-    var spec: any = {};
+function prepareTestParser(test: any): any {
+    const spec: any = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -238,8 +239,8 @@ function prepareTestParser(test: any) {
     return spec;
 }
 
-function prepareTestTokenizer(test: any) {
-    var spec: any = {};
+function prepareTestTokenizer(test: any): any {
+    const spec: any = {};
     // Output prefix
     spec.prefix = makePrefix(test);
     // Template
@@ -249,38 +250,38 @@ function prepareTestTokenizer(test: any) {
     return spec;
 }
 
-function runTest(test: any) {
-    var result = null;
+function runTest(test: any): boolean | null {
+    let result = null;
     switch (test.suite) {
-        case 'basic':
-        case 'bench':
-        case 'blocks':
-        case 'builtins':
-        case 'data':
-        case 'helpers':
-        case 'partials':
-        case 'regressions':
-        case 'strict':
-        case 'string-params':
-        case 'subexpressions':
-        case 'track-ids':
-        case 'whitespace-control':
-            result = runTestGeneric(prepareTestGeneric(test));
-            break;
-        case 'parser':
-            result = runTestParser(prepareTestParser(test));
-            break;
-        case 'tokenizer':
-            result = runTestTokenizer(prepareTestTokenizer(test));
-            break;
+    case 'basic':
+    case 'bench':
+    case 'blocks':
+    case 'builtins':
+    case 'data':
+    case 'helpers':
+    case 'partials':
+    case 'regressions':
+    case 'strict':
+    case 'string-params':
+    case 'subexpressions':
+    case 'track-ids':
+    case 'whitespace-control':
+        result = runTestGeneric(prepareTestGeneric(test));
+        break;
+    case 'parser':
+        result = runTestParser(prepareTestParser(test));
+        break;
+    case 'tokenizer':
+        result = runTestTokenizer(prepareTestTokenizer(test));
+        break;
     }
     return result;
 }
 
-function runTestGeneric(test: any) {
-    let handlebarsEnv = (global as any).handlebarsEnv;
-    let CompilerContext = (global as any).CompilerContext;
-    let equals = (global as any).equals;
+function runTestGeneric(test: any): boolean {
+    const handlebarsEnv = (global as any).handlebarsEnv;
+    const CompilerContext = (global as any).CompilerContext;
+    const equals = (global as any).equals;
     (global as any).value = 1; // for helpers - block params - should take presednece over parent block params - 00
     (global as any).lastOptions = undefined; // for subexpressions - provides each nested helper invocation its own options hash - 00
     (global as any).run = false; // for blocks - decorators - should fail when accessing variables from root - 00
@@ -303,9 +304,9 @@ function runTestGeneric(test: any) {
         // });
 
         // Execute
-        var hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
-        var template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
-        var runtimeOptions = test.runtimeOptions || test.options || {};
+        const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
+        const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, clone(test.compileOptions));
+        const runtimeOptions = test.runtimeOptions || test.options || {};
         //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
         if (test.helpers) {
             runtimeOptions.helpers = test.helpers;
@@ -318,7 +319,7 @@ function runTestGeneric(test: any) {
         }
         test.runtimeOptions = runtimeOptions;
 
-        var actual = template(test.data, test.runtimeOptions);
+        const actual = template(test.data, test.runtimeOptions);
         equals(actual, test.expected);
 
         return checkResult(test);
@@ -327,9 +328,9 @@ function runTestGeneric(test: any) {
     }
 }
 
-function runTestParser(test: any) {
+function runTestParser(test: any): boolean {
     try {
-        var actual = astFor(test.template);
+        const actual = astFor(test.template);
         assert.equal(actual, test.expected);
         return checkResult(test);
     } catch (e) {
@@ -337,9 +338,9 @@ function runTestParser(test: any) {
     }
 }
 
-function runTestTokenizer(test: any) {
+function runTestTokenizer(test: any): boolean {
     try {
-        var actual = tokenize(test.template);
+        const actual = tokenize(test.template);
         assert.deepEqual(actual, test.expected);
         return checkResult(test);
     } catch (e) {

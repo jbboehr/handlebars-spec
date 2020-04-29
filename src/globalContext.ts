@@ -1,6 +1,5 @@
 
-import { TestSpec, StringDict } from "./types";
-import { TestContext } from "./testContext";
+import { TestContext } from './testContext';
 
 export class GlobalContext {
     afterFns: Function[] = [];
@@ -10,7 +9,7 @@ export class GlobalContext {
     testContext: TestContext = new TestContext();
 
     indices: StringDict = {};
-    suite: string = "";
+    suite = '';
     unusedPatches: StringDict = {};
     tests: TestSpec[] = [];
 }

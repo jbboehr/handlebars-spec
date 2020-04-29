@@ -1,30 +1,29 @@
 
-import * as Handlebars from "handlebars";
-import { clone, stripNulls, serialize } from "./utils";
-import { TestSpec, StringDict, CodeDict } from "./types";
-import { ExpectTemplate } from "./expectTemplate";
-import { resolve as resolvePath } from "path";
-import extend from "extend";
-import {existsSync} from "fs";
-import { GlobalContext } from "./globalContext";
-import * as sinon from "sinon";
+import * as Handlebars from 'handlebars';
+import { clone, stripNulls, serialize } from './utils';
+import { ExpectTemplate } from './expectTemplate';
+import { resolve as resolvePath } from 'path';
+import extend from 'extend';
+import {existsSync, readFileSync} from 'fs';
+import { GlobalContext } from './globalContext';
+import * as sinon from 'sinon';
 
 export {Handlebars, sinon};
 
-export let globalContext: GlobalContext = new GlobalContext();
+export const globalContext: GlobalContext = new GlobalContext();
 
-export function resetContext() {
+export function resetContext(): void {
     globalContext.testContext = globalContext.testContext.reset();
 }
 
-function currentTestName() {
-    return globalContext.testContext.key;
+function currentTestName(): string {
+    return globalContext.testContext.key || '';
 }
 
-function log(message?: any, ...optionalParams: any[]) {
+function log(message?: any, ...optionalParams: any[]): void {
     console.warn.apply(null, [
         currentTestName(),
-        "|",
+        '|',
         message,
         // ...optionalParams
     ]);
@@ -39,16 +38,16 @@ class SkipError extends Error {}
 
 // env
 
-export function afterEach(fn: Function) {
+export function afterEach(fn: Function): void {
     globalContext.afterFns.push(fn);
 }
 
-export function beforeEach(fn: Function) {
+export function beforeEach(fn: Function): void {
     globalContext.beforeFns.push(fn);
 }
 
-export function CompilerContextCompile(template: string, options: object) {
-    let {testContext} = globalContext;
+export function CompilerContextCompile(template: string, options: object): Function {
+    const {testContext} = globalContext;
 
     // Push template unto context
     testContext.template = template;
@@ -56,7 +55,7 @@ export function CompilerContextCompile(template: string, options: object) {
 
     const compiledTemplate = Handlebars.compile(template, options);
 
-    return function (data: any, options: any) {
+    return function (data: any, options: any): string {
         // Note: merging data in the options causes tests to fail, possibly
         // a separate type of data?
         if (options && options.hasOwnProperty('data')) {
@@ -82,8 +81,8 @@ export function CompilerContextCompile(template: string, options: object) {
     };
 }
 
-function CompilerContextCompileWithPartial(template: string, options: any) {
-    let {testContext} = globalContext;
+function CompilerContextCompileWithPartial(template: string, options: any): Function {
+    const {testContext} = globalContext;
 
     // Push template unto context
     testContext.template = template;
@@ -94,11 +93,12 @@ function CompilerContextCompileWithPartial(template: string, options: any) {
 export const CompilerContext = {
     compile: CompilerContextCompile,
     compileWithPartial: CompilerContextCompileWithPartial,
-}
+};
 
-export function describe(description: string, next: Function) {
-    let {testContext, descriptionStack, beforeFns, afterFns} = globalContext;
-    beforeFns = [...beforeFns]
+export function describe(description: string, next: Function): void {
+    const {testContext, descriptionStack} = globalContext;
+    let {beforeFns, afterFns} = globalContext;
+    beforeFns = [...beforeFns];
     afterFns = [...afterFns];
 
     descriptionStack.push(description);
@@ -111,10 +111,10 @@ export function describe(description: string, next: Function) {
     delete testContext.oldDescription;
     globalContext.beforeFns = beforeFns;
     globalContext.afterFns = afterFns;
-};
+}
 
-export function it(description: string, next: Function) {
-    let {testContext} = globalContext;
+export function it(description: string, next: Function): void {
+    const {testContext} = globalContext;
 
     // Call before fns
     globalContext.beforeFns.forEach((fn) => {
@@ -123,8 +123,8 @@ export function it(description: string, next: Function) {
 
     // Push test spec unto context
     testContext.it = description;
-    testContext.description = globalContext.descriptionStack.join(" - ");
-    testContext.key = testContext.description + " - " + testContext.it;
+    testContext.description = globalContext.descriptionStack.join(' - ');
+    testContext.key = testContext.description + ' - ' + testContext.it;
 
     // Test
     next();
@@ -133,72 +133,72 @@ export function it(description: string, next: Function) {
     globalContext.afterFns.forEach((fn: Function) => {
         fn();
     });
-};
-
-export function equals(actual: any, expected: any, message?: string) {
-    log("equals called", ...arguments);
-};
-
-export function xit() {
-    log("xit called", ...arguments);
 }
 
-export function expect() {
+export function equals(...args: any[]): void {
+    log('equals called', ...args);
+}
+
+export function xit(...args: any[]): void {
+    log('xit called', ...args);
+}
+
+export function expect(): any {
     return {
         to: {
-            equal: function () {
-                log("expect.to.equal called", ...arguments);
+            equal(...args: any[]): void {
+                log('expect.to.equal called', ...args);
             },
             be: {
-                true: function () {
-                    log("expect.to.be.true called", ...arguments);
+                true(...args: any[]): void {
+                    log('expect.to.be.true called', ...args);
                 }
             },
-            "throw": function () {
-                log("expect.to.throw called", ...arguments);
+            throw(...args: any[]): void {
+                log('expect.to.throw called', ...args);
             },
-            match: function () {
-                log("expect.to.match called", ...arguments);
+            match(...args: any[]): void {
+                log('expect.to.match called', ...args);
             }
         }
     };
-};
+}
 
-export function shouldBeToken() {
-    log("shouldBeToken called", ...arguments);
-};
+export function shouldBeToken(...args: any[]): void {
+    log('shouldBeToken called', ...args);
+}
 
-export function shouldCompileTo(str: string, hashOrArray: any, expected: any, message?: string) {
-    log("shouldCompileTo called", ...arguments);
-};
+export function shouldCompileTo(...args: any[]): void {
+    log('shouldCompileTo called', ...args);
+}
 
-export function shouldCompileToWithPartials(str: string, hashOrArray: any, partials: any, expected: any, message?: string) {
-    log("shouldCompileToWithPartials called", ...arguments);
-};
+export function shouldCompileToWithPartials(...args: any[]): void {
+    log('shouldCompileToWithPartials called', ...args);
+}
 
-export function compileWithPartials(template: string, hashOrArray: any, partials?: StringDict, expected?: any, message?: string) {
-    log('compileWithPartials called', ...arguments);
-};
+export function compileWithPartials(...args: any[]): void {
+    log('compileWithPartials called', ...args);
+}
 
-export function shouldThrow(callback: Function, error: string, message: string) {
-    log('shouldThrow called', ...arguments);
-};
+export function shouldThrow(...args: any[]): void {
+    log('shouldThrow called', ...args);
+}
 
-export function tokenize(template: string) {
-    log('tokenize called', ...arguments);
-};
+export function tokenize(...args: any[]): void {
+    log('tokenize called', ...args);
+}
 
-export function shouldMatchTokens(expected: any /*, tokens*/) {
-    log('shouldMatchTokens called', ...arguments);
-};
+export function shouldMatchTokens(...args: any[]): void {
+    log('shouldMatchTokens called', ...args);
+}
 
-export function expectTemplate(template: string) {
+export function expectTemplate(template: string): ExpectTemplate {
     return new ExpectTemplate(template, addExpectTemplate);
-};
+}
 
-function addExpectTemplate(xt: ExpectTemplate) {
-    let { testContext, suite, indices, tests} = globalContext;
-    let { description, it, extraEquals } = testContext;
+function addExpectTemplate(xt: ExpectTemplate): void {
+    const { testContext, indices, tests} = globalContext;
+    const { description, it, extraEquals } = testContext;
 
     if (extraEquals && Object.keys(extraEquals).length >= 0) {
         console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
@@ -206,21 +206,22 @@ function addExpectTemplate(xt: ExpectTemplate) {
     }
 
     // Generate key
-    var key = (description + ' - ' + it).toLowerCase();
-    let [name, number] = (() => {
+    const key = (description + ' - ' + it).toLowerCase();
+    function generateName(): [string, string] {
         for (let i = 0; i < 99; i++) {
-            let j = ('0' + i).slice(-2);
-            let n = key + ' - ' + j;
+            const j = ('0' + i).slice(-2);
+            const n = key + ' - ' + j;
             if (!indices.hasOwnProperty(n)) {
                 return [n, j];
             }
         }
         throw new Error('Failed to acquire test index');
-    })();
+    }
+    const [name, number] = generateName();
     indices[name] = name;
 
     // Make test spec
-    var spec: TestSpec = serialize({
+    let spec: TestSpec = serialize({
         description,
         it,
         number,
@@ -239,7 +240,7 @@ function addExpectTemplate(xt: ExpectTemplate) {
     if (spec.exception) {
         delete spec.expected;
     }
-    if (number === "00") {
+    if (number === '00') {
         delete spec.number;
     }
 
@@ -260,14 +261,15 @@ function addExpectTemplate(xt: ExpectTemplate) {
 }
 
 function applyPatches(name: string, spec: TestSpec): TestSpec {
-    let { suite, unusedPatches } = globalContext;
+    const { suite, unusedPatches } = globalContext;
 
-    let patchFile = resolvePath('./patch/' + '/' + suite + '.json');
+    const patchFile = resolvePath('./patch/' + '/' + suite + '.json');
     if (!existsSync(patchFile)) {
         return spec;
     }
 
-    let patchData: any = require(patchFile);
+    // @todo only read once
+    const patchData: any = JSON.parse(readFileSync(patchFile).toString());
     let patch: any;
 
     if (patchData.hasOwnProperty(name)) {
@@ -280,31 +282,31 @@ function applyPatches(name: string, spec: TestSpec): TestSpec {
         // Note: setting to null means to skip the test. These will most
         // likely be implementation-dependant. Note that it still has to be
         // added to the indices array
-        log("skipped via patch");
+        log('skipped via patch');
         throw new SkipError();
     } else {
         spec = extend(true, spec, patch);
         // Using nulls in patches to unset things
         stripNulls(spec);
-        log("applied patch", spec);
+        log('applied patch', spec);
     }
 
     // Track unused patches
     if (unusedPatches === null) {
-        unusedPatches = extend({}, patchData);
+        extend(unusedPatches, patchData);
     }
     delete unusedPatches[name];
 
     return spec;
 }
 
-function detectGlobalHelpers() {
-    let { handlebarsEnv } = (global as any);
+function detectGlobalHelpers(): FunctionDict {
+    const { handlebarsEnv } = (global as any);
     const builtins = [
         'helperMissing', 'blockHelperMissing', 'each', 'if',
         'unless', 'with', 'log', 'lookup'
     ];
-    let globalHelpers: CodeDict = {};
+    const globalHelpers: FunctionDict = {};
 
     Object.keys(handlebarsEnv.helpers).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
@@ -316,10 +318,10 @@ function detectGlobalHelpers() {
     return globalHelpers;
 }
 
-function detectGlobalDecorators() {
-    let { handlebarsEnv } = (global as any);
+function detectGlobalDecorators(): FunctionDict {
+    const { handlebarsEnv } = (global as any);
     const builtins = ['inline'];
-    let globalDecorators: CodeDict = {};
+    const globalDecorators: FunctionDict = {};
 
     Object.keys(handlebarsEnv.decorators).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
@@ -331,14 +333,14 @@ function detectGlobalDecorators() {
     return globalDecorators;
 }
 
-function detectGlobalPartials() {
-    let { handlebarsEnv } = (global as any);
+function detectGlobalPartials(): StringDict {
+    const { handlebarsEnv } = (global as any);
     // This should never be null, but it is in one case
     if (!handlebarsEnv) {
         return {};
     }
 
-    let globalPartials: StringDict = {};
+    const globalPartials: StringDict = {};
 
     Object.keys(handlebarsEnv.partials).forEach((x) => {
         globalPartials[x] = handlebarsEnv.partials[x];
