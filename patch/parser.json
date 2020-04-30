@@ -3,13 +3,13 @@
     "parser - gh1024 - should track program location properly - 00": null,
     "parser - gh1024 - should track program location properly - 01": null,
     "parser - gh1024 - should track program location properly - 02": null,
-    "parser-should handle invalid paths-00": {
-        "message": "\/Invalid path: foo\\\/\\.\\.\/"
+    "parser - should handle invalid paths - 00": {
+        "exception": "\/Invalid path: foo\\\/\\.\\.\/"
     },
-    "parser-should handle invalid paths-01": {
-        "message": "\/Invalid path: foo\\\/\\.\/"
+    "parser - should handle invalid paths - 01": {
+        "exception": "\/Invalid path: foo\\\/\\.\/"
     },
-    "parser-should handle invalid paths-02": {
-        "message": "\/Invalid path: foo\\\/this\/"
+    "parser - should handle invalid paths - 02": {
+        "exception": "\/Invalid path: foo\\\/this\/"
     }
 }
