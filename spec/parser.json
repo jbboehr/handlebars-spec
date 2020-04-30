@@ -450,21 +450,21 @@
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"template": "{{foo/../bar}}",
-		"exception": "/Invalid path: foo\\/\\.\\. - 1:2/"
+		"exception": "/Invalid path: foo\\/\\.\\./"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"number": "01",
 		"template": "{{foo/./bar}}",
-		"exception": "/Invalid path: foo\\/\\. - 1:2/"
+		"exception": "/Invalid path: foo\\/\\./"
 	},
 	{
 		"description": "parser",
 		"it": "should handle invalid paths",
 		"number": "02",
 		"template": "{{foo/this/bar}}",
-		"exception": "/Invalid path: foo\\/this - 1:2/"
+		"exception": "/Invalid path: foo\\/this/"
 	},
 	{
 		"description": "parser",
