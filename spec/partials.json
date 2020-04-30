@@ -484,18 +484,6 @@
 		}
 	},
 	{
-		"description": "partials",
-		"it": "throw on missing partial",
-		"template": "{{> dude}}",
-		"data": {},
-		"partials": {
-			"shared/dude": "{{name}}",
-			"globalTest": "{{anotherDude}}",
-			"dude": "fail"
-		},
-		"exception": "/The partial dude could not be compiled/"
-	},
-	{
 		"description": "partials - partial blocks",
 		"it": "should render partial block as default",
 		"template": "{{#> dude}}success{{/dude}}",
