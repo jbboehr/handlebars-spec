@@ -191,7 +191,7 @@
 		"compileOptions": {
 			"strict": true
 		},
-		"exception": "\"hello\" not defined in [object Object] - 4:5"
+		"exception": "/\"hello\" not defined in/"
 	},
 	{
 		"description": "strict - assume objects",
