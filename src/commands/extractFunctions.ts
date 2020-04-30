@@ -4,7 +4,7 @@ import { OutputFileOptions } from './generate';
 import { readFileSync, writeFileSync } from 'fs';
 import { normalizeJavascript } from '../utils';
 import deepEqual from 'deep-equal';
-import * as hjson from 'hjson';
+import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
 @command({
     description: 'This extracts functions from the existing spec files into a translation table',
@@ -25,16 +25,20 @@ export default class extends Command {
             const filestr = readFileSync(args[i]).toString();
             let data;
             if (args[i].endsWith('.hjson')) {
-                data = hjson.parse(filestr);
+                data = hjsonParse(filestr);
             } else {
                 data = JSON.parse(filestr);
             }
             fns = this.extract(data, fns);
         }
 
+        if (options.outputFile && options.outputFile.endsWith('.hjson')) {
+            options.outputFormat = "hjson";
+        }
+
         let output;
         if (options.outputFormat === 'hjson') {
-            output = hjson.stringify(fns, {
+            output = hjsonStringify(fns, {
                 bracesSameLine: true,
                 space: '\t'
             });

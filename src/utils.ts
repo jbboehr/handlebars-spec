@@ -4,15 +4,11 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 import { isArray } from 'util';
 import { safeEval } from './eval';
+import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
-const PATCH_FILE = resolvePath(__dirname + '/../patch/_functions.json');
+const PATCH_FILE = resolvePath(__dirname + '/../patch/_functions.hjson');
 
 let functionPatches: CodeDict;
-try {
-    functionPatches = require(PATCH_FILE);
-} catch (e) {
-    console.warn(e);
-}
 
 function isEmptyObject(obj: object): boolean {
     return !Object.keys(obj).length;
@@ -33,6 +29,12 @@ export function jsToCode(fn: Function | string): CodeData {
     const str = ('' + fn);
     const key = normalizeJavascript(str);
     let data: CodeData;
+
+    // Load function patches
+    if (!functionPatches) {
+        functionPatches = hjsonParse(readFileSync(PATCH_FILE).toString()) || {};
+    }
+
     if (key in functionPatches) {
         data = {
             '!code': true,
@@ -46,17 +48,21 @@ export function jsToCode(fn: Function | string): CodeData {
         };
         functionPatches[key] = data;
         // write it out to _functions
-        const tmp = JSON.parse(readFileSync(PATCH_FILE).toString());
-        tmp[key] = data;
-        writeFileSync(PATCH_FILE, JSON.stringify(tmp, null, '\t'));
+        writeFileSync(PATCH_FILE, hjsonStringify(functionPatches, {
+            bracesSameLine: true,
+            space: '\t'
+        }));
     }
+
     if (!('php' in data)) {
         console.log('Missing function patch for: ' + JSON.stringify(key) + ' <- ' + JSON.stringify(str));
     }
+
     // Keep the old function for now, if it's already set...
     if (!data.javascript) {
         //data['javascript'] = str;
     }
+
     return data;
 }
 
