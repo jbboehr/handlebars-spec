@@ -1,0 +1,5 @@
+{
+	"strict - strict mode - should show error location on missing property lookup - 00": {
+		"exception": "/\"hello\" not defined in/"
+	}
+}
