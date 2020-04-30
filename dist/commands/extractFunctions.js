@@ -14,20 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const clime_1 = require("clime");
 const generate_1 = require("./generate");
 const fs_1 = require("fs");
 const utils_1 = require("../utils");
 const deep_equal_1 = __importDefault(require("deep-equal"));
-const hjson = __importStar(require("hjson"));
+const hjson_1 = require("hjson");
 let default_1 = class default_1 extends clime_1.Command {
     execute(args, options) {
         let fns = {};
@@ -35,16 +28,19 @@ let default_1 = class default_1 extends clime_1.Command {
             const filestr = fs_1.readFileSync(args[i]).toString();
             let data;
             if (args[i].endsWith('.hjson')) {
-                data = hjson.parse(filestr);
+                data = hjson_1.parse(filestr);
             }
             else {
                 data = JSON.parse(filestr);
             }
             fns = this.extract(data, fns);
         }
+        if (options.outputFile && options.outputFile.endsWith('.hjson')) {
+            options.outputFormat = 'hjson';
+        }
         let output;
         if (options.outputFormat === 'hjson') {
-            output = hjson.stringify(fns, {
+            output = hjson_1.stringify(fns, {
                 bracesSameLine: true,
                 space: '\t'
             });

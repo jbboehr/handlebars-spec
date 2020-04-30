@@ -243,7 +243,8 @@
 		"helpers": {
 			"equal": {
 				"!code": true,
-				"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }"
+				"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n           static $lastOptions = null;\n        if (!$options || $options === $lastOptions) {\n          throw new Exception('options hash was reused');\n        }\n        $lastOptions = $options;\n        return $x === $y;\n      }"
 			}
 		}
 	},

@@ -1843,7 +1843,8 @@
 			},
 			"goodbyes": {
 				"!code": true,
-				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }"
+				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }",
+				"php": "function($options) {\n             static $value = 0;\n          return $options->fn(\n            [ \"value\" => 'bar' ],\n            [\n                 // blockParams probably wrong\n              \"blockParams\" => $options->blockParams === 1 ? [$value++, $value++] : null\n            ]\n          );\n        }"
 			}
 		}
 	},

@@ -8,14 +8,9 @@ const fs_1 = require("fs");
 const path_1 = require("path");
 const util_1 = require("util");
 const eval_1 = require("./eval");
-const PATCH_FILE = path_1.resolve(__dirname + '/../patch/_functions.json');
+const hjson_1 = require("hjson");
+const PATCH_FILE = path_1.resolve(__dirname + '/../patch/_functions.hjson');
 let functionPatches;
-try {
-    functionPatches = require(PATCH_FILE);
-}
-catch (e) {
-    console.warn(e);
-}
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
@@ -33,6 +28,10 @@ function jsToCode(fn) {
     const str = ('' + fn);
     const key = normalizeJavascript(str);
     let data;
+    // Load function patches
+    if (!functionPatches) {
+        functionPatches = hjson_1.parse(fs_1.readFileSync(PATCH_FILE).toString()) || {};
+    }
     if (key in functionPatches) {
         data = {
             '!code': true,
@@ -47,9 +46,10 @@ function jsToCode(fn) {
         };
         functionPatches[key] = data;
         // write it out to _functions
-        const tmp = JSON.parse(fs_1.readFileSync(PATCH_FILE).toString());
-        tmp[key] = data;
-        fs_1.writeFileSync(PATCH_FILE, JSON.stringify(tmp, null, '\t'));
+        fs_1.writeFileSync(PATCH_FILE, hjson_1.stringify(functionPatches, {
+            bracesSameLine: true,
+            space: '\t'
+        }));
     }
     if (!('php' in data)) {
         console.log('Missing function patch for: ' + JSON.stringify(key) + ' <- ' + JSON.stringify(str));
