@@ -33,7 +33,7 @@ export default class extends Command {
         }
 
         if (options.outputFile && options.outputFile.endsWith('.hjson')) {
-            options.outputFormat = "hjson";
+            options.outputFormat = 'hjson';
         }
 
         let output;

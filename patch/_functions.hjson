@@ -2132,6 +2132,16 @@
 			    return options.lookupProperty(obj, field);
 			  }
 			'''
+		php:
+			'''
+			function ($obj, $field, $options) {
+			    if (!$obj) {
+			      // Note for 5.0: Change to "obj == null" in 5.0
+			      return $obj;
+			    }
+			    return $options->lookupProperty($obj, $field);
+			  }
+			'''
 	}
 	"function(context,options){if(arguments.length!=2){throw new _exception2[\"default\"](\"#with requires exactly one argument\")}if(_utils.isFunction(context)){context=context.call(this)}var fn=options.fn;if(!_utils.isEmpty(context)){var data=options.data;if(options.data&&options.ids){data=_utils.createFrame(options.data);data.contextPath=_utils.appendContextPath(options.data.contextPath,options.ids[0])}return fn(context,{data:data,blockParams:_utils.blockParams([context],[data&&data.contextPath])})}else{return options.inverse(this)}};": {
 		!code: true
@@ -2210,6 +2220,19 @@
 			          );
 			        }
 			'''
+		php:
+			'''
+			function($options) {
+                static $value = 0;
+			          return $options->fn(
+			            [ "value" => 'bar' ],
+			            [
+                    // blockParams probably wrong
+			              "blockParams" => $options->blockParams === 1 ? [$value++, $value++] : null
+			            ]
+			          );
+			        }
+			'''
 	}
 	"function(exclamation,options){equal(exclamation,\"he.says\");equal(options.types[0],\"PathExpression\");equal(options.contexts.length,1);equal(options.hashContexts.noun,context);equal(options.hash.desire,\"need\");equal(options.hash.noun,\"dad.joke\");equal(options.hash.bool,true);return\"Helper called\"};": {
 		!code: true
@@ -2227,6 +2250,20 @@
 			        return 'Helper called';
 			      }
 			'''
+		php:
+			'''
+			function($exclamation, $options) {
+			        assert($exclamation == 'he.says');
+			        assert($options->types[0] === 'PathExpression');
+
+			        assert(count(options->contexts), 1);
+			        //assert($options->hashContexts["noun"], $context);
+			        assert($options->hash["desire"], 'need');
+			        assert($options->hash["noun"], 'dad.joke');
+			        assert($options->hash["bool"], true);
+			        return 'Helper called';
+			      }
+			'''
 	}
 	"function(withContext,options){return options.fn(options.contexts[0][withContext])};": {
 		!code: true
@@ -2234,6 +2271,12 @@
 			'''
 			function(withContext, options) {
 			        return options.fn(options.contexts[0][withContext]);
+			      }
+			'''
+		php:
+			'''
+			function($withContext, $options) {
+			        return $options->fn($options->contexts[0][$withContext]);
 			      }
 			'''
 	}
@@ -2247,6 +2290,17 @@
 			        }
 			        lastOptions = options;
 			        return x === y;
+			      }
+			'''
+		php:
+			'''
+			function($x, $y, $options) {
+              static $lastOptions = null;
+			        if (!$options || $options === $lastOptions) {
+			          throw new Exception('options hash was reused');
+			        }
+			        $lastOptions = $options;
+			        return $x === $y;
 			      }
 			'''
 	}
