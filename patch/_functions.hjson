@@ -901,7 +901,7 @@
 			'''
 		php:
 			'''
-			function goodbye($options) {
+			function ($options) {
 			        if ($options['hash']['print'] === true) {
 			          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];
 			        } else if ($options['hash']['print'] === false) {
@@ -935,6 +935,18 @@
 			        if (options.hash.print === true) {
 			          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);
 			        } else if (options.hash.print === false) {
+			          return 'NOT PRINTING';
+			        } else {
+			          return 'THIS SHOULD NOT HAPPEN';
+			        }
+			      }
+			'''
+		php:
+			'''
+			function ($options) {
+			        if ($options['hash']['print'] === true) {
+			          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options->fn($options->scope);
+			        } else if ($options['hash']['print'] === false) {
 			          return 'NOT PRINTING';
 			        } else {
 			          return 'THIS SHOULD NOT HAPPEN';
