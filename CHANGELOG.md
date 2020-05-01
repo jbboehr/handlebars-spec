@@ -9,7 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Changed
 - Rewrote everything in TypeScript
 - Switched the license to `AGPL-3.0-or-later`. The specification data is still licensed under the `MIT` license, as it is extracted from `handlebars.js`
-- `description` now includes all `describe{$description, ...)` from the handlebars test suite
+- `description` now includes all `describe($description, ...)` from the handlebars test suite
 - `exception` can now be either `true`, a string, or a regex.
 - `message` used to be the exception message, but will now be any extra message noted in the handlebars.js test suite
 - `options` was renamed to `runtimeOptions` to differentiate from `compileOptions`
