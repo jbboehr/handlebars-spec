@@ -3,28 +3,31 @@ language: php
 
 php:
   - 7.2
+  - 7.3
+  - 7.4
+  - master
 
-before_script:
+before_install:
+  - export PATH="./node_modules/.bin:$PATH"
+
+install:
   - npm install
   - make
 
 script:
-  - make check_changes
-  - make test
+  - make test_changes
+  - make test_eslint
+  - make test_node
+  - make test_php
 
 branches:
   only:
     - master
     - travis
 
-env:
-  global:
-    - secure: "ZjGYCdnJbnuXx+CTiIIr50cZxEaGXF8JIY3QMgfOJ2ll4X6wVZ5FsYaOyuaaDI86lb767/fKPZ4hgFqMVAYS50XHjjr23Smavd9HHsVRPQmOifrYIYVFSDkEiKVo6JIiJPBI0NM+5vrowuORMm3YFGZMv6RGOEAa5cvjSte1wVSwvgeIK6QKlXL65L/29/p7ynT6PPhZ3kuc+lY3v2N4WGxMj7eynjGajsymAEKCqKDjRu7RRGbhcw7KdPbeMo2l+qkQBS/aEikiUgTW2CBb7cirXHODnEru15OQOTWw29ntrI7uteA6vK5w9ygTtguTEVhVDDAySGU6VYK/5VO2nnye0VLkTRKPpzeEuQNjbw85MveFoxXDPgfpUUe0tiG1ho37p73aFbZM6im1M5oQCL8gcqi+rUCshRn5MpjscZ8vMN7GFF1Sva1RQ9f/ho93gmIP0+5TStVTYgd3QTri3F14lT79P0Ujbxk4ltWX15Zj52Kcan0ipWmcz9ENGH3kqMOH9q2KvWI+vPL3laL9sBQ5L5VUWeF8XrmrSYX9MOILaJWaCPQT31oBbGUlgJZGslGqpctLBHsF5K7t7LObADU5XheMWvC0iDO/0WqVDyG37D4UTfXoaFrXIlhNSX6ouZjq+WwJaOyxLm/498N0Wk/XUpMSJ4XFKiw/mSe/6XA="
-
 matrix:
   include:
     - language: nix
-      before_script:
-      script: nix-build --argstr handlebarsSpecVersion $TRAVIS_BRANCH | tee result.txt
-      after_success: cat result.txt | cachix push jbboehr-ci
-
+      before_install:
+      install:
+      script: nix-build --argstr handlebarsSpecVersion $TRAVIS_BRANCH

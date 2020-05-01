@@ -1,30 +1,5 @@
 {
-    "data-data can be functions with params-00": {
-        "options": {
-            "data": {
-                "hello": {
-                    "php": "function() { return 'hello'; }"
-                }
-            }
-        }
-    },
-    "data-data can be functions-00": {
-        "options": {
-            "data": {
-                "hello": {
-                    "php": "function() { return 'hello'; }"
-                }
-            }
-        }
-    },
-    "data-data is inherited downstream-00": {
-        "helpers": {
-            "let": {
-                "php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
-            }
-        }
-    },
-    "data-deep @foo triggers automatic top-level data-00": {
+    "data - deep @foo triggers automatic top-level data - 00": {
         "helpers": {
             "helperMissing": null,
             "blockHelperMissing": null,
@@ -34,78 +9,10 @@
             "with": null,
             "log": null,
             "lookup": null,
-            "let": {
-                "javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
-                "php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
-            }
+			"_parent": null
         }
     },
-    "data-hash values can be looked up via @foo-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) { return \"Hello \" . $options['hash']['noun']; }"
-            }
-        }
-    },
-    "data-nested parameter data can be looked up via @foo.bar-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($noun) { return \"Hello \" . $noun; }"
-            }
-        }
-    },
-    "data-nested parameter data does not fail with @world.bar-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
-            }
-        }
-    },
-    "data-parameter data can be looked up via @foo-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($noun) { return \"Hello \" . $noun; }"
-            }
-        }
-    },
-    "data-passing in data to a compiled function that expects data - data is passed to with block helpers where children use ..-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options['data']['accessData'] . \" \" . $options->fn(array(\"exclaim\" => \"?\"));\n      }"
-            },
-            "world": {
-                "php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
-            }
-        }
-    },
-    "data-passing in data to a compiled function that expects data - works with block helpers that use ..-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"));\n      }"
-            },
-            "world": {
-                "php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
-            }
-        }
-    },
-    "data-passing in data to a compiled function that expects data - works with block helpers-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options->fn($options->scope);\n      }"
-            },
-            "world": {
-                "php": "function($options) {\n        return $options['data']['adjective'] . \" world\" . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
-            }
-        }
-    },
-    "data-passing in data to a compiled function that expects data - works with helpers and parameters-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($noun, $options) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
-            }
-        }
-    },
-    "data-passing in data to a compiled function that expects data - works with helpers in partials-00": {
+    "data - passing in data to a compiled function that expects data - works with helpers in partials - 00": {
         "helpers": {
             "helperMissing": null,
             "blockHelperMissing": null,
@@ -114,45 +21,11 @@
             "unless": null,
             "with": null,
             "log": null,
-            "lookup": null,
-            "hello": {
-                "php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
-            }
+            "lookup": null
         },
-        "decorators": null
-    },
-    "data-passing in data to a compiled function that expects data - works with helpers-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
-            }
-        }
-    },
-    "data-you can override inherited data when invoking a helper with depth-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
-            },
-            "world": {
-                "php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
-            }
-        }
-    },
-    "data-you can override inherited data when invoking a helper-00": {
-        "helpers": {
-            "hello": {
-                "php": "function($options) {\n        return $options->fn(array(\"exclaim\" => \"?\", \"zomg\" => \"world\"), array(\"data\" => array(\"adjective\" => \"sad\")));\n      }"
-            },
-            "world": {
-                "php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
-            }
-        }
-    },
-    "nesting-the root context can be looked up via @root-00": {
-        "helpers": {
-            "helper": {
-                "php": "function($options) {\n            $frame = Utils::createFrame($options['data']);\n            $frame['depth'] = $options['data']['depth'] + 1;\n            return $options->fn($options->scope, array(\"data\" => $frame));\n          }"
-            }
-        }
+		"decorators": null,
+		"partials": {
+			"myPartial": "{{hello}}"
+		}
     }
 }

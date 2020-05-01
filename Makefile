@@ -1,39 +1,40 @@
 
-BASIC_SPECS := basic blocks builtins data helpers partials regressions \
-		string-params subexpressions strict track-ids \
+SPECS := basic blocks builtins data helpers parser partials regressions \
+		string-params subexpressions strict tokenizer track-ids \
 		whitespace-control
-SPECS := $(BASIC_SPECS) parser tokenizer
 
 all: spec export
 
-spec: node_modules
-	node bin handlebars.js/bench/templates/index.js -o spec/bench.json
-	$(foreach var, $(SPECS), node bin handlebars.js/spec/$(var).js -o spec/$(var).json;)
+dist: node_modules src tsconfig.json
+	tsc
 
-export: node_modules
-	node bin/export spec/bench.json -o export/bench.json
-	$(foreach var, $(BASIC_SPECS), node bin/export spec/$(var).json -o export/$(var).json;)
-
-check_changes:
-	@git status --porcelain | grep 'spec/' && return 1 || return 0
-
-stubs:
-	$(foreach var, $(SPECS), php bin/stubs.php spec/$(var).json patch/$(var).json;)
-
-test: jshint test_node test_php
-
-test_node:
-	@echo ---------- Testing spec against handlebars.js ---------- 
-	node bin/runner.js
-
-test_php:
-	@echo ---------- Linting PHP code ---------- 
-	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
-
-jshint: node_modules
-	./node_modules/.bin/jshint  bin/*.js
-
-node_modules:
+node_modules: package.json
 	npm install
 
-.PHONY: all spec export check_changes test test_node test_php
+spec: dist
+	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js;)
+
+export: dist
+	$(foreach var, $(SPECS), node dist/cli.js export -o export/$(var).json spec/$(var).json;)
+
+
+test: test_changes test_eslint test_node test_php
+check: test
+
+test_changes:
+	@git status --porcelain | grep 'spec/' && return 1 || return 0
+
+test_node: dist
+	@echo ---------- Testing spec against handlebars.js ----------
+	node dist/cli.js testRunner
+
+test_php:
+	@echo ---------- Linting PHP code ----------
+	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
+
+test_eslint: node_modules
+	eslint --ext .js,.ts .
+
+
+.PHONY: all spec export test test_changes test_eslint test_node test_php
+.DEFAULT_GOAL: all

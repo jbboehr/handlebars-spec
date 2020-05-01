@@ -15,12 +15,18 @@
 
 {
   pkgs ? import <nixpkgs> {},
-  handlebarsSpecVersion ? null,
-  handlebarsSpecSrc ? ./.,
-  handlebarsSpecSha256 ? null
+  nodejs ? pkgs.nodejs-12_x,
+  php ? pkgs.php,
+  nodeModulesBinPath ? (builtins.getEnv "PWD") + "/node_modules/.bin"
 }:
 
-pkgs.callPackage ./derivation.nix {
-  inherit handlebarsSpecVersion handlebarsSpecSrc handlebarsSpecSha256;
-}
+with pkgs;
 
+stdenv.mkDerivation {
+  name = "handlebars-spec-shell";
+  buildInputs = [ nodejs jq php ];
+  shellHook = ''
+      export PATH="${nodeModulesBinPath}:$PATH"
+      export TS_NODE_FILES=true
+    '';
+}

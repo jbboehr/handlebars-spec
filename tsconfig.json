@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "commonjs",
+		"target": "es6",
+		"allowJs": false,
+		"strict": true,
+		"noImplicitAny": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"sourceMap": true,
+		"moduleResolution": "node"
+	},
+	"include": [
+		"src/types.d.ts",
+		"src/**/*"
+	],
+	"exclude": ["node_modules", "./handlebars.js", "**/*.spec.ts"]
+}
