@@ -336,7 +336,8 @@
 		"helpers": {
 			"helper": {
 				"!code": true,
-				"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }"
+				"javascript": "function() {\n        // It's valid to execute a block against an undefined context, but\n        // helpers can not do so, so we expect to have an empty object here;\n        for (var name in this) {\n          if (Object.prototype.hasOwnProperty.call(this, name)) {\n            return 'found';\n          }\n        }\n        // And to make IE happy, check for the known string as length is not enumerated.\n        return this === 'bat' ? 'found' : 'not';\n      }",
+				"php": "function() {\n           return 'found';\n      }"
 			}
 		}
 	},

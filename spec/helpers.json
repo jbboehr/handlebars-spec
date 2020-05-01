@@ -856,7 +856,8 @@
 			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function goodbye($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Helper output hash"
@@ -881,7 +882,8 @@
 			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function goodbye($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Boolean helper parameter honored"
@@ -1627,7 +1629,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
-				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
+				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']);\n        }"
 			},
 			"cruel": {
 				"!code": true,
@@ -1693,7 +1695,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
-				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
+				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']);\n        }"
 			},
 			"cruel": {
 				"!code": true,
@@ -2042,7 +2044,8 @@
 			},
 			"testHelper": {
 				"!code": true,
-				"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }"
+				"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }",
+				"php": "function ($options) {\n          return $options->lookupProperty($options->scope, 'testProperty');\n        }"
 			}
 		}
 	}
