@@ -6,7 +6,8 @@
 	"contributors": [
 		"Kasper Isager <kasperisager@gmail.com>"
 	],
-	"license": "MIT",
+	"license": "AGPL-3.0-or-later",
+	"repository": "https://github.com/jbboehr/handlebars-spec.git",
 	"dependencies": {
 		"clime": "^0.5.10",
 		"deep-equal": "^2.0.3",

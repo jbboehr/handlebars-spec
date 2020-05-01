@@ -12,6 +12,6 @@
         "handlebars",
         "mustache"
     ],
-    "license": "LGPLv3",
+    "license": "AGPL-3.0-or-later",
     "type" : "library"
 }
