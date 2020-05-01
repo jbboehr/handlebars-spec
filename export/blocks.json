@@ -18,20 +18,7 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Arrays iterate over the contents when not empty",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -732,26 +719,14 @@
 	{
 		"description": "blocks",
 		"it": "array",
+		"number": "01",
 		"template": "{{#goodbyes}}{{text}}! {{/goodbyes}}cruel {{world}}!",
 		"data": {
 			"goodbyes": [],
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Arrays ignore the contents when empty",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3292,20 +3267,7 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Arrays iterate over the contents when not empty",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3809,26 +3771,14 @@
 	{
 		"description": "blocks",
 		"it": "empty block",
+		"number": "01",
 		"template": "{{#goodbyes}}{{/goodbyes}}cruel {{world}}!",
 		"data": {
 			"goodbyes": [],
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Arrays ignore the contents when empty",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4348,20 +4298,7 @@
 			]
 		},
 		"expected": "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! ",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Templates can access variables in contexts up the stack with relative path syntax",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4998,20 +4935,6 @@
 			]
 		},
 		"expected": "AlanAlanAlanAlanAlanAlan",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5534,20 +5457,6 @@
 			]
 		},
 		"expected": "Goodbye cruel sad OMG!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7238,25 +7147,12 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "inverted sections with unset value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {},
 		"expected": "Right On!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Inverted section rendered when value isn't set.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7934,27 +7830,14 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "inverted section with false value",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {
 			"goodbyes": false
 		},
 		"expected": "Right On!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Inverted section rendered when value is false.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8632,27 +8515,14 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "inverted section with empty set",
 		"template": "{{#goodbyes}}{{this}}{{/goodbyes}}{{^goodbyes}}Right On!{{/goodbyes}}",
 		"data": {
 			"goodbyes": []
 		},
 		"expected": "Right On!",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"message": "Inverted section rendered when value is empty set.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9330,27 +9200,13 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "block inverted sections",
 		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9998,27 +9854,13 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "chained inverted sections",
 		"template": "{{#people}}{{name}}{{else if none}}{{none}}{{/people}}",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -10884,27 +10726,14 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "chained inverted sections",
+		"number": "01",
 		"template": "{{#people}}{{name}}{{else if nothere}}fail{{else unless nothere}}{{none}}{{/people}}",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -12061,27 +11890,14 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "chained inverted sections",
+		"number": "02",
 		"template": "{{#people}}{{name}}{{else if none}}{{none}}{{else}}fail{{/people}}",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13020,7 +12836,7 @@
 		}
 	},
 	{
-		"description": "inverted sections",
+		"description": "blocks - inverted sections",
 		"it": "block inverted sections with empty arrays",
 		"template": "{{#people}}{{name}}{{^}}{{none}}{{/people}}",
 		"data": {
@@ -13028,20 +12844,6 @@
 			"people": []
 		},
 		"expected": "No people",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -13689,27 +13491,13 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone else sections",
 		"template": "{{#people}}\n{{name}}\n{{^}}\n{{none}}\n{{/people}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people\n",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -14469,27 +14257,14 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone else sections",
+		"number": "01",
 		"template": "{{#none}}\n{{.}}\n{{^}}\n{{none}}\n{{/none}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people\n",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15189,27 +14964,14 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone else sections",
+		"number": "02",
 		"template": "{{#people}}\n{{name}}\n{{^}}\n{{none}}\n{{/people}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people\n",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -15969,14 +15731,13 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone else sections can be disabled",
 		"template": "{{#people}}\n{{name}}\n{{^}}\n{{none}}\n{{/people}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "\nNo people\n\n",
-		"partials": {},
 		"compileOptions": {
 			"ignoreStandalone": true,
 			"data": true,
@@ -16751,19 +16512,17 @@
 			"guid": 2,
 			"isSimple": false,
 			"blockParams": 0
-		},
-		"partialAsts": {},
-		"partialOpcodes": {}
+		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone else sections can be disabled",
+		"number": "01",
 		"template": "{{#none}}\n{{.}}\n{{^}}\nFail\n{{/none}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "\nNo people\n\n",
-		"partials": {},
 		"compileOptions": {
 			"ignoreStandalone": true,
 			"data": true,
@@ -17309,32 +17068,16 @@
 			"guid": 2,
 			"isSimple": false,
 			"blockParams": 0
-		},
-		"partialAsts": {},
-		"partialOpcodes": {}
+		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone chained else sections",
 		"template": "{{#people}}\n{{name}}\n{{else if none}}\n{{none}}\n{{/people}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people\n",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -18311,27 +18054,14 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "block standalone chained else sections",
+		"number": "01",
 		"template": "{{#people}}\n{{name}}\n{{else if none}}\n{{none}}\n{{^}}\n{{/people}}\n",
 		"data": {
 			"none": "No people"
 		},
 		"expected": "No people\n",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -19366,7 +19096,7 @@
 		}
 	},
 	{
-		"description": "standalone sections",
+		"description": "blocks - standalone sections",
 		"it": "should handle nesting",
 		"template": "{{#data}}\n{{#if true}}\n{{.}}\n{{/if}}\n{{/data}}\nOK.",
 		"data": {
@@ -19377,20 +19107,6 @@
 			]
 		},
 		"expected": "1\n3\n5\nOK.",
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -20088,7 +19804,7 @@
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "blocks - compat mode",
 		"it": "block with deep recursive lookup lookup",
 		"template": "{{#outer}}Goodbye {{#inner}}cruel {{omg}}{{/inner}}{{/outer}}",
 		"data": {
@@ -20104,7 +19820,6 @@
 			]
 		},
 		"expected": "Goodbye cruel OMG!",
-		"compat": true,
 		"compileOptions": {
 			"compat": true,
 			"data": true,
@@ -20897,7 +20612,7 @@
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "blocks - compat mode",
 		"it": "block with deep recursive pathed lookup",
 		"template": "{{#outer}}Goodbye {{#inner}}cruel {{omg.yes}}{{/inner}}{{/outer}}",
 		"data": {
@@ -20916,7 +20631,6 @@
 			]
 		},
 		"expected": "Goodbye cruel OMG!",
-		"compat": true,
 		"compileOptions": {
 			"compat": true,
 			"data": true,
@@ -21660,7 +21374,7 @@
 		}
 	},
 	{
-		"description": "compat mode",
+		"description": "blocks - compat mode",
 		"it": "block with missed recursive lookup",
 		"template": "{{#outer}}Goodbye {{#inner}}cruel {{omg.yes}}{{/inner}}{{/outer}}",
 		"data": {
@@ -21679,7 +21393,6 @@
 			]
 		},
 		"expected": "Goodbye cruel ",
-		"compat": true,
 		"compileOptions": {
 			"compat": true,
 			"data": true,
@@ -22423,7 +22136,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should apply mustache decorators",
 		"template": "{{#helper}}{{*decorator}}{{/helper}}",
 		"data": {},
@@ -22440,20 +22153,6 @@
 				"!code": true,
 				"javascript": "function (fn) {\n          fn.run = 'success';\n          return fn;\n        }",
 				"php": "function($fn) {\n          $fn->run = 'success';\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -22857,7 +22556,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should apply allow undefined return",
 		"template": "{{#helper}}{{*decorator}}suc{{/helper}}",
 		"data": {},
@@ -22874,20 +22573,6 @@
 				"!code": true,
 				"javascript": "function (fn) {\n          fn.run = 'cess';\n        }",
 				"php": "function($fn) {\n          $fn->run = 'cess';\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -23322,7 +23007,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should apply block decorators",
 		"template": "{{#helper}}{{#*decorator}}success{{/decorator}}{{/helper}}",
 		"data": {},
@@ -23339,20 +23024,6 @@
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          fn.run = options.fn();\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->fn();\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -23830,7 +23501,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should support nested decorators",
 		"template": "{{#helper}}{{#*decorator}}{{#*nested}}suc{{/nested}}cess{{/decorator}}{{/helper}}",
 		"data": {},
@@ -23852,20 +23523,6 @@
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          props.nested = options.fn();\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $props->nested = $options->fn();\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -24521,7 +24178,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should apply multiple decorators",
 		"template": "{{#helper}}{{#*decorator}}suc{{/decorator}}{{#*decorator}}cess{{/decorator}}{{/helper}}",
 		"data": {},
@@ -24538,20 +24195,6 @@
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          fn.run = (fn.run || '') + options.fn();\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = (isset($fn->run) ? $fn->run : '') . $options->fn();\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -25204,7 +24847,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should access parent variables",
 		"template": "{{#helper}}{{*decorator foo}}{{/helper}}",
 		"data": {
@@ -25223,20 +24866,6 @@
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          fn.run = options.args;\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          $fn->run = $options->args;\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -25697,7 +25326,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should work with root program",
 		"template": "{{*decorator \"success\"}}",
 		"data": {
@@ -25709,20 +25338,6 @@
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
 				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -25901,7 +25516,7 @@
 		}
 	},
 	{
-		"description": "decorators",
+		"description": "blocks - decorators",
 		"it": "should fail when accessing variables from root",
 		"template": "{{*decorator foo}}",
 		"data": {
@@ -25911,22 +25526,7 @@
 		"decorators": {
 			"decorator": {
 				"!code": true,
-				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          run = true;\n          return fn;\n        }",
-				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === null');\n          return $fn;\n        }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
+				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }"
 			}
 		},
 		"ast": {

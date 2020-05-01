@@ -7,8 +7,7 @@
 			"noun": "cat"
 		},
 		"expected": "happy cat",
-		"message": "Data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -22,7 +21,8 @@
 				"javascript": "function (options) {\n        return options.data.adjective + ' ' + this.noun;\n      }",
 				"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper"
 	},
 	{
 		"description": "data",
@@ -30,12 +30,12 @@
 		"template": "{{@hello}}",
 		"data": {},
 		"expected": "hello",
-		"message": "@foo retrieves template data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"hello": "hello"
 			}
-		}
+		},
+		"message": "@foo retrieves template data"
 	},
 	{
 		"description": "data",
@@ -45,14 +45,14 @@
 			"foo": true
 		},
 		"expected": "Hello world",
-		"message": "Automatic data was triggered",
 		"helpers": {
 			"let": {
 				"!code": true,
-				"javascript": "function (options) {\n      var frame = Handlebars.createFrame(options.data);\n\n      for (var prop in options.hash) {\n        frame[prop] = options.hash[prop];\n      }\n      return options.fn(this, { data: frame });\n    }",
+				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          if (prop in options.hash) {\n            frame[prop] = options.hash[prop];\n          }\n        }\n        return options.fn(this, {data: frame});\n      }",
 				"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
-		}
+		},
+		"message": "Automatic data was triggered"
 	},
 	{
 		"description": "data",
@@ -60,8 +60,7 @@
 		"template": "{{hello @world}}",
 		"data": {},
 		"expected": "Hello world",
-		"message": "@foo as a parameter retrieves template data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"world": "world"
 			}
@@ -70,9 +69,10 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (noun) {\n        return 'Hello ' + noun;\n      }",
-				"php": "function($noun) { return \"Hello \" . $noun; }"
+				"php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
 			}
-		}
+		},
+		"message": "@foo as a parameter retrieves template data"
 	},
 	{
 		"description": "data",
@@ -80,8 +80,7 @@
 		"template": "{{hello noun=@world}}",
 		"data": {},
 		"expected": "Hello world",
-		"message": "@foo as a parameter retrieves template data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"world": "world"
 			}
@@ -92,7 +91,8 @@
 				"javascript": "function (options) {\n        return 'Hello ' + options.hash.noun;\n      }",
 				"php": "function($options) { return \"Hello \" . $options['hash']['noun']; }"
 			}
-		}
+		},
+		"message": "@foo as a parameter retrieves template data"
 	},
 	{
 		"description": "data",
@@ -100,8 +100,7 @@
 		"template": "{{hello @world.bar}}",
 		"data": {},
 		"expected": "Hello world",
-		"message": "@foo as a parameter retrieves template data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"world": {
 					"bar": "world"
@@ -112,9 +111,10 @@
 			"hello": {
 				"!code": true,
 				"javascript": "function (noun) {\n        return 'Hello ' + noun;\n      }",
-				"php": "function($noun) { return \"Hello \" . $noun; }"
+				"php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
 			}
-		}
+		},
+		"message": "@foo as a parameter retrieves template data"
 	},
 	{
 		"description": "data",
@@ -122,8 +122,7 @@
 		"template": "{{hello @world.bar}}",
 		"data": {},
 		"expected": "Hello undefined",
-		"message": "@foo as a parameter retrieves template data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"foo": {
 					"bar": "world"
@@ -136,12 +135,14 @@
 				"javascript": "function (noun) {\n        return 'Hello ' + noun;\n      }",
 				"php": "function($noun) { return \"Hello \" . ($noun === null ? 'undefined' : $noun); }"
 			}
-		}
+		},
+		"message": "@foo as a parameter retrieves template data"
 	},
 	{
 		"description": "data",
 		"it": "parameter data throws when using complex scope references",
 		"template": "{{#goodbyes}}{{text}} cruel {{@foo/../name}}! {{/goodbyes}}",
+		"data": {},
 		"exception": true
 	},
 	{
@@ -150,7 +151,7 @@
 		"template": "{{@hello}}",
 		"data": {},
 		"expected": "hello",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"hello": {
 					"!code": true,
@@ -166,12 +167,12 @@
 		"template": "{{@hello \"hello\"}}",
 		"data": {},
 		"expected": "hello",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"hello": {
 					"!code": true,
 					"javascript": "function (arg) { return arg; }",
-					"php": "function() { return 'hello'; }"
+					"php": "function($arg) { return $arg; }"
 				}
 			}
 		}
@@ -186,8 +187,7 @@
 			}
 		},
 		"expected": "2hello world1",
-		"message": "data variables are inherited downstream",
-		"options": {
+		"runtimeOptions": {
 			"data": {}
 		},
 		"compileOptions": {
@@ -199,30 +199,27 @@
 				"javascript": "function (options) {\n        var frame = Handlebars.createFrame(options.data);\n        for (var prop in options.hash) {\n          if (prop in options.hash) {\n            frame[prop] = options.hash[prop];\n          }\n        }\n        return options.fn(this, {data: frame});\n      }",
 				"php": "function($options) {\n        $frame = Utils::createFrame($options['data']);\n        foreach( $options['hash'] as $prop => $v ) {\n          $frame[$prop] = $options['hash'][$prop];\n        }\n        return $options->fn($options->scope, array(\"data\" => $frame));\n      }"
 			}
-		}
+		},
+		"message": "data variables are inherited downstream"
 	},
 	{
 		"description": "data",
 		"it": "passing in data to a compiled function that expects data - works with helpers in partials",
-		"template": "{{hello}}",
+		"template": "{{>myPartial}}",
 		"data": {
 			"noun": "cat"
 		},
 		"expected": "happy cat",
-		"message": "Data output by helper inside partial",
-		"options": {
+		"runtimeOptions": {
 			"data": {
-				"adjective": "happy",
-				"_parent": {
-					"adjective": "happy"
-				},
-				"root": {
-					"noun": "cat"
-				}
+				"adjective": "happy"
 			}
 		},
 		"compileOptions": {
 			"data": true
+		},
+		"partials": {
+			"myPartial": "{{hello}}"
 		},
 		"helpers": {
 			"hello": {
@@ -230,7 +227,8 @@
 				"javascript": "function (options) {\n        return options.data.adjective + ' ' + this.noun;\n      }",
 				"php": "function($options) {\n        return $options['data']['adjective'] . \" \"  . $options->scope['noun'];\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper inside partial"
 	},
 	{
 		"description": "data",
@@ -241,8 +239,7 @@
 			"world": "world"
 		},
 		"expected": "happy world!",
-		"message": "Data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -256,7 +253,8 @@
 				"javascript": "function (noun, options) {\n        return options.data.adjective + ' ' + noun + (this.exclaim ? '!' : '');\n      }",
 				"php": "function($noun, $options) {\n        return $options['data']['adjective'] . \" \"  . $noun . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper"
 	},
 	{
 		"description": "data",
@@ -266,8 +264,7 @@
 			"exclaim": true
 		},
 		"expected": "happy world!",
-		"message": "Data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -286,7 +283,8 @@
 				"javascript": "function (options) {\n        return options.data.adjective + ' world' + (this.exclaim ? '!' : '');\n      }",
 				"php": "function($options) {\n        return $options['data']['adjective'] . \" world\" . ($options->scope['exclaim'] ? \"!\" : \"\");\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper"
 	},
 	{
 		"description": "data",
@@ -297,8 +295,7 @@
 			"zomg": "world"
 		},
 		"expected": "happy world?",
-		"message": "Data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -317,7 +314,8 @@
 				"javascript": "function (thing, options) {\n        return options.data.adjective + ' ' + thing + (this.exclaim || '');\n      }",
 				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper"
 	},
 	{
 		"description": "data",
@@ -328,8 +326,7 @@
 			"zomg": "world"
 		},
 		"expected": "#win happy world?",
-		"message": "Data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy",
 				"accessData": "#win"
@@ -349,7 +346,8 @@
 				"javascript": "function (thing, options) {\n        return options.data.adjective + ' ' + thing + (this.exclaim || '');\n      }",
 				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
-		}
+		},
+		"message": "Data output by helper"
 	},
 	{
 		"description": "data",
@@ -360,8 +358,7 @@
 			"zomg": "planet"
 		},
 		"expected": "sad world?",
-		"message": "Overriden data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -380,7 +377,8 @@
 				"javascript": "function (thing, options) {\n        return options.data.adjective + ' ' + thing + (this.exclaim || '');\n      }",
 				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
-		}
+		},
+		"message": "Overriden data output by helper"
 	},
 	{
 		"description": "data",
@@ -391,8 +389,7 @@
 			"zomg": "world"
 		},
 		"expected": "sad world?",
-		"message": "Overriden data output by helper",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"adjective": "happy"
 			}
@@ -411,23 +408,25 @@
 				"javascript": "function (thing, options) {\n        return options.data.adjective + ' ' + thing + (this.exclaim || '');\n      }",
 				"php": "function($thing, $options) {\n        return $options['data']['adjective'] . \" \" . $thing . ($options->scope['exclaim'] ?: \"\");\n      }"
 			}
-		}
+		},
+		"message": "Overriden data output by helper"
 	},
 	{
-		"description": "@root",
+		"description": "data - @root",
 		"it": "the root context can be looked up via @root",
 		"template": "{{@root.foo}}",
 		"data": {
 			"foo": "hello"
 		},
 		"expected": "hello",
-		"options": {
+		"runtimeOptions": {
 			"data": {}
 		}
 	},
 	{
-		"description": "@root",
+		"description": "data - @root",
 		"it": "the root context can be looked up via @root",
+		"number": "01",
 		"template": "{{@root.foo}}",
 		"data": {
 			"foo": "hello"
@@ -435,12 +434,14 @@
 		"expected": "hello"
 	},
 	{
-		"description": "@root",
+		"description": "data - @root",
 		"it": "passed root values take priority",
 		"template": "{{@root.foo}}",
-		"data": {},
+		"data": {
+			"foo": "should not be used"
+		},
 		"expected": "hello",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"root": {
 					"foo": "hello"
@@ -449,14 +450,14 @@
 		}
 	},
 	{
-		"description": "nesting",
+		"description": "data - nesting",
 		"it": "the root context can be looked up via @root",
 		"template": "{{#helper}}{{#helper}}{{@./depth}} {{@../depth}} {{@../../depth}}{{/helper}}{{/helper}}",
 		"data": {
 			"foo": "hello"
 		},
 		"expected": "2 1 0",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"depth": 0
 			}

@@ -6,338 +6,332 @@
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar&lt;",
-		"compileOptions": {}
+		"expected": "bar&lt;"
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
+		"number": "01",
 		"template": " {{~foo}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar&lt; ",
-		"compileOptions": {}
+		"expected": "bar&lt; "
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
+		"number": "02",
 		"template": " {{foo~}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar&lt;",
-		"compileOptions": {}
+		"expected": " bar&lt;"
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
+		"number": "03",
 		"template": " {{~&foo~}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
+		"number": "04",
 		"template": " {{~{foo}~}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
 		"description": "whitespace control",
 		"it": "should strip whitespace around mustache calls",
+		"number": "05",
 		"template": "1\n{{foo~}} \n\n 23\n{{bar}}4",
 		"data": {},
-		"expected": "1\n23\n4",
-		"compileOptions": {}
+		"expected": "1\n23\n4"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
 		"template": " {{~#if foo~}} bar {{~/if~}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
+		"number": "01",
 		"template": " {{#if foo~}} bar {{/if~}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
+		"number": "02",
 		"template": " {{~#if foo}} bar {{~/if}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
+		"number": "03",
 		"template": " {{#if foo}} bar {{/if}} ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "  bar  ",
-		"compileOptions": {}
+		"expected": "  bar  "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
+		"number": "04",
 		"template": " \n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around simple block calls",
+		"number": "05",
 		"template": " a\n\n{{~#if foo~}} \n\nbar \n\n{{~/if~}}\n\na ",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " abara ",
-		"compileOptions": {}
+		"expected": " abara "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around inverse block calls",
 		"template": " {{~^if foo~}} bar {{~/if~}} ",
 		"data": {},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around inverse block calls",
+		"number": "01",
 		"template": " {{^if foo~}} bar {{/if~}} ",
 		"data": {},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around inverse block calls",
+		"number": "02",
 		"template": " {{~^if foo}} bar {{~/if}} ",
 		"data": {},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around inverse block calls",
+		"number": "03",
 		"template": " {{^if foo}} bar {{/if}} ",
 		"data": {},
-		"expected": "  bar  ",
-		"compileOptions": {}
+		"expected": "  bar  "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around inverse block calls",
+		"number": "04",
 		"template": " \n\n{{~^if foo~}} \n\nbar \n\n{{~/if~}}\n\n ",
 		"data": {},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
 		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "01",
 		"template": "{{#if foo~}} bar {{^~}} baz {{/if}}",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar ",
-		"compileOptions": {}
+		"expected": "bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "02",
 		"template": "{{#if foo}} bar {{~^~}} baz {{~/if}}",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar",
-		"compileOptions": {}
+		"expected": " bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "03",
 		"template": "{{#if foo}} bar {{^~}} baz {{/if}}",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": " bar ",
-		"compileOptions": {}
+		"expected": " bar "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "04",
 		"template": "{{#if foo~}} bar {{~else~}} baz {{~/if}}",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "05",
 		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "06",
 		"template": "\n\n{{~#if foo~}} \n\n{{{foo}}} \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
 		"data": {
 			"foo": "bar<"
 		},
-		"expected": "bar<",
-		"compileOptions": {}
+		"expected": "bar<"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "07",
 		"template": "{{#if foo~}} bar {{~^~}} baz {{~/if}}",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "08",
 		"template": "{{#if foo}} bar {{~^~}} baz {{/if}}",
 		"data": {},
-		"expected": "baz ",
-		"compileOptions": {}
+		"expected": "baz "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "09",
 		"template": "{{#if foo~}} bar {{~^}} baz {{~/if}}",
 		"data": {},
-		"expected": " baz",
-		"compileOptions": {}
+		"expected": " baz"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "10",
 		"template": "{{#if foo~}} bar {{~^}} baz {{/if}}",
 		"data": {},
-		"expected": " baz ",
-		"compileOptions": {}
+		"expected": " baz "
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "11",
 		"template": "{{#if foo~}} bar {{~else~}} baz {{~/if}}",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
-		"description": "blocks",
+		"description": "whitespace control - blocks",
 		"it": "should strip whitespace around complex block calls",
+		"number": "12",
 		"template": "\n\n{{~#if foo~}} \n\nbar \n\n{{~^~}} \n\nbaz \n\n{{~/if~}}\n\n",
 		"data": {},
-		"expected": "baz",
-		"compileOptions": {}
+		"expected": "baz"
 	},
 	{
-		"description": "should strip whitespace around partials",
+		"description": "whitespace control",
 		"it": "should strip whitespace around partials",
 		"template": "foo {{~> dude~}} ",
 		"data": {},
 		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "should strip whitespace around partials",
+		"description": "whitespace control",
 		"it": "should strip whitespace around partials",
+		"number": "01",
 		"template": "foo {{> dude~}} ",
 		"data": {},
 		"expected": "foo bar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "should strip whitespace around partials",
+		"description": "whitespace control",
 		"it": "should strip whitespace around partials",
+		"number": "02",
 		"template": "foo {{> dude}} ",
 		"data": {},
 		"expected": "foo bar ",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "should strip whitespace around partials",
+		"description": "whitespace control",
 		"it": "should strip whitespace around partials",
+		"number": "03",
 		"template": "foo\n {{~> dude}} ",
 		"data": {},
 		"expected": "foobar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "should strip whitespace around partials",
+		"description": "whitespace control",
 		"it": "should strip whitespace around partials",
+		"number": "04",
 		"template": "foo\n {{> dude}} ",
 		"data": {},
 		"expected": "foo\n bar",
 		"partials": {
 			"dude": "bar"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "should only strip whitespace once",
+		"description": "whitespace control",
 		"it": "should only strip whitespace once",
 		"template": " {{~foo~}} {{foo}} {{foo}} ",
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "barbar bar ",
-		"compileOptions": {}
+		"expected": "barbar bar "
 	}
 ]

@@ -17,20 +17,6 @@
 				"php": "function() {\n        return \"LOL\";\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -411,20 +397,6 @@
 				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -893,20 +865,6 @@
 				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -1487,20 +1445,6 @@
 				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -2093,20 +2037,6 @@
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2585,6 +2515,7 @@
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "01",
 		"template": "{{dash d (concat a b)}}",
 		"data": {
 			"a": "a",
@@ -2608,20 +2539,6 @@
 				"!code": true,
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -3127,6 +3044,7 @@
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "02",
 		"template": "{{dash c.c (concat a b)}}",
 		"data": {
 			"a": "a",
@@ -3150,20 +3068,6 @@
 				"!code": true,
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -3671,6 +3575,7 @@
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "03",
 		"template": "{{dash (concat a b) c.c}}",
 		"data": {
 			"a": "a",
@@ -3694,20 +3599,6 @@
 				"!code": true,
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -4215,6 +4106,7 @@
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "04",
 		"template": "{{dash (concat a e.e) c.c}}",
 		"data": {
 			"a": "a",
@@ -4238,20 +4130,6 @@
 				"!code": true,
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -4767,25 +4645,10 @@
 		"helpers": {
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y, options) {\n        return x === y;\n      }",
-				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+				"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n           static $lastOptions = null;\n        if (!$options || $options === $lastOptions) {\n          throw new Exception('options hash was reused');\n        }\n        $lastOptions = $options;\n        return $x === $y;\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -5229,20 +5092,6 @@
 				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -5904,27 +5753,13 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return 'val is ' + options.hash.fun;\n      }",
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
 				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
 			},
 			"equal": {
 				"!code": true,
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -6588,20 +6423,6 @@
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -7240,20 +7061,6 @@
 				"!code": true,
 				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
-			}
-		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
 			}
 		},
 		"ast": {
@@ -7936,7 +7743,6 @@
 			"yeah": {}
 		},
 		"expected": "fooyeah",
-		"message": "string params for inner helper processed correctly",
 		"compileOptions": {
 			"stringParams": true,
 			"data": true,
@@ -7964,7 +7770,6 @@
 				"php": "function($a, $options) {\n        return $a;\n      }"
 			}
 		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -8678,8 +8483,7 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
-				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
+				"javascript": "function(options) {\n        equals(options.hashTypes.fun, 'SubExpression');\n        return 'val is ' + options.hash.fun;\n      }"
 			},
 			"bork": {
 				"!code": true,
@@ -8687,7 +8491,6 @@
 				"php": "function() {\n        return \"BORK\";\n      }"
 			}
 		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant.",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9129,20 +8932,6 @@
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9512,8 +9301,6 @@
 		"data": {
 			"bar": "LOL"
 		},
-		"expected": "LOLLOL!",
-		"exception": true,
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -9521,20 +9308,7 @@
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
-		"compileOptions": {
-			"data": true,
-			"blockParams": [],
-			"knownHelpers": {
-				"helperMissing": true,
-				"blockHelperMissing": true,
-				"each": true,
-				"if": true,
-				"unless": true,
-				"with": true,
-				"log": true,
-				"lookup": true
-			}
-		},
+		"exception": true,
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -9894,398 +9668,6 @@
 				}
 			},
 			"isSimple": false,
-			"blockParams": 0
-		}
-	},
-	{
-		"description": "subexpressions",
-		"it": "subexpressions can't just be property lookups",
-		"template": "{{blog fun=(bork)}}",
-		"exception": true,
-		"ast": {
-			"type": "Program",
-			"body": [
-				{
-					"type": "MustacheStatement",
-					"path": {
-						"type": "PathExpression",
-						"data": false,
-						"depth": 0,
-						"parts": [
-							"blog"
-						],
-						"original": "blog",
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 2
-							},
-							"end": {
-								"line": 1,
-								"column": 6
-							}
-						}
-					},
-					"params": [],
-					"hash": {
-						"type": "Hash",
-						"pairs": [
-							{
-								"type": "HashPair",
-								"key": "fun",
-								"value": {
-									"type": "SubExpression",
-									"path": {
-										"type": "PathExpression",
-										"data": false,
-										"depth": 0,
-										"parts": [
-											"bork"
-										],
-										"original": "bork",
-										"loc": {
-											"start": {
-												"line": 1,
-												"column": 12
-											},
-											"end": {
-												"line": 1,
-												"column": 16
-											}
-										}
-									},
-									"params": [],
-									"loc": {
-										"start": {
-											"line": 1,
-											"column": 11
-										},
-										"end": {
-											"line": 1,
-											"column": 17
-										}
-									}
-								},
-								"loc": {
-									"start": {
-										"line": 1,
-										"column": 7
-									},
-									"end": {
-										"line": 1,
-										"column": 17
-									}
-								}
-							}
-						],
-						"loc": {
-							"start": {
-								"line": 1,
-								"column": 7
-							},
-							"end": {
-								"line": 1,
-								"column": 17
-							}
-						}
-					},
-					"escaped": true,
-					"strip": {
-						"open": false,
-						"close": false
-					},
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 19
-						}
-					}
-				}
-			],
-			"strip": {},
-			"loc": {
-				"start": {
-					"line": 1,
-					"column": 0
-				},
-				"end": {
-					"line": 1,
-					"column": 19
-				}
-			}
-		},
-		"opcodes": {
-			"sourceNode": [],
-			"opcodes": [
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 19
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 19
-						}
-					}
-				},
-				{
-					"opcode": "pushHash",
-					"args": [],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 7
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 11
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "pushProgram",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 11
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "emptyHash",
-					"args": [
-						null
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 11
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 12
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"bork"
-						],
-						true,
-						true,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 12
-						},
-						"end": {
-							"line": 1,
-							"column": 16
-						}
-					}
-				},
-				{
-					"opcode": "invokeHelper",
-					"args": [
-						0,
-						"bork",
-						true
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 11
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "assignToHash",
-					"args": [
-						"fun"
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 7
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "popHash",
-					"args": [],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 7
-						},
-						"end": {
-							"line": 1,
-							"column": 17
-						}
-					}
-				},
-				{
-					"opcode": "getContext",
-					"args": [
-						0
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 2
-						},
-						"end": {
-							"line": 1,
-							"column": 6
-						}
-					}
-				},
-				{
-					"opcode": "lookupOnContext",
-					"args": [
-						[
-							"blog"
-						],
-						true,
-						true,
-						false
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 2
-						},
-						"end": {
-							"line": 1,
-							"column": 6
-						}
-					}
-				},
-				{
-					"opcode": "invokeHelper",
-					"args": [
-						0,
-						"blog",
-						true
-					],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 19
-						}
-					}
-				},
-				{
-					"opcode": "appendEscaped",
-					"args": [],
-					"loc": {
-						"start": {
-							"line": 1,
-							"column": 0
-						},
-						"end": {
-							"line": 1,
-							"column": 19
-						}
-					}
-				}
-			],
-			"children": [],
-			"options": {
-				"data": true,
-				"blockParams": [],
-				"knownHelpers": {
-					"helperMissing": true,
-					"blockHelperMissing": true,
-					"each": true,
-					"if": true,
-					"unless": true,
-					"with": true,
-					"log": true,
-					"lookup": true
-				}
-			},
-			"isSimple": true,
 			"blockParams": 0
 		}
 	}

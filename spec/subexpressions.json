@@ -16,8 +16,7 @@
 				"javascript": "function () {\n        return 'LOL';\n      }",
 				"php": "function() {\n        return \"LOL\";\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -38,8 +37,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -64,8 +62,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -86,8 +83,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -116,12 +112,12 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "01",
 		"template": "{{dash d (concat a b)}}",
 		"data": {
 			"a": "a",
@@ -146,12 +142,12 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "02",
 		"template": "{{dash c.c (concat a b)}}",
 		"data": {
 			"a": "a",
@@ -176,12 +172,12 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "03",
 		"template": "{{dash (concat a b) c.c}}",
 		"data": {
 			"a": "a",
@@ -206,12 +202,12 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
 		"it": "GH-800 : Complex subexpressions",
+		"number": "04",
 		"template": "{{dash (concat a e.e) c.c}}",
 		"data": {
 			"a": "a",
@@ -236,8 +232,7 @@
 				"javascript": "function (a, b) {\n        return a + b;\n      }",
 				"php": "function($a, $b) {\n        return $a . $b;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -248,12 +243,10 @@
 		"helpers": {
 			"equal": {
 				"!code": true,
-				"javascript": "function (x, y, options) {\n        return x === y;\n      }",
-				"php": "function($x, $y, $options) {\n        return $x === $y;\n      }"
+				"javascript": "function(x, y, options) {\n        if (!options || options === global.lastOptions) {\n          throw new Error('options hash was reused');\n        }\n        global.lastOptions = options;\n        return x === y;\n      }",
+				"php": "function($x, $y, $options) {\n           static $lastOptions = null;\n        if (!$options || $options === $lastOptions) {\n          throw new Exception('options hash was reused');\n        }\n        $lastOptions = $options;\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -274,8 +267,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -286,7 +278,7 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return 'val is ' + options.hash.fun;\n      }",
+				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
 				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
 			},
 			"equal": {
@@ -294,8 +286,7 @@
 				"javascript": "function (x, y) {\n        return x === y;\n      }",
 				"php": "function($x, $y) {\n        return $x === $y;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -314,8 +305,7 @@
 				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -339,8 +329,7 @@
 				"javascript": "function (defaultString) {\n        return new Handlebars.SafeString(defaultString);\n      }",
 				"php": "function($defaultString) {\n        return new SafeString($defaultString);\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -351,7 +340,6 @@
 			"yeah": {}
 		},
 		"expected": "fooyeah",
-		"message": "string params for inner helper processed correctly",
 		"compileOptions": {
 			"stringParams": true
 		},
@@ -366,8 +354,7 @@
 				"javascript": "function (a, options) {\n        equals(options.types.length, 1, 'string params for inner helper processed correctly');\n        equals(options.types[0], 'PathExpression', 'string params for inner helper processed correctly');\n        return a;\n      }",
 				"php": "function($a, $options) {\n        return $a;\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -381,16 +368,14 @@
 		"helpers": {
 			"blog": {
 				"!code": true,
-				"javascript": "function (options) {\n        return \"val is \" + options.hash.fun;\n      }",
-				"php": "function($options) {\n        return \"val is \" . (is_bool($tmp = $options['hash']['fun']) ? ($tmp ? 'true' : 'false') : $tmp);\n      }"
+				"javascript": "function(options) {\n        equals(options.hashTypes.fun, 'SubExpression');\n        return 'val is ' + options.hash.fun;\n      }"
 			},
 			"bork": {
 				"!code": true,
 				"javascript": "function () {\n        return 'BORK';\n      }",
 				"php": "function() {\n        return \"BORK\";\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -410,8 +395,7 @@
 				"javascript": "function (val) {\n        return val + val;\n      }",
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "subexpressions",
@@ -420,8 +404,6 @@
 		"data": {
 			"bar": "LOL"
 		},
-		"expected": "LOLLOL!",
-		"exception": true,
 		"helpers": {
 			"foo": {
 				"!code": true,
@@ -429,12 +411,6 @@
 				"php": "function($val) {\n        return $val . $val;\n      }"
 			}
 		},
-		"compileOptions": {}
-	},
-	{
-		"description": "subexpressions",
-		"it": "subexpressions can't just be property lookups",
-		"template": "{{blog fun=(bork)}}",
 		"exception": true
 	}
 ]

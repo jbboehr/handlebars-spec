@@ -6,8 +6,7 @@
 		"data": {
 			"foo": "foo"
 		},
-		"expected": "foo",
-		"compileOptions": {}
+		"expected": "foo"
 	},
 	{
 		"description": "basic context",
@@ -16,48 +15,47 @@
 		"data": {
 			"foo": "food"
 		},
-		"expected": "{{foo}}",
-		"compileOptions": {}
+		"expected": "{{foo}}"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "01",
 		"template": "content \\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
-		"expected": "content {{foo}}",
-		"compileOptions": {}
+		"expected": "content {{foo}}"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "02",
 		"template": "\\\\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
-		"expected": "\\food",
-		"compileOptions": {}
+		"expected": "\\food"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "03",
 		"template": "content \\\\{{foo}}",
 		"data": {
 			"foo": "food"
 		},
-		"expected": "content \\food",
-		"compileOptions": {}
+		"expected": "content \\food"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping",
+		"number": "04",
 		"template": "\\\\ {{foo}}",
 		"data": {
 			"foo": "food"
 		},
-		"expected": "\\\\ food",
-		"compileOptions": {}
+		"expected": "\\\\ food"
 	},
 	{
 		"description": "basic context",
@@ -68,7 +66,7 @@
 			"world": "world"
 		},
 		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {}
+		"message": "It works if all the required keys are provided"
 	},
 	{
 		"description": "basic context",
@@ -76,7 +74,6 @@
 		"template": "{{.}}{{length}}",
 		"data": "bye",
 		"expected": "bye3",
-		"compileOptions": {},
 		"note": "PHP strings do not have properties",
 		"helpers": {
 			"length": {
@@ -89,15 +86,16 @@
 		"description": "basic context",
 		"it": "compiling with an undefined context",
 		"template": "Goodbye\n{{cruel}}\n{{world.bar}}!",
-		"expected": "Goodbye\n\n!",
-		"compileOptions": {}
+		"data": null,
+		"expected": "Goodbye\n\n!"
 	},
 	{
 		"description": "basic context",
 		"it": "compiling with an undefined context",
+		"number": "01",
 		"template": "{{#unless foo}}Goodbye{{../test}}{{test2}}{{/unless}}",
-		"expected": "Goodbye",
-		"compileOptions": {}
+		"data": null,
+		"expected": "Goodbye"
 	},
 	{
 		"description": "basic context",
@@ -108,55 +106,55 @@
 			"world": "world"
 		},
 		"expected": "Goodbye\ncruel\nworld!",
-		"compileOptions": {}
+		"message": "comments are ignored"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "01",
 		"template": "    {{~! comment ~}}      blah",
 		"data": {},
-		"expected": "blah",
-		"compileOptions": {}
+		"expected": "blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "02",
 		"template": "    {{~!-- long-comment --~}}      blah",
 		"data": {},
-		"expected": "blah",
-		"compileOptions": {}
+		"expected": "blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "03",
 		"template": "    {{! comment ~}}      blah",
 		"data": {},
-		"expected": "    blah",
-		"compileOptions": {}
+		"expected": "    blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "04",
 		"template": "    {{!-- long-comment --~}}      blah",
 		"data": {},
-		"expected": "    blah",
-		"compileOptions": {}
+		"expected": "    blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "05",
 		"template": "    {{~! comment}}      blah",
 		"data": {},
-		"expected": "      blah",
-		"compileOptions": {}
+		"expected": "      blah"
 	},
 	{
 		"description": "basic context",
 		"it": "comments",
+		"number": "06",
 		"template": "    {{~!-- long-comment --}}      blah",
 		"data": {},
-		"expected": "      blah",
-		"compileOptions": {}
+		"expected": "      blah"
 	},
 	{
 		"description": "basic context",
@@ -167,18 +165,19 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "booleans show the contents when true"
 	},
 	{
 		"description": "basic context",
 		"it": "boolean",
+		"number": "01",
 		"template": "{{#goodbye}}GOODBYE {{/goodbye}}cruel {{world}}!",
 		"data": {
 			"goodbye": false,
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "booleans do not show the contents when false"
 	},
 	{
 		"description": "basic context",
@@ -188,28 +187,27 @@
 			"num1": 42,
 			"num2": 0
 		},
-		"expected": "num1: 42, num2: 0",
-		"compileOptions": {}
+		"expected": "num1: 42, num2: 0"
 	},
 	{
 		"description": "basic context",
 		"it": "zeros",
+		"number": "01",
 		"template": "num: {{.}}",
 		"data": 0,
-		"expected": "num: 0",
-		"compileOptions": {}
+		"expected": "num: 0"
 	},
 	{
 		"description": "basic context",
 		"it": "zeros",
+		"number": "02",
 		"template": "num: {{num1/num2}}",
 		"data": {
 			"num1": {
 				"num2": 0
 			}
 		},
-		"expected": "num: 0",
-		"compileOptions": {}
+		"expected": "num: 0"
 	},
 	{
 		"description": "basic context",
@@ -219,51 +217,50 @@
 			"val1": false,
 			"val2": false
 		},
-		"expected": "val1: false, val2: false",
-		"compileOptions": {}
+		"expected": "val1: false, val2: false"
 	},
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "01",
 		"template": "val: {{.}}",
 		"data": false,
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "02",
 		"template": "val: {{val1/val2}}",
 		"data": {
 			"val1": {
 				"val2": false
 			}
 		},
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "03",
 		"template": "val1: {{{val1}}}, val2: {{{val2}}}",
 		"data": {
 			"val1": false,
 			"val2": false
 		},
-		"expected": "val1: false, val2: false",
-		"compileOptions": {}
+		"expected": "val1: false, val2: false"
 	},
 	{
 		"description": "basic context",
 		"it": "false",
+		"number": "04",
 		"template": "val: {{{val1/val2}}}",
 		"data": {
 			"val1": {
 				"val2": false
 			}
 		},
-		"expected": "val: false",
-		"compileOptions": {}
+		"expected": "val: false"
 	},
 	{
 		"description": "basic context",
@@ -276,12 +273,12 @@
 				"php": "function ($_undefined, $_null, $options) {\n            return ($_undefined === null ? 'true' : 'false') . ' ' . ($_null === null ? 'true' : 'false') . ' ' . gettype($options);\n          }"
 			}
 		},
-		"expected": "true true object",
-		"compileOptions": {}
+		"expected": "true true object"
 	},
 	{
 		"description": "basic context",
 		"it": "should handle undefined and null",
+		"number": "01",
 		"template": "{{undefined}}",
 		"data": {
 			"undefined": {
@@ -290,12 +287,12 @@
 				"php": "function() {\n            return 'undefined!';\n          }"
 			}
 		},
-		"expected": "undefined!",
-		"compileOptions": {}
+		"expected": "undefined!"
 	},
 	{
 		"description": "basic context",
 		"it": "should handle undefined and null",
+		"number": "02",
 		"template": "{{null}}",
 		"data": {
 			"null": {
@@ -304,24 +301,22 @@
 				"php": "function() {\n            return 'null!';\n          }"
 			}
 		},
-		"expected": "null!",
-		"compileOptions": {}
+		"expected": "null!"
 	},
 	{
 		"description": "basic context",
 		"it": "newlines",
 		"template": "Alan's\nTest",
 		"data": {},
-		"expected": "Alan's\nTest",
-		"compileOptions": {}
+		"expected": "Alan's\nTest"
 	},
 	{
 		"description": "basic context",
 		"it": "newlines",
+		"number": "01",
 		"template": "Alan's\rTest",
 		"data": {},
-		"expected": "Alan's\rTest",
-		"compileOptions": {}
+		"expected": "Alan's\rTest"
 	},
 	{
 		"description": "basic context",
@@ -329,41 +324,45 @@
 		"template": "Awesome's",
 		"data": {},
 		"expected": "Awesome's",
-		"compileOptions": {}
+		"message": "text is escaped so that it doesn't get caught on single quotes"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "01",
 		"template": "Awesome\\",
 		"data": {},
 		"expected": "Awesome\\",
-		"compileOptions": {}
+		"message": "text is escaped so that the closing quote can't be ignored"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "02",
 		"template": "Awesome\\\\ foo",
 		"data": {},
 		"expected": "Awesome\\\\ foo",
-		"compileOptions": {}
+		"message": "text is escaped so that it doesn't mess up backslashes"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "03",
 		"template": "Awesome {{foo}}",
 		"data": {
 			"foo": "\\"
 		},
 		"expected": "Awesome \\",
-		"compileOptions": {}
+		"message": "text is escaped so that it doesn't mess up backslashes"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping text",
+		"number": "04",
 		"template": " ' ' ",
 		"data": {},
 		"expected": " ' ' ",
-		"compileOptions": {}
+		"message": "double quotes never produce invalid javascript"
 	},
 	{
 		"description": "basic context",
@@ -373,37 +372,40 @@
 			"awesome": "&'\\<>"
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {}
+		"message": "expressions with 3 handlebars aren't escaped"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "01",
 		"template": "{{&awesome}}",
 		"data": {
 			"awesome": "&'\\<>"
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {}
+		"message": "expressions with {{& handlebars aren't escaped"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "02",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": "&\"'`\\<>"
 		},
 		"expected": "&amp;&quot;&#x27;&#x60;\\&lt;&gt;",
-		"compileOptions": {}
+		"message": "by default expressions should be escaped"
 	},
 	{
 		"description": "basic context",
 		"it": "escaping expressions",
+		"number": "03",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": "Escaped, <b> looks like: &lt;b&gt;"
 		},
 		"expected": "Escaped, &lt;b&gt; looks like: &amp;lt;b&amp;gt;",
-		"compileOptions": {}
+		"message": "escaping should properly handle amperstands"
 	},
 	{
 		"description": "basic context",
@@ -417,7 +419,7 @@
 			}
 		},
 		"expected": "&'\\<>",
-		"compileOptions": {}
+		"message": "functions returning safestrings aren't escaped"
 	},
 	{
 		"description": "basic context",
@@ -431,11 +433,12 @@
 			}
 		},
 		"expected": "Awesome",
-		"compileOptions": {}
+		"message": "functions are called and render their output"
 	},
 	{
 		"description": "basic context",
 		"it": "functions",
+		"number": "01",
 		"template": "{{awesome}}",
 		"data": {
 			"awesome": {
@@ -446,7 +449,7 @@
 			"more": "More awesome"
 		},
 		"expected": "More awesome",
-		"compileOptions": {}
+		"message": "functions are bound to the context"
 	},
 	{
 		"description": "basic context",
@@ -461,7 +464,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {}
+		"message": "functions are called with context arguments"
 	},
 	{
 		"description": "basic context",
@@ -478,7 +481,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {}
+		"message": "functions are called with context arguments"
 	},
 	{
 		"description": "basic context",
@@ -493,7 +496,7 @@
 			"frank": "Frank"
 		},
 		"expected": "Frank",
-		"compileOptions": {}
+		"message": "functions are called with context arguments"
 	},
 	{
 		"description": "basic context",
@@ -507,7 +510,7 @@
 			}
 		},
 		"expected": "inner 1",
-		"compileOptions": {}
+		"message": "block functions are called with context and options"
 	},
 	{
 		"description": "basic context",
@@ -522,7 +525,7 @@
 			}
 		},
 		"expected": "inner 1",
-		"compileOptions": {}
+		"message": "block functions are called with context and options"
 	},
 	{
 		"description": "basic context",
@@ -531,12 +534,12 @@
 		"data": {
 			"awesome": {
 				"!code": true,
-				"javascript": "function (options) { return options.fn(this); }",
-				"php": "function($options) { return $options->fn($options->scope); }"
+				"javascript": "function (options) {\n        return options.fn(this);\n      }",
+				"php": "function($options) {\n        return $options->fn($options->scope);\n      }"
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {}
+		"message": "block functions are called with options"
 	},
 	{
 		"description": "basic context",
@@ -547,12 +550,12 @@
 				"awesome": {
 					"!code": true,
 					"javascript": "function () { return this; }",
-					"php": "function($scope) { return $scope; }"
+					"php": "function($context) { return $context; }"
 				}
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {}
+		"message": "block functions are called with options"
 	},
 	{
 		"description": "basic context",
@@ -567,7 +570,7 @@
 			}
 		},
 		"expected": "inner",
-		"compileOptions": {}
+		"message": "block functions are called with options"
 	},
 	{
 		"description": "basic context",
@@ -577,11 +580,12 @@
 			"foo-bar": "baz"
 		},
 		"expected": "baz",
-		"compileOptions": {}
+		"message": "Paths can contain hyphens (-)"
 	},
 	{
 		"description": "basic context",
 		"it": "paths with hyphens",
+		"number": "01",
 		"template": "{{foo.foo-bar}}",
 		"data": {
 			"foo": {
@@ -589,11 +593,12 @@
 			}
 		},
 		"expected": "baz",
-		"compileOptions": {}
+		"message": "Paths can contain hyphens (-)"
 	},
 	{
 		"description": "basic context",
 		"it": "paths with hyphens",
+		"number": "02",
 		"template": "{{foo/foo-bar}}",
 		"data": {
 			"foo": {
@@ -601,7 +606,7 @@
 			}
 		},
 		"expected": "baz",
-		"compileOptions": {}
+		"message": "Paths can contain hyphens (-)"
 	},
 	{
 		"description": "basic context",
@@ -613,7 +618,7 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"message": "Nested paths access nested objects"
 	},
 	{
 		"description": "basic context",
@@ -625,7 +630,7 @@
 			}
 		},
 		"expected": "Goodbye  world!",
-		"compileOptions": {}
+		"message": "Nested paths access nested objects with empty string"
 	},
 	{
 		"description": "basic context",
@@ -637,11 +642,12 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"message": "Literal paths can be used"
 	},
 	{
 		"description": "basic context",
 		"it": "literal paths",
+		"number": "01",
 		"template": "Goodbye {{[foo bar]/expression}} world!",
 		"data": {
 			"foo bar": {
@@ -649,7 +655,7 @@
 			}
 		},
 		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"message": "Literal paths can be used"
 	},
 	{
 		"description": "basic context",
@@ -658,58 +664,57 @@
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "01",
 		"template": "Goodbye {{\"foo bar\"}} world!",
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "02",
 		"template": "Goodbye {{'foo bar'}} world!",
 		"data": {
 			"foo bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "03",
 		"template": "Goodbye {{\"foo[bar\"}} world!",
 		"data": {
 			"foo[bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "04",
 		"template": "Goodbye {{\"foo'bar\"}} world!",
 		"data": {
 			"foo'bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
 		"it": "literal references",
+		"number": "05",
 		"template": "Goodbye {{'foo\"bar'}} world!",
 		"data": {
 			"foo\"bar": "beautiful"
 		},
-		"expected": "Goodbye beautiful world!",
-		"compileOptions": {}
+		"expected": "Goodbye beautiful world!"
 	},
 	{
 		"description": "basic context",
@@ -717,7 +722,9 @@
 		"template": "test: {{.}}",
 		"data": null,
 		"expected": "test: ",
-		"compileOptions": {}
+		"helpers": {
+			"helper": "awesome"
+		}
 	},
 	{
 		"description": "basic context",
@@ -728,18 +735,17 @@
 				"name": null
 			}
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "complex but empty paths",
+		"number": "01",
 		"template": "{{person/name}}",
 		"data": {
 			"person": {}
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
@@ -753,11 +759,12 @@
 			]
 		},
 		"expected": "goodbyeGoodbyeGOODBYE",
-		"compileOptions": {}
+		"message": "This keyword in paths evaluates to current context"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword in paths",
+		"number": "01",
 		"template": "{{#hellos}}{{this/text}}{{/hellos}}",
 		"data": {
 			"hellos": [
@@ -773,36 +780,36 @@
 			]
 		},
 		"expected": "helloHelloHELLO",
-		"compileOptions": {}
+		"message": "This keyword evaluates in more complex paths"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
 		"template": "{{#hellos}}{{text/this/foo}}{{/hellos}}",
-		"exception": true,
-		"message": "Invalid path: text/this - 1:13"
+		"data": {},
+		"exception": "Invalid path: text/this - 1:13"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
+		"number": "01",
 		"template": "{{[this]}}",
 		"data": {
 			"this": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside path",
+		"number": "02",
 		"template": "{{text/[this]}}",
 		"data": {
 			"text": {
 				"this": "bar"
 			}
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
@@ -823,11 +830,12 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "This keyword in paths evaluates to current context"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword in helpers",
+		"number": "01",
 		"template": "{{#hellos}}{{foo this/text}}{{/hellos}}",
 		"data": {
 			"hellos": [
@@ -850,18 +858,19 @@
 				"php": "function($value) { return 'bar ' . $value; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "This keyword evaluates in more complex paths"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
 		"template": "{{#hellos}}{{foo text/this/foo}}{{/hellos}}",
-		"exception": true,
-		"message": "Invalid path: text/this - 1:17"
+		"data": {},
+		"exception": "Invalid path: text/this - 1:17"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
+		"number": "01",
 		"template": "{{foo [this]}}",
 		"data": {
 			"foo": {
@@ -871,12 +880,12 @@
 			},
 			"this": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "this keyword nested inside helpers param",
+		"number": "02",
 		"template": "{{foo text/[this]}}",
 		"data": {
 			"foo": {
@@ -888,30 +897,29 @@
 				"this": "bar"
 			}
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass string literals",
 		"template": "{{\"foo\"}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "pass string literals",
+		"number": "01",
 		"template": "{{\"foo\"}}",
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass string literals",
+		"number": "02",
 		"template": "{{#\"foo\"}}{{.}}{{/\"foo\"}}",
 		"data": {
 			"foo": [
@@ -919,48 +927,47 @@
 				"baz"
 			]
 		},
-		"expected": "barbaz",
-		"compileOptions": {}
+		"expected": "barbaz"
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
 		"template": "{{12}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "01",
 		"template": "{{12}}",
 		"data": {
 			"12": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "02",
 		"template": "{{12.34}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "03",
 		"template": "{{12.34}}",
 		"data": {
 			"12.34": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "basic context",
 		"it": "pass number literals",
+		"number": "04",
 		"template": "{{12.34 1}}",
 		"data": {
 			"12.34": {
@@ -969,36 +976,34 @@
 				"php": "function($arg) { return 'bar' . $arg; }"
 			}
 		},
-		"expected": "bar1",
-		"compileOptions": {}
+		"expected": "bar1"
 	},
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
 		"template": "{{true}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
+		"number": "01",
 		"template": "{{true}}",
 		"data": {
 			"": "foo"
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "basic context",
 		"it": "pass boolean literals",
+		"number": "02",
 		"template": "{{false}}",
 		"data": {
 			"false": "foo"
 		},
-		"expected": "foo",
-		"compileOptions": {}
+		"expected": "foo"
 	},
 	{
 		"description": "basic context",
@@ -1015,10 +1020,9 @@
 		"helpers": {
 			"foo": {
 				"!code": true,
-				"javascript": "function (arg) {\n        return arg;\n      }",
-				"php": "function($arg) {\n        return $arg;\n      }"
+				"javascript": "function (arg) { return arg; }",
+				"php": "function($arg) { return $arg; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	}
 ]

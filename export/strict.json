@@ -1,10 +1,9 @@
 [
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing property lookup",
 		"template": "{{hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -20,6 +19,7 @@
 				"lookup": true
 			}
 		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -215,14 +215,15 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing child",
 		"template": "{{hello.bar}}",
-		"exception": true,
-		"message": "/\"bar\" not defined in/",
 		"data": {
-			"hello": {}
+			"hello": {
+				"bar": "foo"
+			}
 		},
+		"expected": "foo",
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -384,7 +385,176 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
+		"it": "should error on missing child",
+		"number": "01",
+		"template": "{{hello.bar}}",
+		"data": {
+			"hello": {}
+		},
+		"compileOptions": {
+			"strict": true,
+			"data": true,
+			"blockParams": [],
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"exception": "/\"bar\" not defined in/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "MustacheStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"hello",
+							"bar"
+						],
+						"original": "hello.bar",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 2
+							},
+							"end": {
+								"line": 1,
+								"column": 11
+							}
+						}
+					},
+					"params": [],
+					"escaped": true,
+					"strip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 13
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 13
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 11
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"hello",
+							"bar"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 11
+						}
+					}
+				},
+				{
+					"opcode": "resolvePossibleLambda",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 13
+						}
+					}
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 13
+						}
+					}
+				}
+			],
+			"children": [],
+			"options": {
+				"strict": true,
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "strict - strict mode",
 		"it": "should handle explicit undefined",
 		"template": "{{hello.bar}}",
 		"data": {
@@ -408,7 +578,6 @@
 				"lookup": true
 			}
 		},
-		"note": "Can't specify undefined in JSON",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -555,14 +724,13 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing property lookup in known helpers mode",
 		"template": "{{hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
 		"compileOptions": {
-			"knownHelpersOnly": true,
 			"strict": true,
+			"knownHelpersOnly": true,
 			"data": true,
 			"blockParams": [],
 			"knownHelpers": {
@@ -576,6 +744,7 @@
 				"lookup": true
 			}
 		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -701,8 +870,8 @@
 			],
 			"children": [],
 			"options": {
-				"knownHelpersOnly": true,
 				"strict": true,
+				"knownHelpersOnly": true,
 				"data": true,
 				"blockParams": [],
 				"knownHelpers": {
@@ -721,10 +890,10 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing context",
 		"template": "{{hello}}",
-		"exception": true,
+		"data": {},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -740,6 +909,7 @@
 				"lookup": true
 			}
 		},
+		"exception": true,
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -935,9 +1105,10 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing data lookup",
 		"template": "{{@hello}}",
+		"data": {},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -1148,11 +1319,17 @@
 		}
 	},
 	{
-		"description": "strict mode",
-		"it": "should not run helperMissing for helper calls",
-		"template": "{{hello foo}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"description": "strict - strict mode",
+		"it": "should error on missing data lookup",
+		"number": "01",
+		"template": "{{@hello}}",
+		"data": {},
+		"expected": "foo",
+		"runtimeOptions": {
+			"data": {
+				"hello": "foo"
+			}
+		},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -1168,6 +1345,222 @@
 				"lookup": true
 			}
 		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "MustacheStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": true,
+						"depth": 0,
+						"parts": [
+							"hello"
+						],
+						"original": "@hello",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 2
+							},
+							"end": {
+								"line": 1,
+								"column": 8
+							}
+						}
+					},
+					"params": [],
+					"escaped": true,
+					"strip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 10
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 8
+						}
+					}
+				},
+				{
+					"opcode": "lookupData",
+					"args": [
+						0,
+						[
+							"hello"
+						],
+						true
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 8
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"hello",
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 10
+						}
+					}
+				}
+			],
+			"children": [],
+			"options": {
+				"strict": true,
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should not run helperMissing for helper calls",
+		"template": "{{hello foo}}",
+		"data": {
+			"foo": true
+		},
+		"compileOptions": {
+			"strict": true,
+			"data": true,
+			"blockParams": [],
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -1421,11 +1814,13 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should not run helperMissing for helper calls",
+		"number": "01",
 		"template": "{{#hello foo}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {
+			"foo": true
+		},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -1441,6 +1836,7 @@
 				"lookup": true
 			}
 		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -1726,11 +2122,10 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should throw on ambiguous blocks",
 		"template": "{{#hello}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -1746,6 +2141,7 @@
 				"lookup": true
 			}
 		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2033,11 +2429,11 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should throw on ambiguous blocks",
+		"number": "01",
 		"template": "{{^hello}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -2053,6 +2449,7 @@
 				"lookup": true
 			}
 		},
+		"exception": "/\"hello\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2340,11 +2737,13 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should throw on ambiguous blocks",
+		"number": "02",
 		"template": "{{#hello.bar}}{{/hello.bar}}",
-		"exception": true,
-		"message": "/\"bar\" not defined in/",
+		"data": {
+			"hello": {}
+		},
 		"compileOptions": {
 			"strict": true,
 			"data": true,
@@ -2360,9 +2759,7 @@
 				"lookup": true
 			}
 		},
-		"data": {
-			"hello": {}
-		},
+		"exception": "/\"bar\" not defined in/",
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -2603,7 +3000,7 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should allow undefined parameters when passed to helpers",
 		"template": "{{#unless foo}}success{{/unless}}",
 		"data": {},
@@ -2913,13 +3310,15 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should allow undefined hash when passed to helpers",
 		"template": "{{helper value=@foo}}",
 		"data": {},
 		"expected": "success",
 		"compileOptions": {
 			"strict": true,
+			"data": true,
+			"blockParams": [],
 			"knownHelpers": {
 				"helperMissing": true,
 				"blockHelperMissing": true,
@@ -2928,11 +3327,8 @@
 				"unless": true,
 				"with": true,
 				"log": true,
-				"lookup": true,
-				"helper": true
-			},
-			"data": true,
-			"blockParams": []
+				"lookup": true
+			}
 		},
 		"helpers": {
 			"helper": {
@@ -3159,10 +3555,48 @@
 					}
 				},
 				{
-					"opcode": "invokeKnownHelper",
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 8
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"helper"
+						],
+						true,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 2
+						},
+						"end": {
+							"line": 1,
+							"column": 8
+						}
+					}
+				},
+				{
+					"opcode": "invokeHelper",
 					"args": [
 						0,
-						"helper"
+						"helper",
+						true
 					],
 					"loc": {
 						"start": {
@@ -3193,6 +3627,8 @@
 			"children": [],
 			"options": {
 				"strict": true,
+				"data": true,
+				"blockParams": [],
 				"knownHelpers": {
 					"helperMissing": true,
 					"blockHelperMissing": true,
@@ -3201,18 +3637,261 @@
 					"unless": true,
 					"with": true,
 					"log": true,
-					"lookup": true,
-					"helper": true
-				},
-				"data": true,
-				"blockParams": []
+					"lookup": true
+				}
 			},
 			"isSimple": true,
 			"blockParams": 0
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - strict mode",
+		"it": "should show error location on missing property lookup",
+		"template": "\n\n\n   {{hello}}",
+		"data": {},
+		"compileOptions": {
+			"strict": true,
+			"data": true,
+			"blockParams": [],
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"exception": "/\"hello\" not defined in/",
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "ContentStatement",
+					"original": "\n\n\n   ",
+					"value": "\n\n\n   ",
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 4,
+							"column": 3
+						}
+					}
+				},
+				{
+					"type": "MustacheStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"hello"
+						],
+						"original": "hello",
+						"loc": {
+							"start": {
+								"line": 4,
+								"column": 5
+							},
+							"end": {
+								"line": 4,
+								"column": 10
+							}
+						}
+					},
+					"params": [],
+					"escaped": true,
+					"strip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 12
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "appendContent",
+					"args": [
+						"\n\n\n   "
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 4,
+							"column": 3
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 5
+						},
+						"end": {
+							"line": 4,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"hello"
+						],
+						null,
+						true,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 5
+						},
+						"end": {
+							"line": 4,
+							"column": 10
+						}
+					}
+				},
+				{
+					"opcode": "invokeAmbiguous",
+					"args": [
+						"hello",
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				},
+				{
+					"opcode": "appendEscaped",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 3
+						},
+						"end": {
+							"line": 4,
+							"column": 12
+						}
+					}
+				}
+			],
+			"children": [],
+			"options": {
+				"strict": true,
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"isSimple": false,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "strict - assume objects",
 		"it": "should ignore missing property",
 		"template": "{{hello}}",
 		"data": {},
@@ -3427,7 +4106,7 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should ignore missing child",
 		"template": "{{hello.bar}}",
 		"data": {
@@ -3595,10 +4274,9 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing object",
 		"template": "{{hello.bar}}",
-		"exception": true,
 		"data": {},
 		"compileOptions": {
 			"assumeObjects": true,
@@ -3615,6 +4293,7 @@
 				"lookup": true
 			}
 		},
+		"exception": true,
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3761,10 +4440,10 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing context",
 		"template": "{{hello}}",
-		"exception": true,
+		"data": null,
 		"compileOptions": {
 			"assumeObjects": true,
 			"data": true,
@@ -3780,6 +4459,7 @@
 				"lookup": true
 			}
 		},
+		"exception": true,
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -3975,10 +4655,10 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing data lookup",
 		"template": "{{@hello.bar}}",
-		"exception": true,
+		"data": null,
 		"compileOptions": {
 			"assumeObjects": true,
 			"data": true,
@@ -3994,6 +4674,7 @@
 				"lookup": true
 			}
 		},
+		"exception": true,
 		"ast": {
 			"type": "Program",
 			"body": [
@@ -4139,7 +4820,7 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should execute blockHelperMissing",
 		"template": "{{^hello}}foo{{/hello}}",
 		"data": {},

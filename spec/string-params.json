@@ -5,7 +5,6 @@
 		"template": "{{wycats is.a slave.driver}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver",
-		"message": "String parameters output",
 		"compileOptions": {
 			"stringParams": true
 		},
@@ -15,7 +14,8 @@
 				"javascript": "function (passiveVoice, noun) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun;\n      }",
 				"php": "function($passiveVoice, $noun) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun;\n      }"
 			}
-		}
+		},
+		"message": "String parameters output"
 	},
 	{
 		"description": "string params mode",
@@ -23,7 +23,6 @@
 		"template": "{{#wycats is.a slave.driver}}help :({{/wycats}}",
 		"data": {},
 		"expected": "HELP ME MY BOSS is.a slave.driver: help :(",
-		"message": "String parameters output",
 		"compileOptions": {
 			"stringParams": true
 		},
@@ -33,7 +32,8 @@
 				"javascript": "function (passiveVoice, noun, options) {\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' +\n                noun + ': ' + options.fn(this);\n      }",
 				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' .\n                $noun . ': ' . $options->fn($options->scope);\n      }"
 			}
-		}
+		},
+		"message": "String parameters output"
 	},
 	{
 		"description": "string params mode",
@@ -44,7 +44,6 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke",
-		"message": "Proper context variable output",
 		"compileOptions": {
 			"stringParams": true
 		},
@@ -59,7 +58,8 @@
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
 				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
-		}
+		},
+		"message": "Proper context variable output"
 	},
 	{
 		"description": "string params mode",
@@ -67,18 +67,15 @@
 		"template": "{{tomdale 'need' dad.joke true false}}",
 		"data": {},
 		"expected": "Helper called",
-		"message": "the string type is passed",
 		"compileOptions": {
 			"stringParams": true
 		},
 		"helpers": {
 			"tomdale": {
 				"!code": true,
-				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
-				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+				"javascript": "function(desire, noun, trueBool, falseBool, options) {\n        equal(options.types[0], 'StringLiteral', 'the string type is passed');\n        equal(\n          options.types[1],\n          'PathExpression',\n          'the expression type is passed'\n        );\n        equal(\n          options.types[2],\n          'BooleanLiteral',\n          'the expression type is passed'\n        );\n        equal(desire, 'need', 'the string form is passed for strings');\n        equal(noun, 'dad.joke', 'the string form is passed for expressions');\n        equal(trueBool, true, 'raw booleans are passed through');\n        equal(falseBool, false, 'raw booleans are passed through');\n        return 'Helper called';\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "string params mode",
@@ -92,36 +89,9 @@
 		"helpers": {
 			"tomdale": {
 				"!code": true,
-				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
-				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
+				"javascript": "function(exclamation, options) {\n        equal(exclamation, 'he.says');\n        equal(options.types[0], 'PathExpression');\n\n        equal(options.hashTypes.desire, 'StringLiteral');\n        equal(options.hashTypes.noun, 'PathExpression');\n        equal(options.hashTypes.bool, 'BooleanLiteral');\n        equal(options.hash.desire, 'need');\n        equal(options.hash.noun, 'dad.joke');\n        equal(options.hash.bool, true);\n        return 'Helper called';\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
-	},
-	{
-		"description": "string params mode",
-		"it": "hash parameters get context information",
-		"template": "{{#with dale}}{{tomdale he.says desire='need' noun=../dad/joke bool=true}}{{/with}}",
-		"data": {
-			"dale": {}
-		},
-		"expected": "Helper called",
-		"compileOptions": {
-			"stringParams": true
-		},
-		"helpers": {
-			"tomdale": {
-				"!code": true,
-				"javascript": "function (exclamation, options) {\n        return \"Helper called\";\n      }",
-				"php": "function($exclamation, $options) {\n        return \"Helper called\";\n      }"
-			},
-			"with": {
-				"!code": true,
-				"javascript": "function (withContext, options) {\n        return options.fn(options.contexts[0][withContext]);\n      }",
-				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
-			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
 		"description": "string params mode",
@@ -132,7 +102,6 @@
 			"need": "need-a"
 		},
 		"expected": "STOP ME FROM READING HACKER NEWS I need-a dad.joke wot",
-		"message": "Proper context variable output",
 		"compileOptions": {
 			"stringParams": true
 		},
@@ -147,7 +116,8 @@
 				"javascript": "function (context, options) {\n        return options.fn(options.contexts[0][context]);\n      }",
 				"php": "function($context, $options) {\n        return $options->fn($options['contexts'][0][$context]);\n      }"
 			}
-		}
+		},
+		"message": "Proper context variable output"
 	},
 	{
 		"description": "string params mode",
@@ -186,7 +156,6 @@
 				"javascript": "function (bar, options) {\n        equal(bar, '@bar');\n        equal(options.types[0], 'PathExpression');\n        return 'Foo!';\n      }",
 				"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	}
 ]

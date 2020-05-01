@@ -1,29 +1,43 @@
 [
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing property lookup",
 		"template": "{{hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should error on missing child",
+		"template": "{{hello.bar}}",
+		"data": {
+			"hello": {
+				"bar": "foo"
+			}
+		},
+		"expected": "foo",
 		"compileOptions": {
 			"strict": true
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing child",
+		"number": "01",
 		"template": "{{hello.bar}}",
-		"exception": true,
-		"message": "/\"bar\" not defined in/",
 		"data": {
 			"hello": {}
 		},
 		"compileOptions": {
 			"strict": true
-		}
+		},
+		"exception": "/\"bar\" not defined in/"
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should handle explicit undefined",
 		"template": "{{hello.bar}}",
 		"data": {
@@ -34,93 +48,116 @@
 		"expected": "",
 		"compileOptions": {
 			"strict": true
-		},
-		"note": "Can't specify undefined in JSON"
+		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing property lookup in known helpers mode",
 		"template": "{{hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
+		"data": {},
 		"compileOptions": {
-			"knownHelpersOnly": true,
-			"strict": true
-		}
+			"strict": true,
+			"knownHelpersOnly": true
+		},
+		"exception": "/\"hello\" not defined in/"
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should error on missing context",
 		"template": "{{hello}}",
-		"exception": true,
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	{
-		"description": "strict mode",
-		"it": "should error on missing data lookup",
-		"template": "{{@hello}}",
+		"data": {},
 		"compileOptions": {
 			"strict": true
 		},
 		"exception": true
 	},
 	{
-		"description": "strict mode",
-		"it": "should not run helperMissing for helper calls",
-		"template": "{{hello foo}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	{
-		"description": "strict mode",
-		"it": "should not run helperMissing for helper calls",
-		"template": "{{#hello foo}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	{
-		"description": "strict mode",
-		"it": "should throw on ambiguous blocks",
-		"template": "{{#hello}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	{
-		"description": "strict mode",
-		"it": "should throw on ambiguous blocks",
-		"template": "{{^hello}}{{/hello}}",
-		"exception": true,
-		"message": "/\"hello\" not defined in/",
-		"compileOptions": {
-			"strict": true
-		}
-	},
-	{
-		"description": "strict mode",
-		"it": "should throw on ambiguous blocks",
-		"template": "{{#hello.bar}}{{/hello.bar}}",
-		"exception": true,
-		"message": "/\"bar\" not defined in/",
+		"description": "strict - strict mode",
+		"it": "should error on missing data lookup",
+		"template": "{{@hello}}",
+		"data": {},
 		"compileOptions": {
 			"strict": true
 		},
-		"data": {
-			"hello": {}
+		"exception": true
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should error on missing data lookup",
+		"number": "01",
+		"template": "{{@hello}}",
+		"data": {},
+		"expected": "foo",
+		"runtimeOptions": {
+			"data": {
+				"hello": "foo"
+			}
+		},
+		"compileOptions": {
+			"strict": true
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
+		"it": "should not run helperMissing for helper calls",
+		"template": "{{hello foo}}",
+		"data": {
+			"foo": true
+		},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should not run helperMissing for helper calls",
+		"number": "01",
+		"template": "{{#hello foo}}{{/hello}}",
+		"data": {
+			"foo": true
+		},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should throw on ambiguous blocks",
+		"template": "{{#hello}}{{/hello}}",
+		"data": {},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should throw on ambiguous blocks",
+		"number": "01",
+		"template": "{{^hello}}{{/hello}}",
+		"data": {},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
+		"it": "should throw on ambiguous blocks",
+		"number": "02",
+		"template": "{{#hello.bar}}{{/hello.bar}}",
+		"data": {
+			"hello": {}
+		},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"bar\" not defined in/"
+	},
+	{
+		"description": "strict - strict mode",
 		"it": "should allow undefined parameters when passed to helpers",
 		"template": "{{#unless foo}}success{{/unless}}",
 		"data": {},
@@ -130,16 +167,13 @@
 		}
 	},
 	{
-		"description": "strict mode",
+		"description": "strict - strict mode",
 		"it": "should allow undefined hash when passed to helpers",
 		"template": "{{helper value=@foo}}",
 		"data": {},
 		"expected": "success",
 		"compileOptions": {
-			"strict": true,
-			"knownHelpers": {
-				"helper": true
-			}
+			"strict": true
 		},
 		"helpers": {
 			"helper": {
@@ -150,7 +184,17 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - strict mode",
+		"it": "should show error location on missing property lookup",
+		"template": "\n\n\n   {{hello}}",
+		"data": {},
+		"compileOptions": {
+			"strict": true
+		},
+		"exception": "/\"hello\" not defined in/"
+	},
+	{
+		"description": "strict - assume objects",
 		"it": "should ignore missing property",
 		"template": "{{hello}}",
 		"data": {},
@@ -160,7 +204,7 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should ignore missing child",
 		"template": "{{hello.bar}}",
 		"data": {
@@ -172,35 +216,37 @@
 		}
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing object",
 		"template": "{{hello.bar}}",
-		"exception": true,
 		"data": {},
 		"compileOptions": {
 			"assumeObjects": true
-		}
+		},
+		"exception": true
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing context",
 		"template": "{{hello}}",
-		"exception": true,
+		"data": null,
 		"compileOptions": {
 			"assumeObjects": true
-		}
+		},
+		"exception": true
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should error on missing data lookup",
 		"template": "{{@hello.bar}}",
-		"exception": true,
+		"data": null,
 		"compileOptions": {
 			"assumeObjects": true
-		}
+		},
+		"exception": true
 	},
 	{
-		"description": "assume objects",
+		"description": "strict - assume objects",
 		"it": "should execute blockHelperMissing",
 		"template": "{{^hello}}foo{{/hello}}",
 		"data": {},

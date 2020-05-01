@@ -1,6 +1,6 @@
 [
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
@@ -8,43 +8,47 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with boolean argument shows the contents when true"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "01",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": "dummy",
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with string argument shows the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "02",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": false,
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with boolean argument does not show the contents when false"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "03",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with undefined does not show the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "04",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": [
@@ -53,59 +57,63 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with non-empty array shows the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "05",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": [],
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with empty array does not show the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "06",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": 0,
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with zero does not show the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if",
+		"number": "07",
 		"template": "{{#if goodbye includeZero=true}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": 0,
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with zero does not show the contents"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if with function argument",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return true; }",
-				"php": "function() { return true; }"
+				"javascript": "function () {\n        return true;\n      }",
+				"php": "function() {\n        return true;\n      }"
 			},
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with function shows the contents when function returns true"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if with function argument",
+		"number": "01",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": {
@@ -116,26 +124,28 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"message": "if with function shows the contents when function returns string"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if with function argument",
+		"number": "02",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": {
 				"!code": true,
-				"javascript": "function () {return false; }",
+				"javascript": "function () { return false; }",
 				"php": "function() { return false; }"
 			},
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with function does not show the contents when returns false"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "if with function argument",
+		"number": "03",
 		"template": "{{#if goodbye}}GOODBYE {{/if}}cruel {{world}}!",
 		"data": {
 			"goodbye": {
@@ -146,10 +156,10 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {}
+		"message": "if with function does not show the contents when returns undefined"
 	},
 	{
-		"description": "#if",
+		"description": "builtin helpers - #if",
 		"it": "should not change the depth list",
 		"template": "{{#with foo}}{{#if goodbye}}GOODBYE cruel {{../world}}!{{/if}}{{/with}}",
 		"data": {
@@ -158,11 +168,10 @@
 			},
 			"world": "world"
 		},
-		"expected": "GOODBYE cruel world!",
-		"compileOptions": {}
+		"expected": "GOODBYE cruel world!"
 	},
 	{
-		"description": "#with",
+		"description": "builtin helpers - #with",
 		"it": "with",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
 		"data": {
@@ -171,11 +180,10 @@
 				"last": "Johnson"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
-		"description": "#with",
+		"description": "builtin helpers - #with",
 		"it": "with with function argument",
 		"template": "{{#with person}}{{first}} {{last}}{{/with}}",
 		"data": {
@@ -185,19 +193,17 @@
 				"php": "function() { return array(\"first\" => \"Alan\", \"last\" => \"Johnson\"); }"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
-		"description": "#with",
+		"description": "builtin helpers - #with",
 		"it": "with with else",
 		"template": "{{#with person}}Person is present{{else}}Person is not present{{/with}}",
 		"data": {},
-		"expected": "Person is not present",
-		"compileOptions": {}
+		"expected": "Person is not present"
 	},
 	{
-		"description": "#with",
+		"description": "builtin helpers - #with",
 		"it": "with provides block parameter",
 		"template": "{{#with person as |foo|}}{{foo.first}} {{last}}{{/with}}",
 		"data": {
@@ -206,11 +212,10 @@
 				"last": "Johnson"
 			}
 		},
-		"expected": "Alan Johnson",
-		"compileOptions": {}
+		"expected": "Alan Johnson"
 	},
 	{
-		"description": "#with",
+		"description": "builtin helpers - #with",
 		"it": "works when data is disabled",
 		"template": "{{#with person as |foo|}}{{foo.first}} {{last}}{{/with}}",
 		"data": {
@@ -225,7 +230,7 @@
 		}
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -243,35 +248,36 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
-		}
+		},
+		"message": "each with array argument iterates over the contents when not empty"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each",
+		"number": "01",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
 			"goodbyes": [],
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
-		}
+		},
+		"message": "each with array argument ignores the contents when empty"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each without data",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -289,72 +295,60 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"runtimeOptions": {
+			"data": false
+		},
+		"compileOptions": {
+			"data": false
+		},
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each without data",
+		"number": "01",
 		"template": "{{#each .}}{{.}}{{/each}}",
 		"data": {
 			"goodbyes": "cruel",
 			"world": "world"
 		},
 		"expected": "cruelworld",
-		"compileOptions": {},
-		"globalHelpers": {
+		"runtimeOptions": {
+			"data": false
+		},
+		"compileOptions": {
+			"data": false
+		},
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each without context",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
+		"data": null,
 		"expected": "cruel !",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
 	},
 	{
-		"description": "#each",
-		"it": "each with an object and @key",
-		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
-		"data": {
-			"goodbyes": {
-				"2": {
-					"text": "GOODBYE"
-				},
-				"<b>#1</b>": {
-					"text": "goodbye"
-				}
-			},
-			"world": "world"
-		},
-		"expected": "2. GOODBYE! &lt;b&gt;#1&lt;/b&gt;. goodbye! cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
-			"detectDataInsideEach": {
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
-			}
-		}
-	},
-	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with an object and @key",
 		"template": "{{#each goodbyes}}{{@key}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -362,17 +356,16 @@
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
 		}
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -390,10 +383,17 @@
 			"world": "world"
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @index variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with nested @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{#each ../goodbyes}}{{@index}} {{/each}}After {{@index}} {{/each}}{{@index}}cruel {{world}}!",
 		"data": {
@@ -411,10 +411,17 @@
 			"world": "world"
 		},
 		"expected": "0. goodbye! 0 1 2 After 0 1. Goodbye! 0 1 2 After 1 2. GOODBYE! 0 1 2 After 2 cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @index variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with block params",
 		"template": "{{#each goodbyes as |value index|}}{{index}}. {{value.text}}! {{#each ../goodbyes as |childValue childIndex|}} {{index}} {{childIndex}}{{/each}} After {{index}} {{/each}}{{index}}cruel {{world}}!",
 		"data": {
@@ -428,10 +435,17 @@
 			],
 			"world": "world"
 		},
-		"expected": "0. goodbye!  0 0 0 1 After 0 1. Goodbye!  1 0 1 1 After 1 cruel world!"
+		"expected": "0. goodbye!  0 0 0 1 After 0 1. Goodbye!  1 0 1 1 After 1 cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		}
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each object with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -449,10 +463,17 @@
 			"world": "world"
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @index variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with @first",
 		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
 		"data": {
@@ -470,10 +491,17 @@
 			"world": "world"
 		},
 		"expected": "goodbye! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @first variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with nested @first",
 		"template": "{{#each goodbyes}}({{#if @first}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @first}}{{text}}!{{/if}}{{/each}}{{#if @first}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
 		"data": {
@@ -491,10 +519,17 @@
 			"world": "world"
 		},
 		"expected": "(goodbye! goodbye! goodbye!) (goodbye!) (goodbye!) cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @first variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each object with @first",
 		"template": "{{#each goodbyes}}{{#if @first}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
 		"data": {
@@ -509,10 +544,17 @@
 			"world": "world"
 		},
 		"expected": "goodbye! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @first variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with @last",
 		"template": "{{#each goodbyes}}{{#if @last}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
 		"data": {
@@ -530,10 +572,17 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @last variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each object with @last",
 		"template": "{{#each goodbyes}}{{#if @last}}{{text}}! {{/if}}{{/each}}cruel {{world}}!",
 		"data": {
@@ -548,10 +597,17 @@
 			"world": "world"
 		},
 		"expected": "Goodbye! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @last variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with nested @last",
 		"template": "{{#each goodbyes}}({{#if @last}}{{text}}! {{/if}}{{#each ../goodbyes}}{{#if @last}}{{text}}!{{/if}}{{/each}}{{#if @last}} {{text}}!{{/if}}) {{/each}}cruel {{world}}!",
 		"data": {
@@ -569,10 +625,17 @@
 			"world": "world"
 		},
 		"expected": "(GOODBYE!) (GOODBYE!) (GOODBYE! GOODBYE! GOODBYE!) cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "The @last variable is used"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with function argument",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -584,35 +647,36 @@
 			"world": "world"
 		},
 		"expected": "goodbye! Goodbye! GOODBYE! cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
-		}
+		},
+		"message": "each with array function argument iterates over the contents when not empty"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each with function argument",
+		"number": "01",
 		"template": "{{#each goodbyes}}{{text}}! {{/each}}cruel {{world}}!",
 		"data": {
 			"goodbyes": [],
 			"world": "world"
 		},
 		"expected": "cruel world!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"detectDataInsideEach": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.data && options.data.exclaim;\n      }",
-				"php": "function($options) {\n        return $options['data'] && $options['data']['exclaim'];\n      }"
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
-		}
+		},
+		"message": "each with array function argument ignores the contents when empty"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each object when last key is an empty string",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
@@ -630,10 +694,17 @@
 			"world": "world"
 		},
 		"expected": "0. goodbye! 1. Goodbye! 2. GOODBYE! cruel world!",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
 		"message": "Empty string key is not skipped"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "data passed to helpers",
 		"template": "{{#each letters}}{{this}}{{detectDataInsideEach}}{{/each}}",
 		"data": {
@@ -644,8 +715,7 @@
 			]
 		},
 		"expected": "a!b!c!",
-		"message": "should output data",
-		"options": {
+		"runtimeOptions": {
 			"data": {
 				"exclaim": "!"
 			}
@@ -656,17 +726,25 @@
 				"javascript": "function(options) { return options.data && options.data.exclaim; }",
 				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
 			}
-		}
+		},
+		"message": "should output data"
 	},
 	{
-		"description": "#each",
+		"description": "builtin helpers - #each",
 		"it": "each on implicit context",
 		"template": "{{#each}}{{text}}! {{/each}}cruel world!",
-		"exception": true,
-		"message": "Must pass iterator to #each"
+		"data": {},
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
+		"exception": "Must pass iterator to #each"
 	},
 	{
-		"description": "#lookup",
+		"description": "builtin helpers - #lookup",
 		"it": "should lookup arbitrary content",
 		"template": "{{#each goodbyes}}{{lookup ../data .}}{{/each}}",
 		"data": {
@@ -679,10 +757,17 @@
 				"bar"
 			]
 		},
-		"expected": "foobar"
+		"expected": "foobar",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		}
 	},
 	{
-		"description": "#lookup",
+		"description": "builtin helpers - #lookup",
 		"it": "should not fail on undefined value",
 		"template": "{{#each goodbyes}}{{lookup ../bar .}}{{/each}}",
 		"data": {
@@ -695,6 +780,13 @@
 				"bar"
 			]
 		},
-		"expected": ""
+		"expected": "",
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		}
 	}
 ]

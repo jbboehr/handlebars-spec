@@ -17,7 +17,7 @@
 			]
 		},
 		"expected": "The origin of speciesCharles DarwinLazarillo de Tormes",
-		"compileOptions": {}
+		"message": "Renders without an undefined property error"
 	},
 	{
 		"description": "Regressions",
@@ -25,35 +25,40 @@
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {},
 		"expected": "not set :: ",
-		"compileOptions": {}
+		"message": "inverted sections run when property isn't present in context"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "01",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
-		"data": {},
+		"data": {
+			"set": null
+		},
 		"expected": "not set :: ",
-		"compileOptions": {}
+		"message": "inverted sections run when property is undefined"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "02",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {
 			"set": false
 		},
 		"expected": "not set :: ",
-		"compileOptions": {}
+		"message": "inverted sections run when property is false"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-150: Inverted sections print when they shouldn't",
+		"number": "03",
 		"template": "{{^set}}not set{{/set}} :: {{#set}}set{{/set}}",
 		"data": {
 			"set": true
 		},
 		"expected": " :: set",
-		"compileOptions": {}
+		"message": "inverted sections don't run when property is true"
 	},
 	{
 		"description": "Regressions",
@@ -66,7 +71,7 @@
 			]
 		},
 		"expected": "1, 2",
-		"compileOptions": {}
+		"message": "it works as expected"
 	},
 	{
 		"description": "Regressions",
@@ -98,8 +103,7 @@
 				"php": "function() {\n        return true;\n      }"
 			}
 		},
-		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n",
-		"compileOptions": {}
+		"expected": "<strong>This is a slightly more complicated blah.</strong>.\nCheck this out:\n<ul>\n<li class=one>@fat</li>\n<li class=two>@dhg</li>\n<li class=three>@sayrer</li>\n</ul>.\n"
 	},
 	{
 		"description": "Regressions",
@@ -139,12 +143,12 @@
 				"javascript": "function (block) { return block.inverse(''); }",
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
 		"it": "GS-428: Nested if else rendering",
+		"number": "01",
 		"template": "{{#inverse}} {{#blk}} Unexpected {{/blk}} {{else}} {{#blk}} Expected {{/blk}} {{/inverse}}",
 		"data": {},
 		"expected": "  Expected  ",
@@ -159,8 +163,7 @@
 				"javascript": "function (block) { return block.inverse(''); }",
 				"php": "function($block) { return $block/*['inverse']*/->inverse(''); }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -169,16 +172,14 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-375: Unicode line terminators",
 		"template": " ",
 		"data": {},
-		"expected": " ",
-		"compileOptions": {}
+		"expected": " "
 	},
 	{
 		"description": "Regressions",
@@ -187,20 +188,22 @@
 		"data": {
 			"foo": "bar"
 		},
-		"expected": "bar",
-		"compileOptions": {}
+		"expected": "bar"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
 		"template": "{{{a}}",
-		"exception": true
+		"data": {},
+		"exception": "/Parse error on/"
 	},
 	{
 		"description": "Regressions",
 		"it": "GH-437: Matching escaping",
+		"number": "01",
 		"template": "{{a}}}",
-		"exception": true
+		"data": {},
+		"exception": "/Parse error on/"
 	},
 	{
 		"description": "Regressions",
@@ -213,7 +216,7 @@
 			]
 		},
 		"expected": "1,2",
-		"compileOptions": {}
+		"message": "it works as expected"
 	},
 	{
 		"description": "Regressions",
@@ -226,7 +229,7 @@
 			"in_ca": true
 		},
 		"expected": "Hello Chris. You have just won $10000! Well, $6000, after taxes.",
-		"compileOptions": {}
+		"message": "the hello world mustache example works"
 	},
 	{
 		"description": "Regressions",
@@ -236,8 +239,7 @@
 			"foo": 0,
 			"bar": "OK"
 		},
-		"expected": " This is  ~ ",
-		"compileOptions": {}
+		"expected": " This is  ~ "
 	},
 	{
 		"description": "Regressions",
@@ -246,8 +248,7 @@
 		"data": {
 			"foo": 0
 		},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "Regressions",
@@ -261,8 +262,7 @@
 				"javascript": "function (value) { return value + ''; }",
 				"php": "function($value) { return $value === null ? 'undefined' : (string) $value; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -290,8 +290,7 @@
 				"value": 10000
 			}
 		},
-		"expected": "Key: \nKey: name\nKey: value\n",
-		"compileOptions": {}
+		"expected": "Key: \nKey: name\nKey: value\n"
 	},
 	{
 		"description": "Regressions",
@@ -308,8 +307,7 @@
 				"javascript": "function (options) {\n        return new Handlebars.SafeString(options.fn());\n      }",
 				"php": "function($options) {\n        return new \\Handlebars\\SafeString($options->fn());\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -322,8 +320,7 @@
 				"!sparsearray": true
 			}
 		},
-		"expected": "1foo3bar",
-		"compileOptions": {}
+		"expected": "1foo3bar"
 	},
 	{
 		"description": "Regressions",
@@ -334,8 +331,7 @@
 		"partials": {
 			"doctype": "doctype{{> content}}",
 			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{> subcontent}}{{/inline}}{{/doctype}}"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -346,8 +342,7 @@
 		"partials": {
 			"doctype": "doctype{{> content}}",
 			"layout": "{{#> doctype}}{{#*inline \"content\"}}layout{{#> subcontent}}subcontent{{/subcontent}}{{/inline}}{{/doctype}}"
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "Regressions",
@@ -358,7 +353,91 @@
 		"partials": {
 			"layout": "{{#> inner}}Inner{{/inner}}{{> @partial-block }}",
 			"inner": ""
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1135 : Context handling within each iteration",
+		"template": "{{#each array}}\n 1. IF: {{#if true}}{{../name}}-{{../../name}}-{{../../../name}}{{/if}}\n 2. MYIF: {{#myif true}}{{../name}}={{../../name}}={{../../../name}}{{/myif}}\n{{/each}}",
+		"data": {
+			"array": [
+				1
+			],
+			"name": "John"
 		},
-		"compileOptions": {}
+		"expected": " 1. IF: John--\n 2. MYIF: John==\n",
+		"helpers": {
+			"myif": {
+				"!code": true,
+				"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }",
+				"php": "function($conditional, $options) {\n        if ($conditional) {\n          return $options->fn($options->scope);\n        } else {\n          return $options->inverse($options->scope);\n        }\n      }"
+			}
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1186: Support block params for existing programs",
+		"template": "{{#*inline \"test\"}}{{> @partial-block }}{{/inline}}{{#>test }}{{#each listOne as |item|}}{{ item }}{{/each}}{{/test}}{{#>test }}{{#each listTwo as |item|}}{{ item }}{{/each}}{{/test}}",
+		"data": {
+			"listOne": [
+				"a"
+			],
+			"listTwo": [
+				"b"
+			]
+		},
+		"expected": "ab"
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1319: \"unless\" breaks when \"each\" value equals \"null\"",
+		"template": "{{#each list}}{{#unless ./prop}}parent={{../value}} {{/unless}}{{/each}}",
+		"data": {
+			"value": "parent",
+			"list": [
+				null,
+				"a"
+			]
+		},
+		"expected": "parent=parent parent=parent "
+	},
+	{
+		"description": "Regressions",
+		"it": "GH-1341: 4.0.7 release breaks {{#if @partial-block}} usage",
+		"template": "template {{>partial}} template",
+		"data": {},
+		"expected": "template  block  partial  block  template",
+		"partials": {
+			"partialWithBlock": "{{#if @partial-block}} block {{> @partial-block}} block {{/if}}",
+			"partial": "{{#> partialWithBlock}} partial {{/partialWithBlock}}"
+		}
+	},
+	{
+		"description": "Regressions",
+		"it": "should allow hash with protected array names",
+		"template": "{{helpa length=\"foo\"}}",
+		"data": {
+			"array": [
+				1
+			],
+			"name": "John"
+		},
+		"expected": "foo",
+		"helpers": {
+			"helpa": {
+				"!code": true,
+				"javascript": "function(options) {\n        return options.hash.length;\n      }",
+				"php": "function($options) {\n        return $options['hash']['length'];\n      }"
+			}
+		}
+	},
+	{
+		"description": "Regressions - GH-1639: TypeError: Cannot read property 'apply' of undefined\" when handlebars version > 4.6.0 (undocumented, deprecated usage)",
+		"it": "should treat undefined helpers like non-existing helpers",
+		"template": "{{foo}}",
+		"data": {
+			"foo": "bar"
+		},
+		"expected": "bar"
 	}
 ]

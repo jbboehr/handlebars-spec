@@ -19,8 +19,7 @@
 				"javascript": "function (prefix) {\n      return '<a href=\"' + prefix + '/' + this.url + '\">' + this.text + '</a>';\n    }",
 				"php": "function($prefix, $options) { return '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">' . $options->scope['text'] . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -33,11 +32,11 @@
 		"helpers": {
 			"raw": {
 				"!code": true,
-				"javascript": "function (options) {\n        return options.fn();\n    }",
-				"php": "function($options) { return $options->fn(); }"
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
 			}
 		},
-		"compileOptions": {}
+		"message": "raw block helper gets raw content"
 	},
 	{
 		"description": "helpers",
@@ -54,22 +53,56 @@
 				"php": "function($a, $b, $c, $options) {\n        return $options->fn() . $a . $b . $c;\n    }"
 			}
 		},
-		"compileOptions": {}
+		"message": "raw block helper gets raw content"
 	},
 	{
-		"description": "helpers",
+		"description": "helpers - raw block parsing (with identity helper-function)",
 		"it": "helper for nested raw block gets raw content",
-		"template": "{{{{a}}}} {{{{b}}}} {{{{/b}}}} {{{{/a}}}}",
+		"template": "{{{{identity}}}} {{{{b}}}} {{{{/b}}}} {{{{/identity}}}}",
 		"data": {},
 		"expected": " {{{{b}}}} {{{{/b}}}} ",
 		"helpers": {
-			"a": {
+			"identity": {
 				"!code": true,
 				"javascript": "function (options) {\n          return options.fn();\n      }",
 				"php": "function($options) {\n          return $options->fn();\n      }"
 			}
-		},
-		"compileOptions": {}
+		}
+	},
+	{
+		"description": "helpers - raw block parsing (with identity helper-function)",
+		"it": "helper for nested raw block works with empty content",
+		"template": "{{{{identity}}}}{{{{/identity}}}}",
+		"data": {},
+		"expected": "",
+		"helpers": {
+			"identity": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
+			}
+		}
+	},
+	{
+		"description": "helpers - raw block parsing (with identity helper-function)",
+		"it": "helper for nested raw block closes after first matching close",
+		"template": "{{{{identity}}}}abc{{{{/identity}}}} {{{{identity}}}}abc{{{{/identity}}}}",
+		"data": {},
+		"expected": "abc abc",
+		"helpers": {
+			"identity": {
+				"!code": true,
+				"javascript": "function (options) {\n          return options.fn();\n      }",
+				"php": "function($options) {\n          return $options->fn();\n      }"
+			}
+		}
+	},
+	{
+		"description": "helpers - raw block parsing (with identity helper-function)",
+		"it": "helper for nested raw block throw exception when with missing closing braces",
+		"template": "{{{{a}}}} {{{{/a",
+		"data": {},
+		"exception": true
 	},
 	{
 		"description": "helpers",
@@ -85,8 +118,7 @@
 				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn(this) + '! ';\n      }\n      return out;\n    }",
 				"php": "function($options) {\n      $out = '';\n      $byes = array('Goodbye', 'goodbye', 'GOODBYE');\n      for ($i = 0, $j = count($byes); $i < $j; $i++) {\n        $out .= $byes[$i] . ' ' . $options->fn($options->scope) . '! ';\n      }\n      return $out;\n    }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -102,8 +134,7 @@
 				"javascript": "function (options) {\n      var out = '';\n      var byes = ['Goodbye', 'goodbye', 'GOODBYE'];\n      for (var i = 0, j = byes.length; i < j; i++) {\n        out += byes[i] + ' ' + options.fn({}) + '! ';\n      }\n      return out;\n    }",
 				"php": "function($options) {\n$byes = array('Goodbye', 'goodbye', 'GOODBYE');\n$out = '';\nforeach ($byes as $bye) {\n$out .= $bye.' ';\n$out .= $options->fn();\n$out .= '! ';\n}\nreturn $out;\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -125,8 +156,7 @@
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -148,8 +178,7 @@
 				"javascript": "function (prefix, options) {\n        return '<a href=\"' + prefix + '/' + this.url + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($prefix, $options) { $out = '<a href=\"' . $prefix . '/' . $options->scope['url'] . '\">'; $out .= $options->fn($options->scope); return $out . '</a>'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -163,12 +192,12 @@
 				"javascript": "function () {}",
 				"php": "function() {}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
 		"it": "helper returning undefined value",
+		"number": "01",
 		"template": " {{#nothere}}{{/nothere}}",
 		"data": {},
 		"expected": " ",
@@ -178,8 +207,7 @@
 				"javascript": "function () {}",
 				"php": "function() {}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
@@ -189,14 +217,14 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE! cruel world!",
-		"message": "Block helper executed",
 		"helpers": {
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) { return options.fn({text: 'GOODBYE'}); }",
 				"php": "function($options) { return $options->fn(array('text' => 'GOODBYE')); }"
 			}
-		}
+		},
+		"message": "Block helper executed"
 	},
 	{
 		"description": "helpers",
@@ -206,14 +234,14 @@
 			"name": "Yehuda"
 		},
 		"expected": "<form><p>Yehuda</p></form>",
-		"message": "Block helper executed with current context",
 		"helpers": {
 			"form": {
 				"!code": true,
 				"javascript": "function (options) { return '<form>' + options.fn(this) + '</form>'; }",
 				"php": "function($options) { $out = '<form>'; $out .= $options->fn($options->scope); return $out . '</form>'; }"
 			}
-		}
+		},
+		"message": "Block helper executed with current context"
 	},
 	{
 		"description": "helpers",
@@ -238,16 +266,14 @@
 				"javascript": "function link(options) {\n      return '<a href=\"/people/' + this.id + '\">' + options.fn(this) + '</a>';\n    }",
 				"php": "function($options) {\n    return '<a href=\"/people/'.$options->scope['id'].'\">' . $options->fn($options->scope) . '</a>';\n}"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
 		"it": "block helper for undefined value",
 		"template": "{{#empty}}shouldn't render{{/empty}}",
 		"data": {},
-		"expected": "",
-		"compileOptions": {}
+		"expected": ""
 	},
 	{
 		"description": "helpers",
@@ -259,14 +285,14 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p></form>",
-		"message": "Context variable resolved",
 		"helpers": {
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
-				"php": "function($context, $options) {\n    return '<form>' . $options->fn($context) . '</form>';\n}"
+				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
-		}
+		},
+		"message": "Context variable resolved"
 	},
 	{
 		"description": "helpers",
@@ -281,14 +307,14 @@
 			}
 		},
 		"expected": "<form><p>Harold</p></form>",
-		"message": "Complex path variable resolved",
 		"helpers": {
 			"form": {
 				"!code": true,
 				"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
-				"php": "function($context, $options) {\n    return '<form>' . $options->fn($context) . '</form>';\n}"
+				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
-		}
+		},
+		"message": "Complex path variable resolved"
 	},
 	{
 		"description": "helpers",
@@ -300,7 +326,6 @@
 			}
 		},
 		"expected": "<form><p>Yehuda</p><a href=\"Yehuda\">Hello</a></form>",
-		"message": "Both blocks executed",
 		"helpers": {
 			"link": {
 				"!code": true,
@@ -312,7 +337,8 @@
 				"javascript": "function (context, options) { return '<form>' + options.fn(context) + '</form>'; }",
 				"php": "function($context, $options) {\n    $out = '<form>';\n    $out .= $options->fn($context);\n    return $out . '</form>';\n}"
 			}
-		}
+		},
+		"message": "Both blocks executed"
 	},
 	{
 		"description": "helpers",
@@ -336,11 +362,12 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {}
+		"message": "an inverse wrapper is passed in as a new context"
 	},
 	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
+		"number": "01",
 		"template": "{{#list people}}{{name}}{{^}}<em>Nobody's here</em>{{/list}}",
 		"data": {
 			"people": []
@@ -353,11 +380,12 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {}
+		"message": "an inverse wrapper can be optionally called"
 	},
 	{
 		"description": "helpers",
 		"it": "block helper inverted sections",
+		"number": "02",
 		"template": "{{#list people}}Hello{{^}}{{message}}{{/list}}",
 		"data": {
 			"people": [],
@@ -371,7 +399,7 @@
 				"php": "function($context, $options) {\n    $out = '';\n    if (count($context) > 0) {\n        $out .= '<ul>';\n        foreach ($context as $row) {\n            $out .= '<li>';\n            $out .= $options->fn($row);\n            $out .= '</li>';\n        }\n        $out .= '</ul>';\n    } elseif (isset($options->inverse)) {\n        $out .= '<p>';\n        $out .= $options->inverse($options->scope);\n        $out .= '</p>';\n    }\n    return $out;\n}"
 			}
 		},
-		"compileOptions": {}
+		"message": "the context of an inverse is the parent of the block"
 	},
 	{
 		"description": "helpers",
@@ -382,28 +410,21 @@
 				"!code": true,
 				"javascript": "function () {\n        return 'winning';\n      }",
 				"php": "function() {\n        return 'winning';\n      }"
-			},
-			"hash": {
-				"helper": {
-					"php": "function() {\n        return 'winning';\n      }",
-					"!code": true,
-					"javascript": "function () {\n        return 'winning';\n      }"
-				}
 			}
 		},
 		"expected": "winning",
 		"helpers": {
 			"./helper": {
 				"!code": true,
-				"javascript": "function () {\n        return 'fail';\n      }",
-				"php": "function() {\n        return 'fail';\n      }"
+				"javascript": "function () { return 'fail'; }",
+				"php": "function() { return 'fail'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
 		"description": "helpers",
 		"it": "pathed lambas with parameters",
+		"number": "01",
 		"template": "{{hash/helper 1}}",
 		"data": {
 			"helper": {
@@ -413,9 +434,9 @@
 			},
 			"hash": {
 				"helper": {
-					"php": "function() {\n        return 'winning';\n      }",
 					"!code": true,
-					"javascript": "function () {\n        return 'winning';\n      }"
+					"javascript": "function () {\n        return 'winning';\n      }",
+					"php": "function() {\n        return 'winning';\n      }"
 				}
 			}
 		},
@@ -423,14 +444,13 @@
 		"helpers": {
 			"./helper": {
 				"!code": true,
-				"javascript": "function () {\n        return 'fail';\n      }",
-				"php": "function() {\n        return 'fail';\n      }"
+				"javascript": "function () { return 'fail'; }",
+				"php": "function() { return 'fail'; }"
 			}
-		},
-		"compileOptions": {}
+		}
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "providing a helpers hash",
 		"template": "Goodbye {{cruel}} {{world}}!",
 		"data": {
@@ -444,11 +464,12 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "helpers hash is available"
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "providing a helpers hash",
+		"number": "01",
 		"template": "Goodbye {{#iter}}{{cruel}} {{world}}{{/iter}}!",
 		"data": {
 			"iter": [
@@ -465,10 +486,10 @@
 				"php": "function() { return 'world'; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "helpers hash is available inside other blocks"
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "in cases of conflict, helpers win",
 		"template": "{{{lookup}}}",
 		"data": {
@@ -482,11 +503,12 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "helpers hash has precedence escaped expansion"
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "in cases of conflict, helpers win",
+		"number": "01",
 		"template": "{{lookup}}",
 		"data": {
 			"lookup": "Explicit"
@@ -499,10 +521,10 @@
 				"php": "function() { return 'helpers'; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "helpers hash has precedence simple expansion"
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "the helpers hash is available is nested contexts",
 		"template": "{{#outer}}{{#inner}}{{helper}}{{/inner}}{{/outer}}",
 		"data": {
@@ -520,12 +542,33 @@
 				"php": "function() { return 'helper'; }"
 			}
 		},
-		"compileOptions": {}
+		"message": "helpers hash is available in nested contexts."
 	},
 	{
-		"description": "helpers hash",
+		"description": "helpers - helpers hash",
 		"it": "the helper hash should augment the global hash",
 		"template": "{{test_helper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
+		"data": {
+			"cruel": "cruel"
+		},
+		"expected": "found it! Goodbye cruel world!!",
+		"helpers": {
+			"test_helper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			}
+		}
+	},
+	{
+		"description": "helpers - registration",
+		"it": "allows multiple globals",
+		"template": "{{testHelper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
 		"data": {
 			"cruel": "cruel"
 		},
@@ -536,249 +579,185 @@
 				"javascript": "function () { return 'world!'; }",
 				"php": "function() { return 'world!'; }"
 			},
-			"test_helper": {
-				"!code": true,
-				"javascript": "function() { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"test_helper": {
+			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
-			},
-			"world": {
-				"php": "function() { return \"world!\"; }"
 			}
 		}
 	},
 	{
-		"description": "registration",
-		"it": "allows multiple globals",
-		"template": "{{testHelper}} {{#if cruel}}Goodbye {{cruel}} {{world}}!{{/if}}",
-		"data": {
-			"cruel": "cruel"
-		},
-		"expected": "found it! Goodbye cruel world!!",
-		"compileOptions": {},
-		"globalHelpers": {
+		"description": "helpers",
+		"it": "decimal number literals work",
+		"template": "Message: {{hello -1.2 1.2}}",
+		"data": {},
+		"expected": "Message: Hello -1.2 1.2 times",
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
-		}
-	},
-	{
-		"description": "registration",
-		"it": "fails with multiple and args",
-		"template": "{{#form yehuda}}<p>{{name}}</p>{{#link}}Hello{{/link}}{{/form}}",
-		"exception": true,
-		"message": "Arg not supported with multiple helpers"
-	},
-	{
-		"description": "decimal number literals work",
-		"it": "decimal number literals work",
-		"template": "Message: {{hello -1.2 1.2}}",
-		"data": {},
-		"expected": "Message: Hello -1.2 1.2 times",
-		"helpers": {
 			"hello": {
 				"!code": true,
 				"javascript": "function (times, times2) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      if (typeof times2 !== 'number') { times2 = 'NaN'; }\n      return 'Hello ' + times + ' ' + times2 + ' times';\n    }",
 				"php": "function($times, $times2) {\n    if (!is_numeric($times)) {\n        $times = 'NaN';\n    }\n    if (!is_numeric($times2)) {\n        $times2 = \"NaN\";\n    }\n    return \"Hello $times $times2 times\";\n}"
 			}
 		},
-		"compileOptions": {},
-		"globalHelpers": {
+		"message": "template with a negative integer literal"
+	},
+	{
+		"description": "helpers",
+		"it": "negative number literals work",
+		"template": "Message: {{hello -12}}",
+		"data": {},
+		"expected": "Message: Hello -12 times",
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
-		}
-	},
-	{
-		"description": "negative number literals work",
-		"it": "negative number literals work",
-		"template": "Message: {{hello -12}}",
-		"data": {},
-		"expected": "Message: Hello -12 times",
-		"helpers": {
 			"hello": {
 				"!code": true,
 				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"compileOptions": {},
-		"globalHelpers": {
+		"message": "template with a negative integer literal"
+	},
+	{
+		"description": "helpers - String literal parameters",
+		"it": "simple literals work",
+		"template": "Message: {{hello \"world\" 12 true false}}",
+		"data": {},
+		"expected": "Message: Hello world 12 times: true false",
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
-		}
-	},
-	{
-		"description": "String literal parameters",
-		"it": "simple literals work",
-		"template": "Message: {{hello \"world\" 12 true false}}",
-		"data": {},
-		"expected": "Message: Hello world 12 times: true false",
-		"helpers": {
 			"hello": {
 				"!code": true,
 				"javascript": "function (param, times, bool1, bool2) {\n        if (typeof times !== 'number') { times = 'NaN'; }\n        if (typeof bool1 !== 'boolean') { bool1 = 'NaB'; }\n        if (typeof bool2 !== 'boolean') { bool2 = 'NaB'; }\n        return 'Hello ' + param + ' ' + times + ' times: ' + bool1 + ' ' + bool2;\n      }",
 				"php": "function($param, $times, $bool1, $bool2) {\n    if(!is_numeric($times)) { $times = \"NaN\"; }\n    if(!is_bool($bool1)) {\n        $bool1 = \"NaB\";\n    } else {\n        $bool1 = ($bool1 ? 'true' : 'false');\n    }\n    if(!is_bool($bool2)) {\n        $bool2 = \"NaB\";\n    } else {\n        $bool2 = ($bool2 ? 'true' : 'false');\n    }\n\n    return \"Hello $param $times times: $bool1 $bool2\";\n}"
 			}
 		},
-		"compileOptions": {},
-		"globalHelpers": {
+		"message": "template with a simple String literal"
+	},
+	{
+		"description": "helpers - String literal parameters",
+		"it": "using a quote in the middle of a parameter raises an error",
+		"template": "Message: {{hello wo\"rld\"}}",
+		"data": {},
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
-		}
+		},
+		"exception": true
 	},
 	{
-		"description": "String literal parameters",
-		"it": "using a quote in the middle of a parameter raises an error",
-		"template": "Message: {{hello wo\"rld\"}}",
-		"exception": true,
-		"helpers": {
-			"hello": {
-				"php": "function() { return ''; }"
-			}
-		}
-	},
-	{
-		"description": "String literal parameters",
+		"description": "helpers - String literal parameters",
 		"it": "escaping a String is possible",
 		"template": "Message: {{{hello \"\\\"world\\\"\"}}}",
 		"data": {},
 		"expected": "Message: Hello \"world\"",
 		"helpers": {
-			"hello": {
-				"!code": true,
-				"javascript": "function (param) { return 'Hello ' + param; }",
-				"php": "function($param) { return 'Hello '.$param; }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
-		}
-	},
-	{
-		"description": "String literal parameters",
-		"it": "it works with ' marks",
-		"template": "Message: {{{hello \"Alan's world\"}}}",
-		"data": {},
-		"expected": "Message: Hello Alan's world",
-		"helpers": {
 			"hello": {
 				"!code": true,
 				"javascript": "function (param) { return 'Hello ' + param; }",
 				"php": "function($param) { return \"Hello \" . $param; }"
 			}
 		},
-		"compileOptions": {},
-		"globalHelpers": {
+		"message": "template with an escaped String literal"
+	},
+	{
+		"description": "helpers - String literal parameters",
+		"it": "it works with ' marks",
+		"template": "Message: {{{hello \"Alan's world\"}}}",
+		"data": {},
+		"expected": "Message: Hello Alan's world",
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"hello": {
+				"!code": true,
+				"javascript": "function (param) { return 'Hello ' + param; }",
+				"php": "function($param) { return \"Hello \" . $param; }"
 			}
-		}
+		},
+		"message": "template with a ' mark"
 	},
 	{
-		"description": "negative number literals work",
+		"description": "helpers",
 		"it": "negative number literals work",
+		"number": "01",
 		"template": "Message: {{hello -12}}",
 		"data": {},
 		"expected": "Message: Hello -12 times",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"hello": {
 				"!code": true,
 				"javascript": "function (times) {\n      if (typeof times !== 'number') { times = 'NaN'; }\n      return 'Hello ' + times + ' times';\n    }",
 				"php": "function($times) {\n    if(!is_numeric($times)) {\n        $times = \"NaN\";\n    }\n    return \"Hello $times times\";\n}"
 			}
 		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
-		}
+		"message": "template with a negative integer literal"
 	},
 	{
-		"description": "multiple parameters",
+		"description": "helpers - multiple parameters",
 		"it": "simple multi-params work",
 		"template": "Message: {{goodbye cruel world}}",
 		"data": {
@@ -787,31 +766,26 @@
 		},
 		"expected": "Message: Goodbye cruel world",
 		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }",
-				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (cruel, world) { return 'Goodbye ' + cruel + ' ' + world; }",
+				"php": "function($cruel, $world) { return 'Goodbye ' . $cruel . ' ' . $world; }"
 			}
-		}
+		},
+		"message": "regular helpers with multiple params"
 	},
 	{
-		"description": "multiple parameters",
+		"description": "helpers - multiple parameters",
 		"it": "block multi-params work",
 		"template": "Message: {{#goodbye cruel world}}{{greeting}} {{adj}} {{noun}}{{/goodbye}}",
 		"data": {
@@ -820,143 +794,222 @@
 		},
 		"expected": "Message: Goodbye cruel world",
 		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});\n      }",
-				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (cruel, world, options) {\n        return options.fn({greeting: 'Goodbye', adj: cruel, noun: world});\n      }",
+				"php": "function($cruel, $world, $options) {\n    return $options->fn(array('greeting' => 'Goodbye', 'adj' => 'cruel', 'noun' => 'world'));\n}"
 			}
-		}
+		},
+		"message": "block helpers with multiple params"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" times=12}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD 12 TIMES",
-		"message": "Helper output hash",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    $r = 'GOODBYE ';\n    $r .= $options['hash']['cruel'].' ';\n    $r .= $options['hash']['world'].' ';\n    $r .= $options['hash']['times'].' TIMES';\n\n    return $r;\n}"
 			}
-		}
+		},
+		"message": "Helper output hash"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash with booleans",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=true}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL WORLD",
-		"message": "Helper output hash",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
-		}
+		},
+		"message": "Helper output hash"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "helpers can take an optional hash with booleans",
+		"number": "01",
 		"template": "{{goodbye cruel=\"CRUEL\" world=\"WORLD\" print=false}}",
 		"data": {},
 		"expected": "NOT PRINTING",
-		"message": "Boolean helper parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
-		}
+		},
+		"message": "Boolean helper parameter honored"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash",
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
-		"message": "Hash parameters output",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
 			}
-		}
+		},
+		"message": "Hash parameters output"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with single quoted stings",
 		"template": "{{#goodbye cruel=\"CRUEL\" times=12}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world 12 TIMES",
-		"message": "Hash parameters output",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function (options) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this) + ' ' + options.hash.times + ' TIMES';\n        }",
 				"php": "function($options) {\n    return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . \" {$options['hash']['times']} TIMES\";\n}"
 			}
-		}
+		},
+		"message": "Hash parameters output"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with booleans",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=true}}world{{/goodbye}}",
 		"data": {},
 		"expected": "GOODBYE CRUEL world",
-		"message": "Boolean hash parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options->fn($options->scope);\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
-		}
+		},
+		"message": "Boolean hash parameter honored"
 	},
 	{
-		"description": "hash",
+		"description": "helpers - hash",
 		"it": "block helpers can take an optional hash with booleans",
+		"number": "01",
 		"template": "{{#goodbye cruel=\"CRUEL\" print=false}}world{{/goodbye}}",
 		"data": {},
 		"expected": "NOT PRINTING",
-		"message": "Boolean hash parameter honored",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function (options) {\n          if (options.hash.print === true) {\n            return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n          } else if (options.hash.print === false) {\n            return 'NOT PRINTING';\n          } else {\n            return 'THIS SHOULD NOT HAPPEN';\n          }\n        }",
-				"php": "function($options) {\n    if ($options['hash']['print'] === true) {\n        return \"GOODBYE {$options['hash']['cruel']} \" . $options->fn($options->scope) . @$options['hash']['world'];\n    } elseif ($options['hash']['print'] === false) {\n        return \"NOT PRINTING\";\n    } else {\n        return \"THIS SHOULD NOT HAPPEN\";\n    }\n}"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options->fn($options->scope);\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
-		}
+		},
+		"message": "Boolean hash parameter honored"
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a context is not found, helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
-		"exception": true,
-		"message": "/Missing helper: \"link_to\"/"
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/Missing helper: \"link_to\"/"
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a context is not found, custom helperMissing is used",
 		"template": "{{hello}} {{link_to world}}",
 		"data": {
@@ -965,31 +1018,25 @@
 		},
 		"expected": "Hello <a>world</a>",
 		"helpers": {
-			"helperMissing": {
-				"!code": true,
-				"javascript": "function (mesg, options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>' + mesg + '</a>');\n          }\n        }",
-				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function (mesg, options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>' + mesg + '</a>');\n          }\n        }",
+				"php": "function($mesg, $options = null) {\n          if($options && $options['name'] === \"link_to\") {\n            return new SafeString(\"<a>\" . $mesg . \"</a>\");\n          }\n        }"
 			}
 		}
 	},
 	{
-		"description": "helperMissing",
+		"description": "helpers - helperMissing",
 		"it": "if a value is not found, custom helperMissing is used",
 		"template": "{{hello}} {{link_to}}",
 		"data": {
@@ -998,56 +1045,58 @@
 		},
 		"expected": "Hello <a>winning</a>",
 		"helpers": {
-			"helperMissing": {
-				"!code": true,
-				"javascript": "function (options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>winning</a>');\n          }\n        }",
-				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
+			"helperMissing": {
+				"!code": true,
+				"javascript": "function (options) {\n          if (options.name === 'link_to') {\n            return new Handlebars.SafeString('<a>winning</a>');\n          }\n        }",
+				"php": "function($options) {\n          if($options['name'] === \"link_to\") {\n            return new SafeString(\"<a>winning</a>\");\n          }\n        }"
 			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Known helper should render helper",
 		"template": "{{hello}}",
 		"data": {},
 		"expected": "foo",
-		"message": "'foo' should === 'foo",
 		"compileOptions": {
 			"knownHelpers": {
 				"hello": true
 			}
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"hello": {
 				"!code": true,
-				"javascript": "function () { return 'foo'; }",
-				"php": "function() { return \"foo\"; }"
+				"javascript": "function () {\n          return 'foo';\n        }",
+				"php": "function() {\n          return 'foo';\n        }"
 			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Unknown helper in knownHelpers only mode should be passed as undefined",
 		"template": "{{typeof hello}}",
 		"data": {},
 		"expected": "undefined",
-		"message": "'undefined' should === 'undefined",
 		"compileOptions": {
 			"knownHelpers": {
 				"typeof": true
@@ -1055,6 +1104,16 @@
 			"knownHelpersOnly": true
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"typeof": {
 				"!code": true,
 				"javascript": "function (arg) { return typeof arg; }",
@@ -1062,63 +1121,107 @@
 			},
 			"hello": {
 				"!code": true,
-				"javascript": "function () { return 'foo'; }",
-				"php": "function() { return \"foo\"; }"
+				"javascript": "function () {\n          return 'foo';\n        }",
+				"php": "function() {\n          return 'foo';\n        }"
 			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Builtin helpers available in knownHelpers only mode",
 		"template": "{{#unless foo}}bar{{/unless}}",
 		"data": {},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Field lookup works in knownHelpers only mode",
 		"template": "{{foo}}",
 		"data": {
 			"foo": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Conditional blocks work in knownHelpers only mode",
 		"template": "{{#foo}}bar{{/foo}}",
 		"data": {
 			"foo": "baz"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Invert blocks work in knownHelpers only mode",
 		"template": "{{^foo}}bar{{/foo}}",
 		"data": {
 			"foo": false
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
 		}
 	},
 	{
-		"description": "knownHelpers",
+		"description": "helpers - knownHelpers",
 		"it": "Functions are bound to the context in knownHelpers only mode",
 		"template": "{{foo}}",
 		"data": {
@@ -1130,48 +1233,71 @@
 			"bar": "bar"
 		},
 		"expected": "bar",
-		"message": "'bar' should === 'bar",
 		"compileOptions": {
 			"knownHelpersOnly": true
-		}
-	},
-	{
-		"description": "knownHelpers",
-		"it": "Unknown helper call in knownHelpers only mode should throw",
-		"template": "{{typeof hello}}",
-		"exception": true
-	},
-	{
-		"description": "blockHelperMissing",
-		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
-		"template": "{{#truthy}}yep{{/truthy}}",
-		"data": {
-			"truthy": {
-				"!code": true,
-				"javascript": "function () { return true; }",
-				"php": "function() { return true; }"
-			}
 		},
-		"expected": "yep",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			}
+		}
+	},
+	{
+		"description": "helpers - knownHelpers",
+		"it": "Unknown helper call in knownHelpers only mode should throw",
+		"template": "{{typeof hello}}",
+		"data": {},
+		"compileOptions": {
+			"knownHelpersOnly": true
+		},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
 			},
-			"test_helper": {
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": true
+	},
+	{
+		"description": "helpers - blockHelperMissing",
+		"it": "lambdas are resolved by blockHelperMissing, not handlebars proper",
+		"template": "{{#truthy}}yep{{/truthy}}",
+		"data": {
+			"truthy": {
+				"!code": true,
+				"javascript": "function () {\n        return true;\n      }",
+				"php": "function() {\n        return true;\n      }"
+			}
+		},
+		"expected": "yep",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
 			}
 		}
 	},
 	{
-		"description": "blockHelperMissing",
+		"description": "helpers - blockHelperMissing",
 		"it": "lambdas resolved by blockHelperMissing are bound to the context",
 		"template": "{{#truthy}}yep{{/truthy}}",
 		"data": {
@@ -1187,31 +1313,36 @@
 			}
 		},
 		"expected": "",
-		"compileOptions": {},
-		"globalHelpers": {
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
+				"php": "function() { return 'world!'; }"
 			},
 			"testHelper": {
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
 			}
-		},
-		"note": "Check original spec. Needs other tests, possibly implementation dependant."
+		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in ambiguous mustache calls",
 		"template": "{{helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1227,31 +1358,25 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in helper mustache calls",
 		"template": "{{helper 1}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1267,31 +1392,25 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in ambiguous block calls",
 		"template": "{{#helper}}{{/helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1307,31 +1426,25 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in simple block calls",
 		"template": "{{#./helper}}{{/./helper}}",
 		"data": {},
 		"expected": "missing: ./helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1347,31 +1460,25 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in helper block calls",
 		"template": "{{#helper 1}}{{/helper}}",
 		"data": {},
 		"expected": "ran: helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1387,26 +1494,10 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include in known helper calls",
 		"template": "{{helper}}",
 		"data": {},
@@ -1418,6 +1509,16 @@
 			"knownHelpersOnly": true
 		},
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1436,7 +1537,7 @@
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include full id",
 		"template": "{{#foo.helper}}{{/foo.helper}}",
 		"data": {
@@ -1444,6 +1545,16 @@
 		},
 		"expected": "missing: foo.helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1459,26 +1570,10 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name field",
+		"description": "helpers - name field",
 		"it": "should include full id if a hash is passed",
 		"template": "{{#foo.helper bar=baz}}{{/foo.helper}}",
 		"data": {
@@ -1486,6 +1581,16 @@
 		},
 		"expected": "helper missing: foo.helper",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"blockHelperMissing": {
 				"!code": true,
 				"javascript": "function () {\n        return 'missing: ' + arguments[arguments.length - 1].name;\n      }",
@@ -1501,26 +1606,10 @@
 				"javascript": "function () {\n        return 'ran: ' + arguments[arguments.length - 1].name;\n      }",
 				"php": "function() {\n        $arguments = func_get_args();\n        return 'ran: ' . $arguments[count($arguments)-1]['name'];\n      }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return \"world!\"; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			},
-			"test_helper": {
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "helpers take precedence over same-named context properties",
 		"template": "{{goodbye}} {{cruel world}}",
 		"data": {
@@ -1528,8 +1617,17 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
-		"message": "Helper executed",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"goodbye": {
 				"!code": true,
 				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
@@ -1540,10 +1638,11 @@
 				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
 				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
 			}
-		}
+		},
+		"message": "Helper executed"
 	},
 	{
-		"description": "name conflicts",
+		"description": "helpers - name conflicts",
 		"it": "helpers take precedence over same-named context properties$",
 		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}}",
 		"data": {
@@ -1551,83 +1650,7 @@
 			"world": "world"
 		},
 		"expected": "GOODBYE cruel WORLD",
-		"message": "Helper executed",
 		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
-				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);\n        }"
-			},
-			"cruel": {
-				"!code": true,
-				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
-				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
-			}
-		}
-	},
-	{
-		"description": "name conflicts",
-		"it": "Scoped names take precedence over helpers",
-		"template": "{{this.goodbye}} {{cruel world}} {{cruel this.goodbye}}",
-		"data": {
-			"goodbye": "goodbye",
-			"world": "world"
-		},
-		"expected": "goodbye cruel WORLD cruel GOODBYE",
-		"message": "Helper not executed",
-		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
-				"php": "function($options, $scope) {\n          return strtoupper($scope['goodbye']);\n        }"
-			},
-			"cruel": {
-				"!code": true,
-				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
-				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
-			}
-		}
-	},
-	{
-		"description": "name conflicts",
-		"it": "Scoped names take precedence over block helpers",
-		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}} {{this.goodbye}}",
-		"data": {
-			"goodbye": "goodbye",
-			"world": "world"
-		},
-		"expected": "GOODBYE cruel WORLD goodbye",
-		"message": "Helper executed",
-		"helpers": {
-			"goodbye": {
-				"!code": true,
-				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
-				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);\n        }"
-			},
-			"cruel": {
-				"!code": true,
-				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
-				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
-			}
-		}
-	},
-	{
-		"description": "block params",
-		"it": "should take presedence over context values",
-		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
-		"data": {
-			"value": "foo"
-		},
-		"expected": "1foo",
-		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -1637,16 +1660,129 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
+				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);\n        }"
+			},
+			"cruel": {
+				"!code": true,
+				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
+				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+			}
+		},
+		"message": "Helper executed"
+	},
+	{
+		"description": "helpers - name conflicts",
+		"it": "Scoped names take precedence over helpers",
+		"template": "{{this.goodbye}} {{cruel world}} {{cruel this.goodbye}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "goodbye cruel WORLD cruel GOODBYE",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
+			"goodbye": {
+				"!code": true,
+				"javascript": "function () {\n          return this.goodbye.toUpperCase();\n        }",
+				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']);\n        }"
+			},
+			"cruel": {
+				"!code": true,
+				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
+				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+			}
+		},
+		"message": "Helper not executed"
+	},
+	{
+		"description": "helpers - name conflicts",
+		"it": "Scoped names take precedence over block helpers",
+		"template": "{{#goodbye}} {{cruel world}}{{/goodbye}} {{this.goodbye}}",
+		"data": {
+			"goodbye": "goodbye",
+			"world": "world"
+		},
+		"expected": "GOODBYE cruel WORLD goodbye",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
+			"goodbye": {
+				"!code": true,
+				"javascript": "function (options) {\n          return this.goodbye.toUpperCase() + options.fn(this);\n        }",
+				"php": "function($options) {\n          return strtoupper($options->scope['goodbye']) . $options->fn($options->scope);\n        }"
+			},
+			"cruel": {
+				"!code": true,
+				"javascript": "function (world) {\n          return 'cruel ' + world.toUpperCase();\n        }",
+				"php": "function($world) {\n          return \"cruel \" . strtoupper($world);\n        }"
+			}
+		},
+		"message": "Helper executed"
+	},
+	{
+		"description": "helpers - block params",
+		"it": "should take presedence over context values",
+		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
+		"data": {
+			"value": "foo"
+		},
+		"expected": "1foo",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
+				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should take presedence over helper values",
 		"template": "{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{value}}",
 		"data": {},
 		"expected": "1foo",
 		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			},
 			"value": {
 				"!code": true,
 				"javascript": "function () {\n          return 'foo';\n        }",
@@ -1657,9 +1793,17 @@
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({}, {blockParams: [1, 2]});\n        }",
 				"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
 			}
+		}
+	},
+	{
+		"description": "helpers - block params",
+		"it": "should not take presedence over pathed values",
+		"template": "{{#goodbyes as |value|}}{{./value}}{{/goodbyes}}{{value}}",
+		"data": {
+			"value": "bar"
 		},
-		"compileOptions": {},
-		"globalHelpers": {
+		"expected": "barfoo",
+		"helpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -1669,18 +1813,7 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
-			}
-		}
-	},
-	{
-		"description": "block params",
-		"it": "should not take presedence over pathed values",
-		"template": "{{#goodbyes as |value|}}{{./value}}{{/goodbyes}}{{value}}",
-		"data": {
-			"value": "bar"
-		},
-		"expected": "barfoo",
-		"helpers": {
+			},
 			"value": {
 				"!code": true,
 				"javascript": "function () {\n          return 'foo';\n        }",
@@ -1691,23 +1824,10 @@
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
 				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
-			"world": {
-				"!code": true,
-				"javascript": "function () { return 'world!'; }",
-				"php": "function() { return 'world!'; }"
-			},
-			"testHelper": {
-				"!code": true,
-				"javascript": "function () { return 'found it!'; }",
-				"php": "function() { return 'found it!'; }"
-			}
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should take presednece over parent block params",
 		"template": "{{#goodbyes as |value|}}{{#goodbyes}}{{value}}{{#goodbyes as |value|}}{{value}}{{/goodbyes}}{{/goodbyes}}{{/goodbyes}}{{value}}",
 		"data": {
@@ -1715,14 +1835,6 @@
 		},
 		"expected": "13foo",
 		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [value++, value++] : undefined});\n        }",
-				"php": "function($options) {\n          static $value;\n          if( $value === null ) { $value = 1; } return $options->fn(array('value' => 'bar'), array('blockParams' => array($value++, $value++)));\n        }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -1732,11 +1844,16 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          if( typeof value === 'undefined' ) { value = 1; } return options.fn({value: 'bar'}, {blockParams: options.fn.blockParams === 1 ? [global.value++, global.value++] : undefined});\n        }",
+				"php": "function($options) {\n             static $value = 0;\n          return $options->fn(\n            [ \"value\" => 'bar' ],\n            [\n                 // blockParams probably wrong\n              \"blockParams\" => $options->blockParams === 1 ? [$value++, $value++] : null\n            ]\n          );\n        }"
 			}
 		}
 	},
 	{
-		"description": "block params",
+		"description": "helpers - block params",
 		"it": "should allow block params on chained helpers",
 		"template": "{{#if bar}}{{else goodbyes as |value|}}{{value}}{{/if}}{{value}}",
 		"data": {
@@ -1744,14 +1861,6 @@
 		},
 		"expected": "1foo",
 		"helpers": {
-			"goodbyes": {
-				"!code": true,
-				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
-			}
-		},
-		"compileOptions": {},
-		"globalHelpers": {
 			"world": {
 				"!code": true,
 				"javascript": "function () { return 'world!'; }",
@@ -1761,6 +1870,184 @@
 				"!code": true,
 				"javascript": "function () { return 'found it!'; }",
 				"php": "function() { return 'found it!'; }"
+			},
+			"goodbyes": {
+				"!code": true,
+				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
+				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+			}
+		}
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too few arguments",
+		"template": "{{#if}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, string",
+		"template": "{{#if test \"string\"}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, undefined",
+		"template": "{{#if test undefined}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "if helper - too many arguments, null",
+		"template": "{{#if test null}}{{/if}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#if requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "unless helper - too few arguments",
+		"template": "{{#unless}}{{/unless}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#unless requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "unless helper - too many arguments",
+		"template": "{{#unless test null}}{{/unless}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#unless requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "with helper - too few arguments",
+		"template": "{{#with}}{{/with}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#with requires exactly one argument/"
+	},
+	{
+		"description": "helpers - built-in helpers malformed arguments ",
+		"it": "with helper - too many arguments",
+		"template": "{{#with test \"string\"}}{{/with}}",
+		"data": {},
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function () { return 'found it!'; }",
+				"php": "function() { return 'found it!'; }"
+			}
+		},
+		"exception": "/#with requires exactly one argument/"
+	},
+	{
+		"description": "helpers - the lookupProperty-option",
+		"it": "should be passed to custom helpers",
+		"template": "{{testHelper}}",
+		"data": {
+			"testProperty": "abc"
+		},
+		"expected": "abc",
+		"helpers": {
+			"world": {
+				"!code": true,
+				"javascript": "function () { return 'world!'; }",
+				"php": "function() { return 'world!'; }"
+			},
+			"testHelper": {
+				"!code": true,
+				"javascript": "function testHelper(options) {\n          return options.lookupProperty(this, 'testProperty');\n        }",
+				"php": "function ($options) {\n          return $options->lookupProperty($options->scope, 'testProperty');\n        }"
 			}
 		}
 	}

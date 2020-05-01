@@ -461,6 +461,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "allows dot notation",
+		"number": "01",
 		"template": "{{foo.bar.baz}}",
 		"expected": [
 			{
@@ -862,6 +863,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes a partial space at the }); as \"OPEN_PARTIAL ID CLOSE\"",
+		"number": "01",
 		"template": "{{>foo/bar.baz  }}",
 		"expected": [
 			{
@@ -1079,6 +1081,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes directives",
+		"number": "01",
 		"template": "{{*foo}}",
 		"expected": [
 			{
@@ -1109,6 +1112,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"INVERSE\"",
+		"number": "01",
 		"template": "{{else}}",
 		"expected": [
 			{
@@ -1120,6 +1124,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes inverse sections as \"INVERSE\"",
+		"number": "02",
 		"template": "{{ else }}",
 		"expected": [
 			{
@@ -1346,6 +1351,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"number": "01",
 		"template": "{{ foo 1.1 }}",
 		"expected": [
 			{
@@ -1369,6 +1375,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"number": "02",
 		"template": "{{ foo -1 }}",
 		"expected": [
 			{
@@ -1392,6 +1399,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes numbers",
+		"number": "03",
 		"template": "{{ foo -1.1 }}",
 		"expected": [
 			{
@@ -1438,6 +1446,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes booleans",
+		"number": "01",
 		"template": "{{ foo false }}",
 		"expected": [
 			{
@@ -1519,6 +1528,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "01",
 		"template": "{{ foo bar baz=bat }}",
 		"expected": [
 			{
@@ -1554,6 +1564,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "02",
 		"template": "{{ foo bar baz=1 }}",
 		"expected": [
 			{
@@ -1589,6 +1600,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "03",
 		"template": "{{ foo bar baz=true }}",
 		"expected": [
 			{
@@ -1624,6 +1636,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "04",
 		"template": "{{ foo bar baz=false }}",
 		"expected": [
 			{
@@ -1659,6 +1672,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "05",
 		"template": "{{ foo bar\n  baz=bat }}",
 		"expected": [
 			{
@@ -1694,6 +1708,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "06",
 		"template": "{{ foo bar baz=\"bat\" }}",
 		"expected": [
 			{
@@ -1729,6 +1744,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "07",
 		"template": "{{ foo bar baz=\"bat\" bam=wot }}",
 		"expected": [
 			{
@@ -1776,6 +1792,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes hash arguments",
+		"number": "08",
 		"template": "{{foo omg bar=baz bat=\"bam\"}}",
 		"expected": [
 			{
@@ -1846,6 +1863,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"number": "01",
 		"template": "{{ foo @bar }}",
 		"expected": [
 			{
@@ -1873,6 +1891,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes special @ identifiers",
+		"number": "02",
 		"template": "{{ foo bar=@baz }}",
 		"expected": [
 			{
@@ -1969,6 +1988,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes subexpressions",
+		"number": "01",
 		"template": "{{foo (a-x b-y)}}",
 		"expected": [
 			{
@@ -2193,6 +2213,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes block params",
+		"number": "01",
 		"template": "{{#foo as |bar baz|}}",
 		"expected": [
 			{
@@ -2228,6 +2249,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes block params",
+		"number": "02",
 		"template": "{{#foo as | bar baz |}}",
 		"expected": [
 			{
@@ -2263,6 +2285,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes block params",
+		"number": "03",
 		"template": "{{#foo as as | bar baz |}}",
 		"expected": [
 			{
@@ -2302,6 +2325,7 @@
 	{
 		"description": "Tokenizer",
 		"it": "tokenizes block params",
+		"number": "04",
 		"template": "{{else foo as |bar baz|}}",
 		"expected": [
 			{
@@ -2331,6 +2355,57 @@
 			{
 				"name": "CLOSE",
 				"text": "}}"
+			}
+		]
+	},
+	{
+		"description": "Tokenizer",
+		"it": "tokenizes raw blocks",
+		"template": "{{{{a}}}} abc {{{{/a}}}} aaa {{{{a}}}} abc {{{{/a}}}}",
+		"expected": [
+			{
+				"name": "OPEN_RAW_BLOCK",
+				"text": "{{{{"
+			},
+			{
+				"name": "ID",
+				"text": "a"
+			},
+			{
+				"name": "CLOSE_RAW_BLOCK",
+				"text": "}}}}"
+			},
+			{
+				"name": "CONTENT",
+				"text": " abc "
+			},
+			{
+				"name": "END_RAW_BLOCK",
+				"text": "a"
+			},
+			{
+				"name": "CONTENT",
+				"text": " aaa "
+			},
+			{
+				"name": "OPEN_RAW_BLOCK",
+				"text": "{{{{"
+			},
+			{
+				"name": "ID",
+				"text": "a"
+			},
+			{
+				"name": "CLOSE_RAW_BLOCK",
+				"text": "}}}}"
+			},
+			{
+				"name": "CONTENT",
+				"text": " abc "
+			},
+			{
+				"name": "END_RAW_BLOCK",
+				"text": "a"
 			}
 		]
 	}
