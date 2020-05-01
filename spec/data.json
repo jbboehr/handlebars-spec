@@ -437,7 +437,9 @@
 		"description": "data - @root",
 		"it": "passed root values take priority",
 		"template": "{{@root.foo}}",
-		"data": {},
+		"data": {
+			"foo": "should not be used"
+		},
 		"expected": "hello",
 		"runtimeOptions": {
 			"data": {
