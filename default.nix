@@ -15,7 +15,7 @@
 
 {
   pkgs ? import <nixpkgs> {},
-  handlebarsSpecVersion ? null,
+  handlebarsSpecVersion ? "104.7.6",
   handlebarsSpecSrc ? ./.,
   handlebarsSpecSha256 ? null
 }:

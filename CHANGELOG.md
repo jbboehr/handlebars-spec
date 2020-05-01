@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+## [104.7.6] - 2020-04-30
+
 ### Changed
 - Rewrote everything in TypeScript
 - Switched the license to `AGPL-3.0-or-later`. The specification data is still licensed under the `MIT` license, as it is extracted from `handlebars.js`
@@ -23,4 +25,5 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - `globalPartials`, `globalDecorators`, and `globalHelpers` are now removed and merged into
   `partials`, `decorators`, and `helpers` instead
 
-[Unreleased]: https://github.com/jbboehr/handlebars.c/compare/v4.0.5-p1...HEAD
+[Unreleased]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.6...HEAD
+[104.7.6]: https://github.com/jbboehr/handlebars-spec/compare/v4.0.5-p1...v104.7.6

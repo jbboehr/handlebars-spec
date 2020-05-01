@@ -22,7 +22,7 @@ test: test_changes test_eslint test_node test_php
 check: test
 
 test_changes:
-	@git status --porcelain | grep 'spec/' && return 1 || return 0
+	sh -c 'git status --porcelain | grep 'spec/' && exit 1 || exit 0'
 
 test_node: dist
 	@echo ---------- Testing spec against handlebars.js ----------
