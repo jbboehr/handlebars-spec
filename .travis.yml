@@ -11,6 +11,9 @@ install:
   - npm install
   - make
 
+before_script:
+  - export PATH="./node_modules/.bin:$PATH"
+
 script:
   - make test_changes
   - make test_eslint
