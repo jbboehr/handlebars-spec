@@ -857,7 +857,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
-				"php": "function goodbye($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Helper output hash"
@@ -883,7 +883,7 @@
 			"goodbye": {
 				"!code": true,
 				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.hash.world;\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
-				"php": "function goodbye($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Boolean helper parameter honored"
@@ -957,7 +957,8 @@
 			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options->fn($options->scope);\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Boolean hash parameter honored"
@@ -982,7 +983,8 @@
 			},
 			"goodbye": {
 				"!code": true,
-				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
+				"javascript": "function goodbye(options) {\n        if (options.hash.print === true) {\n          return 'GOODBYE ' + options.hash.cruel + ' ' + options.fn(this);\n        } else if (options.hash.print === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }",
+				"php": "function ($options) {\n        if ($options['hash']['print'] === true) {\n          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options->fn($options->scope);\n        } else if ($options['hash']['print'] === false) {\n          return 'NOT PRINTING';\n        } else {\n          return 'THIS SHOULD NOT HAPPEN';\n        }\n      }"
 			}
 		},
 		"message": "Boolean hash parameter honored"
