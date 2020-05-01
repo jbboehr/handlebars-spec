@@ -899,6 +899,18 @@
 			        }
 			      }
 			'''
+		php:
+			'''
+			function goodbye($options) {
+			        if ($options['hash']['print'] === true) {
+			          return 'GOODBYE ' . $options['hash']['cruel'] . ' ' . $options['hash']['world'];
+			        } else if ($options['hash']['print'] === false) {
+			          return 'NOT PRINTING';
+			        } else {
+			          return 'THIS SHOULD NOT HAPPEN';
+			        }
+			      }
+			'''
 	}
 	"function(options){return\"GOODBYE \"+options.hash.cruel+\" \"+options.fn(this)+\" \"+options.hash.times+\" TIMES\"};": {
 		!code: true
@@ -1056,8 +1068,8 @@
 			'''
 		php:
 			'''
-			function($options, $scope) {
-			          return strtoupper($scope['goodbye']);
+			function($options) {
+			          return strtoupper($options->scope['goodbye']);
 			        }
 			'''
 	}
@@ -1154,6 +1166,12 @@
 			'''
 			function testHelper(options) {
 			          return options.lookupProperty(this, 'testProperty');
+			        }
+			'''
+		php:
+			'''
+			function ($options) {
+			          return $options->lookupProperty($options->scope, 'testProperty');
 			        }
 			'''
 	}
@@ -1261,6 +1279,12 @@
 			        }
 			        // And to make IE happy, check for the known string as length is not enumerated.
 			        return this === 'bat' ? 'found' : 'not';
+			      }
+			'''
+		php:
+			'''
+			function() {
+              return 'found';
 			      }
 			'''
 	}
