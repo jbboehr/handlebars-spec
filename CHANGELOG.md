@@ -6,6 +6,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+## [104.7.106] - 2020-05-01
+
+### Fixed
+- npm packaging issues
+- ungenerated export/
+
+### Removed
+- Bench spec
+
 ## [104.7.6] - 2020-04-30
 
 ### Changed
@@ -25,5 +34,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - `globalPartials`, `globalDecorators`, and `globalHelpers` are now removed and merged into
   `partials`, `decorators`, and `helpers` instead
 
-[Unreleased]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.6...HEAD
+[Unreleased]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.106...HEAD
+[104.7.106]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.6...v104.7.106
 [104.7.6]: https://github.com/jbboehr/handlebars-spec/compare/v4.0.5-p1...v104.7.6
