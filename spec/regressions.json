@@ -369,7 +369,8 @@
 		"helpers": {
 			"myif": {
 				"!code": true,
-				"javascript": "function($conditional, $options) {\n        if ($conditional) {\n          return $options->fn($options->scope);\n        } else {\n          return $options->inverse($options->scope);\n        }\n      }"
+				"javascript": "function(conditional, options) {\n        if (conditional) {\n          return options.fn(this);\n        } else {\n          return options.inverse(this);\n        }\n      }",
+				"php": "function($conditional, $options) {\n        if ($conditional) {\n          return $options->fn($options->scope);\n        } else {\n          return $options->inverse($options->scope);\n        }\n      }"
 			}
 		}
 	},
@@ -425,7 +426,8 @@
 		"helpers": {
 			"helpa": {
 				"!code": true,
-				"javascript": "function($options) {\n        return $options['hash']['length'];\n      }"
+				"javascript": "function(options) {\n        return options.hash.length;\n      }",
+				"php": "function($options) {\n        return $options['hash']['length'];\n      }"
 			}
 		}
 	},
