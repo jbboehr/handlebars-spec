@@ -45,5 +45,14 @@
 	},
 	"engines": {
 		"node": ">=12.0.0"
-	}
+	},
+	"bin": "./dist/cli.js",
+	"files": [
+		"bin",
+		"dist",
+		"export",
+		"patch",
+		"spec",
+		"src"
+	]
 }
