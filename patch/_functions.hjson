@@ -1312,7 +1312,7 @@
 			        }
 			      }
 			'''
-		javascript:
+		php:
 			'''
 			function($conditional, $options) {
 			        if ($conditional) {
@@ -1331,7 +1331,7 @@
 			        return options.hash.length;
 			      }
 			'''
-		javascript:
+		php:
 			'''
 			function($options) {
 			        return $options['hash']['length'];
