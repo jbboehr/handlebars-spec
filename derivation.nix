@@ -29,10 +29,10 @@ in
 
 stdenv.mkDerivation rec {
   name = "handlebars-spec-${version}";
-  version = orDefault handlebarsSpecVersion "v4.0.5-p1";
+  version = orDefault handlebarsSpecVersion "v104.7.6";
   src = orDefault handlebarsSpecSrc (fetchurl {
     url = "https://github.com/jbboehr/handlebars-spec/archive/${version}.tar.gz";
-    sha256 = orDefault handlebarsSpecSha256 "477552869cf4a8d3cadb74f0d297988dfa9edddbc818ee8f56bae0a097dc657c";
+    sha256 = orDefault handlebarsSpecSha256 "09i8cbypfpb10jc6pwbw7rsvhwlm0lmswsd7p2isxnlsmhn07lwk";
   });
 
   builder = writeText "builder.sh" ''
