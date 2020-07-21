@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GlobalContext = void 0;
 const testContext_1 = require("./testContext");
 class GlobalContext {
     constructor() {

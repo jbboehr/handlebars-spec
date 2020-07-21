@@ -9,31 +9,31 @@
 	"license": "AGPL-3.0-or-later",
 	"repository": "https://github.com/jbboehr/handlebars-spec.git",
 	"dependencies": {
-		"clime": "^0.5.10",
+		"clime": "^0.5.14",
 		"deep-equal": "^2.0.3",
 		"extend": "^3.0.2",
 		"handlebars": "4.7.6",
 		"hjson": "^3.2.1",
 		"sha1": "^1.1.1",
 		"sinon": "^9.0.2",
-		"uglify-js": "^3.9.1"
+		"uglify-js": "^3.10.0"
 	},
 	"devDependencies": {
 		"@types/deep-equal": "^1.0.1",
 		"@types/extend": "^3.0.1",
-		"@types/hjson": "^2.4.1",
-		"@types/node": "^13.13.4",
-		"@types/sinon": "^9.0.0",
-		"@types/uglify-js": "^3.9.0",
-		"@typescript-eslint/eslint-plugin": "^2.30.0",
-		"@typescript-eslint/parser": "^2.30.0",
+		"@types/hjson": "^2.4.2",
+		"@types/node": "^13.13.14",
+		"@types/sinon": "^9.0.4",
+		"@types/uglify-js": "^3.9.3",
+		"@typescript-eslint/eslint-plugin": "^2.34.0",
+		"@typescript-eslint/parser": "^2.34.0",
 		"eslint": "^6.8.0",
-		"eslint-plugin-compat": "^3.5.1",
-		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-compat": "^3.8.0",
+		"eslint-plugin-import": "^2.22.0",
 		"eslint-plugin-node": "^11.1.0",
 		"source-map": "^0.7.3",
-		"ts-node": "^8.9.1",
-		"typescript": "^3.8.3"
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.7"
 	},
 	"scripts": {
 		"build": "tsc",

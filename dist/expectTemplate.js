@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExpectTemplate = void 0;
 class ExpectTemplate {
     constructor(template, cb) {
         this.helpers = {};

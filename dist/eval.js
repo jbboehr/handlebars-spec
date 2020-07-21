@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.wrappedEval = exports.safeEval = void 0;
 /*jshint strict: false, unused: false */
 function safeEval(templateSpec) {
     try {

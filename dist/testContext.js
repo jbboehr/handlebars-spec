@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TestContext = void 0;
 class TestContext {
     reset() {
         const self = new TestContext();
