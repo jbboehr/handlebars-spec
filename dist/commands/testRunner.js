@@ -213,7 +213,7 @@ function checkResult(test, e) {
         if (e) {
             console.error(e.stack);
         }
-        console.error(require('util').inspect(utils_1.serialize(test), false, null, true));
+        console.error(util_1.inspect(utils_1.serialize(test), false, null, true));
         return false;
     }
 }

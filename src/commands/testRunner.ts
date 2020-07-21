@@ -18,7 +18,7 @@
 import { Command, command, param } from 'clime';
 import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
-import { isArray } from 'util';
+import { isArray, inspect } from 'util';
 import { serialize } from '../utils';
 import { resolve as resolvePath } from 'path';
 import { readdirSync, readFileSync } from 'fs';
@@ -197,7 +197,7 @@ function checkResult(test: any, e?: Error): boolean {
         if (e) {
             console.error(e.stack);
         }
-        console.error(require('util').inspect(serialize(test), false, null, true));
+        console.error(inspect(serialize(test), false, null, true));
         return false;
     }
 }
