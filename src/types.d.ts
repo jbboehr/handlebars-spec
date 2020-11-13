@@ -49,10 +49,10 @@ interface ExpectTemplateInterface {
 interface TestSpec {
     description: string;
     it: string;
-    number: string;
+    number?: string;
     template: string;
     data: any;
-    expected: string;
+    expected?: string;
     runtimeOptions?: RuntimeOptions;
     compileOptions?: CompileOptions;
     partials: StringDict;
