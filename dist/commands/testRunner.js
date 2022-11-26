@@ -68,7 +68,7 @@ global.CompilerContext = {
         return handlebarsEnv.compile(template, options);
     }
 };
-require('../../handlebars.js/spec/env/common.js');
+require('../../handlebars.js/spec/env/common');
 let default_1 = class default_1 extends clime_1.Command {
     execute(inputFile) {
         const successes = [];

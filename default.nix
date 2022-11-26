@@ -20,7 +20,7 @@
   handlebarsSpecSha256 ? null
 }:
 
-pkgs.callPackage ./derivation.nix {
+pkgs.callPackage ./nix/derivation.nix {
   inherit handlebarsSpecVersion handlebarsSpecSrc handlebarsSpecSha256;
 }
 

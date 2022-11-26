@@ -13,7 +13,8 @@
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"sourceMap": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"useUnknownInCatchVariables": false
 	},
 	"include": [
 		"src/types.d.ts",

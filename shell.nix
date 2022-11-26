@@ -15,7 +15,7 @@
 
 {
   pkgs ? import <nixpkgs> {},
-  nodejs ? pkgs.nodejs-12_x,
+  nodejs ? pkgs.nodejs,
   php ? pkgs.php,
   nodeModulesBinPath ? (builtins.getEnv "PWD") + "/node_modules/.bin"
 }:

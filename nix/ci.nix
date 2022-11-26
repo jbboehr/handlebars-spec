@@ -16,13 +16,13 @@
 builtins.mapAttrs (k: _v:
   let
     path = builtins.fetchTarball {
-      url = https://github.com/NixOS/nixpkgs-channels/archive/nixos-20.03.tar.gz;
-      name = "nixpkgs-20.03";
+      url = https://github.com/NixOS/nixpkgs/archive/nixos-22.05.tar.gz;
+      name = "nixpkgs-22.05";
     };
     pkgs = import (path) { system = k; };
   in
   pkgs.recurseIntoAttrs {
-    n2003 = pkgs.callPackage ./default.nix {};
+    n2205 = pkgs.callPackage ../default.nix {};
   }
 ) {
   x86_64-linux = {};

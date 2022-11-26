@@ -17,14 +17,15 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-        - "10.x"
-        - "12.x"
-        - "14.x"
+          - "14.x"
+          - "16.x"
+          - "18.x"
     steps:
-      - uses: actions/checkout@v2
-      - uses: textbook/git-checkout-submodule-action@master
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: make
@@ -37,17 +38,18 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-        - "14.x"
+          - "16.x"
         php-version:
-        - "7.2"
-        - "7.3"
-        - "7.4"
-        - "8.0"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
     steps:
-      - uses: actions/checkout@v2
-      - uses: textbook/git-checkout-submodule-action@master
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup PHP ${{ matrix.php-version }}
@@ -56,3 +58,15 @@ jobs:
           php-version: ${{ matrix.php-version }}
       - run: make
       - run: make test_php
+
+  nix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v18
+        with:
+          nix_path: nixpkgs=channel:nixos-22.05
+      - run: nix-build
+      - run: nix-build nix/ci.nix

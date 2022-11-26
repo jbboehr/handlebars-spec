@@ -40,7 +40,7 @@ const handlebarsEnv = Handlebars;
         return handlebarsEnv.compile(template, options);
     }
 };
-require('../../handlebars.js/spec/env/common.js');
+require('../../handlebars.js/spec/env/common');
 
 
 
