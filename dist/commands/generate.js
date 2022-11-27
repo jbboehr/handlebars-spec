@@ -17,7 +17,11 @@
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -36,7 +40,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -55,7 +59,7 @@ const mockGlobals = __importStar(require("../mockGlobals"));
 class OutputFileOptions extends clime_1.Options {
 }
 __decorate([
-    clime_1.option({
+    (0, clime_1.option)({
         flag: 'o',
         description: 'Output file',
         required: false,
@@ -63,7 +67,7 @@ __decorate([
     __metadata("design:type", String)
 ], OutputFileOptions.prototype, "outputFile", void 0);
 __decorate([
-    clime_1.option({
+    (0, clime_1.option)({
         description: 'Output format',
         required: false,
     }),
@@ -73,7 +77,7 @@ exports.OutputFileOptions = OutputFileOptions;
 let default_1 = class default_1 extends clime_1.Command {
     execute(inputFile, options) {
         const suite = path.basename(inputFile).replace(/\.js$/, '');
-        if (!fs_1.existsSync(inputFile)) {
+        if (!(0, fs_1.existsSync)(inputFile)) {
             console.error('The input file does not exist');
             return process.exit(66);
         }
@@ -92,14 +96,14 @@ let default_1 = class default_1 extends clime_1.Command {
         // Need to patch out some global functions for the tokenizer
         if (inputFile.match(/tokenizer\.js$/)) {
             mockGlobals.globalContext.isParser = true;
-            const tokenizerData = ('' + fs_1.readFileSync(inputFile))
+            const tokenizerData = ('' + (0, fs_1.readFileSync)(inputFile))
                 .replace(/function shouldMatchTokens/, 'function REMshouldMatchTokens')
                 .replace(/function shouldBeToken/, 'function REMshouldBeToken')
                 .replace(/function tokenize/, 'global.originalTokenize = function');
             inputFile = inputFile.replace(/\.js$/, '.tmp.js');
-            fs_1.writeFileSync(inputFile, tokenizerData);
+            (0, fs_1.writeFileSync)(inputFile, tokenizerData);
             process.on('exit', function () {
-                fs_1.unlinkSync(inputFile);
+                (0, fs_1.unlinkSync)(inputFile);
             });
         }
         require(path.resolve(inputFile));
@@ -116,7 +120,7 @@ let default_1 = class default_1 extends clime_1.Command {
         }
         const outputFile = path.resolve(options.outputFile);
         try {
-            fs_1.writeFileSync(outputFile, output);
+            (0, fs_1.writeFileSync)(outputFile, output);
             console.log('JSON saved to ' + options.outputFile);
             /*
             if (unusedPatches !== null) {
@@ -134,7 +138,7 @@ let default_1 = class default_1 extends clime_1.Command {
     }
 };
 __decorate([
-    __param(0, clime_1.param({
+    __param(0, (0, clime_1.param)({
         name: 'Input file',
         required: true,
     })),
@@ -143,7 +147,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], default_1.prototype, "execute", null);
 default_1 = __decorate([
-    clime_1.command({
+    (0, clime_1.command)({
         description: 'This generates the spec json files from the handlebars test suite',
     })
 ], default_1);

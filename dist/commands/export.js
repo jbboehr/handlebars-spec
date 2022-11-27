@@ -34,7 +34,7 @@ const fs_1 = require("fs");
 class ExportOptions extends clime_1.Options {
 }
 __decorate([
-    clime_1.option({
+    (0, clime_1.option)({
         flag: 'o',
         description: 'Output file',
         required: false,
@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:type", String)
 ], ExportOptions.prototype, "outputFile", void 0);
 __decorate([
-    clime_1.option({
+    (0, clime_1.option)({
         description: 'Output format',
         required: false,
     }),
@@ -50,11 +50,11 @@ __decorate([
 ], ExportOptions.prototype, "outputFormat", void 0);
 let default_1 = class default_1 extends clime_1.Command {
     execute(inputFile, options) {
-        inputFile = path_1.resolve(inputFile);
-        if (!fs_1.existsSync(inputFile)) {
+        inputFile = (0, path_1.resolve)(inputFile);
+        if (!(0, fs_1.existsSync)(inputFile)) {
             throw new Error(inputFile + ' does not exist');
         }
-        const inputData = JSON.parse(fs_1.readFileSync(inputFile).toString());
+        const inputData = JSON.parse((0, fs_1.readFileSync)(inputFile).toString());
         const tests = [];
         for (const test of inputData) {
             try {
@@ -68,7 +68,7 @@ let default_1 = class default_1 extends clime_1.Command {
         }
         const outputText = JSON.stringify(tests, null, '\t');
         if (options.outputFile) {
-            fs_1.writeFileSync(options.outputFile, outputText);
+            (0, fs_1.writeFileSync)(options.outputFile, outputText);
         }
         else {
             process.stdout.write(outputText);
@@ -111,7 +111,7 @@ let default_1 = class default_1 extends clime_1.Command {
     }
 };
 __decorate([
-    __param(0, clime_1.param({
+    __param(0, (0, clime_1.param)({
         name: 'Input file',
         required: true,
     })),
@@ -120,7 +120,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], default_1.prototype, "execute", null);
 default_1 = __decorate([
-    clime_1.command({
+    (0, clime_1.command)({
         description: 'This exports stuff',
     })
 ], default_1);

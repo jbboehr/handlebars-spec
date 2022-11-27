@@ -17,7 +17,11 @@
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -30,7 +34,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -55,6 +59,7 @@ function log(message, ...optionalParams) {
         exports.globalContext.testContext.key || '',
         '|',
         message,
+        // ...optionalParams
     ]);
     if (optionalParams && optionalParams.length >= 1) {
         console.warn.apply(null, optionalParams);
@@ -129,7 +134,7 @@ function addExpectTemplate(xt) {
     const [name, number] = generateName();
     indices[name] = name;
     // Make test spec
-    let spec = utils_1.serialize({
+    let spec = (0, utils_1.serialize)({
         description,
         it,
         number,
@@ -138,9 +143,9 @@ function addExpectTemplate(xt) {
         expected: xt.expected,
         runtimeOptions: xt.runtimeOptions,
         compileOptions: xt.compileOptions,
-        partials: extend_1.default({}, detectGlobalPartials(), xt.partials || {}),
-        helpers: extend_1.default({}, detectGlobalHelpers(), xt.helpers || {}),
-        decorators: extend_1.default({}, detectGlobalDecorators(), xt.decorators || {}),
+        partials: (0, extend_1.default)({}, detectGlobalPartials(), xt.partials || {}),
+        helpers: (0, extend_1.default)({}, detectGlobalHelpers(), xt.helpers || {}),
+        decorators: (0, extend_1.default)({}, detectGlobalDecorators(), xt.decorators || {}),
         message: xt.message,
         exception: xt.exception,
     });
@@ -171,12 +176,12 @@ function addExpectTemplate(xt) {
 }
 function applyPatches(name, spec) {
     const { suite, unusedPatches } = exports.globalContext;
-    const patchFile = path_1.resolve('./patch/' + '/' + suite + '.json');
-    if (!fs_1.existsSync(patchFile)) {
+    const patchFile = (0, path_1.resolve)('./patch/' + '/' + suite + '.json');
+    if (!(0, fs_1.existsSync)(patchFile)) {
         return spec;
     }
     // @todo only read once
-    const patchData = JSON.parse(fs_1.readFileSync(patchFile).toString());
+    const patchData = JSON.parse((0, fs_1.readFileSync)(patchFile).toString());
     let patch;
     if (patchData.hasOwnProperty(name)) {
         patch = patchData[name];
@@ -192,14 +197,14 @@ function applyPatches(name, spec) {
         throw new SkipError();
     }
     else {
-        spec = extend_1.default(true, spec, patch);
+        spec = (0, extend_1.default)(true, spec, patch);
         // Using nulls in patches to unset things
-        utils_1.stripNulls(spec);
+        (0, utils_1.stripNulls)(spec);
         log('applied patch', spec);
     }
     // Track unused patches
     if (unusedPatches === null) {
-        extend_1.default(unusedPatches, patchData);
+        (0, extend_1.default)(unusedPatches, patchData);
     }
     delete unusedPatches[name];
     return spec;

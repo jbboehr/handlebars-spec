@@ -24,7 +24,7 @@ import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
 @command({
     description: 'This extracts functions from the existing spec files into a translation table',
-})
+    })
 export default class extends Command {
     execute(
         @params({
@@ -33,7 +33,7 @@ export default class extends Command {
             required: true,
         })
             args: string[],
-            options: OutputFileOptions,
+        options: OutputFileOptions,
     ): void {
         let fns: CodeDict = {};
 

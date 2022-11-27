@@ -46,7 +46,7 @@ require('../../handlebars.js/spec/env/common');
 
 @command({
     description: 'This runs the spec json files against handlebars to test them',
-})
+    })
 export default class extends Command {
     execute(
         @param({

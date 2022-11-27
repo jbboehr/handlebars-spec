@@ -41,10 +41,10 @@ let default_1 = class default_1 extends clime_1.Command {
     execute(args, options) {
         let fns = {};
         for (let i = 0; i < args.length; i++) {
-            const filestr = fs_1.readFileSync(args[i]).toString();
+            const filestr = (0, fs_1.readFileSync)(args[i]).toString();
             let data;
             if (args[i].endsWith('.hjson')) {
-                data = hjson_1.parse(filestr);
+                data = (0, hjson_1.parse)(filestr);
             }
             else {
                 data = JSON.parse(filestr);
@@ -56,7 +56,7 @@ let default_1 = class default_1 extends clime_1.Command {
         }
         let output;
         if (options.outputFormat === 'hjson') {
-            output = hjson_1.stringify(fns, {
+            output = (0, hjson_1.stringify)(fns, {
                 bracesSameLine: true,
                 space: '\t'
             });
@@ -65,7 +65,7 @@ let default_1 = class default_1 extends clime_1.Command {
             output = JSON.stringify(fns, null, '\t');
         }
         if (options.outputFile) {
-            fs_1.writeFileSync(options.outputFile, output);
+            (0, fs_1.writeFileSync)(options.outputFile, output);
         }
         else {
             process.stdout.write(output);
@@ -81,9 +81,9 @@ let default_1 = class default_1 extends clime_1.Command {
                 console.warn('js key not set');
                 return prev;
             }
-            const key = utils_1.normalizeJavascript(js);
+            const key = (0, utils_1.normalizeJavascript)(js);
             if (key in prev) {
-                if (!deep_equal_1.default(prev[key], data)) {
+                if (!(0, deep_equal_1.default)(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);
                 }
             }
@@ -98,7 +98,7 @@ let default_1 = class default_1 extends clime_1.Command {
     }
 };
 __decorate([
-    __param(0, clime_1.params({
+    __param(0, (0, clime_1.params)({
         type: String,
         description: 'input files',
         required: true,
@@ -108,7 +108,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], default_1.prototype, "execute", null);
 default_1 = __decorate([
-    clime_1.command({
+    (0, clime_1.command)({
         description: 'This extracts functions from the existing spec files into a translation table',
     })
 ], default_1);

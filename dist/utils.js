@@ -26,7 +26,7 @@ const path_1 = require("path");
 const util_1 = require("util");
 const eval_1 = require("./eval");
 const hjson_1 = require("hjson");
-const PATCH_FILE = path_1.resolve(__dirname + '/../patch/_functions.hjson');
+const PATCH_FILE = (0, path_1.resolve)(__dirname + '/../patch/_functions.hjson');
 let functionPatches;
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
@@ -47,7 +47,7 @@ function jsToCode(fn) {
     let data;
     // Load function patches
     if (!functionPatches) {
-        functionPatches = hjson_1.parse(fs_1.readFileSync(PATCH_FILE).toString()) || {};
+        functionPatches = (0, hjson_1.parse)((0, fs_1.readFileSync)(PATCH_FILE).toString()) || {};
     }
     if (key in functionPatches) {
         data = {
@@ -63,7 +63,7 @@ function jsToCode(fn) {
         };
         functionPatches[key] = data;
         // write it out to _functions
-        fs_1.writeFileSync(PATCH_FILE, hjson_1.stringify(functionPatches, {
+        (0, fs_1.writeFileSync)(PATCH_FILE, (0, hjson_1.stringify)(functionPatches, {
             bracesSameLine: true,
             space: '\t'
         }));
@@ -163,7 +163,7 @@ function serializeInner(data) {
         return null;
     }
     // Handle arrays
-    if (util_1.isArray(data)) {
+    if ((0, util_1.isArray)(data)) {
         if (isSparseArray(data)) {
             const orv = { '!sparsearray': true };
             Object.keys(data).forEach((key) => {
@@ -249,7 +249,7 @@ function deserialize(data) {
         return undefined;
     }
     else if ('!code' in data) {
-        return eval_1.safeEval(data['javascript']);
+        return (0, eval_1.safeEval)(data['javascript']);
     }
     else if ('!sparsearray' in data) {
         const newData = [];

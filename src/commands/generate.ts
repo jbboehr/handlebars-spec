@@ -36,7 +36,7 @@ export class OutputFileOptions extends Options {
 
 @command({
     description: 'This generates the spec json files from the handlebars test suite',
-})
+    })
 export default class extends Command {
     execute(
         @param({
@@ -44,7 +44,7 @@ export default class extends Command {
             required: true,
         })
             inputFile: string,
-            options: OutputFileOptions,
+        options: OutputFileOptions,
     ): void {
         const suite = path.basename(inputFile).replace(/\.js$/, '');
 

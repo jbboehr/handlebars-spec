@@ -35,7 +35,7 @@ class ExportOptions extends Options {
 
 @command({
     description: 'This exports stuff',
-})
+    })
 export default class extends Command {
     execute(
         @param({
@@ -43,7 +43,7 @@ export default class extends Command {
             required: true,
         })
             inputFile: string,
-            options: ExportOptions,
+        options: ExportOptions,
     ): void {
         inputFile = resolvePath(inputFile);
 

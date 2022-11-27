@@ -17,7 +17,11 @@
  */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -36,7 +40,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -62,7 +66,7 @@ global.handlebarsEnv = handlebarsEnv;
 global.CompilerContext = {
     compile(template, options) {
         const templateSpec = global.handlebarsEnv.precompile(template, options);
-        return handlebarsEnv.template(eval_1.safeEval(templateSpec));
+        return handlebarsEnv.template((0, eval_1.safeEval)(templateSpec));
     },
     compileWithPartial(template, options) {
         return handlebarsEnv.compile(template, options);
@@ -78,7 +82,7 @@ let default_1 = class default_1 extends clime_1.Command {
         function runSpec(spec) {
             const tmp = spec.replace(/\.json$/, '').split('/');
             const suite = tmp[tmp.length - 1];
-            const data = JSON.parse(fs_1.readFileSync(path_1.resolve(dir + '/' + spec)).toString());
+            const data = JSON.parse((0, fs_1.readFileSync)((0, path_1.resolve)(dir + '/' + spec)).toString());
             Object.keys(data).forEach(function (y) {
                 data[y].suite = suite;
                 const result = runTest(data[y]);
@@ -97,8 +101,8 @@ let default_1 = class default_1 extends clime_1.Command {
             runSpec(inputFile);
         }
         else {
-            dir = path_1.resolve('./spec/');
-            const specs = fs_1.readdirSync(dir);
+            dir = (0, path_1.resolve)('./spec/');
+            const specs = (0, fs_1.readdirSync)(dir);
             Object.values(specs).forEach(runSpec);
         }
         console.log('Summary');
@@ -109,7 +113,7 @@ let default_1 = class default_1 extends clime_1.Command {
     }
 };
 __decorate([
-    __param(0, clime_1.param({
+    __param(0, (0, clime_1.param)({
         name: 'Input file',
         required: false,
     })),
@@ -118,7 +122,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], default_1.prototype, "execute", null);
 default_1 = __decorate([
-    clime_1.command({
+    (0, clime_1.command)({
         description: 'This runs the spec json files against handlebars to test them',
     })
 ], default_1);
@@ -150,7 +154,7 @@ function unstringifyHelpers(helpers) {
     }
     const ret = {};
     Object.keys(helpers).forEach(function (x) {
-        ret[x] = eval_1.safeEval(helpers[x].javascript);
+        ret[x] = (0, eval_1.safeEval)(helpers[x].javascript);
     });
     return ret;
 }
@@ -159,12 +163,12 @@ function unstringifyLambdas(data) {
         return data;
     }
     for (const x in data) {
-        if (util_1.isArray(data[x])) {
+        if ((0, util_1.isArray)(data[x])) {
             unstringifyLambdas(data[x]);
         }
         else if (typeof data[x] === 'object' && data[x] !== null) {
             if ('!code' in data[x]) {
-                data[x] = eval_1.safeEval(data[x].javascript);
+                data[x] = (0, eval_1.safeEval)(data[x].javascript);
             }
             else {
                 unstringifyLambdas(data[x]);
@@ -213,7 +217,7 @@ function checkResult(test, e) {
         if (e) {
             console.error(e.stack);
         }
-        console.error(util_1.inspect(utils_1.serialize(test), false, null, true));
+        console.error((0, util_1.inspect)((0, utils_1.serialize)(test), false, null, true));
         return false;
     }
 }
