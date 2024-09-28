@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -58,6 +58,7 @@ const fs_1 = require("fs");
 const mockGlobals = __importStar(require("../mockGlobals"));
 class OutputFileOptions extends clime_1.Options {
 }
+exports.OutputFileOptions = OutputFileOptions;
 __decorate([
     (0, clime_1.option)({
         flag: 'o',
@@ -73,8 +74,7 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], OutputFileOptions.prototype, "outputFormat", void 0);
-exports.OutputFileOptions = OutputFileOptions;
-let default_1 = class default_1 extends clime_1.Command {
+let default_1 = class extends clime_1.Command {
     execute(inputFile, options) {
         const suite = path.basename(inputFile).replace(/\.js$/, '');
         if (!(0, fs_1.existsSync)(inputFile)) {

@@ -15,15 +15,15 @@
 		"handlebars": "4.7.7",
 		"hjson": "^3.2.1",
 		"sha1": "^1.1.1",
-		"sinon": "^9.2.1",
+		"sinon": "^19.0.2",
 		"uglify-js": "^3.11.5"
 	},
 	"devDependencies": {
 		"@types/deep-equal": "^1.0.1",
 		"@types/extend": "^3.0.1",
 		"@types/hjson": "^2.4.2",
-		"@types/node": "^16.11.7",
-		"@types/sinon": "^9.0.8",
+		"@types/node": "^20.0",
+		"@types/sinon": "^17.0.3",
 		"@types/uglify-js": "^3.11.1",
 		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.44.0",
@@ -32,8 +32,8 @@
 		"eslint-plugin-import": "^2.22.1",
 		"eslint-plugin-node": "^11.1.0",
 		"source-map": "^0.7.3",
-		"ts-node": "^10.9.1",
-		"typescript": "^4.9.3"
+		"ts-node": "^10.9.2",
+		"typescript": "^5.6.2"
 	},
 	"scripts": {
 		"build": "tsc",

@@ -9,15 +9,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [104.7.106] - 2020-05-01
 
 ### Fixed
+
 - npm packaging issues
 - ungenerated export/
 
 ### Removed
+
 - Bench spec
 
 ## [104.7.6] - 2020-04-30
 
 ### Changed
+
 - Rewrote everything in TypeScript
 - Switched the license to `AGPL-3.0-or-later`. The specification data is still licensed under the `MIT` license, as it is extracted from `handlebars.js`
 - `description` now includes all `describe($description, ...)` from the handlebars test suite
@@ -27,9 +30,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Using a new version format `104.7.6` which is: `(myMajor * 100 + handlebarsMajor) + '.' + (myMinor * 100 + handlebarsMinor) + '.' + (myPatch * 100 + handlebarsPatch)`
 
 ### Added
+
 - `number` is now included in tests (besides the first implied `00`) that have multiple cases
 
 ### Removed
+
 - `compat` is removed in favor of `compileOptions.compat`
 - `globalPartials`, `globalDecorators`, and `globalHelpers` are now removed and merged into
   `partials`, `decorators`, and `helpers` instead

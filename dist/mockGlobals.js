@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -42,7 +42,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.compileWithPartials = exports.shouldCompileToWithPartials = exports.shouldCompileTo = exports.shouldBeToken = exports.expect = exports.xit = exports.shouldMatchTokens = exports.tokenize = exports.shouldThrow = exports.equals = exports.expectTemplate = exports.it = exports.describe = exports.beforeEach = exports.afterEach = exports.globalContext = exports.sinon = exports.Handlebars = void 0;
+exports.globalContext = exports.sinon = exports.Handlebars = void 0;
+exports.afterEach = afterEach;
+exports.beforeEach = beforeEach;
+exports.describe = describe;
+exports.it = it;
+exports.expectTemplate = expectTemplate;
+exports.equals = equals;
+exports.shouldThrow = shouldThrow;
+exports.tokenize = tokenize;
+exports.shouldMatchTokens = shouldMatchTokens;
+exports.xit = xit;
+exports.expect = expect;
+exports.shouldBeToken = shouldBeToken;
+exports.shouldCompileTo = shouldCompileTo;
+exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
+exports.compileWithPartials = compileWithPartials;
 const Handlebars = __importStar(require("handlebars"));
 exports.Handlebars = Handlebars;
 const utils_1 = require("./utils");
@@ -70,11 +85,9 @@ class SkipError extends Error {
 function afterEach(fn) {
     exports.globalContext.afterFns.push(fn);
 }
-exports.afterEach = afterEach;
 function beforeEach(fn) {
     exports.globalContext.beforeFns.push(fn);
 }
-exports.beforeEach = beforeEach;
 function describe(description, next) {
     const { testContext, descriptionStack } = exports.globalContext;
     let { beforeFns, afterFns } = exports.globalContext;
@@ -89,7 +102,6 @@ function describe(description, next) {
     exports.globalContext.beforeFns = beforeFns;
     exports.globalContext.afterFns = afterFns;
 }
-exports.describe = describe;
 function it(description, next) {
     const { testContext } = exports.globalContext;
     // Call before fns
@@ -107,11 +119,9 @@ function it(description, next) {
         fn();
     });
 }
-exports.it = it;
 function expectTemplate(template) {
     return new expectTemplate_1.ExpectTemplate(template, addExpectTemplate);
 }
-exports.expectTemplate = expectTemplate;
 function addExpectTemplate(xt) {
     const { testContext, indices, tests, isParser } = exports.globalContext;
     const { description, it, extraEquals } = testContext;
@@ -262,7 +272,6 @@ function equals(actual, expected) {
         log('equals called', actual, expected);
     }
 }
-exports.equals = equals;
 function shouldThrow(cb, a, b) {
     const { testContext, isParser } = exports.globalContext;
     if (isParser) {
@@ -288,7 +297,6 @@ function shouldThrow(cb, a, b) {
         log('shouldThrow called', a, b);
     }
 }
-exports.shouldThrow = shouldThrow;
 function tokenize(template) {
     const { testContext, isParser } = exports.globalContext;
     if (isParser) {
@@ -299,7 +307,6 @@ function tokenize(template) {
     }
     return global.originalTokenize(template);
 }
-exports.tokenize = tokenize;
 function shouldMatchTokens(actual, expected) {
     const { testContext, isParser } = exports.globalContext;
     if (isParser) {
@@ -310,12 +317,10 @@ function shouldMatchTokens(actual, expected) {
         log('shouldMatchTokens called', actual, expected);
     }
 }
-exports.shouldMatchTokens = shouldMatchTokens;
 // these functions don't need to do anything, just warn and ignore
 function xit(...args) {
     log('xit called', ...args);
 }
-exports.xit = xit;
 function expect() {
     return {
         to: {
@@ -336,21 +341,16 @@ function expect() {
         }
     };
 }
-exports.expect = expect;
 function shouldBeToken(...args) {
     log('shouldBeToken called', ...args);
 }
-exports.shouldBeToken = shouldBeToken;
 function shouldCompileTo(...args) {
     log('shouldCompileTo called', ...args);
 }
-exports.shouldCompileTo = shouldCompileTo;
 function shouldCompileToWithPartials(...args) {
     log('shouldCompileToWithPartials called', ...args);
 }
-exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
 function compileWithPartials(...args) {
     log('compileWithPartials called', ...args);
 }
-exports.compileWithPartials = compileWithPartials;
 //# sourceMappingURL=mockGlobals.js.map

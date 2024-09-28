@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -48,7 +48,7 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], ExportOptions.prototype, "outputFormat", void 0);
-let default_1 = class default_1 extends clime_1.Command {
+let default_1 = class extends clime_1.Command {
     execute(inputFile, options) {
         inputFile = (0, path_1.resolve)(inputFile);
         if (!(0, fs_1.existsSync)(inputFile)) {

@@ -1,4 +1,4 @@
-# Copyright (C) 2020 John Boehr
+# Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -12,49 +12,37 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 {
   lib,
   stdenv,
   writeText,
   fetchurl,
-  handlebarsSpecVersion ? null,
-  handlebarsSpecSrc ? null,
-  handlebarsSpecSha256 ? null
+  src,
 }:
-
-let
-  orDefault = x: y: (if (!isNull x) then x else y);
-in
-
 stdenv.mkDerivation rec {
   name = "handlebars-spec-${version}";
-  version = orDefault handlebarsSpecVersion "v104.7.6";
-  src = orDefault handlebarsSpecSrc (fetchurl {
-    url = "https://github.com/jbboehr/handlebars-spec/archive/${version}.tar.gz";
-    sha256 = orDefault handlebarsSpecSha256 "09i8cbypfpb10jc6pwbw7rsvhwlm0lmswsd7p2isxnlsmhn07lwk";
-  });
+  version = "v104.7.6";
+  inherit src;
 
   builder = writeText "builder.sh" ''
-      source $stdenv/setup
+    source $stdenv/setup
 
-      buildPhase() {
-          echo do nothing
-      }
+    buildPhase() {
+        echo do nothing
+    }
 
-      installPhase() {
-          mkdir -p $out/share/handlebars-spec
-          cp -prvd spec export $out/share/handlebars-spec/
-      }
+    installPhase() {
+        mkdir -p $out/share/handlebars-spec
+        cp -prvd spec export $out/share/handlebars-spec/
+    }
 
-      genericBuild
-    '';
+    genericBuild
+  '';
 
   meta = {
     description = "The Handlebars.js specification converted to JSON.";
     homepage = https://github.com/jbboehr/handlebars-spec;
     license = "MIT";
-    maintainers = [ "John Boehr <jbboehr@gmail.com>" ];
+    maintainers = ["John Boehr <jbboehr@gmail.com>"];
   };
 }
-

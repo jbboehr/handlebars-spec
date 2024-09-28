@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrappedEval = exports.safeEval = void 0;
+exports.safeEval = safeEval;
+exports.wrappedEval = wrappedEval;
 /*jshint strict: false, unused: false */
 function safeEval(templateSpec) {
     try {
@@ -29,7 +30,6 @@ function safeEval(templateSpec) {
         throw err;
     }
 }
-exports.safeEval = safeEval;
 function wrappedEval(templateSpec) {
     return safeEval('function() {' +
         'try {' +
@@ -41,5 +41,4 @@ function wrappedEval(templateSpec) {
         '}' +
         '}');
 }
-exports.wrappedEval = wrappedEval;
 //# sourceMappingURL=eval.js.map

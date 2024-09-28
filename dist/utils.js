@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deserialize = exports.serialize = exports.stripNulls = exports.removeCircularReferences = exports.normalizeJavascript = exports.jsToCode = void 0;
+exports.jsToCode = jsToCode;
+exports.normalizeJavascript = normalizeJavascript;
+exports.removeCircularReferences = removeCircularReferences;
+exports.stripNulls = stripNulls;
+exports.serialize = serialize;
+exports.deserialize = deserialize;
 const uglify_js_1 = __importDefault(require("uglify-js"));
 const fs_1 = require("fs");
 const path_1 = require("path");
@@ -77,7 +82,6 @@ function jsToCode(fn) {
     }
     return data;
 }
-exports.jsToCode = jsToCode;
 function normalizeJavascript(js) {
     const str = 'var x = ' + js;
     const r = uglify_js_1.default.minify(str, {
@@ -95,7 +99,6 @@ function normalizeJavascript(js) {
     }
     return r.code.replace('var x=', '');
 }
-exports.normalizeJavascript = normalizeJavascript;
 function removeCircularReferences(data, prev = []) {
     if (typeof data !== 'object') {
         return data;
@@ -120,7 +123,6 @@ function removeCircularReferences(data, prev = []) {
     }
     return data;
 }
-exports.removeCircularReferences = removeCircularReferences;
 function stripNulls(data) {
     if (typeof data === 'object') {
         for (const x in data) {
@@ -139,7 +141,6 @@ function stripNulls(data) {
     }
     return data;
 }
-exports.stripNulls = stripNulls;
 function serializeInner(data) {
     switch (typeof data) {
         case 'boolean':
@@ -227,7 +228,6 @@ function serialize(data) {
     removeCircularReferences(data);
     return serializeInner(data);
 }
-exports.serialize = serialize;
 function deserialize(data) {
     switch (typeof data) {
         case 'boolean':
@@ -271,5 +271,4 @@ function deserialize(data) {
     });
     return rv;
 }
-exports.deserialize = deserialize;
 //# sourceMappingURL=utils.js.map

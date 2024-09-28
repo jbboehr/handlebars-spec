@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Copyright (C) 2020 John Boehr
+ * Copyright (c) anno Domini nostri Jesu Christi MMXX-MMXXIV John Boehr & contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -37,7 +37,7 @@ const fs_1 = require("fs");
 const utils_1 = require("../utils");
 const deep_equal_1 = __importDefault(require("deep-equal"));
 const hjson_1 = require("hjson");
-let default_1 = class default_1 extends clime_1.Command {
+let default_1 = class extends clime_1.Command {
     execute(args, options) {
         let fns = {};
         for (let i = 0; i < args.length; i++) {

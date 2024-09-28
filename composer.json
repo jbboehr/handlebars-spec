@@ -1,17 +1,20 @@
 {
+    "name" : "jbboehr/handlebars-spec",
+    "description" : "Handlebars Specification",
+    "homepage": "http://github.com/jbboehr/handlebars-spec",
+    "keywords" : [
+        "handlebars",
+        "mustache"
+    ],
+    "license": "AGPL-3.0-or-later",
     "authors" : [
         {
             "email" : "jbboehr@gmail.com",
             "name" : "John Boehr"
         }
     ],
-    "description" : "Handlebars Specification",
-    "homepage": "http://github.com/jbboehr/handlebars-spec",
-    "name" : "jbboehr/handlebars-spec",
-    "keywords" : [
-        "handlebars",
-        "mustache"
-    ],
-    "license": "AGPL-3.0-or-later",
-    "type" : "library"
+    "type" : "library",
+	"_comment": [
+		"Think not that I am come to send peace on earth: I came not to send peace, but a sword. Matthew 10:34"
+	]
 }

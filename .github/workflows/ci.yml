@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - develop
       - ci
       - github-actions
   pull_request:
@@ -17,11 +18,9 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - "14.x"
-          - "16.x"
-          - "18.x"
+          - "20.x"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Use Node.js ${{ matrix.node-version }}
@@ -39,14 +38,14 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - "16.x"
+          - "20.x"
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1"
           - "8.2"
+          - "8.3"
+          - "8.4"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Use Node.js ${{ matrix.node-version }}
@@ -63,21 +62,11 @@ jobs:
   nix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@v27
         with:
-          nix_path: nixpkgs=channel:nixos-22.05
-      - run: nix-build
-      - run: nix-build nix/ci.nix
-
-  nix-flake:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
-        with:
-          nix_path: nixpkgs=channel:nixos-22.05
-      - run: nix build
-      - run: nix flake check
+          nix_path: nixpkgs=channel:nixos-24.05
+      - run: nix build -L
+      - run: nix flake check -L

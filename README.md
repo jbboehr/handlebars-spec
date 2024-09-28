@@ -6,7 +6,6 @@ The [handlebars.js](https://github.com/wycats/handlebars.js) specification conve
 
 This project was [originally developed](https://github.com/kasperisager/handlebars-spec) by [Kasper Isager](https://github.com/kasperisager).
 
-
 ## License
 
 This project is licensed under the [AGPL-3.0-or-later](http://www.gnu.org/licenses/agpl-3.0.txt).
