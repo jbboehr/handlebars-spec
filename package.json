@@ -9,42 +9,39 @@
 	"license": "AGPL-3.0-or-later",
 	"repository": "https://github.com/jbboehr/handlebars-spec.git",
 	"dependencies": {
-		"clime": "^0.5.14",
-		"deep-equal": "^2.0.4",
+		"clime": "^0.5.16",
+		"deep-equal": "^2.2.3",
 		"extend": "^3.0.2",
-		"handlebars": "4.7.7",
-		"hjson": "^3.2.1",
-		"sha1": "^1.1.1",
-		"sinon": "^19.0.2",
-		"uglify-js": "^3.11.5"
+		"handlebars": "4.7.9",
+		"hjson": "^3.2.2",
+		"sinon": "^22.1.0",
+		"uglify-js": "^3.19.3"
 	},
 	"devDependencies": {
-		"@types/deep-equal": "^1.0.1",
-		"@types/extend": "^3.0.1",
-		"@types/hjson": "^2.4.2",
-		"@types/node": "^20.0",
-		"@types/sinon": "^17.0.3",
-		"@types/uglify-js": "^3.11.1",
-		"@typescript-eslint/eslint-plugin": "^5.44.0",
-		"@typescript-eslint/parser": "^5.44.0",
-		"eslint": "^8.28.0",
-		"eslint-plugin-compat": "^4.0.2",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-node": "^11.1.0",
-		"source-map": "^0.7.3",
+		"@eslint/js": "^10.0.1",
+		"@types/deep-equal": "^1.0.4",
+		"@types/extend": "^3.0.4",
+		"@types/hjson": "^2.4.6",
+		"@types/node": "^22.0.0",
+		"@types/sinon": "^22.0.0",
+		"@types/uglify-js": "^3.17.5",
+		"@typescript-eslint/parser": "^8.68.0",
+		"eslint": "^10.9.1",
+		"eslint-plugin-import-x": "^4.17.1",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.6.2"
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.68.0"
 	},
 	"scripts": {
 		"build": "tsc",
 		"extractFunctions": "ts-node --files src/cli.ts extractFunctions",
-		"format": "eslint --ext .js,.ts --fix .",
-		"lint": "eslint --ext .js,.ts .",
+		"format": "eslint --fix .",
+		"lint": "eslint .",
 		"generate": "ts-node --files src/cli.ts generate",
 		"testRunner": "ts-node --files src/cli.ts testRunner"
 	},
 	"engines": {
-		"node": ">=12.0.0"
+		"node": ">=22.13.0"
 	},
 	"bin": "./dist/cli.js",
 	"files": [

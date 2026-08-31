@@ -16,62 +16,54 @@
   description = "handlebars-spec";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     systems.url = "github:nix-systems/default-linux";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-      inputs.gitignore.follows = "gitignore";
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    systems,
-    flake-utils,
-    gitignore,
-    pre-commit-hooks,
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-
-        uncleanedSrc = gitignore.lib.gitignoreSource ./.;
-        src = pkgs.lib.cleanSourceWith {
-          name = "handlebars-spec-source";
-          src = uncleanedSrc;
-          filter = gitignore.lib.gitignoreFilterWith {
-            basePath = ./.;
-            extraRules = ''
-              .editorconfig
-              .envrc
-              .gitattributes
-              .github
-              .gitignore
-              *.md
-              *.nix
-              flake.*
-            '';
+  outputs =
+    {
+      self,
+      nixpkgs,
+      systems,
+      git-hooks,
+    }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs (import systems);
+      version = (builtins.fromJSON (builtins.readFile ./package.json)).version;
+    in
+    {
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          src = pkgs.lib.fileset.toSource {
+            root = ./.;
+            fileset = pkgs.lib.fileset.unions [
+              ./export
+              ./spec
+            ];
           };
-        };
+          handlebars-spec = pkgs.callPackage ./nix/derivation.nix {
+            inherit src version;
+          };
+        in
+        {
+          inherit handlebars-spec;
+          default = handlebars-spec;
+        }
+      );
 
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = uncleanedSrc;
+      checks = forAllSystems (system: {
+        pre-commit-check = git-hooks.lib.${system}.run {
+          src = ./.;
           hooks = {
             actionlint.enable = true;
-            alejandra.enable = true;
             markdownlint.enable = true;
-            markdownlint.excludes = ["LICENSE\.md"];
+            markdownlint.excludes = [ "LICENSE\.md" ];
             markdownlint.settings.configuration = {
               MD013 = {
                 line_length = 1488;
@@ -80,36 +72,33 @@
               };
               MD024 = false;
             };
+            nixfmt.enable = true;
             shellcheck.enable = true;
           };
         };
-      in rec {
-        packages = flake-utils.lib.flattenTree rec {
-          handlebars-spec = pkgs.callPackage ./nix/derivation.nix {
-            inherit src;
+      });
+
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          pre-commit-check = self.checks.${system}.pre-commit-check;
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            packages = [
+              pkgs.nodejs_24
+              pkgs.php
+              pkgs.php.packages.composer
+            ]
+            ++ pre-commit-check.enabledPackages;
+            shellHook = pre-commit-check.shellHook + ''
+              export PATH="./node_modules/.bin:$PATH"
+            '';
           };
-          default = handlebars-spec;
-        };
+        }
+      );
 
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            php
-            php.packages.composer
-            nodejs
-            pre-commit
-            stdenv
-          ];
-          shellHook = ''
-            ${pre-commit-check.shellHook}
-            export PATH="./node_modules/.bin:$PATH"
-          '';
-        };
-
-        checks = {
-          inherit pre-commit-check;
-        };
-
-        formatter = pkgs.alejandra;
-      }
-    );
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+    };
 }

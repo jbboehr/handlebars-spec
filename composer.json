@@ -1,7 +1,7 @@
 {
     "name" : "jbboehr/handlebars-spec",
     "description" : "Handlebars Specification",
-    "homepage": "http://github.com/jbboehr/handlebars-spec",
+    "homepage": "https://github.com/jbboehr/handlebars-spec",
     "keywords" : [
         "handlebars",
         "mustache"

@@ -1,6 +1,6 @@
 # Handlebars Spec
 
-[![GitHub Build Status](https://github.com/jbboehr/handlebars-spec/workflows/ci/badge.svg)](https://github.com/jbboehr/handlebars-spec/actions?query=workflow%3Aci)
+[![CI](https://github.com/jbboehr/handlebars-spec/actions/workflows/ci.yml/badge.svg)](https://github.com/jbboehr/handlebars-spec/actions/workflows/ci.yml)
 
 The [handlebars.js](https://github.com/wycats/handlebars.js) specification converted to JSON.
 

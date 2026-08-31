@@ -14,35 +14,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {
   lib,
-  stdenv,
-  writeText,
-  fetchurl,
+  stdenvNoCC,
   src,
+  version,
 }:
-stdenv.mkDerivation rec {
-  name = "handlebars-spec-${version}";
-  version = "v104.7.6";
-  inherit src;
+stdenvNoCC.mkDerivation {
+  pname = "handlebars-spec";
+  inherit src version;
 
-  builder = writeText "builder.sh" ''
-    source $stdenv/setup
+  dontBuild = true;
 
-    buildPhase() {
-        echo do nothing
-    }
-
-    installPhase() {
-        mkdir -p $out/share/handlebars-spec
-        cp -prvd spec export $out/share/handlebars-spec/
-    }
-
-    genericBuild
+  installPhase = ''
+    runHook preInstall
+    mkdir -p "$out/share/handlebars-spec"
+    cp -r export spec "$out/share/handlebars-spec/"
+    runHook postInstall
   '';
 
   meta = {
     description = "The Handlebars.js specification converted to JSON.";
-    homepage = https://github.com/jbboehr/handlebars-spec;
-    license = "MIT";
-    maintainers = ["John Boehr <jbboehr@gmail.com>"];
+    homepage = "https://github.com/jbboehr/handlebars-spec";
+    license = lib.licenses.mit;
+    maintainers = [
+      {
+        name = "John Boehr";
+        email = "jbboehr@gmail.com";
+      }
+    ];
+    platforms = lib.platforms.all;
   };
 }

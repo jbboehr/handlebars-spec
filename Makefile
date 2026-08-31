@@ -47,7 +47,7 @@ test_php:
 	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
 
 test_eslint: node_modules
-	eslint --ext .js,.ts .
+	npm run lint
 
 
 .PHONY: all spec export test test_changes test_eslint test_node test_php
