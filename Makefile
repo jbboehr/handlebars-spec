@@ -40,6 +40,7 @@ test_changes:
 
 test_node: dist
 	@echo ---------- Testing spec against handlebars.js ----------
+	node --test test/*.test.mjs
 	node dist/cli.js testRunner
 
 test_php:

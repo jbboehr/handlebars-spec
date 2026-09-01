@@ -65,7 +65,6 @@ const clime_1 = require("clime");
 const Handlebars = __importStar(require("handlebars"));
 const eval_1 = require("../eval");
 const util_1 = require("util");
-const utils_1 = require("../utils");
 const path_1 = require("path");
 const fs_1 = require("fs");
 const assert = __importStar(require("assert"));
@@ -213,22 +212,83 @@ function fixSparseArray(data) {
     return data;
 }
 // Test utils
-function checkResult(test, e) {
-    const shouldExcept = test.exception === true;
-    const didExcept = e !== undefined;
-    if (shouldExcept === didExcept) {
+function hasExceptionExpectation(expected) {
+    return expected === true || typeof expected === 'string';
+}
+function exceptionMessage(error) {
+    try {
+        if (typeof error === 'string') {
+            return error;
+        }
+        if (error !== null && (typeof error === 'object' || typeof error === 'function') && 'message' in error) {
+            return String(error.message);
+        }
+        return String(error);
+    }
+    catch (_a) {
+        return undefined;
+    }
+}
+function exceptionMatches(expected, error) {
+    if (expected === true) {
+        return true;
+    }
+    if (typeof expected !== 'string') {
+        return false;
+    }
+    const message = exceptionMessage(error);
+    if (message === undefined) {
+        return false;
+    }
+    const serializedRegExp = expected.match(/^\/([\s\S]*)\/([dgimsuvy]*)$/);
+    if (!serializedRegExp) {
+        return message.includes(expected);
+    }
+    try {
+        return new RegExp(serializedRegExp[1], serializedRegExp[2]).test(message);
+    }
+    catch (_a) {
+        return false;
+    }
+}
+function checkResult(test, didExcept, e) {
+    const shouldExcept = hasExceptionExpectation(test.exception);
+    const passed = shouldExcept
+        ? didExcept && exceptionMatches(test.exception, e)
+        : !didExcept;
+    if (passed) {
         console.log(test.prefix, '|', 'OK');
         return true;
     }
     else {
-        const msg = e || 'Error: should have thrown, did not';
+        let msg = didExcept
+            ? e instanceof Error ? e : 'Error: unexpected thrown value'
+            : 'Error: should have thrown, did not';
+        if (shouldExcept && didExcept) {
+            msg = 'Error: exception did not match ' + JSON.stringify(test.exception);
+        }
         console.log(test.prefix, '|', 'FAIL');
         console.log(msg);
-        if (e) {
+        if (e instanceof Error) {
             console.error(e.stack);
         }
-        console.error((0, util_1.inspect)((0, utils_1.serialize)(test), false, null, true));
+        else if (didExcept) {
+            console.error((0, util_1.inspect)(e, false, null, true));
+        }
+        console.error((0, util_1.inspect)(test, false, null, true));
         return false;
+    }
+}
+function checkAssertion(test, assertion) {
+    if (hasExceptionExpectation(test.exception)) {
+        return checkResult(test, false);
+    }
+    try {
+        assertion();
+        return checkResult(test, false);
+    }
+    catch (e) {
+        return checkResult(test, true, e);
     }
 }
 function makePrefix(test) {
@@ -243,7 +303,7 @@ function prepareTestGeneric(test) {
     // Expected
     spec.expected = test.expected;
     // Exception
-    spec.exception = test.exception ? true : false;
+    spec.exception = test.exception === undefined ? false : test.exception;
     // Data
     spec.data = fixSparseArray(test.data);
     unstringifyLambdas(spec.data);
@@ -276,7 +336,7 @@ function prepareTestParser(test) {
     // Expected
     spec.expected = test.expected;
     // Exception
-    spec.exception = test.exception ? true : false;
+    spec.exception = test.exception === undefined ? false : test.exception;
     // Message
     spec.message = test.message;
     return spec;
@@ -289,6 +349,8 @@ function prepareTestTokenizer(test) {
     spec.template = test.template;
     // Expected
     spec.expected = test.expected;
+    // Exception
+    spec.exception = test.exception === undefined ? false : test.exception;
     return spec;
 }
 function runTest(test) {
@@ -325,6 +387,7 @@ function runTestGeneric(test) {
     global.value = 1; // for helpers - block params - should take presednece over parent block params - 00
     global.lastOptions = undefined; // for subexpressions - provides each nested helper invocation its own options hash - 00
     global.run = false; // for blocks - decorators - should fail when accessing variables from root - 00
+    let actual;
     try {
         // Register global partials
         handlebarsEnv.partials = {};
@@ -354,32 +417,31 @@ function runTestGeneric(test) {
             runtimeOptions.decorators = test.decorators;
         }
         test.runtimeOptions = runtimeOptions;
-        const actual = template(test.data, test.runtimeOptions);
-        equals(actual, test.expected);
-        return checkResult(test);
+        actual = template(test.data, test.runtimeOptions);
     }
     catch (e) {
-        return checkResult(test, e);
+        return checkResult(test, true, e);
     }
+    return checkAssertion(test, () => equals(actual, test.expected));
 }
 function runTestParser(test) {
+    let actual;
     try {
-        const actual = astFor(test.template);
-        assert.equal(actual, test.expected);
-        return checkResult(test);
+        actual = astFor(test.template);
     }
     catch (e) {
-        return checkResult(test, e);
+        return checkResult(test, true, e);
     }
+    return checkAssertion(test, () => assert.equal(actual, test.expected));
 }
 function runTestTokenizer(test) {
+    let actual;
     try {
-        const actual = tokenize(test.template);
-        assert.deepEqual(actual, test.expected);
-        return checkResult(test);
+        actual = tokenize(test.template);
     }
     catch (e) {
-        return checkResult(test, e);
+        return checkResult(test, true, e);
     }
+    return checkAssertion(test, () => assert.deepEqual(actual, test.expected));
 }
 //# sourceMappingURL=testRunner.js.map
