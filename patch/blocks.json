@@ -1,5 +1,4 @@
 {
-	"blocks - decorators - registration - fails with multiple and args - 00": null,
 	"blocks - decorators - should fail when accessing variables from root - 00": {
 		"decorators": {
 			"decorator": {

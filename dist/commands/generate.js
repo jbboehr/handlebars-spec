@@ -100,6 +100,12 @@ let default_1 = class extends clime_1.Command {
             global[x] = mockGlobals[x];
         }
         mockGlobals.globalContext.suite = suite;
+        const patchFile = path.resolve('patch', suite + '.json');
+        const patches = (0, fs_1.existsSync)(patchFile)
+            ? JSON.parse((0, fs_1.readFileSync)(patchFile).toString())
+            : {};
+        mockGlobals.globalContext.patches = patches;
+        mockGlobals.globalContext.unusedPatches = new Set(Object.keys(patches));
         if (inputFile.match(/parser\.js$/)) {
             mockGlobals.globalContext.isParser = true;
         }
@@ -117,6 +123,11 @@ let default_1 = class extends clime_1.Command {
             });
         }
         require(path.resolve(inputFile));
+        const unusedPatches = Array.from(mockGlobals.globalContext.unusedPatches);
+        if (unusedPatches.length) {
+            console.error('Unused patches:\n' + unusedPatches.join('\n'));
+            return process.exit(65);
+        }
         let output;
         try {
             output = JSON.stringify(mockGlobals.globalContext.tests, null, '\t');
@@ -132,14 +143,6 @@ let default_1 = class extends clime_1.Command {
         try {
             (0, fs_1.writeFileSync)(outputFile, output);
             console.log('JSON saved to ' + options.outputFile);
-            /*
-            if (unusedPatches !== null) {
-                unusedPatches = Object.keys(unusedPatches);
-                if (unusedPatches.length) {
-                    console.log("Unused patches: " + unusedPatches);
-                }
-            }
-            */
         }
         catch (e) {
             console.log(e);

@@ -33,6 +33,10 @@ interface StringDict {
     [key: string]: string;
 }
 
+interface PatchDict {
+    [key: string]: any;
+}
+
 interface ExpectTemplateInterface {
     template: string;
     helpers: FunctionDict;

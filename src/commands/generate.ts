@@ -63,6 +63,13 @@ export default class extends Command {
         }
         mockGlobals.globalContext.suite = suite;
 
+        const patchFile = path.resolve('patch', suite + '.json');
+        const patches: PatchDict = existsSync(patchFile)
+            ? JSON.parse(readFileSync(patchFile).toString())
+            : {};
+        mockGlobals.globalContext.patches = patches;
+        mockGlobals.globalContext.unusedPatches = new Set(Object.keys(patches));
+
         if (inputFile.match(/parser\.js$/)) {
             mockGlobals.globalContext.isParser = true;
         }
@@ -83,6 +90,11 @@ export default class extends Command {
 
         require(path.resolve(inputFile));
 
+        const unusedPatches = Array.from(mockGlobals.globalContext.unusedPatches);
+        if (unusedPatches.length) {
+            console.error('Unused patches:\n' + unusedPatches.join('\n'));
+            return process.exit(65);
+        }
 
         let output;
         try {
@@ -101,14 +113,6 @@ export default class extends Command {
         try {
             writeFileSync(outputFile, output);
             console.log('JSON saved to ' + options.outputFile);
-            /*
-            if (unusedPatches !== null) {
-                unusedPatches = Object.keys(unusedPatches);
-                if (unusedPatches.length) {
-                    console.log("Unused patches: " + unusedPatches);
-                }
-            }
-            */
         } catch (e) {
             console.log(e);
             return process.exit(73);

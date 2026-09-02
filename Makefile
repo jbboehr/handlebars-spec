@@ -26,10 +26,10 @@ node_modules: package.json
 	npm install
 
 spec: dist
-	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js;)
+	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js &&) true
 
 export: dist
-	$(foreach var, $(SPECS), node dist/cli.js export -o export/$(var).json spec/$(var).json;)
+	$(foreach var, $(SPECS), node dist/cli.js export -o export/$(var).json spec/$(var).json &&) true
 
 
 test: test_changes test_eslint test_node test_php

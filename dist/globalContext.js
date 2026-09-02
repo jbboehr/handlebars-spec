@@ -25,8 +25,9 @@ class GlobalContext {
         this.descriptionStack = [];
         this.testContext = new testContext_1.TestContext();
         this.indices = {};
+        this.patches = {};
         this.suite = '';
-        this.unusedPatches = {};
+        this.unusedPatches = new Set();
         this.tests = [];
     }
 }

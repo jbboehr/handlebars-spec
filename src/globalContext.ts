@@ -25,8 +25,9 @@ export class GlobalContext {
     testContext: TestContext = new TestContext();
 
     indices: StringDict = {};
+    patches: PatchDict = {};
     suite = '';
-    unusedPatches: StringDict = {};
+    unusedPatches: Set<string> = new Set();
     tests: TestSpec[] = [];
     isParser?: true;
 }

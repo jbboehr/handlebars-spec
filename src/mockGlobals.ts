@@ -18,9 +18,7 @@
 import * as Handlebars from 'handlebars';
 import { stripNulls, serialize } from './utils';
 import { ExpectTemplate } from './expectTemplate';
-import { resolve as resolvePath } from 'path';
 import extend from 'extend';
-import { existsSync, readFileSync } from 'fs';
 import { GlobalContext } from './globalContext';
 import * as sinon from 'sinon';
 
@@ -162,22 +160,14 @@ function addExpectTemplate(xt: ExpectTemplate): void {
 }
 
 function applyPatches(name: string, spec: TestSpec): TestSpec {
-    const { suite, unusedPatches } = globalContext;
+    const { patches, unusedPatches } = globalContext;
 
-    const patchFile = resolvePath('./patch/' + '/' + suite + '.json');
-    if (!existsSync(patchFile)) {
+    if (!Object.prototype.hasOwnProperty.call(patches, name)) {
         return spec;
     }
 
-    // @todo only read once
-    const patchData: any = JSON.parse(readFileSync(patchFile).toString());
-    let patch: any;
-
-    if (patchData.hasOwnProperty(name)) {
-        patch = patchData[name];
-    } else {
-        return spec;
-    }
+    const patch = patches[name];
+    unusedPatches.delete(name);
 
     if (patch === null) {
         // Note: setting to null means to skip the test. These will most
@@ -191,12 +181,6 @@ function applyPatches(name: string, spec: TestSpec): TestSpec {
         stripNulls(spec);
         log('applied patch', spec);
     }
-
-    // Track unused patches
-    if (unusedPatches === null) {
-        extend(unusedPatches, patchData);
-    }
-    delete unusedPatches[name];
 
     return spec;
 }

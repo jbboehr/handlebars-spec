@@ -72,9 +72,7 @@ const Handlebars = __importStar(require("handlebars"));
 exports.Handlebars = Handlebars;
 const utils_1 = require("./utils");
 const expectTemplate_1 = require("./expectTemplate");
-const path_1 = require("path");
 const extend_1 = __importDefault(require("extend"));
-const fs_1 = require("fs");
 const globalContext_1 = require("./globalContext");
 const sinon = __importStar(require("sinon"));
 exports.sinon = sinon;
@@ -195,20 +193,12 @@ function addExpectTemplate(xt) {
     exports.globalContext.testContext = exports.globalContext.testContext.reset();
 }
 function applyPatches(name, spec) {
-    const { suite, unusedPatches } = exports.globalContext;
-    const patchFile = (0, path_1.resolve)('./patch/' + '/' + suite + '.json');
-    if (!(0, fs_1.existsSync)(patchFile)) {
+    const { patches, unusedPatches } = exports.globalContext;
+    if (!Object.prototype.hasOwnProperty.call(patches, name)) {
         return spec;
     }
-    // @todo only read once
-    const patchData = JSON.parse((0, fs_1.readFileSync)(patchFile).toString());
-    let patch;
-    if (patchData.hasOwnProperty(name)) {
-        patch = patchData[name];
-    }
-    else {
-        return spec;
-    }
+    const patch = patches[name];
+    unusedPatches.delete(name);
     if (patch === null) {
         // Note: setting to null means to skip the test. These will most
         // likely be implementation-dependant. Note that it still has to be
@@ -222,11 +212,6 @@ function applyPatches(name, spec) {
         (0, utils_1.stripNulls)(spec);
         log('applied patch', spec);
     }
-    // Track unused patches
-    if (unusedPatches === null) {
-        (0, extend_1.default)(unusedPatches, patchData);
-    }
-    delete unusedPatches[name];
     return spec;
 }
 function detectGlobalHelpers() {
