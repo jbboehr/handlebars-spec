@@ -54,17 +54,36 @@ let default_1 = class extends clime_1.Command {
         if (!(0, fs_1.existsSync)(inputFile)) {
             throw new Error(inputFile + ' does not exist');
         }
+        const suite = (0, path_1.basename)(inputFile, '.json');
+        const localOmissionFile = (0, path_1.resolve)('patch', '_export.json');
+        const packagedOmissionFile = (0, path_1.resolve)(__dirname, '..', '..', 'patch', '_export.json');
+        const omissionFile = (0, fs_1.existsSync)(localOmissionFile)
+            ? localOmissionFile
+            : packagedOmissionFile;
+        const omissionSuites = (0, fs_1.existsSync)(omissionFile)
+            ? JSON.parse((0, fs_1.readFileSync)(omissionFile).toString())
+            : {};
+        const omissions = omissionSuites[suite] || {};
+        const unusedOmissions = new Set(Object.keys(omissions));
         const inputData = JSON.parse((0, fs_1.readFileSync)(inputFile).toString());
         const tests = [];
         for (const test of inputData) {
+            const name = this.testName(test);
             try {
                 tests.push(this.handleTest(test));
             }
             catch (e) {
-                if (!test.exception) {
-                    console.warn(test.description, '-', test.it, '|', 'caught exception, skipping test', e.stack);
+                if (!unusedOmissions.delete(name)) {
+                    console.error(name, '| unexpected export failure', e);
+                    return process.exit(65);
                 }
+                console.warn(name, '| skipped via export omission:', omissions[name]);
             }
+        }
+        const unused = Array.from(unusedOmissions);
+        if (unused.length) {
+            console.error('Unused export omissions:\n' + unused.join('\n'));
+            return process.exit(65);
         }
         const outputText = JSON.stringify(tests, null, '\t');
         if (options.outputFile) {
@@ -73,6 +92,9 @@ let default_1 = class extends clime_1.Command {
         else {
             process.stdout.write(outputText);
         }
+    }
+    testName(test) {
+        return (test.description + ' - ' + test.it + ' - ' + (test.number || '00')).toLowerCase();
     }
     handleTest(test) {
         const spec = test;

@@ -16,8 +16,16 @@
  */
 
 import { Command, command, option, Options, param } from 'clime';
-import { resolve as resolvePath } from 'path';
+import { basename, resolve as resolvePath } from 'path';
 import { existsSync, writeFileSync, readFileSync } from 'fs';
+
+interface ExportOmissionDict {
+    [key: string]: string;
+}
+
+interface ExportOmissionSuites {
+    [key: string]: ExportOmissionDict;
+}
 
 class ExportOptions extends Options {
     @option({
@@ -51,17 +59,37 @@ export default class extends Command {
             throw new Error(inputFile + ' does not exist');
         }
 
+        const suite = basename(inputFile, '.json');
+        const localOmissionFile = resolvePath('patch', '_export.json');
+        const packagedOmissionFile = resolvePath(__dirname, '..', '..', 'patch', '_export.json');
+        const omissionFile = existsSync(localOmissionFile)
+            ? localOmissionFile
+            : packagedOmissionFile;
+        const omissionSuites: ExportOmissionSuites = existsSync(omissionFile)
+            ? JSON.parse(readFileSync(omissionFile).toString())
+            : {};
+        const omissions = omissionSuites[suite] || {};
+        const unusedOmissions = new Set(Object.keys(omissions));
         const inputData = JSON.parse(readFileSync(inputFile).toString());
         const tests: TestSpecWithAst[] = [];
 
         for (const test of inputData) {
+            const name = this.testName(test);
             try {
                 tests.push(this.handleTest(test));
             } catch (e) {
-                if( !test.exception ) {
-                    console.warn(test.description, '-', test.it, '|', 'caught exception, skipping test', e.stack);
+                if (!unusedOmissions.delete(name)) {
+                    console.error(name, '| unexpected export failure', e);
+                    return process.exit(65);
                 }
+                console.warn(name, '| skipped via export omission:', omissions[name]);
             }
+        }
+
+        const unused = Array.from(unusedOmissions);
+        if (unused.length) {
+            console.error('Unused export omissions:\n' + unused.join('\n'));
+            return process.exit(65);
         }
 
         const outputText = JSON.stringify(tests, null, '\t');
@@ -71,6 +99,10 @@ export default class extends Command {
         } else {
             process.stdout.write(outputText);
         }
+    }
+
+    private testName(test: TestSpec): string {
+        return (test.description + ' - ' + test.it + ' - ' + (test.number || '00')).toLowerCase();
     }
 
     private handleTest(test: TestSpec): TestSpecWithAst {

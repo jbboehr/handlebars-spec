@@ -1,0 +1,58 @@
+{
+	"basic": {
+		"basic context - this keyword nested inside path - 00": "The source spec expects this template to fail compilation.",
+		"basic context - this keyword nested inside helpers param - 00": "The source spec expects this template to fail compilation."
+	},
+	"blocks": {
+		"blocks - block with complex lookup using nested context - 00": "The source spec expects this template to fail compilation.",
+		"blocks - inverted sections - chained inverted sections with mismatch - 00": "The source spec expects this template to fail compilation."
+	},
+	"data": {
+		"data - parameter data throws when using complex scope references - 00": "The source spec expects this template to fail compilation."
+	},
+	"helpers": {
+		"helpers - raw block parsing (with identity helper-function) - helper for nested raw block throw exception when with missing closing braces - 00": "The source spec expects this template to fail compilation.",
+		"helpers - string literal parameters - using a quote in the middle of a parameter raises an error - 00": "The source spec expects this template to fail compilation.",
+		"helpers - knownhelpers - unknown helper call in knownhelpers only mode should throw - 00": "The source spec expects this template to fail compilation."
+	},
+	"parser": {
+		"parser - should handle parser block mismatch - 00": "The source spec expects this template to fail compilation.",
+		"parser - throws on old inverse section - 00": "The source spec expects this template to fail compilation.",
+		"parser - raises if there's a parse error - 00": "The source spec expects this template to fail compilation.",
+		"parser - raises if there's a parse error - 01": "The source spec expects this template to fail compilation.",
+		"parser - raises if there's a parse error - 02": "The source spec expects this template to fail compilation.",
+		"parser - raises if there's a parse error - 03": "The source spec expects this template to fail compilation.",
+		"parser - raises if there's a parse error - 04": "The source spec expects this template to fail compilation.",
+		"parser - should handle invalid paths - 00": "The source spec expects this template to fail compilation.",
+		"parser - should handle invalid paths - 01": "The source spec expects this template to fail compilation.",
+		"parser - should handle invalid paths - 02": "The source spec expects this template to fail compilation.",
+		"parser - knows how to report the correct line number in errors - 00": "The source spec expects this template to fail compilation.",
+		"parser - knows how to report the correct line number in errors - 01": "The source spec expects this template to fail compilation.",
+		"parser - knows how to report the correct line number in errors when the first character is a newline - 00": "The source spec expects this template to fail compilation.",
+		"parser - directives - should fail if directives have inverse - 00": "The source spec expects this template to fail compilation."
+	},
+	"partials": {
+		"partials - partials with duplicate parameters - 00": "The source spec expects this template to fail compilation.",
+		"partials - rendering function partial in vm mode - 00": "Function-valued partials cannot be parsed into an AST.",
+		"partials - inline partials - should override global partials - 00": "Function-valued partials cannot be parsed into an AST."
+	},
+	"regressions": {
+		"regressions - gh-437: matching escaping - 00": "The source spec expects this template to fail compilation.",
+		"regressions - gh-437: matching escaping - 01": "The source spec expects this template to fail compilation."
+	},
+	"tokenizer": {
+		"tokenizer - tokenizes partial block declarations - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes inverse sections as \"inverse\" - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes inverse sections as \"inverse\" - 01": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes inverse sections as \"inverse\" - 02": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes inverse sections with id as \"open_inverse id close\" - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes inverse sections with id and spaces as \"open_inverse id close\" - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - does not time out in a mustache with a single } followed by eof - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - does not time out in a mustache when invalid id characters are used - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes block params - 00": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes block params - 01": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes block params - 02": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes block params - 03": "Lexer-only input is not a complete parseable template.",
+		"tokenizer - tokenizes block params - 04": "Lexer-only input is not a complete parseable template."
+	}
+}
