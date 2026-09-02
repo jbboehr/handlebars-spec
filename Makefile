@@ -20,7 +20,7 @@ SPECS := basic blocks builtins data helpers parser partials regressions \
 all: spec export
 
 dist: node_modules src tsconfig.json
-	tsc
+	npm run build
 
 node_modules: package.json
 	npm install
@@ -35,8 +35,9 @@ export: dist
 test: test_changes test_eslint test_node test_php
 check: test
 
-test_changes:
-	sh -c 'git status --porcelain | grep 'spec/' && exit 1 || exit 0'
+test_changes: all
+	@git status --short -- dist export spec
+	@test -z "$$(git status --porcelain -- dist export spec)"
 
 test_node: dist
 	@echo ---------- Testing spec against handlebars.js ----------
@@ -51,5 +52,5 @@ test_eslint: node_modules
 	npm run lint
 
 
-.PHONY: all spec export test test_changes test_eslint test_node test_php
+.PHONY: all dist spec export test test_changes test_eslint test_node test_php
 .DEFAULT_GOAL: all
