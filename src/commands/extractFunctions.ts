@@ -19,7 +19,7 @@ import { Command, command, params } from 'clime';
 import { OutputFileOptions } from './generate';
 import { readFileSync, writeFileSync } from 'fs';
 import { normalizeJavascript } from '../utils';
-import deepEqual from 'deep-equal';
+import { isDeepStrictEqual } from 'node:util';
 import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
 @command({
@@ -82,7 +82,7 @@ export default class extends Command {
             }
             const key = normalizeJavascript(js);
             if (key in prev) {
-                if (!deepEqual(prev[key], data)) {
+                if (!isDeepStrictEqual(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);
                 }
             }

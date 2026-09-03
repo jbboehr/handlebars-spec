@@ -27,15 +27,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const clime_1 = require("clime");
 const generate_1 = require("./generate");
 const fs_1 = require("fs");
 const utils_1 = require("../utils");
-const deep_equal_1 = __importDefault(require("deep-equal"));
+const node_util_1 = require("node:util");
 const hjson_1 = require("hjson");
 let default_1 = class extends clime_1.Command {
     execute(args, options) {
@@ -83,7 +80,7 @@ let default_1 = class extends clime_1.Command {
             }
             const key = (0, utils_1.normalizeJavascript)(js);
             if (key in prev) {
-                if (!(0, deep_equal_1.default)(prev[key], data)) {
+                if (!(0, node_util_1.isDeepStrictEqual)(prev[key], data)) {
                     console.warn('key already set and mismatch', key, prev[key], data);
                 }
             }

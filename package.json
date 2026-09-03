@@ -10,7 +10,6 @@
 	"repository": "https://github.com/jbboehr/handlebars-spec.git",
 	"dependencies": {
 		"clime": "^0.5.16",
-		"deep-equal": "^2.2.3",
 		"extend": "^3.0.2",
 		"handlebars": "4.7.9",
 		"hjson": "^3.2.2",
@@ -19,7 +18,6 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@types/deep-equal": "^1.0.4",
 		"@types/extend": "^3.0.4",
 		"@types/hjson": "^2.4.6",
 		"@types/node": "^22.0.0",
