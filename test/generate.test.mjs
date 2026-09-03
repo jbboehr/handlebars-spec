@@ -105,6 +105,56 @@ test('uses one patch-file snapshot for the whole suite', () => {
     );
 });
 
+test('preserves global partial names that collide with prototype setters', () => {
+    const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-generate-'));
+    const patchDirectory = path.join(directory, 'patch');
+    const inputFile = path.join(directory, 'fixture.js');
+    const outputFile = path.join(directory, 'fixture.json');
+    temporaryDirectories.push(directory);
+    mkdirSync(patchDirectory);
+    writeFileSync(path.join(patchDirectory, 'fixture.json'), '{}');
+    writeFileSync(inputFile, `
+        Object.defineProperty(Handlebars.partials, '__proto__', {
+            configurable: true,
+            enumerable: true,
+            value: 'prototype partial'
+        });
+        Object.defineProperty(Handlebars.partials, 'partialSetterCollision', {
+            configurable: true,
+            enumerable: true,
+            value: 'setter partial'
+        });
+        Object.defineProperty(Object.prototype, 'partialSetterCollision', {
+            configurable: true,
+            set: function () {}
+        });
+
+        try {
+            describe('suite', function () {
+                it('entry', function () {
+                    expectTemplate('ok').toCompileTo('ok');
+                });
+            });
+        } finally {
+            delete Object.prototype.partialSetterCollision;
+            delete Handlebars.partials.__proto__;
+            delete Handlebars.partials.partialSetterCollision;
+        }
+    `);
+
+    const result = spawnSync(
+        process.execPath,
+        [cliPath, 'generate', '-o', outputFile, inputFile],
+        { cwd: directory, encoding: 'utf8' },
+    );
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    const [generated] = JSON.parse(readFileSync(outputFile, 'utf8'));
+    assert.equal(Object.hasOwn(generated.partials, '__proto__'), true);
+    assert.equal(generated.partials.__proto__, 'prototype partial');
+    assert.equal(generated.partials.partialSetterCollision, 'setter partial');
+});
+
 test('make generation and export stop at the first failed suite', () => {
     const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-make-'));
     const binDirectory = path.join(directory, 'bin');

@@ -38,6 +38,24 @@ function log(message?: any, ...optionalParams: any[]): void {
     }
 }
 
+function mergeOwnDefinedProperties(...sources: object[]): any {
+    const target: any = {};
+    for (const source of sources) {
+        for (const key of Object.keys(source)) {
+            const value = (source as any)[key];
+            if (value !== undefined) {
+                Object.defineProperty(target, key, {
+                    configurable: true,
+                    enumerable: true,
+                    value,
+                    writable: true,
+                });
+            }
+        }
+    }
+    return target;
+}
+
 class SkipError extends Error {}
 
 export function afterEach(fn: Function): void {
@@ -126,9 +144,9 @@ function addExpectTemplate(xt: ExpectTemplate): void {
         expected: xt.expected,
         runtimeOptions: xt.runtimeOptions,
         compileOptions: xt.compileOptions,
-        partials: extend({}, detectGlobalPartials(), xt.partials || {}),
-        helpers: extend({}, detectGlobalHelpers(), xt.helpers || {}),
-        decorators: extend({}, detectGlobalDecorators(), xt.decorators || {}),
+        partials: mergeOwnDefinedProperties(detectGlobalPartials(), xt.partials || {}),
+        helpers: mergeOwnDefinedProperties(detectGlobalHelpers(), xt.helpers || {}),
+        decorators: mergeOwnDefinedProperties(detectGlobalDecorators(), xt.decorators || {}),
         message: xt.message,
         exception: xt.exception,
     });
@@ -191,7 +209,7 @@ function detectGlobalHelpers(): FunctionDict {
         'helperMissing', 'blockHelperMissing', 'each', 'if',
         'unless', 'with', 'log', 'lookup'
     ];
-    const globalHelpers: FunctionDict = {};
+    const globalHelpers: FunctionDict = Object.create(null);
 
     Object.keys(handlebarsEnv.helpers).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
@@ -206,7 +224,7 @@ function detectGlobalHelpers(): FunctionDict {
 function detectGlobalDecorators(): FunctionDict {
     const { handlebarsEnv } = (global as any);
     const builtins = ['inline'];
-    const globalDecorators: FunctionDict = {};
+    const globalDecorators: FunctionDict = Object.create(null);
 
     Object.keys(handlebarsEnv.decorators).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
@@ -222,10 +240,10 @@ function detectGlobalPartials(): StringDict {
     const { handlebarsEnv } = (global as any);
     // This should never be null, but it is in one case
     if (!handlebarsEnv) {
-        return {};
+        return Object.create(null);
     }
 
-    const globalPartials: StringDict = {};
+    const globalPartials: StringDict = Object.create(null);
 
     Object.keys(handlebarsEnv.partials).forEach((x) => {
         globalPartials[x] = handlebarsEnv.partials[x];

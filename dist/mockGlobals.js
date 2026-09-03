@@ -88,6 +88,23 @@ function log(message, ...optionalParams) {
         console.warn.apply(null, optionalParams);
     }
 }
+function mergeOwnDefinedProperties(...sources) {
+    const target = {};
+    for (const source of sources) {
+        for (const key of Object.keys(source)) {
+            const value = source[key];
+            if (value !== undefined) {
+                Object.defineProperty(target, key, {
+                    configurable: true,
+                    enumerable: true,
+                    value,
+                    writable: true,
+                });
+            }
+        }
+    }
+    return target;
+}
 class SkipError extends Error {
 }
 function afterEach(fn) {
@@ -161,9 +178,9 @@ function addExpectTemplate(xt) {
         expected: xt.expected,
         runtimeOptions: xt.runtimeOptions,
         compileOptions: xt.compileOptions,
-        partials: (0, extend_1.default)({}, detectGlobalPartials(), xt.partials || {}),
-        helpers: (0, extend_1.default)({}, detectGlobalHelpers(), xt.helpers || {}),
-        decorators: (0, extend_1.default)({}, detectGlobalDecorators(), xt.decorators || {}),
+        partials: mergeOwnDefinedProperties(detectGlobalPartials(), xt.partials || {}),
+        helpers: mergeOwnDefinedProperties(detectGlobalHelpers(), xt.helpers || {}),
+        decorators: mergeOwnDefinedProperties(detectGlobalDecorators(), xt.decorators || {}),
         message: xt.message,
         exception: xt.exception,
     });
@@ -220,7 +237,7 @@ function detectGlobalHelpers() {
         'helperMissing', 'blockHelperMissing', 'each', 'if',
         'unless', 'with', 'log', 'lookup'
     ];
-    const globalHelpers = {};
+    const globalHelpers = Object.create(null);
     Object.keys(handlebarsEnv.helpers).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
             return;
@@ -232,7 +249,7 @@ function detectGlobalHelpers() {
 function detectGlobalDecorators() {
     const { handlebarsEnv } = global;
     const builtins = ['inline'];
-    const globalDecorators = {};
+    const globalDecorators = Object.create(null);
     Object.keys(handlebarsEnv.decorators).forEach((x) => {
         if (builtins.indexOf(x) !== -1) {
             return;
@@ -245,9 +262,9 @@ function detectGlobalPartials() {
     const { handlebarsEnv } = global;
     // This should never be null, but it is in one case
     if (!handlebarsEnv) {
-        return {};
+        return Object.create(null);
     }
-    const globalPartials = {};
+    const globalPartials = Object.create(null);
     Object.keys(handlebarsEnv.partials).forEach((x) => {
         globalPartials[x] = handlebarsEnv.partials[x];
     });

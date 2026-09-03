@@ -30,11 +30,31 @@ function isEmptyObject(obj: object): boolean {
     return !Object.keys(obj).length;
 }
 
+function hasOwn(data: object, key: PropertyKey): boolean {
+    return Object.prototype.hasOwnProperty.call(data, key);
+}
+
+function getOwnSerializableKeys(data: any): string[] {
+    const array = isArray(data);
+    return Object.getOwnPropertyNames(data).filter((key) => {
+        if (Object.prototype.propertyIsEnumerable.call(data, key)) {
+            return true;
+        }
+
+        const index = Number(key);
+        return array
+            && Number.isInteger(index)
+            && index >= 0
+            && index < 0xffffffff
+            && String(index) === key;
+    });
+}
+
 function isSparseArray(arr: any[]): boolean {
     let i = 0;
     const l = arr.length;
     for (; i < l; i++) {
-        if (!arr.hasOwnProperty(i)) {
+        if (!hasOwn(arr, i)) {
             return true;
         }
     }
@@ -104,8 +124,7 @@ export function removeCircularReferences(data: any, prev: any[] = []): any {
         return data;
     }
 
-    prev = prev || [];
-    prev.push(data);
+    prev = [...(prev || []), data];
 
     function checkCircularRef(v: any): boolean {
         for (const y in prev) {
@@ -120,11 +139,61 @@ export function removeCircularReferences(data: any, prev: any[] = []): any {
         if (checkCircularRef(data[x])) {
             delete data[x];
         } else if (typeof data[x] === 'object') {
-            removeCircularReferences(data[x]);
+            removeCircularReferences(data[x], prev);
         }
     }
 
     return data;
+}
+
+function copyWithoutCircularReferences(data: any, prev: any[] = [], beneathArray: boolean = false): any {
+    if (typeof data !== 'object'
+        || data === null
+        || data instanceof RegExp
+        || data instanceof Boolean
+        || (beneathArray && (data instanceof Number || data instanceof String || typeof data.toJSON === 'function'))
+    ) {
+        return data;
+    }
+
+    const ancestors = [...prev, data];
+    const values: {[key: string]: any} = Object.create(null);
+    let changed = false;
+    const keys = getOwnSerializableKeys(data);
+    const childIsBeneathArray = beneathArray || isArray(data);
+
+    for (const key of keys) {
+        const value = data[key];
+        if (ancestors.includes(value)) {
+            changed = true;
+            continue;
+        }
+
+        values[key] = copyWithoutCircularReferences(value, ancestors, childIsBeneathArray);
+        changed = changed || values[key] !== value;
+    }
+
+    if (!changed) {
+        return data;
+    }
+
+    const copy = isArray(data)
+        ? new Array(data.length)
+        : Object.create(Object.getPrototypeOf(data));
+    for (const key of keys) {
+        if (!hasOwn(values, key)) {
+            continue;
+        }
+
+        Object.defineProperty(copy, key, {
+            configurable: true,
+            enumerable: Object.prototype.propertyIsEnumerable.call(data, key),
+            value: values[key],
+            writable: true,
+        });
+    }
+
+    return copy;
 }
 
 export function stripNulls(data: any): any {
@@ -177,15 +246,25 @@ function serializeInner(data: any): any {
     if (isArray(data)) {
         if (isSparseArray(data)) {
             const orv: any = {'!sparsearray': true};
-            Object.keys(data).forEach((key) => {
-                orv[key] = (data as any)[key];
+            getOwnSerializableKeys(data).forEach((key) => {
+                Object.defineProperty(orv, key, {
+                    configurable: true,
+                    enumerable: true,
+                    value: (data as any)[key],
+                    writable: true,
+                });
             });
             return orv;
         } else {
-            const arv: any[] = [];
-            data.forEach((value, index) => {
-                arv[index] = value;
-            });
+            const arv: any[] = new Array(data.length);
+            for (let index = 0; index < data.length; index++) {
+                Object.defineProperty(arv, index, {
+                    configurable: true,
+                    enumerable: true,
+                    value: data[index],
+                    writable: true,
+                });
+            }
             return arv;
         }
     }
@@ -222,24 +301,28 @@ function serializeInner(data: any): any {
     const rv: any = {};
     Object.keys(data).forEach((key) => {
         // Ignore some empty objects
-        if (ignoreEmptyKeys[key] === true) {
+        if (hasOwn(ignoreEmptyKeys, key)) {
             if (!data[key]) {
                 return;
             }
-        } else if (ignoreEmptyObjectKeys[key] === true) {
+        } else if (hasOwn(ignoreEmptyObjectKeys, key)) {
             if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
                 return;
             }
         }
         // serialize and append
-        rv[key] = serializeInner(data[key]);
+        Object.defineProperty(rv, key, {
+            configurable: true,
+            enumerable: true,
+            value: serializeInner(data[key]),
+            writable: true,
+        });
     });
     return rv;
 }
 
 export function serialize(data: any): any {
-    removeCircularReferences(data);
-    return serializeInner(data);
+    return serializeInner(copyWithoutCircularReferences(data));
 }
 
 export function deserialize(data: any): any {
