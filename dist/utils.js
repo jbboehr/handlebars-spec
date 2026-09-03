@@ -28,7 +28,6 @@ exports.deserialize = deserialize;
 const uglify_js_1 = __importDefault(require("uglify-js"));
 const fs_1 = require("fs");
 const path_1 = require("path");
-const util_1 = require("util");
 const eval_1 = require("./eval");
 const hjson_1 = require("hjson");
 const PATCH_FILE = (0, path_1.resolve)(__dirname + '/../patch/_functions.hjson');
@@ -40,7 +39,7 @@ function hasOwn(data, key) {
     return Object.prototype.hasOwnProperty.call(data, key);
 }
 function getOwnSerializableKeys(data) {
-    const array = (0, util_1.isArray)(data);
+    const array = Array.isArray(data);
     return Object.getOwnPropertyNames(data).filter((key) => {
         if (Object.prototype.propertyIsEnumerable.call(data, key)) {
             return true;
@@ -151,7 +150,7 @@ function copyWithoutCircularReferences(data, prev = [], beneathArray = false) {
     const values = Object.create(null);
     let changed = false;
     const keys = getOwnSerializableKeys(data);
-    const childIsBeneathArray = beneathArray || (0, util_1.isArray)(data);
+    const childIsBeneathArray = beneathArray || Array.isArray(data);
     for (const key of keys) {
         const value = data[key];
         if (ancestors.includes(value)) {
@@ -164,7 +163,7 @@ function copyWithoutCircularReferences(data, prev = [], beneathArray = false) {
     if (!changed) {
         return data;
     }
-    const copy = (0, util_1.isArray)(data)
+    const copy = Array.isArray(data)
         ? new Array(data.length)
         : Object.create(Object.getPrototypeOf(data));
     for (const key of keys) {
@@ -221,7 +220,7 @@ function serializeInner(data) {
         return null;
     }
     // Handle arrays
-    if ((0, util_1.isArray)(data)) {
+    if (Array.isArray(data)) {
         if (isSparseArray(data)) {
             const orv = { '!sparsearray': true };
             getOwnSerializableKeys(data).forEach((key) => {

@@ -18,7 +18,6 @@
 import UglifyJS from 'uglify-js';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
-import { isArray } from 'util';
 import { safeEval } from './eval';
 import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
@@ -35,7 +34,7 @@ function hasOwn(data: object, key: PropertyKey): boolean {
 }
 
 function getOwnSerializableKeys(data: any): string[] {
-    const array = isArray(data);
+    const array = Array.isArray(data);
     return Object.getOwnPropertyNames(data).filter((key) => {
         if (Object.prototype.propertyIsEnumerable.call(data, key)) {
             return true;
@@ -160,7 +159,7 @@ function copyWithoutCircularReferences(data: any, prev: any[] = [], beneathArray
     const values: {[key: string]: any} = Object.create(null);
     let changed = false;
     const keys = getOwnSerializableKeys(data);
-    const childIsBeneathArray = beneathArray || isArray(data);
+    const childIsBeneathArray = beneathArray || Array.isArray(data);
 
     for (const key of keys) {
         const value = data[key];
@@ -177,7 +176,7 @@ function copyWithoutCircularReferences(data: any, prev: any[] = [], beneathArray
         return data;
     }
 
-    const copy = isArray(data)
+    const copy = Array.isArray(data)
         ? new Array(data.length)
         : Object.create(Object.getPrototypeOf(data));
     for (const key of keys) {
@@ -243,7 +242,7 @@ function serializeInner(data: any): any {
     }
 
     // Handle arrays
-    if (isArray(data)) {
+    if (Array.isArray(data)) {
         if (isSparseArray(data)) {
             const orv: any = {'!sparsearray': true};
             getOwnSerializableKeys(data).forEach((key) => {

@@ -18,7 +18,7 @@
 import { Command, command, param } from 'clime';
 import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
-import { isArray, inspect } from 'util';
+import { inspect } from 'util';
 import { resolve as resolvePath } from 'path';
 import { readdirSync, readFileSync } from 'fs';
 import * as assert from 'assert';
@@ -138,7 +138,7 @@ function unstringifyLambdas(data: any): any {
         return data;
     }
     for (const x in data) {
-        if (isArray(data[x])) {
+        if (Array.isArray(data[x])) {
             unstringifyLambdas(data[x]);
         } else if (typeof data[x] === 'object' && data[x] !== null) {
             if ('!code' in data[x]) {

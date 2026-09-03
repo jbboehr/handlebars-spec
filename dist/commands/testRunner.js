@@ -172,7 +172,7 @@ function unstringifyLambdas(data) {
         return data;
     }
     for (const x in data) {
-        if ((0, util_1.isArray)(data[x])) {
+        if (Array.isArray(data[x])) {
             unstringifyLambdas(data[x]);
         }
         else if (typeof data[x] === 'object' && data[x] !== null) {
