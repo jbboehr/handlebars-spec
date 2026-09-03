@@ -33,6 +33,28 @@ function hasOwn(data: object, key: PropertyKey): boolean {
     return Object.prototype.hasOwnProperty.call(data, key);
 }
 
+function isArrayIndex(key: string): boolean {
+    const index = Number(key);
+    return Number.isInteger(index)
+        && index >= 0
+        && index < 0xffffffff
+        && String(index) === key;
+}
+
+function sparseArrayLength(data: any): number {
+    if (!hasOwn(data, '!length')) {
+        return 0;
+    }
+
+    const length = data['!length'];
+    return typeof length === 'number'
+        && Number.isInteger(length)
+        && length >= 0
+        && length <= 0xffffffff
+        ? length
+        : 0;
+}
+
 function getOwnSerializableKeys(data: any): string[] {
     const array = Array.isArray(data);
     return Object.getOwnPropertyNames(data).filter((key) => {
@@ -40,12 +62,7 @@ function getOwnSerializableKeys(data: any): string[] {
             return true;
         }
 
-        const index = Number(key);
-        return array
-            && Number.isInteger(index)
-            && index >= 0
-            && index < 0xffffffff
-            && String(index) === key;
+        return array && isArrayIndex(key);
     });
 }
 
@@ -244,12 +261,22 @@ function serializeInner(data: any): any {
     // Handle arrays
     if (Array.isArray(data)) {
         if (isSparseArray(data)) {
-            const orv: any = {'!sparsearray': true};
+            const orv: any = {
+                '!sparsearray': true,
+                '!length': data.length,
+            };
             getOwnSerializableKeys(data).forEach((key) => {
+                if (key === '!sparsearray' || key === '!length') {
+                    return;
+                }
+
+                const value = (data as any)[key];
                 Object.defineProperty(orv, key, {
                     configurable: true,
                     enumerable: true,
-                    value: (data as any)[key],
+                    value: isArrayIndex(key) && Array.isArray(value)
+                        ? serializeInner(value)
+                        : value,
                     writable: true,
                 });
             });
@@ -349,16 +376,25 @@ export function deserialize(data: any): any {
         return undefined;
     } else if ('!code' in data) {
         return safeEval(data['javascript']);
-    } else if ('!sparsearray' in data) {
-        const newData = [];
-        for (const x in data) {
-            let i;
-            if (data.hasOwnProperty(x)) {
-                if (!isNaN(i = parseInt(x))) {
-                    newData[i] = data[x];
-                }
+    } else if (hasOwn(data, '!sparsearray')) {
+        const newData = new Array(sparseArrayLength(data));
+        Object.keys(data).forEach((key) => {
+            if (!isArrayIndex(key)) {
+                return;
             }
-        }
+
+            const value = data[key];
+            Object.defineProperty(newData, Number(key), {
+                configurable: true,
+                enumerable: true,
+                value: value !== null
+                    && typeof value === 'object'
+                    && hasOwn(value, '!sparsearray')
+                    ? deserialize(value)
+                    : value,
+                writable: true,
+            });
+        });
         return newData;
     }
 

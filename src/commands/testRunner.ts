@@ -151,29 +151,56 @@ function unstringifyLambdas(data: any): any {
     return data;
 }
 
+function hasOwn(data: object, key: PropertyKey): boolean {
+    return Object.prototype.hasOwnProperty.call(data, key);
+}
+
+function isArrayIndex(key: string): boolean {
+    const index = Number(key);
+    return Number.isInteger(index)
+        && index >= 0
+        && index < 0xffffffff
+        && String(index) === key;
+}
+
+function sparseArrayLength(data: any): number {
+    if (!hasOwn(data, '!length')) {
+        return 0;
+    }
+
+    const length = data['!length'];
+    return typeof length === 'number'
+        && Number.isInteger(length)
+        && length >= 0
+        && length <= 0xffffffff
+        ? length
+        : 0;
+}
+
 function fixSparseArray(data: any): any {
     if (!data || typeof data !== 'object') {
         return data;
     }
 
-    let x, i;
-
-    if ('!sparsearray' in data) {
-        const newData = [];
-        for (x in data) {
-            if (data.hasOwnProperty(x)) {
-                if (!isNaN(i = parseInt(x))) {
-                    newData[i] = data[x];
-                }
+    if (hasOwn(data, '!sparsearray')) {
+        const newData = new Array(sparseArrayLength(data));
+        Object.keys(data).forEach((key) => {
+            if (!isArrayIndex(key)) {
+                return;
             }
-        }
+
+            Object.defineProperty(newData, Number(key), {
+                configurable: true,
+                enumerable: true,
+                value: fixSparseArray(data[key]),
+                writable: true,
+            });
+        });
         data = newData;
     } else {
-        for (x in data) {
-            if (data.hasOwnProperty(x)) {
-                data[x] = fixSparseArray(data[x]);
-            }
-        }
+        Object.keys(data).forEach((key) => {
+            data[key] = fixSparseArray(data[key]);
+        });
     }
 
     return data;

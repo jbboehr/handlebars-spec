@@ -38,18 +38,32 @@ function isEmptyObject(obj) {
 function hasOwn(data, key) {
     return Object.prototype.hasOwnProperty.call(data, key);
 }
+function isArrayIndex(key) {
+    const index = Number(key);
+    return Number.isInteger(index)
+        && index >= 0
+        && index < 0xffffffff
+        && String(index) === key;
+}
+function sparseArrayLength(data) {
+    if (!hasOwn(data, '!length')) {
+        return 0;
+    }
+    const length = data['!length'];
+    return typeof length === 'number'
+        && Number.isInteger(length)
+        && length >= 0
+        && length <= 0xffffffff
+        ? length
+        : 0;
+}
 function getOwnSerializableKeys(data) {
     const array = Array.isArray(data);
     return Object.getOwnPropertyNames(data).filter((key) => {
         if (Object.prototype.propertyIsEnumerable.call(data, key)) {
             return true;
         }
-        const index = Number(key);
-        return array
-            && Number.isInteger(index)
-            && index >= 0
-            && index < 0xffffffff
-            && String(index) === key;
+        return array && isArrayIndex(key);
     });
 }
 function isSparseArray(arr) {
@@ -222,12 +236,21 @@ function serializeInner(data) {
     // Handle arrays
     if (Array.isArray(data)) {
         if (isSparseArray(data)) {
-            const orv = { '!sparsearray': true };
+            const orv = {
+                '!sparsearray': true,
+                '!length': data.length,
+            };
             getOwnSerializableKeys(data).forEach((key) => {
+                if (key === '!sparsearray' || key === '!length') {
+                    return;
+                }
+                const value = data[key];
                 Object.defineProperty(orv, key, {
                     configurable: true,
                     enumerable: true,
-                    value: data[key],
+                    value: isArrayIndex(key) && Array.isArray(value)
+                        ? serializeInner(value)
+                        : value,
                     writable: true,
                 });
             });
@@ -321,16 +344,24 @@ function deserialize(data) {
     else if ('!code' in data) {
         return (0, eval_1.safeEval)(data['javascript']);
     }
-    else if ('!sparsearray' in data) {
-        const newData = [];
-        for (const x in data) {
-            let i;
-            if (data.hasOwnProperty(x)) {
-                if (!isNaN(i = parseInt(x))) {
-                    newData[i] = data[x];
-                }
+    else if (hasOwn(data, '!sparsearray')) {
+        const newData = new Array(sparseArrayLength(data));
+        Object.keys(data).forEach((key) => {
+            if (!isArrayIndex(key)) {
+                return;
             }
-        }
+            const value = data[key];
+            Object.defineProperty(newData, Number(key), {
+                configurable: true,
+                enumerable: true,
+                value: value !== null
+                    && typeof value === 'object'
+                    && hasOwn(value, '!sparsearray')
+                    ? deserialize(value)
+                    : value,
+                writable: true,
+            });
+        });
         return newData;
     }
     // Recurse

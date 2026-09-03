@@ -180,3 +180,106 @@ test('fails when the thrown exception does not match a serialized regular expres
 
     assert.equal(result.status, 2, result.stdout + result.stderr);
 });
+
+test('preserves trailing holes when restoring a sparse input array', () => {
+    const result = runTest({
+        template: '{{array.length}}',
+        data: {
+            array: {
+                '!sparsearray': true,
+                '!length': 3,
+                0: 'present',
+            },
+        },
+        expected: '3',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('restores a sparse input array with an own hasOwnProperty field', () => {
+    const result = runTest({
+        template: '{{array.[0]}}',
+        data: {
+            array: {
+                '!sparsearray': true,
+                0: 'present',
+                hasOwnProperty: 'collision',
+            },
+        },
+        expected: 'present',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('ignores non-canonical indices when restoring a sparse input array', () => {
+    const result = runTest({
+        template: '{{array.[1]}}|{{array.[2]}}',
+        data: {
+            array: {
+                '!sparsearray': true,
+                '1junk': 'wrong',
+                2: 'right',
+            },
+        },
+        expected: '|right',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('derives sparse input length when length metadata is absent or malformed', () => {
+    const result = runTest({
+        template: '{{legacy.length}}|{{negative.length}}|{{fractional.length}}|{{string.length}}|{{tooLarge.length}}',
+        data: {
+            legacy: {
+                '!sparsearray': true,
+                2: 'present',
+            },
+            negative: {
+                '!sparsearray': true,
+                '!length': -1,
+                2: 'present',
+            },
+            fractional: {
+                '!sparsearray': true,
+                '!length': 1.5,
+                2: 'present',
+            },
+            string: {
+                '!sparsearray': true,
+                '!length': '3',
+                2: 'present',
+            },
+            tooLarge: {
+                '!sparsearray': true,
+                '!length': 0x100000000,
+                2: 'present',
+            },
+        },
+        expected: '3|3|3|3|3',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('recursively restores a sparse input array nested in a sparse array', () => {
+    const result = runTest({
+        template: '{{array.length}}|{{array.[0].length}}|{{array.[0].[1]}}',
+        data: {
+            array: {
+                '!sparsearray': true,
+                '!length': 2,
+                0: {
+                    '!sparsearray': true,
+                    '!length': 3,
+                    1: 'inner value',
+                },
+            },
+        },
+        expected: '2|3|inner value',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});

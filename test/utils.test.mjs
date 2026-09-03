@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import utils from '../dist/utils.js';
 
-const { removeCircularReferences, serialize } = utils;
+const { deserialize, removeCircularReferences, serialize } = utils;
 
 test('continues to remove a direct self-reference', () => {
     const value = { name: 'value' };
@@ -224,8 +224,215 @@ test('preserves present non-enumerable indices in sparse arrays', () => {
 
     assert.deepEqual(output, {
         '!sparsearray': true,
+        '!length': 2,
         0: 'present',
     });
+});
+
+test('round-trips trailing holes in sparse arrays', () => {
+    const input = new Array(3);
+    input[0] = 'present';
+
+    const output = deserialize(serialize(input));
+
+    assert.equal(output.length, 3);
+    assert.deepEqual(Object.keys(output), ['0']);
+    assert.equal(output[0], 'present');
+});
+
+test('round-trips sparse array length when JSON omits the final value', () => {
+    const input = new Array(3);
+    input[2] = undefined;
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+    const output = deserialize(encoded);
+
+    assert.equal(output.length, 3);
+    assert.deepEqual(Object.keys(output), []);
+});
+
+test('array data cannot overwrite reserved sparse-array length metadata', () => {
+    const input = new Array(4);
+    input[1] = 'present';
+    input['!length'] = 'invalid';
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+    const output = deserialize(encoded);
+
+    assert.equal(encoded['!length'], 4);
+    assert.equal(output.length, 4);
+    assert.equal(output[1], 'present');
+});
+
+test('round-trips nested sparse arrays without materializing their holes', () => {
+    const input = new Array(2);
+    const inner = new Array(3);
+    inner[1] = 'present';
+    input[0] = inner;
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+    const output = deserialize(encoded);
+
+    assert.equal(output.length, 2);
+    assert.equal(output[0].length, 3);
+    assert.deepEqual(Object.keys(output[0]), ['1']);
+    assert.equal(output[0][1], 'present');
+});
+
+test('round-trips Date values at present sparse-array indices through JSON', () => {
+    const input = new Array(4);
+    input[1] = new Date('2020-01-02T03:04:05.000Z');
+
+    const serialized = serialize(input);
+    const directOutput = deserialize(serialized);
+    const encoded = JSON.parse(JSON.stringify(serialized));
+    const output = deserialize(encoded);
+
+    assert.equal(directOutput[1] instanceof Date, true);
+    assert.equal(directOutput[1].toISOString(), '2020-01-02T03:04:05.000Z');
+    assert.equal(encoded[1], '2020-01-02T03:04:05.000Z');
+    assert.equal(output.length, 4);
+    assert.deepEqual(Object.keys(output), ['1']);
+    assert.equal(output[1], '2020-01-02T03:04:05.000Z');
+});
+
+test('deserializes sparse arrays with an own hasOwnProperty field', () => {
+    const output = deserialize({
+        '!sparsearray': true,
+        '!length': 2,
+        0: 'present',
+        hasOwnProperty: 'collision',
+    });
+
+    assert.equal(output.length, 2);
+    assert.deepEqual(Object.keys(output), ['0']);
+    assert.equal(output[0], 'present');
+});
+
+test('ignores non-canonical sparse array index keys', () => {
+    const output = deserialize({
+        '!sparsearray': true,
+        '1junk': 'wrong',
+        2: 'right',
+    });
+
+    assert.equal(output.length, 3);
+    assert.equal(1 in output, false);
+    assert.equal(output[2], 'right');
+});
+
+test('restores sparse array indices without invoking inherited setters', () => {
+    let setterCalls = 0;
+    Object.defineProperty(Array.prototype, '0', {
+        configurable: true,
+        set() {
+            setterCalls++;
+        },
+    });
+
+    let output;
+    try {
+        output = deserialize({
+            '!sparsearray': true,
+            0: 'present',
+        });
+    } finally {
+        delete Array.prototype[0];
+    }
+
+    assert.equal(output[0], 'present');
+    assert.equal(setterCalls, 0);
+});
+
+test('does not restore an inherited sparse-array marker', () => {
+    const input = Object.create({ '!sparsearray': true });
+    input.value = 'present';
+
+    assert.deepEqual(deserialize(input), { value: 'present' });
+});
+
+test('derives legacy sparse-array length only from own canonical indices', () => {
+    const input = Object.create({
+        '!length': 100,
+        3: 'inherited',
+    });
+    Object.assign(input, {
+        '!sparsearray': true,
+        2: 'last own value',
+        '02': 'non-canonical',
+    });
+
+    const output = deserialize(input);
+
+    assert.equal(output.length, 3);
+    assert.equal(output[2], 'last own value');
+    assert.equal(Object.hasOwn(output, 3), false);
+    assert.equal(Object.hasOwn(output, '02'), false);
+});
+
+test('ignores malformed sparse-array lengths and derives length from indices', async (t) => {
+    const malformedLengths = [
+        ['null', null],
+        ['boolean', false],
+        ['numeric string', '3'],
+        ['negative', -1],
+        ['fractional', 1.5],
+        ['above maximum', 0x100000000],
+        ['NaN', Number.NaN],
+        ['infinity', Number.POSITIVE_INFINITY],
+    ];
+
+    for (const [name, length] of malformedLengths) {
+        await t.test(name, () => {
+            const output = deserialize({
+                '!sparsearray': true,
+                '!length': length,
+                2: 'last value',
+            });
+
+            assert.equal(output.length, 3);
+            assert.equal(output[2], 'last value');
+        });
+    }
+});
+
+test('accepts only exact decimal JavaScript array-index keys at the upper boundary', () => {
+    const output = deserialize({
+        '!sparsearray': true,
+        0: 'zero',
+        '-0': 'negative zero',
+        '00': 'leading zero',
+        '01': 'leading zero one',
+        '1.0': 'decimal',
+        '1e0': 'exponent',
+        '+1': 'positive sign',
+        ' 1': 'whitespace',
+        4294967294: 'maximum index',
+        4294967295: 'array length, not an index',
+    });
+
+    assert.equal(output.length, 0xffffffff);
+    assert.equal(output[0], 'zero');
+    assert.equal(output[0xfffffffe], 'maximum index');
+    for (const key of ['-0', '00', '01', '1.0', '1e0', '+1', ' 1', '4294967295']) {
+        assert.equal(Object.hasOwn(output, key), false, key);
+    }
+});
+
+test('recursively restores a sparse array nested in a sparse array', () => {
+    const output = deserialize({
+        '!sparsearray': true,
+        '!length': 2,
+        0: {
+            '!sparsearray': true,
+            '!length': 3,
+            1: 'inner value',
+        },
+    });
+
+    assert.equal(Array.isArray(output[0]), true);
+    assert.equal(output[0].length, 3);
+    assert.equal(output[0][1], 'inner value');
 });
 
 test('preserves an own __proto__ property on sparse arrays', () => {
