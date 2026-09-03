@@ -1,6 +1,6 @@
 {
     "name" : "jbboehr/handlebars-spec",
-    "description" : "Handlebars Specification",
+    "description" : "JSON test fixtures derived from the Handlebars.js test suite",
     "homepage": "https://github.com/jbboehr/handlebars-spec",
     "keywords" : [
         "handlebars",

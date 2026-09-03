@@ -1,7 +1,7 @@
 {
 	"name": "handlebars-spec",
 	"version": "104.7.106",
-	"description": "",
+	"description": "JSON test fixtures derived from the Handlebars.js test suite",
 	"author": "John Boehr <jbboehr@gmail.com>",
 	"contributors": [
 		"Kasper Isager <kasperisager@gmail.com>"
