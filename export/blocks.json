@@ -25526,7 +25526,8 @@
 		"decorators": {
 			"decorator": {
 				"!code": true,
-				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }"
+				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }",
+				"php": "function($fn, $props, $container, $options) {\n          assert($options->args[0] === null);\n          return $fn;\n        }"
 			}
 		},
 		"ast": {

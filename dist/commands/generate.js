@@ -87,6 +87,8 @@ __decorate([
 let default_1 = class extends clime_1.Command {
     execute(inputFile, options) {
         const suite = path.basename(inputFile).replace(/\.js$/, '');
+        // Handlebars stringParams mode is deprecated. Its remaining
+        // JavaScript-only callbacks are intentionally not exported to PHP.
         if (!(0, fs_1.existsSync)(inputFile)) {
             console.error('The input file does not exist');
             return process.exit(66);

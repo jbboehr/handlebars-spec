@@ -48,6 +48,9 @@ export default class extends Command {
     ): void {
         const suite = path.basename(inputFile).replace(/\.js$/, '');
 
+        // Handlebars stringParams mode is deprecated. Its remaining
+        // JavaScript-only callbacks are intentionally not exported to PHP.
+
         if (!existsSync(inputFile)) {
             console.error('The input file does not exist');
             return process.exit(66);
