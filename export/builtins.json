@@ -17691,6 +17691,577 @@
 	},
 	{
 		"description": "builtin helpers - #each",
+		"it": "each with block params and strict compilation",
+		"template": "{{#each goodbyes as |value index|}}{{index}}. {{value.text}}!{{/each}}",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				}
+			]
+		},
+		"expected": "0. goodbye!1. Goodbye!",
+		"compileOptions": {
+			"strict": true,
+			"data": true,
+			"blockParams": [],
+			"knownHelpers": {
+				"helperMissing": true,
+				"blockHelperMissing": true,
+				"each": true,
+				"if": true,
+				"unless": true,
+				"with": true,
+				"log": true,
+				"lookup": true
+			}
+		},
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		},
+		"ast": {
+			"type": "Program",
+			"body": [
+				{
+					"type": "BlockStatement",
+					"path": {
+						"type": "PathExpression",
+						"data": false,
+						"depth": 0,
+						"parts": [
+							"each"
+						],
+						"original": "each",
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 3
+							},
+							"end": {
+								"line": 1,
+								"column": 7
+							}
+						}
+					},
+					"params": [
+						{
+							"type": "PathExpression",
+							"data": false,
+							"depth": 0,
+							"parts": [
+								"goodbyes"
+							],
+							"original": "goodbyes",
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 8
+								},
+								"end": {
+									"line": 1,
+									"column": 16
+								}
+							}
+						}
+					],
+					"program": {
+						"type": "Program",
+						"body": [
+							{
+								"type": "MustacheStatement",
+								"path": {
+									"type": "PathExpression",
+									"data": false,
+									"depth": 0,
+									"parts": [
+										"index"
+									],
+									"original": "index",
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 37
+										},
+										"end": {
+											"line": 1,
+											"column": 42
+										}
+									}
+								},
+								"params": [],
+								"escaped": true,
+								"strip": {
+									"open": false,
+									"close": false
+								},
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 35
+									},
+									"end": {
+										"line": 1,
+										"column": 44
+									}
+								}
+							},
+							{
+								"type": "ContentStatement",
+								"original": ". ",
+								"value": ". ",
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 44
+									},
+									"end": {
+										"line": 1,
+										"column": 46
+									}
+								}
+							},
+							{
+								"type": "MustacheStatement",
+								"path": {
+									"type": "PathExpression",
+									"data": false,
+									"depth": 0,
+									"parts": [
+										"value",
+										"text"
+									],
+									"original": "value.text",
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 48
+										},
+										"end": {
+											"line": 1,
+											"column": 58
+										}
+									}
+								},
+								"params": [],
+								"escaped": true,
+								"strip": {
+									"open": false,
+									"close": false
+								},
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 46
+									},
+									"end": {
+										"line": 1,
+										"column": 60
+									}
+								}
+							},
+							{
+								"type": "ContentStatement",
+								"original": "!",
+								"value": "!",
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 60
+									},
+									"end": {
+										"line": 1,
+										"column": 61
+									}
+								}
+							}
+						],
+						"strip": {},
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 35
+							},
+							"end": {
+								"line": 1,
+								"column": 61
+							}
+						},
+						"blockParams": [
+							"value",
+							"index"
+						]
+					},
+					"openStrip": {
+						"open": false,
+						"close": false
+					},
+					"closeStrip": {
+						"open": false,
+						"close": false
+					},
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				}
+			],
+			"strip": {},
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 70
+				}
+			}
+		},
+		"opcodes": {
+			"sourceNode": [],
+			"opcodes": [
+				{
+					"opcode": "getContext",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 8
+						},
+						"end": {
+							"line": 1,
+							"column": 16
+						}
+					}
+				},
+				{
+					"opcode": "lookupOnContext",
+					"args": [
+						[
+							"goodbyes"
+						],
+						null,
+						null,
+						false
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 8
+						},
+						"end": {
+							"line": 1,
+							"column": 16
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						0
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				},
+				{
+					"opcode": "pushProgram",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				},
+				{
+					"opcode": "emptyHash",
+					"args": [
+						null
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				},
+				{
+					"opcode": "invokeKnownHelper",
+					"args": [
+						1,
+						"each"
+					],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				},
+				{
+					"opcode": "append",
+					"args": [],
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 70
+						}
+					}
+				}
+			],
+			"children": [
+				{
+					"sourceNode": [],
+					"opcodes": [
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 37
+								},
+								"end": {
+									"line": 1,
+									"column": 42
+								}
+							}
+						},
+						{
+							"opcode": "lookupBlockParam",
+							"args": [
+								[
+									0,
+									1
+								],
+								[
+									"index"
+								]
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 37
+								},
+								"end": {
+									"line": 1,
+									"column": 42
+								}
+							}
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": [],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 35
+								},
+								"end": {
+									"line": 1,
+									"column": 44
+								}
+							}
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": [],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 35
+								},
+								"end": {
+									"line": 1,
+									"column": 44
+								}
+							}
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								". "
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 44
+								},
+								"end": {
+									"line": 1,
+									"column": 46
+								}
+							}
+						},
+						{
+							"opcode": "getContext",
+							"args": [
+								0
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 48
+								},
+								"end": {
+									"line": 1,
+									"column": 58
+								}
+							}
+						},
+						{
+							"opcode": "lookupBlockParam",
+							"args": [
+								[
+									0,
+									0
+								],
+								[
+									"value",
+									"text"
+								]
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 48
+								},
+								"end": {
+									"line": 1,
+									"column": 58
+								}
+							}
+						},
+						{
+							"opcode": "resolvePossibleLambda",
+							"args": [],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 46
+								},
+								"end": {
+									"line": 1,
+									"column": 60
+								}
+							}
+						},
+						{
+							"opcode": "appendEscaped",
+							"args": [],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 46
+								},
+								"end": {
+									"line": 1,
+									"column": 60
+								}
+							}
+						},
+						{
+							"opcode": "appendContent",
+							"args": [
+								"!"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 60
+								},
+								"end": {
+									"line": 1,
+									"column": 61
+								}
+							}
+						}
+					],
+					"children": [],
+					"options": {
+						"strict": true,
+						"data": true,
+						"blockParams": [],
+						"knownHelpers": {
+							"helperMissing": true,
+							"blockHelperMissing": true,
+							"each": true,
+							"if": true,
+							"unless": true,
+							"with": true,
+							"log": true,
+							"lookup": true
+						}
+					},
+					"isSimple": false,
+					"blockParams": 2
+				}
+			],
+			"options": {
+				"strict": true,
+				"data": true,
+				"blockParams": [],
+				"knownHelpers": {
+					"helperMissing": true,
+					"blockHelperMissing": true,
+					"each": true,
+					"if": true,
+					"unless": true,
+					"with": true,
+					"log": true,
+					"lookup": true
+				}
+			},
+			"guid": 1,
+			"isSimple": true,
+			"blockParams": 0
+		}
+	},
+	{
+		"description": "builtin helpers - #each",
 		"it": "each object with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {

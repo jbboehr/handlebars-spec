@@ -446,6 +446,32 @@
 	},
 	{
 		"description": "builtin helpers - #each",
+		"it": "each with block params and strict compilation",
+		"template": "{{#each goodbyes as |value index|}}{{index}}. {{value.text}}!{{/each}}",
+		"data": {
+			"goodbyes": [
+				{
+					"text": "goodbye"
+				},
+				{
+					"text": "Goodbye"
+				}
+			]
+		},
+		"expected": "0. goodbye!1. Goodbye!",
+		"compileOptions": {
+			"strict": true
+		},
+		"helpers": {
+			"detectDataInsideEach": {
+				"!code": true,
+				"javascript": "function(options) { return options.data && options.data.exclaim; }",
+				"php": "function($options) { return isset($options['data']['exclaim'])? $options['data']['exclaim'] : ''; }"
+			}
+		}
+	},
+	{
+		"description": "builtin helpers - #each",
 		"it": "each object with @index",
 		"template": "{{#each goodbyes}}{{@index}}. {{text}}! {{/each}}cruel {{world}}!",
 		"data": {
