@@ -8,14 +8,6 @@
 	],
 	"license": "AGPL-3.0-or-later",
 	"repository": "https://github.com/jbboehr/handlebars-spec.git",
-	"dependencies": {
-		"clime": "^0.5.16",
-		"extend": "^3.0.2",
-		"handlebars": "4.7.9",
-		"hjson": "^3.2.2",
-		"sinon": "^22.1.0",
-		"uglify-js": "^3.19.3"
-	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@types/extend": "^3.0.4",
@@ -24,11 +16,17 @@
 		"@types/sinon": "^22.0.0",
 		"@types/uglify-js": "^3.17.5",
 		"@typescript-eslint/parser": "^8.68.0",
+		"clime": "^0.5.16",
 		"eslint": "^10.9.1",
 		"eslint-plugin-import-x": "^4.17.1",
+		"extend": "^3.0.2",
+		"handlebars": "4.7.9",
+		"hjson": "^3.2.2",
+		"sinon": "^22.1.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.68.0"
+		"typescript-eslint": "^8.68.0",
+		"uglify-js": "^3.19.3"
 	},
 	"scripts": {
 		"build": "tsc",
@@ -38,16 +36,8 @@
 		"generate": "ts-node --files src/cli.ts generate",
 		"testRunner": "ts-node --files src/cli.ts testRunner"
 	},
-	"engines": {
-		"node": ">=22.13.0"
-	},
-	"bin": "./dist/cli.js",
 	"files": [
-		"bin",
-		"dist",
 		"export",
-		"patch",
-		"spec",
-		"src"
+		"spec"
 	]
 }
