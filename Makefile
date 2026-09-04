@@ -46,7 +46,8 @@ test_node: dist
 
 test_php:
 	@echo ---------- Linting PHP code ----------
-	php bin/lint.php $(foreach var,$(SPECS),spec/$(var).json)
+	php test/php-lint.test.php
+	php bin/lint.php --check-omission-suites $(foreach var,$(SPECS),spec/$(var).json)
 
 test_eslint: node_modules
 	npm run lint

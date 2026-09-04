@@ -77,13 +77,33 @@ function searchForCode($data, &$codes, $path = array()) {
   }
 }
 
+function testName($test) {
+  return strtolower(
+    $test['description'] . ' - '
+    . $test['it'] . ' - '
+    . ($test['number'] ?? '00')
+  );
+}
+
 
 // Main
 $inputFiles = (array) array_slice($argv, 1);
+$checkOmissionSuites = ($inputFiles[0] ?? null) === '--check-omission-suites';
+if( $checkOmissionSuites ) {
+  array_shift($inputFiles);
+}
 $successes = array();
 $failures = array();
 $skipped = array();
 $indices = array();
+$inputSuites = array();
+$omissionFile = __DIR__ . '/../patch/_php.json';
+$omissionSuites = json_decode(file_get_contents($omissionFile), true);
+
+if( !is_array($omissionSuites) ) {
+  echo "Failed to decode PHP omission manifest\n";
+  exit(65);
+}
 
 if( !is_dir('./tmp') ) {
   mkdir('./tmp');
@@ -91,6 +111,11 @@ if( !is_dir('./tmp') ) {
 
 foreach( $inputFiles as $inputFile ) {
   $indices[$inputFile] = array();
+
+  $suite = pathinfo($inputFile, PATHINFO_FILENAME);
+  $inputSuites[$suite] = true;
+  $omissions = $omissionSuites[$suite] ?? array();
+  $unusedOmissions = array_fill_keys(array_keys($omissions), true);
 
   if( !file_exists($inputFile) ) {
     echo "Input file does not exist\n";
@@ -114,6 +139,7 @@ foreach( $inputFiles as $inputFile ) {
     }
 
     foreach( $codes as $key => $code ) {
+      $omissionKey = testName($test) . ' [' . $key . ']';
       echo $prefix, ' ', '#', ++$index, " [", $key, "] ... ";
       try {
         if( $code instanceof Exception ) {
@@ -129,12 +155,38 @@ foreach( $inputFiles as $inputFile ) {
         echo $e->getMessage(), "\n";
         $failures[] = $prefix;
       } catch( LintPhpMissingException $e ) {
-        echo "Skipped (", $e->getMessage(), ")\n";
-        $skipped[] = $prefix;
+        if( array_key_exists($omissionKey, $omissions) ) {
+          echo "Skipped (", $omissions[$omissionKey], ")\n";
+          unset($unusedOmissions[$omissionKey]);
+          $skipped[] = $prefix;
+        } else {
+          echo "Failed\n";
+          echo $e->getMessage(), "\n";
+          $failures[] = $prefix;
+        }
       }
     }
 
     unset($codes);
+  }
+
+  if( !empty($unusedOmissions) ) {
+    echo "Unused PHP omissions for ", $suite, ":\n";
+    foreach( array_keys($unusedOmissions) as $omission ) {
+      echo $omission, "\n";
+      $failures[] = $suite . ' - ' . $omission;
+    }
+  }
+}
+
+if( $checkOmissionSuites ) {
+  $unusedOmissionSuites = array_diff_key($omissionSuites, $inputSuites);
+  if( !empty($unusedOmissionSuites) ) {
+    echo "Unused PHP omission suites:\n";
+    foreach( array_keys($unusedOmissionSuites) as $suite ) {
+      echo $suite, "\n";
+      $failures[] = $suite;
+    }
   }
 }
 

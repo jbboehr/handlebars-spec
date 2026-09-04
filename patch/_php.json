@@ -1,0 +1,9 @@
+{
+	"string-params": {
+		"string params mode - information about the types is passed along - 00 [helpers.tomdale]": "Deprecated stringParams mode is intentionally not exported to PHP.",
+		"string params mode - hash parameters get type information - 00 [helpers.tomdale]": "Deprecated stringParams mode is intentionally not exported to PHP."
+	},
+	"subexpressions": {
+		"subexpressions - as hashes in string params mode - 00 [helpers.blog]": "Deprecated stringParams mode is intentionally not exported to PHP."
+	}
+}
