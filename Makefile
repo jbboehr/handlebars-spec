@@ -47,6 +47,7 @@ test_node: dist
 test_php:
 	@echo ---------- Linting PHP code ----------
 	php test/php-lint.test.php
+	php test/php-helpers.test.php
 	php bin/lint.php --check-omission-suites $(foreach var,$(SPECS),spec/$(var).json)
 
 test_eslint: node_modules

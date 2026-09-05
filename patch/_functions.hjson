@@ -2282,11 +2282,10 @@
 		php:
 			'''
 			function($options) {
-                static $value = 0;
+                static $value = 1;
 			          return $options->fn(
 			            [ "value" => 'bar' ],
 			            [
-                    // blockParams probably wrong
 			              "blockParams" => $options->blockParams === 1 ? [$value++, $value++] : null
 			            ]
 			          );
