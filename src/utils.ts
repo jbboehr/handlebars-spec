@@ -18,6 +18,7 @@
 import UglifyJS from 'uglify-js';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
+import { types } from 'util';
 import { safeEval } from './eval';
 import {stringify as hjsonStringify, parse as hjsonParse} from 'hjson';
 
@@ -162,12 +163,19 @@ export function removeCircularReferences(data: any, prev: any[] = []): any {
     return data;
 }
 
+function isOpaqueArrayValue(data: any): boolean {
+    return types.isBoxedPrimitive(data)
+        || data instanceof RegExp
+        || typeof data.toJSON === 'function'
+        || (JSON as JSON & { isRawJSON?: (value: unknown) => boolean }).isRawJSON?.(data) === true;
+}
+
 function copyWithoutCircularReferences(data: any, prev: any[] = [], beneathArray: boolean = false): any {
     if (typeof data !== 'object'
         || data === null
         || data instanceof RegExp
         || data instanceof Boolean
-        || (beneathArray && (data instanceof Number || data instanceof String || typeof data.toJSON === 'function'))
+        || (beneathArray && isOpaqueArrayValue(data))
     ) {
         return data;
     }
@@ -230,7 +238,7 @@ export function stripNulls(data: any): any {
     return data;
 }
 
-function serializeInner(data: any): any {
+function serializeInner(data: any, beneathArray: boolean = false): any {
     switch (typeof data) {
     case 'boolean':
     case 'number':
@@ -240,13 +248,16 @@ function serializeInner(data: any): any {
     default:
     case 'bigint':
     case 'symbol':
+        if (beneathArray) {
+            return data;
+        }
         throw new Error('unimplemented');
 
     case 'function':
         return jsToCode(data);
 
     case 'undefined':
-        return null;
+        return beneathArray ? data : null;
 
     case 'object':
         // fallthrough
@@ -256,6 +267,12 @@ function serializeInner(data: any): any {
     // Handle null
     if (data === null) {
         return null;
+    }
+
+    // Array contents previously went directly to JSON.stringify. Keep native
+    // JSON conversion for these values while encoding callbacks recursively.
+    if (beneathArray && isOpaqueArrayValue(data)) {
+        return data;
     }
 
     // Handle arrays
@@ -274,9 +291,7 @@ function serializeInner(data: any): any {
                 Object.defineProperty(orv, key, {
                     configurable: true,
                     enumerable: true,
-                    value: isArrayIndex(key) && Array.isArray(value)
-                        ? serializeInner(value)
-                        : value,
+                    value: serializeInner(value, true),
                     writable: true,
                 });
             });
@@ -287,7 +302,7 @@ function serializeInner(data: any): any {
                 Object.defineProperty(arv, index, {
                     configurable: true,
                     enumerable: true,
-                    value: data[index],
+                    value: serializeInner(data[index], true),
                     writable: true,
                 });
             }
@@ -327,11 +342,11 @@ function serializeInner(data: any): any {
     const rv: any = {};
     Object.keys(data).forEach((key) => {
         // Ignore some empty objects
-        if (hasOwn(ignoreEmptyKeys, key)) {
+        if (!beneathArray && hasOwn(ignoreEmptyKeys, key)) {
             if (!data[key]) {
                 return;
             }
-        } else if (hasOwn(ignoreEmptyObjectKeys, key)) {
+        } else if (!beneathArray && hasOwn(ignoreEmptyObjectKeys, key)) {
             if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
                 return;
             }
@@ -340,7 +355,7 @@ function serializeInner(data: any): any {
         Object.defineProperty(rv, key, {
             configurable: true,
             enumerable: true,
-            value: serializeInner(data[key]),
+            value: serializeInner(data[key], beneathArray),
             writable: true,
         });
     });

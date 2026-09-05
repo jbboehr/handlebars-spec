@@ -209,6 +209,131 @@ test('preserves serializable object instances nested in arrays', () => {
     assert.equal(metadata.self, metadata);
 });
 
+test('encodes callbacks in dense arrays and nested array objects', () => {
+    const callback = function () { return 'Awesome'; };
+    const input = [callback, { people: [{ name: callback }] }];
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+
+    for (const code of [encoded[0], encoded[1].people[0].name]) {
+        assert.equal(code?.['!code'], true);
+        assert.equal(typeof code.php, 'string');
+        assert.equal(deserialize(code)(), 'Awesome');
+    }
+    assert.equal(input[0], callback);
+    assert.equal(input[1].people[0].name, callback);
+});
+
+test('encodes callbacks beneath sparse indices without filling holes', () => {
+    const callback = function () { return 'Awesome'; };
+    const input = new Array(6);
+    input[1] = callback;
+    input[3] = { people: [[{ name: callback }]] };
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+
+    assert.equal(encoded['!sparsearray'], true);
+    assert.equal(encoded['!length'], 6);
+    assert.deepEqual(Object.keys(encoded), ['1', '3', '!sparsearray', '!length']);
+    for (const code of [encoded[1], encoded[3].people[0][0].name]) {
+        assert.equal(code?.['!code'], true);
+        assert.equal(typeof code.php, 'string');
+        assert.equal(deserialize(code)(), 'Awesome');
+    }
+    assert.equal(input[1], callback);
+    assert.deepEqual(Object.keys(input), ['1', '3']);
+});
+
+test('encodes callbacks at non-enumerable indices without mutating cyclic input', () => {
+    const callback = function () { return 'Awesome'; };
+    const nested = new Array(3);
+    Object.defineProperty(nested, '1', { value: callback });
+    const record = { callback, nested };
+    record.self = record;
+    const input = [];
+    Object.defineProperty(input, '0', { value: record });
+
+    const encoded = JSON.parse(JSON.stringify(serialize(input)));
+
+    assert.equal(encoded[0].callback?.['!code'], true);
+    assert.equal(encoded[0].nested['!sparsearray'], true);
+    assert.equal(encoded[0].nested['!length'], 3);
+    assert.equal(encoded[0].nested[1]?.['!code'], true);
+    assert.deepEqual(Object.keys(encoded[0].nested), ['1', '!sparsearray', '!length']);
+    assert.equal(record.self, record);
+    assert.equal(input[0], record);
+    assert.deepEqual(Object.keys(input), []);
+    assert.deepEqual(Object.keys(nested), []);
+});
+
+test('preserves JSON values and metadata-shaped data beneath arrays', () => {
+    const input = [{
+        nested: {
+            date: new Date('2020-01-02T03:04:05.000Z'),
+            number: new Number(3),
+            string: new String('value'),
+            boolean: new Boolean(false),
+            regexp: /value/,
+            custom: { toJSON(key) { return 'custom:' + key; } },
+            missing: undefined,
+            symbol: Symbol('omitted'),
+            message: '',
+            exception: false,
+            helpers: {},
+        },
+    }];
+
+    const expected = JSON.stringify(input);
+
+    assert.equal(JSON.stringify(serialize(input)), expected);
+});
+
+test('lets custom toJSON control callback-bearing objects beneath arrays', () => {
+    const callback = function () { return 'Awesome'; };
+    const value = { name: callback, toJSON: callback };
+    const sparse = new Array(3);
+    sparse[1] = value;
+
+    assert.equal(JSON.stringify(serialize([value])), '["Awesome"]');
+    assert.deepEqual(JSON.parse(JSON.stringify(serialize(sparse))), {
+        '!sparsearray': true,
+        '!length': 3,
+        1: 'Awesome',
+    });
+    assert.equal(value.name, callback);
+    assert.equal(value.toJSON, callback);
+});
+
+test('preserves native JSON failure for boxed BigInt values beneath arrays', async (t) => {
+    const cyclic = Object(1n);
+    cyclic.self = cyclic;
+    for (const [name, input] of [
+        ['dense', [Object(1n)]],
+        ['sparse', Object.assign(new Array(2), { 1: Object(1n) })],
+        ['cyclic boxed value', [cyclic]],
+    ]) {
+        await t.test(name, () => {
+            assert.throws(() => JSON.stringify(input), TypeError);
+            assert.throws(() => JSON.stringify(serialize(input)), TypeError);
+        });
+    }
+    assert.equal(cyclic.self, cyclic);
+});
+
+test('preserves native raw JSON values beneath arrays', {
+    skip: typeof JSON.rawJSON !== 'function',
+}, async (t) => {
+    const raw = JSON.rawJSON('"value"');
+    for (const [name, input, expected] of [
+        ['dense', [raw], '["value"]'],
+        ['sparse', Object.assign(new Array(2), { 1: raw }), '{"1":"value","!sparsearray":true,"!length":2}'],
+    ]) {
+        await t.test(name, () => {
+            assert.equal(JSON.stringify(serialize(input)), expected);
+        });
+    }
+});
+
 test('preserves present non-enumerable array indices', () => {
     const input = [];
     Object.defineProperty(input, '0', { value: 'present' });

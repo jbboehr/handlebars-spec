@@ -28,6 +28,7 @@ exports.deserialize = deserialize;
 const uglify_js_1 = __importDefault(require("uglify-js"));
 const fs_1 = require("fs");
 const path_1 = require("path");
+const util_1 = require("util");
 const eval_1 = require("./eval");
 const hjson_1 = require("hjson");
 const PATCH_FILE = (0, path_1.resolve)(__dirname + '/../patch/_functions.hjson');
@@ -152,12 +153,19 @@ function removeCircularReferences(data, prev = []) {
     }
     return data;
 }
+function isOpaqueArrayValue(data) {
+    var _a, _b;
+    return util_1.types.isBoxedPrimitive(data)
+        || data instanceof RegExp
+        || typeof data.toJSON === 'function'
+        || ((_b = (_a = JSON).isRawJSON) === null || _b === void 0 ? void 0 : _b.call(_a, data)) === true;
+}
 function copyWithoutCircularReferences(data, prev = [], beneathArray = false) {
     if (typeof data !== 'object'
         || data === null
         || data instanceof RegExp
         || data instanceof Boolean
-        || (beneathArray && (data instanceof Number || data instanceof String || typeof data.toJSON === 'function'))) {
+        || (beneathArray && isOpaqueArrayValue(data))) {
         return data;
     }
     const ancestors = [...prev, data];
@@ -211,7 +219,7 @@ function stripNulls(data) {
     }
     return data;
 }
-function serializeInner(data) {
+function serializeInner(data, beneathArray = false) {
     switch (typeof data) {
         case 'boolean':
         case 'number':
@@ -220,11 +228,14 @@ function serializeInner(data) {
         default:
         case 'bigint':
         case 'symbol':
+            if (beneathArray) {
+                return data;
+            }
             throw new Error('unimplemented');
         case 'function':
             return jsToCode(data);
         case 'undefined':
-            return null;
+            return beneathArray ? data : null;
         case 'object':
             // fallthrough
             break;
@@ -232,6 +243,11 @@ function serializeInner(data) {
     // Handle null
     if (data === null) {
         return null;
+    }
+    // Array contents previously went directly to JSON.stringify. Keep native
+    // JSON conversion for these values while encoding callbacks recursively.
+    if (beneathArray && isOpaqueArrayValue(data)) {
+        return data;
     }
     // Handle arrays
     if (Array.isArray(data)) {
@@ -248,9 +264,7 @@ function serializeInner(data) {
                 Object.defineProperty(orv, key, {
                     configurable: true,
                     enumerable: true,
-                    value: isArrayIndex(key) && Array.isArray(value)
-                        ? serializeInner(value)
-                        : value,
+                    value: serializeInner(value, true),
                     writable: true,
                 });
             });
@@ -262,7 +276,7 @@ function serializeInner(data) {
                 Object.defineProperty(arv, index, {
                     configurable: true,
                     enumerable: true,
-                    value: data[index],
+                    value: serializeInner(data[index], true),
                     writable: true,
                 });
             }
@@ -298,12 +312,12 @@ function serializeInner(data) {
     const rv = {};
     Object.keys(data).forEach((key) => {
         // Ignore some empty objects
-        if (hasOwn(ignoreEmptyKeys, key)) {
+        if (!beneathArray && hasOwn(ignoreEmptyKeys, key)) {
             if (!data[key]) {
                 return;
             }
         }
-        else if (hasOwn(ignoreEmptyObjectKeys, key)) {
+        else if (!beneathArray && hasOwn(ignoreEmptyObjectKeys, key)) {
             if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
                 return;
             }
@@ -312,7 +326,7 @@ function serializeInner(data) {
         Object.defineProperty(rv, key, {
             configurable: true,
             enumerable: true,
-            value: serializeInner(data[key]),
+            value: serializeInner(data[key], beneathArray),
             writable: true,
         });
     });

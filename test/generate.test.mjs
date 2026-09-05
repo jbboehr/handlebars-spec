@@ -105,6 +105,57 @@ test('uses one patch-file snapshot for the whole suite', () => {
     );
 });
 
+for (const sparse of [false, true]) {
+    test(`generates and runs callbacks beneath ${sparse ? 'sparse' : 'dense'} arrays`, () => {
+        const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-generate-'));
+        const inputFile = path.join(directory, 'basic.js');
+        const outputFile = path.join(directory, 'basic.json');
+        temporaryDirectories.push(directory);
+        writeFileSync(inputFile, `
+            describe('array callbacks', function () {
+                it('retains callbacks through JSON', function () {
+                    const people = ${sparse ? 'new Array(3)' : '[]'};
+                    const children = new Array(3);
+                    Object.defineProperty(children, '1', {
+                        value: { name: function () { return 'Awesome'; } }
+                    });
+                    people[${sparse ? 1 : 0}] = {
+                        name: function () { return 'Awesome'; },
+                        children: children
+                    };
+                    expectTemplate('{{people.length}}:{{#each people}}{{name}}/{{children.length}}:{{#each children}}{{name}}{{/each}}{{/each}}')
+                        .withInput({ people: people })
+                        .toCompileTo('${sparse ? 3 : 1}:Awesome/3:Awesome');
+                });
+                it('retains a directly stored callback', function () {
+                    const names = ${sparse ? 'new Array(3)' : '[]'};
+                    Object.defineProperty(names, '${sparse ? 1 : 0}', {
+                        value: function () { return 'Awesome'; }
+                    });
+                    expectTemplate('{{names.[${sparse ? 1 : 0}]}}')
+                        .withInput({ names: names })
+                        .toCompileTo('Awesome');
+                });
+            });
+        `);
+
+        const generation = spawnSync(
+            process.execPath,
+            [cliPath, 'generate', '-o', outputFile, inputFile],
+            { cwd: directory, encoding: 'utf8' },
+        );
+        assert.equal(generation.status, 0, generation.stdout + generation.stderr);
+
+        const execution = spawnSync(
+            process.execPath,
+            [cliPath, 'testRunner', 'basic.json'],
+            { cwd: directory, encoding: 'utf8' },
+        );
+        assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+        assert.match(execution.stdout, /Success: 2\nFailed: 0\nSkipped: 0/);
+    });
+}
+
 test('preserves global partial names that collide with prototype setters', () => {
     const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-generate-'));
     const patchDirectory = path.join(directory, 'patch');
