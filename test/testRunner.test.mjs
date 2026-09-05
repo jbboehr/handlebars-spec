@@ -58,6 +58,29 @@ const validFixture = {
     expected: 'plain text',
 };
 
+for (const absolute of [true, false]) {
+    test(`runs an ${absolute ? 'absolute' : 'explicit relative'} fixture path from another working directory`, () => {
+        const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-path-'));
+        temporaryDirectories.push(directory);
+        const fixtureDirectory = path.join(directory, 'fixtures with spaces');
+        const workingDirectory = path.join(directory, 'working directory');
+        mkdirSync(fixtureDirectory);
+        mkdirSync(workingDirectory);
+        const inputFile = path.join(fixtureDirectory, 'basic.json');
+        writeFileSync(inputFile, JSON.stringify([validFixture]));
+
+        const result = spawnSync(
+            process.execPath,
+            [cliPath, 'testRunner', absolute ? inputFile : path.relative(workingDirectory, inputFile)],
+            { cwd: workingDirectory, encoding: 'utf8' },
+        );
+
+        assert.equal(result.error, undefined);
+        assert.equal(result.status, 0, result.stdout + result.stderr);
+        assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
+    });
+}
+
 for (const selected of [true, false]) {
     for (const empty of [false, true]) {
         test(`rejects ${empty ? 'empty' : 'nonempty'} unsupported suites when ${selected ? 'selected' : 'discovered'}`, () => {

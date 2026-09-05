@@ -92,7 +92,7 @@ let default_1 = class extends clime_1.Command {
             const tmp = spec.replace(/\.json$/, '').split('/');
             const suite = tmp[tmp.length - 1];
             const runTest = getSuiteRunner(suite);
-            const data = JSON.parse((0, fs_1.readFileSync)((0, path_1.resolve)(dir + '/' + spec)).toString());
+            const data = JSON.parse((0, fs_1.readFileSync)((0, path_1.resolve)(dir, spec)).toString());
             Object.keys(data).forEach(function (y) {
                 data[y].suite = suite;
                 if (runTest(data[y])) {
