@@ -12,6 +12,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { afterEach, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import Handlebars from 'handlebars';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cliPath = path.join(projectRoot, 'dist/cli.js');
@@ -54,6 +55,94 @@ function fixtureTest(it, template, extra = {}) {
         ...extra,
     };
 }
+
+function assertExportedFixtureOutput(fixture, expected, input = {}) {
+    const options = fixture.compileOptions || {};
+    const partials = Object.fromEntries(
+        Object.entries(fixture.partialAsts || {}).map(([name, ast]) => [
+            name,
+            Handlebars.compile(ast, options),
+        ]),
+    );
+    assert.equal(
+        Handlebars.compile(fixture.ast, options)(input, { partials }),
+        expected,
+        `${fixture.it} AST`,
+    );
+
+    const compileOpcodes = (opcodes) => Handlebars.template(
+        new Handlebars.JavaScriptCompiler().compile(opcodes, options, undefined, true),
+    );
+    const partialTemplates = Object.fromEntries(
+        Object.entries(fixture.partialOpcodes || {}).map(([name, opcodes]) => [
+            name,
+            compileOpcodes(opcodes),
+        ]),
+    );
+    assert.equal(
+        compileOpcodes(fixture.opcodes)(input, { partials: partialTemplates }),
+        expected,
+        `${fixture.it} opcodes`,
+    );
+}
+
+for (const { name, compileOptions, expected } of [
+    { name: 'default options', expected: 'before\nafter\n' },
+    {
+        name: 'ignoreStandalone disabled',
+        compileOptions: { ignoreStandalone: false },
+        expected: 'before\nafter\n',
+    },
+    {
+        name: 'ignoreStandalone enabled',
+        compileOptions: { ignoreStandalone: true },
+        expected: 'before\n  \nafter\n',
+    },
+]) {
+    test(`exports standalone whitespace with ${name}`, () => {
+        const template = 'before\n  {{! standalone comment}}\nafter\n';
+        const { outputFile, result } = runExport([
+            fixtureTest('template', template, { compileOptions }),
+            fixtureTest('partial', '{{> example}}', {
+                compileOptions,
+                partials: { example: template },
+            }),
+        ]);
+
+        assert.equal(result.status, 0, result.stdout + result.stderr);
+        const fixtures = JSON.parse(readFileSync(outputFile, 'utf8'));
+        assert.equal(fixtures.length, 2);
+
+        for (const fixture of fixtures) {
+            assertExportedFixtureOutput(fixture, expected);
+        }
+    });
+}
+
+test('preserves other compile options alongside ignoreStandalone', () => {
+    const compileOptions = { ignoreStandalone: true, noEscape: true };
+    const template = 'before\n  {{! standalone comment}}\n{{value}}\nafter\n';
+    const expected = 'before\n  \n<b>x</b>\nafter\n';
+    const { outputFile, result } = runExport([
+        fixtureTest('template', template, { compileOptions }),
+        fixtureTest('partial', '{{> example}}', {
+            compileOptions,
+            partials: { example: template },
+        }),
+    ]);
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    const fixtures = JSON.parse(readFileSync(outputFile, 'utf8'));
+    assert.equal(fixtures.length, 2);
+
+    for (const fixture of fixtures) {
+        assertExportedFixtureOutput(
+            fixture,
+            expected,
+            { value: '<b>x</b>' },
+        );
+    }
+});
 
 test('rejects an unexpected export failure without overwriting output', () => {
     const { outputFile, result } = runExport([

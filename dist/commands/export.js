@@ -122,7 +122,7 @@ let default_1 = class extends clime_1.Command {
         if (options.compat) {
             options.useDepths = true;
         }
-        const ast = Handlebars.parse(input);
+        const ast = Handlebars.parse(input, options);
         const astCopy = JSON.parse(JSON.stringify(ast));
         const opcodes = new Handlebars.Compiler().compile(ast, options);
         return {

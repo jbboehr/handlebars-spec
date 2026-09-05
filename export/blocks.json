@@ -15784,7 +15784,7 @@
 							{
 								"type": "ContentStatement",
 								"original": "\n",
-								"value": "",
+								"value": "\n",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -15794,8 +15794,7 @@
 										"line": 2,
 										"column": 0
 									}
-								},
-								"rightStripped": true
+								}
 							},
 							{
 								"type": "MustacheStatement",
@@ -15848,8 +15847,7 @@
 										"line": 3,
 										"column": 0
 									}
-								},
-								"leftStripped": false
+								}
 							}
 						],
 						"strip": {},
@@ -15870,7 +15868,7 @@
 							{
 								"type": "ContentStatement",
 								"original": "\n",
-								"value": "",
+								"value": "\n",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -15880,8 +15878,7 @@
 										"line": 4,
 										"column": 0
 									}
-								},
-								"rightStripped": true
+								}
 							},
 							{
 								"type": "MustacheStatement",
@@ -15934,8 +15931,7 @@
 										"line": 5,
 										"column": 0
 									}
-								},
-								"leftStripped": false
+								}
 							}
 						],
 						"strip": {},
@@ -15976,7 +15972,7 @@
 				{
 					"type": "ContentStatement",
 					"original": "\n",
-					"value": "",
+					"value": "\n",
 					"loc": {
 						"start": {
 							"line": 5,
@@ -15986,8 +15982,7 @@
 							"line": 6,
 							"column": 0
 						}
-					},
-					"rightStripped": true
+					}
 				}
 			],
 			"strip": {},
@@ -16180,12 +16175,44 @@
 							"column": 11
 						}
 					}
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"\n"
+					],
+					"loc": {
+						"start": {
+							"line": 5,
+							"column": 11
+						},
+						"end": {
+							"line": 6,
+							"column": 0
+						}
+					}
 				}
 			],
 			"children": [
 				{
 					"sourceNode": [],
 					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"\n"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 11
+								},
+								"end": {
+									"line": 2,
+									"column": 0
+								}
+							}
+						},
 						{
 							"opcode": "getContext",
 							"args": [
@@ -16341,6 +16368,22 @@
 				{
 					"sourceNode": [],
 					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"\n"
+							],
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 5
+								},
+								"end": {
+									"line": 4,
+									"column": 0
+								}
+							}
+						},
 						{
 							"opcode": "getContext",
 							"args": [
@@ -16569,7 +16612,7 @@
 							{
 								"type": "ContentStatement",
 								"original": "\n",
-								"value": "",
+								"value": "\n",
 								"loc": {
 									"start": {
 										"line": 1,
@@ -16579,8 +16622,7 @@
 										"line": 2,
 										"column": 0
 									}
-								},
-								"rightStripped": true
+								}
 							},
 							{
 								"type": "MustacheStatement",
@@ -16631,8 +16673,7 @@
 										"line": 3,
 										"column": 0
 									}
-								},
-								"leftStripped": false
+								}
 							}
 						],
 						"strip": {},
@@ -16653,7 +16694,7 @@
 							{
 								"type": "ContentStatement",
 								"original": "\nFail\n",
-								"value": "Fail\n",
+								"value": "\nFail\n",
 								"loc": {
 									"start": {
 										"line": 3,
@@ -16663,9 +16704,7 @@
 										"line": 5,
 										"column": 0
 									}
-								},
-								"rightStripped": true,
-								"leftStripped": false
+								}
 							}
 						],
 						"strip": {},
@@ -16706,7 +16745,7 @@
 				{
 					"type": "ContentStatement",
 					"original": "\n",
-					"value": "",
+					"value": "\n",
 					"loc": {
 						"start": {
 							"line": 5,
@@ -16716,8 +16755,7 @@
 							"line": 6,
 							"column": 0
 						}
-					},
-					"rightStripped": true
+					}
 				}
 			],
 			"strip": {},
@@ -16910,12 +16948,44 @@
 							"column": 9
 						}
 					}
+				},
+				{
+					"opcode": "appendContent",
+					"args": [
+						"\n"
+					],
+					"loc": {
+						"start": {
+							"line": 5,
+							"column": 9
+						},
+						"end": {
+							"line": 6,
+							"column": 0
+						}
+					}
 				}
 			],
 			"children": [
 				{
 					"sourceNode": [],
 					"opcodes": [
+						{
+							"opcode": "appendContent",
+							"args": [
+								"\n"
+							],
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 9
+								},
+								"end": {
+									"line": 2,
+									"column": 0
+								}
+							}
+						},
 						{
 							"opcode": "getContext",
 							"args": [
@@ -17016,7 +17086,7 @@
 						{
 							"opcode": "appendContent",
 							"args": [
-								"Fail\n"
+								"\nFail\n"
 							],
 							"loc": {
 								"start": {

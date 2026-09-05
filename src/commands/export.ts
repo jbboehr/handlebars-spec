@@ -136,7 +136,7 @@ export default class extends Command {
             options.useDepths = true;
         }
 
-        const ast = Handlebars.parse(input);
+        const ast = Handlebars.parse(input, options);
         const astCopy = JSON.parse(JSON.stringify(ast));
         const opcodes = new (Handlebars as any).Compiler().compile(ast, options);
         return {
