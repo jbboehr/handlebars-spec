@@ -24,6 +24,97 @@ afterEach(() => {
     }
 });
 
+function generateAndRun(source) {
+    const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-generate-'));
+    const inputFile = path.join(directory, 'basic.js');
+    const outputFile = path.join(directory, 'basic.json');
+    temporaryDirectories.push(directory);
+    writeFileSync(inputFile, source);
+    const generation = spawnSync(
+        process.execPath,
+        [cliPath, 'generate', '-o', outputFile, inputFile],
+        { cwd: directory, encoding: 'utf8' },
+    );
+    assert.equal(generation.status, 0, generation.stdout + generation.stderr);
+    return {
+        fixtures: JSON.parse(readFileSync(outputFile, 'utf8')),
+        execution: spawnSync(
+            process.execPath,
+            [cliPath, 'testRunner', 'basic.json'],
+            { cwd: directory, encoding: 'utf8' },
+        ),
+    };
+}
+
+test('preserves metadata-shaped context keys and empty named partials through generation', () => {
+    const { fixtures, execution } = generateAndRun(`
+        describe('metadata boundaries', function () {
+            it('preserves context keys', function () {
+                expectTemplate('{{#each object}}{{@key}};{{/each}}')
+                    .withInput({ object: { message: '', exception: false, helpers: {} } })
+                    .toCompileTo('message;exception;helpers;');
+            });
+            it('preserves an empty named partial', function () {
+                expectTemplate('{{> message}}')
+                    .withPartial('message', '')
+                    .toCompileTo('');
+            });
+        });
+    `);
+
+    assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+    assert.match(execution.stdout, /Success: 2\nFailed: 0\nSkipped: 0/);
+    assert.deepEqual(fixtures[0].data.object, { message: '', exception: false, helpers: {} });
+    assert.deepEqual(fixtures[1].partials, { message: '' });
+});
+
+test('preserves empty substring and other exception matchers through generation', () => {
+    const { fixtures, execution } = generateAndRun(`
+        describe('exception capture', function () {
+            it('matches a non-empty error with an empty substring', function () {
+                // String matchers use substrings: '' accepts any error message.
+                expectTemplate('{{#if}}yes{{/if}}').toThrow(Error, '');
+            });
+            it('keeps a regular expression', function () {
+                expectTemplate('{{#if}}yes{{/if}}').toThrow(Error, /requires exactly one/);
+            });
+            it('keeps an unrestricted exception', function () {
+                expectTemplate('{{#if}}yes{{/if}}').toThrow(Error);
+            });
+        });
+    `);
+
+    assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+    assert.match(execution.stdout, /Success: 3\nFailed: 0\nSkipped: 0/);
+    assert.deepEqual(fixtures.map(fixture => fixture.exception), ['', '/requires exactly one/', true]);
+    for (const fixture of fixtures) {
+        assert.equal(Object.hasOwn(fixture, 'expected'), false);
+    }
+});
+
+test('omits empty fixture metadata while preserving empty expected output and input', () => {
+    const { fixtures, execution } = generateAndRun(`
+        describe('metadata boundaries', function () {
+            it('omits unused metadata', function () {
+                expectTemplate('')
+                    .withMessage('')
+                    .withCompileOptions({})
+                    .withRuntimeOptions({})
+                    .toCompileTo('');
+            });
+        });
+    `);
+
+    assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+    assert.deepEqual(fixtures, [{
+        description: 'metadata boundaries',
+        it: 'omits unused metadata',
+        template: '',
+        data: {},
+        expected: '',
+    }]);
+});
+
 test('rejects only unused patches and preserves an existing output file', () => {
     const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-generate-'));
     const patchDirectory = path.join(directory, 'patch');

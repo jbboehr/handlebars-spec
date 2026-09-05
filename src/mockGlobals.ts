@@ -16,7 +16,7 @@
  */
 
 import * as Handlebars from 'handlebars';
-import { stripNulls, serialize } from './utils';
+import { hasExceptionExpectation, stripNulls, serialize } from './utils';
 import { ExpectTemplate } from './expectTemplate';
 import extend from 'extend';
 import { GlobalContext } from './globalContext';
@@ -151,8 +151,22 @@ function addExpectTemplate(xt: ExpectTemplate): void {
         exception: xt.exception,
     });
 
-    if (spec.exception) {
+    // Omit unused fixture metadata without removing similarly named input fields.
+    for (const key of ['compat', 'message'] as const) {
+        if (!spec[key]) {
+            delete spec[key];
+        }
+    }
+    for (const key of ['partials', 'helpers', 'decorators', 'compileOptions', 'runtimeOptions'] as const) {
+        const value = spec[key];
+        if (!value || (typeof value === 'object' && Object.keys(value).length === 0)) {
+            delete spec[key];
+        }
+    }
+    if (hasExceptionExpectation(spec.exception)) {
         delete spec.expected;
+    } else {
+        delete spec.exception;
     }
     if (number === '00') {
         delete spec.number;

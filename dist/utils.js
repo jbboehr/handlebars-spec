@@ -19,6 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hasExceptionExpectation = hasExceptionExpectation;
 exports.jsToCode = jsToCode;
 exports.normalizeJavascript = normalizeJavascript;
 exports.removeCircularReferences = removeCircularReferences;
@@ -33,8 +34,8 @@ const eval_1 = require("./eval");
 const hjson_1 = require("hjson");
 const PATCH_FILE = (0, path_1.resolve)(__dirname + '/../patch/_functions.hjson');
 let functionPatches;
-function isEmptyObject(obj) {
-    return !Object.keys(obj).length;
+function hasExceptionExpectation(expected) {
+    return expected === true || typeof expected === 'string';
 }
 function hasOwn(data, key) {
     return Object.prototype.hasOwnProperty.call(data, key);
@@ -292,37 +293,8 @@ function serializeInner(data, beneathArray = false) {
         return data.valueOf();
     }
     // Handle objects
-    const ignoreEmptyKeys = {
-        // 'expected': true,
-        'exception': true,
-        'compat': true,
-        'message': true,
-    };
-    const ignoreEmptyObjectKeys = {
-        'partials': true,
-        'helpers': true,
-        'decorators': true,
-        'compileOptions': true,
-        'runtimeOptions': true,
-        'globalPartials': true,
-        'globalHelpers': true,
-        'globalDecorators': true,
-    };
-    // Recurse
     const rv = {};
     Object.keys(data).forEach((key) => {
-        // Ignore some empty objects
-        if (!beneathArray && hasOwn(ignoreEmptyKeys, key)) {
-            if (!data[key]) {
-                return;
-            }
-        }
-        else if (!beneathArray && hasOwn(ignoreEmptyObjectKeys, key)) {
-            if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
-                return;
-            }
-        }
-        // serialize and append
         Object.defineProperty(rv, key, {
             configurable: true,
             enumerable: true,

@@ -26,8 +26,8 @@ const PATCH_FILE = resolvePath(__dirname + '/../patch/_functions.hjson');
 
 let functionPatches: CodeDict;
 
-function isEmptyObject(obj: object): boolean {
-    return !Object.keys(obj).length;
+export function hasExceptionExpectation(expected: unknown): expected is true | string {
+    return expected === true || typeof expected === 'string';
 }
 
 function hasOwn(data: object, key: PropertyKey): boolean {
@@ -321,37 +321,8 @@ function serializeInner(data: any, beneathArray: boolean = false): any {
     }
 
     // Handle objects
-    const ignoreEmptyKeys: {[key: string]: true} = {
-        // 'expected': true,
-        'exception': true,
-        'compat': true,
-        'message': true,
-    };
-    const ignoreEmptyObjectKeys: {[key: string]: true} = {
-        'partials': true,
-        'helpers': true,
-        'decorators': true,
-        'compileOptions': true,
-        'runtimeOptions': true,
-        'globalPartials': true,
-        'globalHelpers': true,
-        'globalDecorators': true,
-    };
-
-    // Recurse
     const rv: any = {};
     Object.keys(data).forEach((key) => {
-        // Ignore some empty objects
-        if (!beneathArray && hasOwn(ignoreEmptyKeys, key)) {
-            if (!data[key]) {
-                return;
-            }
-        } else if (!beneathArray && hasOwn(ignoreEmptyObjectKeys, key)) {
-            if (!data[key] || (typeof data[key] === 'object' && isEmptyObject(data[key]))) {
-                return;
-            }
-        }
-        // serialize and append
         Object.defineProperty(rv, key, {
             configurable: true,
             enumerable: true,

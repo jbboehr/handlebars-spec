@@ -184,8 +184,23 @@ function addExpectTemplate(xt) {
         message: xt.message,
         exception: xt.exception,
     });
-    if (spec.exception) {
+    // Omit unused fixture metadata without removing similarly named input fields.
+    for (const key of ['compat', 'message']) {
+        if (!spec[key]) {
+            delete spec[key];
+        }
+    }
+    for (const key of ['partials', 'helpers', 'decorators', 'compileOptions', 'runtimeOptions']) {
+        const value = spec[key];
+        if (!value || (typeof value === 'object' && Object.keys(value).length === 0)) {
+            delete spec[key];
+        }
+    }
+    if ((0, utils_1.hasExceptionExpectation)(spec.exception)) {
         delete spec.expected;
+    }
+    else {
+        delete spec.exception;
     }
     if (number === '00') {
         delete spec.number;

@@ -1444,6 +1444,7 @@
 		},
 		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE",
 		"compileOptions": {
+			"compat": false,
 			"data": true,
 			"blockParams": [],
 			"knownHelpers": {
@@ -2173,6 +2174,7 @@
 					],
 					"children": [],
 					"options": {
+						"compat": false,
 						"data": true,
 						"blockParams": [],
 						"knownHelpers": {
@@ -2311,6 +2313,7 @@
 					],
 					"children": [],
 					"options": {
+						"compat": false,
 						"data": true,
 						"blockParams": [],
 						"knownHelpers": {
@@ -2329,6 +2332,7 @@
 				}
 			],
 			"options": {
+				"compat": false,
 				"data": true,
 				"blockParams": [],
 				"knownHelpers": {

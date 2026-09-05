@@ -51,7 +51,9 @@
 			"world": "world"
 		},
 		"expected": "goodbyeGoodbyeGOODBYE goodbyeGoodbyeGOODBYE",
-		"compileOptions": {}
+		"compileOptions": {
+			"compat": false
+		}
 	},
 	{
 		"description": "blocks",

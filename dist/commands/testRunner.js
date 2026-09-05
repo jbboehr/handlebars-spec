@@ -64,6 +64,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const clime_1 = require("clime");
 const Handlebars = __importStar(require("handlebars"));
 const eval_1 = require("../eval");
+const utils_1 = require("../utils");
 const util_1 = require("util");
 const path_1 = require("path");
 const fs_1 = require("fs");
@@ -235,9 +236,6 @@ function fixSparseArray(data) {
     return data;
 }
 // Test utils
-function hasExceptionExpectation(expected) {
-    return expected === true || typeof expected === 'string';
-}
 function exceptionMessage(error) {
     try {
         if (typeof error === 'string') {
@@ -275,7 +273,7 @@ function exceptionMatches(expected, error) {
     }
 }
 function checkResult(test, didExcept, e) {
-    const shouldExcept = hasExceptionExpectation(test.exception);
+    const shouldExcept = (0, utils_1.hasExceptionExpectation)(test.exception);
     const passed = shouldExcept
         ? didExcept && exceptionMatches(test.exception, e)
         : !didExcept;
@@ -303,7 +301,7 @@ function checkResult(test, didExcept, e) {
     }
 }
 function checkAssertion(test, assertion) {
-    if (hasExceptionExpectation(test.exception)) {
+    if ((0, utils_1.hasExceptionExpectation)(test.exception)) {
         return checkResult(test, false);
     }
     try {

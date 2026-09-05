@@ -18,6 +18,7 @@
 import { Command, command, param } from 'clime';
 import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
+import { hasExceptionExpectation } from '../utils';
 import { inspect } from 'util';
 import { resolve as resolvePath } from 'path';
 import { readdirSync, readFileSync } from 'fs';
@@ -209,10 +210,6 @@ function fixSparseArray(data: any): any {
 
 
 // Test utils
-
-function hasExceptionExpectation(expected: any): boolean {
-    return expected === true || typeof expected === 'string';
-}
 
 function exceptionMessage(error: unknown): string | undefined {
     try {

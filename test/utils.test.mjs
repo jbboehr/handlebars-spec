@@ -288,6 +288,39 @@ test('preserves JSON values and metadata-shaped data beneath arrays', () => {
     assert.equal(JSON.stringify(serialize(input)), expected);
 });
 
+test('preserves metadata-shaped keys in ordinary objects at every depth', () => {
+    const fields = {
+        message: '', exception: false, compat: false,
+        helpers: {}, partials: {}, decorators: {},
+        compileOptions: {}, runtimeOptions: {},
+        globalHelpers: {}, globalPartials: {}, globalDecorators: {},
+    };
+    const input = { ...fields, object: { ...fields }, data: { nested: { ...fields } } };
+    const expected = JSON.stringify(input);
+
+    assert.equal(JSON.stringify(serialize(input)), expected);
+    assert.equal(JSON.stringify(input), expected);
+});
+
+test('preserves each metadata-shaped key for every empty JSON value', () => {
+    const keys = [
+        'message', 'exception', 'compat',
+        'helpers', 'partials', 'decorators',
+        'compileOptions', 'runtimeOptions',
+        'globalHelpers', 'globalPartials', 'globalDecorators',
+    ];
+
+    for (const value of ['', false, 0, null, [], {}]) {
+        const input = {
+            nested: Object.fromEntries(keys.map(key => [key, value])),
+        };
+        const expected = JSON.stringify(input);
+
+        assert.equal(JSON.stringify(serialize(input)), expected);
+        assert.equal(JSON.stringify(input), expected);
+    }
+});
+
 test('lets custom toJSON control callback-bearing objects beneath arrays', () => {
     const callback = function () { return 'Awesome'; };
     const value = { name: callback, toJSON: callback };
