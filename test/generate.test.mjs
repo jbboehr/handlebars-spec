@@ -405,6 +405,8 @@ exit 0
             [
                 '--no-print-directory',
                 '--old-file=dist',
+                // Exercise each recipe independently of its prerequisites.
+                ...(target === 'export' ? ['--old-file=spec'] : []),
                 target,
                 'SPECS=one two three',
             ],
@@ -422,6 +424,7 @@ exit 0
         assert.notEqual(result.status, 0, result.stdout + result.stderr);
         const calls = readFileSync(logFile, 'utf8').trim().split('\n');
         assert.equal(calls.length, 2, calls.join('\n'));
+        assert.ok(calls.every(call => call.startsWith('dist/cli.js ' + (target === 'spec' ? 'generate' : 'export') + ' ')));
         assert.match(calls[0], /\/one\./);
         assert.match(calls[1], /\/two\./);
         assert.doesNotMatch(calls.join('\n'), /\/three\./);

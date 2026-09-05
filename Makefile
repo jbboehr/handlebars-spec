@@ -17,7 +17,7 @@ SPECS := basic blocks builtins data helpers parser partials regressions \
 		string-params subexpressions strict tokenizer track-ids \
 		whitespace-control
 
-all: spec export
+all: export
 
 dist: node_modules src tsconfig.json
 	npm run build
@@ -28,21 +28,25 @@ node_modules: package.json
 spec: dist
 	$(foreach var, $(SPECS), node dist/cli.js generate -o spec/$(var).json handlebars.js/spec/$(var).js &&) true
 
-export: dist
+export: spec
 	$(foreach var, $(SPECS), node dist/cli.js export -o export/$(var).json spec/$(var).json &&) true
 
 
-test: test_changes test_eslint test_node test_php
+test: test_changes test_eslint test_node test_php_generated
 check: test
 
 test_changes: all
 	@git status --short -- dist export spec
 	@test -z "$$(git status --porcelain -- dist export spec)"
 
-test_node: dist
+test_node: all
 	@echo ---------- Testing spec against handlebars.js ----------
 	node --test test/*.test.mjs
 	node dist/cli.js testRunner
+
+# Keep PHP-only CI independent of Node while aggregate checks regenerate first.
+test_php_generated: all
+	$(MAKE) test_php
 
 test_php:
 	@echo ---------- Linting PHP code ----------
@@ -56,5 +60,5 @@ test_eslint: node_modules
 	npm run lint
 
 
-.PHONY: all dist spec export test test_changes test_eslint test_node test_php
+.PHONY: all dist spec export test test_changes test_eslint test_node test_php test_php_generated
 .DEFAULT_GOAL: all
