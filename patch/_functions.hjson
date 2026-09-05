@@ -277,7 +277,9 @@
 		php:
 			'''
 			function($fn, $props, $container, $options) {
-			          assert('$options->args[0] === "success"');
+			          if (($options->args[0] ?? null) !== 'success') {
+			            throw new RuntimeException('Expected decorator argument "success"');
+			          }
 			          return $fn;
 			        }
 			'''
@@ -1127,6 +1129,9 @@
 		php:
 			'''
 			function($options) {
+			          if ($options->blockParams !== 1) {
+			            throw new RuntimeException('Expected one declared block parameter');
+			          }
 			          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));
 			        }
 			'''
@@ -1143,6 +1148,9 @@
 		php:
 			'''
 			function($options) {
+			          if ($options->blockParams !== 1) {
+			            throw new RuntimeException('Expected one declared block parameter');
+			          }
 			          return $options->fn(array(), array('blockParams' => array(1, 2)));
 			        }
 			'''
@@ -1159,6 +1167,9 @@
 		php:
 			'''
 			function($options) {
+			          if ($options->blockParams !== 1) {
+			            throw new RuntimeException('Expected one declared block parameter');
+			          }
 			          return $options->fn($options->scope, array('blockParams' => array(1, 2)));
 			        }
 			'''
@@ -1350,7 +1361,10 @@
 			'''
 		php:
 			'''
-			function () {
+			function($options) {
+			          if (!array_key_exists('value', $options->hash) || $options->hash['value'] !== null) {
+			            throw new RuntimeException('Expected a present, undefined hash value');
+			          }
 			          return 'success';
 			        }
 			'''
@@ -1523,6 +1537,9 @@
 		php:
 			'''
 			function($bar, $options) {
+			        if ($bar !== '@bar' || ($options->types[0] ?? null) !== 'PathExpression') {
+			          throw new RuntimeException('Expected @bar as a PathExpression');
+			        }
 			        return 'Foo!';
 			      }
 			'''
@@ -1711,6 +1728,9 @@
 		php:
 			'''
 			function($a, $b, $options) {
+			        if ($a !== 'foo' || ($options->types ?? null) !== ['SubExpression', 'PathExpression']) {
+			          throw new RuntimeException('Expected foo and two outer argument types');
+			        }
 			        return $a . $b;
 			      }
 			'''
@@ -1728,6 +1748,9 @@
 		php:
 			'''
 			function($a, $options) {
+			        if (($options->types ?? null) !== ['PathExpression']) {
+			          throw new RuntimeException('Expected one inner PathExpression argument');
+			        }
 			        return $a;
 			      }
 			'''
@@ -1771,6 +1794,9 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $options) {
+			        if (($options->ids ?? null) !== null || ($options->hashIds ?? null) !== null) {
+			          throw new RuntimeException('Expected no tracking metadata without trackIds');
+			        }
 			        return 'success';
 			      }
 			'''
@@ -1789,6 +1815,9 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $options) {
+			        if (($options['ids'][0] ?? null) !== 'is.a' || ($options['ids'][1] ?? null) !== 'slave.driver') {
+			          throw new RuntimeException('Unexpected argument IDs');
+			        }
 			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;
 			      }
 			'''
@@ -1807,6 +1836,9 @@
 		php:
 			'''
 			function($options) {
+			        if (($options['hashIds']['bat'] ?? null) !== 'is.a' || ($options['hashIds']['baz'] ?? null) !== 'slave.driver') {
+			          throw new RuntimeException('Unexpected hash argument IDs');
+			        }
 			        return "HELP ME MY BOSS " . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];
 			      }
 			'''
@@ -1827,6 +1859,10 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $thiz, $thiz2, $options) {
+			        if (($options['ids'][0] ?? null) !== 'is.a' || ($options['ids'][1] ?? null) !== '../slave.driver'
+			            || ($options['ids'][2] ?? null) !== 'is.a' || ($options['ids'][3] ?? null) !== '') {
+			          throw new RuntimeException('Unexpected relative argument IDs');
+			        }
 			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);
 			      }
 			'''
@@ -1845,6 +1881,9 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $options) {
+			        if (($options['ids'][0] ?? null) !== '@is.a' || ($options['ids'][1] ?? null) !== '@slave.driver') {
+			          throw new RuntimeException('Unexpected data argument IDs');
+			        }
 			        return "HELP ME MY BOSS " . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;
 			      }
 			'''
@@ -1864,6 +1903,11 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $options) {
+			        if (!array_key_exists(0, $options['ids']) || $options['ids'][0] !== null
+			            || !array_key_exists(1, $options['ids']) || $options['ids'][1] !== null
+			            || !array_key_exists('key', $options['hashIds']) || $options['hashIds']['key'] !== null) {
+			          throw new RuntimeException('Expected null IDs for literal arguments');
+			        }
 			        return "HELP ME MY BOSS " . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);
 			      }
 			'''
@@ -1886,6 +1930,9 @@
 		php:
 			'''
 			function($passiveVoice, $options) {
+			        if (($options['ids'][0] ?? null) !== true) {
+			          throw new RuntimeException('Expected a true ID for a subexpression');
+			        }
 			        return "HELP ME MY BOSS " . $passiveVoice;
 			      }
 			'''
@@ -1924,6 +1971,10 @@
 		php:
 			'''
 			function($passiveVoice, $noun, $blah, $options) {
+			        if (($options->ids[0] ?? null) !== 'zomg.a' || ($options->ids[1] ?? null) !== 'slave.driver'
+			            || ($options->ids[2] ?? null) !== 'zomg') {
+			          throw new RuntimeException('Unexpected block parameter IDs');
+			        }
 			        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;
 			      }
 			'''
@@ -1971,7 +2022,9 @@
 		php:
 			'''
 			function($fn, $props, $container, $options) {
-			          assert($options->args[0] === null);
+			          if (($options->args[0] ?? null) !== null) {
+			            throw new RuntimeException('Expected an undefined root decorator argument');
+			          }
 			          return $fn;
 			        }
 			'''

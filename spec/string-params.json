@@ -154,7 +154,7 @@
 			"foo": {
 				"!code": true,
 				"javascript": "function (bar, options) {\n        equal(bar, '@bar');\n        equal(options.types[0], 'PathExpression');\n        return 'Foo!';\n      }",
-				"php": "function($bar, $options) {\n        return 'Foo!';\n      }"
+				"php": "function($bar, $options) {\n        if ($bar !== '@bar' || ($options->types[0] ?? null) !== 'PathExpression') {\n          throw new RuntimeException('Expected @bar as a PathExpression');\n        }\n        return 'Foo!';\n      }"
 			}
 		}
 	}

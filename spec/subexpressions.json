@@ -347,12 +347,12 @@
 			"snog": {
 				"!code": true,
 				"javascript": "function (a, b, options) {\n        equals(a, 'foo');\n        equals(options.types.length, 2, 'string params for outer helper processed correctly');\n        equals(options.types[0], 'SubExpression', 'string params for outer helper processed correctly');\n        equals(options.types[1], 'PathExpression', 'string params for outer helper processed correctly');\n        return a + b;\n      }",
-				"php": "function($a, $b, $options) {\n        return $a . $b;\n      }"
+				"php": "function($a, $b, $options) {\n        if ($a !== 'foo' || ($options->types ?? null) !== ['SubExpression', 'PathExpression']) {\n          throw new RuntimeException('Expected foo and two outer argument types');\n        }\n        return $a . $b;\n      }"
 			},
 			"blorg": {
 				"!code": true,
 				"javascript": "function (a, options) {\n        equals(options.types.length, 1, 'string params for inner helper processed correctly');\n        equals(options.types[0], 'PathExpression', 'string params for inner helper processed correctly');\n        return a;\n      }",
-				"php": "function($a, $options) {\n        return $a;\n      }"
+				"php": "function($a, $options) {\n        if (($options->types ?? null) !== ['PathExpression']) {\n          throw new RuntimeException('Expected one inner PathExpression argument');\n        }\n        return $a;\n      }"
 			}
 		}
 	},

@@ -9,7 +9,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids, undefined);\n        equal(options.hashIds, undefined);\n\n        return 'success';\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return 'success';\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        if (($options->ids ?? null) !== null || ($options->hashIds ?? null) !== null) {\n          throw new RuntimeException('Expected no tracking metadata without trackIds');\n        }\n        return 'success';\n      }"
 			}
 		}
 	},
@@ -33,7 +33,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        if (($options['ids'][0] ?? null) !== 'is.a' || ($options['ids'][1] ?? null) !== 'slave.driver') {\n          throw new RuntimeException('Unexpected argument IDs');\n        }\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		}
 	},
@@ -57,7 +57,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (options) {\n        equal(options.hashIds.bat, 'is.a');\n        equal(options.hashIds.baz, 'slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.hashIds.bat + ':' + options.hash.bat + ' ' + options.hashIds.baz + ':' + options.hash.baz;\n      }",
-				"php": "function($options) {\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
+				"php": "function($options) {\n        if (($options['hashIds']['bat'] ?? null) !== 'is.a' || ($options['hashIds']['baz'] ?? null) !== 'slave.driver') {\n          throw new RuntimeException('Unexpected hash argument IDs');\n        }\n        return \"HELP ME MY BOSS \" . $options['hashIds']['bat'] . ':' . $options['hash']['bat'] . ' ' . $options['hashIds']['baz'] . ':' . $options['hash']['baz'];\n      }"
 			}
 		}
 	},
@@ -81,7 +81,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, thiz, thiz2, options) {\n        equal(options.ids[0], 'is.a');\n        equal(options.ids[1], '../slave.driver');\n        equal(options.ids[2], 'is.a');\n        equal(options.ids[3], '');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
+				"php": "function($passiveVoice, $noun, $thiz, $thiz2, $options) {\n        if (($options['ids'][0] ?? null) !== 'is.a' || ($options['ids'][1] ?? null) !== '../slave.driver'\n            || ($options['ids'][2] ?? null) !== 'is.a' || ($options['ids'][3] ?? null) !== '') {\n          throw new RuntimeException('Unexpected relative argument IDs');\n        }\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . ($noun === null ? 'undefined' : $noun);\n      }"
 			}
 		}
 	},
@@ -108,7 +108,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], '@is.a');\n        equal(options.ids[1], '@slave.driver');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        if (($options['ids'][0] ?? null) !== '@is.a' || ($options['ids'][1] ?? null) !== '@slave.driver') {\n          throw new RuntimeException('Unexpected data argument IDs');\n        }\n        return \"HELP ME MY BOSS \" . $options['ids'][0] . ':' . $passiveVoice . ' ' . $options['ids'][1] . ':' . $noun;\n      }"
 			}
 		}
 	},
@@ -132,7 +132,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, options) {\n        equal(options.ids[0], null);\n        equal(options.ids[1], null);\n        equal(options.hashIds.key, null);\n\n        return 'HELP ME MY BOSS ' + passiveVoice + ' ' + noun + ' ' + options.hash.key;\n      }",
-				"php": "function($passiveVoice, $noun, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
+				"php": "function($passiveVoice, $noun, $options) {\n        if (!array_key_exists(0, $options['ids']) || $options['ids'][0] !== null\n            || !array_key_exists(1, $options['ids']) || $options['ids'][1] !== null\n            || !array_key_exists('key', $options['hashIds']) || $options['hashIds']['key'] !== null) {\n          throw new RuntimeException('Expected null IDs for literal arguments');\n        }\n        return \"HELP ME MY BOSS \" . $passiveVoice . ' ' . $noun . ' ' . ($options['hash']['key'] === false ? 'false' : $options['hash']['key']);\n      }"
 			}
 		}
 	},
@@ -161,7 +161,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, options) {\n        equal(options.ids[0], true);\n\n        return 'HELP ME MY BOSS ' + passiveVoice;\n      }",
-				"php": "function($passiveVoice, $options) {\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
+				"php": "function($passiveVoice, $options) {\n        if (($options['ids'][0] ?? null) !== true) {\n          throw new RuntimeException('Expected a true ID for a subexpression');\n        }\n        return \"HELP ME MY BOSS \" . $passiveVoice;\n      }"
 			}
 		}
 	},
@@ -190,7 +190,7 @@
 			"wycats": {
 				"!code": true,
 				"javascript": "function (passiveVoice, noun, blah, options) {\n        equal(options.ids[0], 'zomg.a');\n        equal(options.ids[1], 'slave.driver');\n        equal(options.ids[2], 'zomg');\n\n        return 'HELP ME MY BOSS ' + options.ids[0] + ':' + passiveVoice + ' ' + options.ids[1] + ':' + noun;\n      }",
-				"php": "function($passiveVoice, $noun, $blah, $options) {\n        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;\n      }"
+				"php": "function($passiveVoice, $noun, $blah, $options) {\n        if (($options->ids[0] ?? null) !== 'zomg.a' || ($options->ids[1] ?? null) !== 'slave.driver'\n            || ($options->ids[2] ?? null) !== 'zomg') {\n          throw new RuntimeException('Unexpected block parameter IDs');\n        }\n        return 'HELP ME MY BOSS ' . $options->ids[0] . ':' . $passiveVoice . ' ' . $options->ids[1] . ':' . $noun;\n      }"
 			}
 		}
 	},

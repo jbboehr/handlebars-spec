@@ -48,6 +48,8 @@ test_php:
 	@echo ---------- Linting PHP code ----------
 	php test/php-lint.test.php
 	php test/php-helpers.test.php
+	php -d zend.assertions=-1 test/php-assertions.test.php
+	php -d zend.assertions=1 test/php-assertions.test.php
 	php bin/lint.php --check-omission-suites $(foreach var,$(SPECS),spec/$(var).json)
 
 test_eslint: node_modules

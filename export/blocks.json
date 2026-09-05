@@ -25407,7 +25407,7 @@
 			"decorator": {
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], 'success');\n          run = true;\n          return fn;\n        }",
-				"php": "function($fn, $props, $container, $options) {\n          assert('$options->args[0] === \"success\"');\n          return $fn;\n        }"
+				"php": "function($fn, $props, $container, $options) {\n          if (($options->args[0] ?? null) !== 'success') {\n            throw new RuntimeException('Expected decorator argument \"success\"');\n          }\n          return $fn;\n        }"
 			}
 		},
 		"ast": {
@@ -25597,7 +25597,7 @@
 			"decorator": {
 				"!code": true,
 				"javascript": "function (fn, props, container, options) {\n          equals(options.args[0], undefined);\n          global.run = true;\n          return fn;\n        }",
-				"php": "function($fn, $props, $container, $options) {\n          assert($options->args[0] === null);\n          return $fn;\n        }"
+				"php": "function($fn, $props, $container, $options) {\n          if (($options->args[0] ?? null) !== null) {\n            throw new RuntimeException('Expected an undefined root decorator argument');\n          }\n          return $fn;\n        }"
 			}
 		},
 		"ast": {

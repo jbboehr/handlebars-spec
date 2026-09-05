@@ -1762,7 +1762,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+				"php": "function($options) {\n          if ($options->blockParams !== 1) {\n            throw new RuntimeException('Expected one declared block parameter');\n          }\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		}
 	},
@@ -1791,7 +1791,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
+				"php": "function($options) {\n          if ($options->blockParams !== 1) {\n            throw new RuntimeException('Expected one declared block parameter');\n          }\n          return $options->fn(array(), array('blockParams' => array(1, 2)));\n        }"
 			}
 		}
 	},
@@ -1822,7 +1822,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn(this, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
+				"php": "function($options) {\n          if ($options->blockParams !== 1) {\n            throw new RuntimeException('Expected one declared block parameter');\n          }\n          return $options->fn($options->scope, array('blockParams' => array(1, 2)));\n        }"
 			}
 		}
 	},
@@ -1874,7 +1874,7 @@
 			"goodbyes": {
 				"!code": true,
 				"javascript": "function (options) {\n          equals(options.fn.blockParams, 1);\n          return options.fn({value: 'bar'}, {blockParams: [1, 2]});\n        }",
-				"php": "function($options) {\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
+				"php": "function($options) {\n          if ($options->blockParams !== 1) {\n            throw new RuntimeException('Expected one declared block parameter');\n          }\n          return $options->fn(array('value' => 'bar'), array('blockParams' => array(1, 2)));\n        }"
 			}
 		}
 	},

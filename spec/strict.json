@@ -179,7 +179,7 @@
 			"helper": {
 				"!code": true,
 				"javascript": "function (options) {\n          equals('value' in options.hash, true);\n          equals(options.hash.value, undefined);\n          return 'success';\n        }",
-				"php": "function () {\n          return 'success';\n        }"
+				"php": "function($options) {\n          if (!array_key_exists('value', $options->hash) || $options->hash['value'] !== null) {\n            throw new RuntimeException('Expected a present, undefined hash value');\n          }\n          return 'success';\n        }"
 			}
 		}
 	},
