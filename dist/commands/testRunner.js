@@ -87,19 +87,15 @@ let default_1 = class extends clime_1.Command {
     execute(inputFile) {
         const successes = [];
         const failures = [];
-        const skipped = [];
         let dir = '.';
         function runSpec(spec) {
             const tmp = spec.replace(/\.json$/, '').split('/');
             const suite = tmp[tmp.length - 1];
+            const runTest = getSuiteRunner(suite);
             const data = JSON.parse((0, fs_1.readFileSync)((0, path_1.resolve)(dir + '/' + spec)).toString());
             Object.keys(data).forEach(function (y) {
                 data[y].suite = suite;
-                const result = runTest(data[y]);
-                if (result === null) {
-                    skipped.push(data[y]);
-                }
-                else if (result === true) {
+                if (runTest(data[y])) {
                     successes.push(data[y]);
                 }
                 else {
@@ -118,7 +114,11 @@ let default_1 = class extends clime_1.Command {
         console.log('Summary');
         console.log('Success: ' + successes.length);
         console.log('Failed: ' + failures.length);
-        console.log('Skipped: ' + skipped.length);
+        console.log('Skipped: 0');
+        if (successes.length === 0 && failures.length === 0) {
+            console.error('No fixtures were run. Check the selected fixture file or spec directory.');
+            process.exit(2);
+        }
         process.exit(failures.length ? 2 : 0);
     }
 };
@@ -374,9 +374,8 @@ function prepareTestTokenizer(test) {
     spec.exception = test.exception === undefined ? false : test.exception;
     return spec;
 }
-function runTest(test) {
-    let result = null;
-    switch (test.suite) {
+function getSuiteRunner(suite) {
+    switch (suite) {
         case 'basic':
         case 'bench':
         case 'blocks':
@@ -390,16 +389,15 @@ function runTest(test) {
         case 'subexpressions':
         case 'track-ids':
         case 'whitespace-control':
-            result = runTestGeneric(prepareTestGeneric(test));
-            break;
+            return test => runTestGeneric(prepareTestGeneric(test));
         case 'parser':
-            result = runTestParser(prepareTestParser(test));
-            break;
+            return test => runTestParser(prepareTestParser(test));
         case 'tokenizer':
-            result = runTestTokenizer(prepareTestTokenizer(test));
-            break;
+            return test => runTestTokenizer(prepareTestTokenizer(test));
+        default:
+            throw new clime_1.ExpectedError('Unsupported fixture suite ' + JSON.stringify(suite)
+                + '. Use a supported suite filename such as basic.json, parser.json, or tokenizer.json', 2);
     }
-    return result;
 }
 function runTestGeneric(test) {
     const handlebarsEnv = global.handlebarsEnv;

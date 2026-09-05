@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
@@ -33,6 +33,100 @@ function runTest(testSpec) {
         { cwd: projectRoot, encoding: 'utf8' },
     );
 }
+
+function runSuites(suites, inputFile) {
+    const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-suites-'));
+    const specDirectory = path.join(directory, 'spec');
+    temporaryDirectories.push(directory);
+    mkdirSync(specDirectory);
+    for (const [filename, fixtures] of Object.entries(suites)) {
+        writeFileSync(path.join(specDirectory, filename), JSON.stringify(fixtures));
+    }
+
+    return spawnSync(
+        process.execPath,
+        [cliPath, 'testRunner', ...(inputFile ? ['spec/' + inputFile] : [])],
+        { cwd: directory, encoding: 'utf8' },
+    );
+}
+
+const validFixture = {
+    description: 'suite dispatch',
+    it: 'checks rendered output',
+    template: 'plain text',
+    data: {},
+    expected: 'plain text',
+};
+
+for (const selected of [true, false]) {
+    for (const empty of [false, true]) {
+        test(`rejects ${empty ? 'empty' : 'nonempty'} unsupported suites when ${selected ? 'selected' : 'discovered'}`, () => {
+            const result = runSuites({
+                'custom.json': empty ? [] : [{ ...validFixture, expected: 'wrong' }],
+            }, selected ? 'custom.json' : undefined);
+
+            assert.equal(result.error, undefined);
+            assert.equal(result.status, 2, result.stdout + result.stderr);
+            assert.match(result.stderr, /Unsupported.*suite.*custom/);
+            assert.match(result.stderr, /basic\.json/);
+            assert.doesNotMatch(result.stderr, /^\s+at /m);
+        });
+    }
+}
+
+test('rejects an unsupported empty suite even when another suite passes', () => {
+    const result = runSuites({
+        'basic.json': [validFixture],
+        'custom.json': [],
+    });
+
+    assert.equal(result.status, 2, result.stdout + result.stderr);
+    assert.match(result.stderr, /Unsupported.*suite.*custom/);
+    assert.doesNotMatch(result.stderr, /^\s+at /m);
+});
+
+for (const [description, suites, inputFile] of [
+    ['a selected empty suite', { 'basic.json': [] }, 'basic.json'],
+    ['an empty spec directory', {}],
+    ['only empty discovered suites', { 'basic.json': [], 'bench.json': [] }],
+]) {
+    test(`fails when no fixtures run from ${description}`, () => {
+        const result = runSuites(suites, inputFile);
+
+        assert.equal(result.status, 2, result.stdout + result.stderr);
+        assert.match(result.stderr, /No fixtures were run/);
+        assert.match(result.stdout, /Success: 0\nFailed: 0\nSkipped: 0/);
+    });
+}
+
+for (const filename of ['basic.json', 'bench.json']) {
+    test(`runs a supported ${filename} suite`, () => {
+        const result = runSuites({ [filename]: [validFixture] }, filename);
+
+        assert.equal(result.status, 0, result.stdout + result.stderr);
+        assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
+    });
+}
+
+test('runs a supported parser suite with parser assertions', () => {
+    const result = runSuites({
+        'parser.json': [{
+            ...validFixture,
+            template: '{{foo}}',
+            expected: '{{ PATH:foo [] }}\n',
+        }],
+    }, 'parser.json');
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
+});
+
+test('allows an empty supported suite alongside fixtures that execute', () => {
+    const result = runSuites({ 'basic.json': [], 'bench.json': [validFixture] });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
+});
 
 test('fails when an expected exception is not thrown', () => {
     const result = runTest({
