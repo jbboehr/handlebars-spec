@@ -62,14 +62,15 @@ exports.equals = equals;
 exports.shouldThrow = shouldThrow;
 exports.tokenize = tokenize;
 exports.shouldMatchTokens = shouldMatchTokens;
+exports.shouldBeToken = shouldBeToken;
 exports.xit = xit;
 exports.expect = expect;
-exports.shouldBeToken = shouldBeToken;
 exports.shouldCompileTo = shouldCompileTo;
 exports.shouldCompileToWithPartials = shouldCompileToWithPartials;
 exports.compileWithPartials = compileWithPartials;
 const Handlebars = __importStar(require("handlebars"));
 exports.Handlebars = Handlebars;
+const assert_1 = require("assert");
 const utils_1 = require("./utils");
 const expectTemplate_1 = require("./expectTemplate");
 const extend_1 = __importDefault(require("extend"));
@@ -337,11 +338,26 @@ function tokenize(template) {
 function shouldMatchTokens(actual, expected) {
     const { testContext, isParser } = exports.globalContext;
     if (isParser) {
+        // Match upstream: unused trailing expected names are allowed.
+        // Its escaped-mustache fixture includes an extra CONTENT expectation.
+        for (let index = 0; index < actual.length; index++) {
+            (0, assert_1.strictEqual)(actual[index].name, expected[index], testContext.key + ' | Token names did not match at index ' + index);
+        }
         expectTemplate(testContext.template || '')
             .toCompileTo(actual);
     }
     else {
         log('shouldMatchTokens called', actual, expected);
+    }
+}
+function shouldBeToken(actual, name, text) {
+    const { testContext, isParser } = exports.globalContext;
+    if (isParser) {
+        (0, assert_1.strictEqual)(actual.name, name, testContext.key + ' | Token name did not match');
+        (0, assert_1.strictEqual)(actual.text, text, testContext.key + ' | Token text did not match');
+    }
+    else {
+        log('shouldBeToken called', actual, name, text);
     }
 }
 // these functions don't need to do anything, just warn and ignore
@@ -367,9 +383,6 @@ function expect() {
             }
         }
     };
-}
-function shouldBeToken(...args) {
-    log('shouldBeToken called', ...args);
 }
 function shouldCompileTo(...args) {
     log('shouldCompileTo called', ...args);

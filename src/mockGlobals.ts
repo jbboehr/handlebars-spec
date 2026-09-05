@@ -16,6 +16,7 @@
  */
 
 import * as Handlebars from 'handlebars';
+import { strictEqual } from 'assert';
 import { hasExceptionExpectation, stripNulls, serialize } from './utils';
 import { ExpectTemplate } from './expectTemplate';
 import extend from 'extend';
@@ -312,7 +313,7 @@ export function shouldThrow(cb: Function, a: any, b: any): void {
     }
 }
 
-export function tokenize(template: string): string[] {
+export function tokenize(template: string): HandlebarsToken[] {
     const { testContext, isParser } = globalContext;
 
     if (isParser) {
@@ -324,14 +325,30 @@ export function tokenize(template: string): string[] {
     return (global as any).originalTokenize(template);
 }
 
-export function shouldMatchTokens(actual: string[], expected: string[]): void {
+export function shouldMatchTokens(actual: HandlebarsToken[], expected: string[]): void {
     const { testContext, isParser } = globalContext;
 
     if (isParser) {
+        // Match upstream: unused trailing expected names are allowed.
+        // Its escaped-mustache fixture includes an extra CONTENT expectation.
+        for (let index = 0; index < actual.length; index++) {
+            strictEqual(actual[index].name, expected[index], testContext.key + ' | Token names did not match at index ' + index);
+        }
         expectTemplate(testContext.template || '')
             .toCompileTo(actual);
     } else {
         log('shouldMatchTokens called', actual, expected);
+    }
+}
+
+export function shouldBeToken(actual: HandlebarsToken, name: string, text: string): void {
+    const { testContext, isParser } = globalContext;
+
+    if (isParser) {
+        strictEqual(actual.name, name, testContext.key + ' | Token name did not match');
+        strictEqual(actual.text, text, testContext.key + ' | Token text did not match');
+    } else {
+        log('shouldBeToken called', actual, name, text);
     }
 }
 
@@ -362,10 +379,6 @@ export function expect(): any {
             }
         }
     };
-}
-
-export function shouldBeToken(...args: any[]): void {
-    log('shouldBeToken called', ...args);
 }
 
 export function shouldCompileTo(...args: any[]): void {
