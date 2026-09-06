@@ -24,7 +24,7 @@
 		"hjson": "^3.2.2",
 		"sinon": "^22.1.0",
 		"ts-node": "^10.9.2",
-		"typescript": "^6.0.3",
+		"typescript": "^7.0.2",
 		"typescript-eslint": "^8.68.0",
 		"uglify-js": "^3.19.3"
 	},
