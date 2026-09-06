@@ -161,6 +161,30 @@ test('runs a supported tokenizer suite with token-array assertions', () => {
     assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
 });
 
+for (const [description, numberToken] of [
+    ['a wrong token name', { name: 'WRONG', text: '1' }],
+    ['wrong token text', { name: 'NUMBER', text: 'wrong' }],
+    ['loosely equal token text', { name: 'NUMBER', text: 1 }],
+]) {
+    test(`rejects ${description} in saved tokenizer fixtures`, () => {
+        const result = runSuites({
+            'tokenizer.json': [{
+                ...validFixture,
+                template: '{{foo 1}}',
+                expected: [
+                    { name: 'OPEN', text: '{{' },
+                    { name: 'ID', text: 'foo' },
+                    numberToken,
+                    { name: 'CLOSE', text: '}}' },
+                ],
+            }],
+        }, 'tokenizer.json');
+
+        assert.equal(result.status, 2, result.stdout + result.stderr);
+        assert.match(result.stdout, /Success: 0\nFailed: 1\nSkipped: 0/);
+    });
+}
+
 test('allows an empty supported suite alongside fixtures that execute', () => {
     const result = runSuites({ 'basic.json': [], 'bench.json': [validFixture] });
 

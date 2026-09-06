@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 import {
     mkdirSync,
     mkdtempSync,
+    readdirSync,
     readFileSync,
     rmSync,
     writeFileSync,
@@ -329,6 +330,84 @@ test('malformed cwd manifest cannot overwrite output or fall back silently', () 
     assert.notEqual(result.status, 0, result.stdout + result.stderr);
     assert.equal(result.stdout, '');
     assert.equal(readFileSync(outputFile, 'utf8'), 'existing output');
+});
+
+function fixtureIdentity(fixture) {
+    return `${fixture.description} - ${fixture.it} - ${fixture.number ?? '00'}`.toLowerCase();
+}
+
+function readFixtures(directory, file) {
+    return JSON.parse(readFileSync(path.join(projectRoot, directory, file), 'utf8'));
+}
+
+const suiteFiles = readdirSync(path.join(projectRoot, 'spec')).filter(file => file.endsWith('.json'));
+
+test('checked-in compiler artifacts match option-aware reference compilation', () => {
+    assert.ok(suiteFiles.length > 0);
+    const omissions = readFixtures('patch', '_export.json');
+    for (const file of suiteFiles) {
+        const sources = readFixtures('spec', file);
+        const exported = readFixtures('export', file);
+        const suiteOmissions = omissions[path.basename(file, '.json')] || {};
+        assert.deepEqual(
+            exported.map(fixtureIdentity),
+            sources.map(fixtureIdentity).filter(name => !Object.hasOwn(suiteOmissions, name)),
+            `${file}: exported fixture identities`,
+        );
+        const byIdentity = new Map(sources.map(fixture => [fixtureIdentity(fixture), fixture]));
+
+        for (const fixture of exported) {
+            const name = fixtureIdentity(fixture);
+            const source = byIdentity.get(name);
+            const checkProgram = (template, ast, opcodes, label) => {
+                const referenceAst = Handlebars.parse(template, globalThis.structuredClone(source.compileOptions || {}));
+                assert.deepEqual(ast, JSON.parse(JSON.stringify(referenceAst)), `${file}: ${name}: ${label} AST`);
+
+                // Let the public compiler supply defaults instead of copying the exporter's option rules.
+                const options = globalThis.structuredClone(source.compileOptions || {});
+                Handlebars.precompile(template, options);
+                const referenceOpcodes = new Handlebars.Compiler().compile(referenceAst, options);
+                assert.deepEqual(opcodes, JSON.parse(JSON.stringify(referenceOpcodes)), `${file}: ${name}: ${label} opcodes`);
+            };
+
+            checkProgram(source.template, fixture.ast, fixture.opcodes, 'template');
+            const partialNames = Object.keys(source.partials || {});
+            assert.deepEqual(Object.keys(fixture.partialAsts || {}), partialNames, `${file}: ${name}: partial AST names`);
+            assert.deepEqual(Object.keys(fixture.partialOpcodes || {}), partialNames, `${file}: ${name}: partial opcode names`);
+            for (const partial of partialNames) {
+                checkProgram(source.partials[partial], fixture.partialAsts[partial], fixture.partialOpcodes[partial], `partial ${partial}`);
+            }
+        }
+    }
+});
+
+test('saved rendering ASTs satisfy fixture expectations with their runtime setup', () => {
+    const directory = mkdtempSync(path.join(tmpdir(), 'handlebars-spec-export-asts-'));
+    temporaryDirectories.push(directory);
+    mkdirSync(path.join(directory, 'spec'));
+    let fixtureCount = 0;
+    for (const file of suiteFiles.filter(file => file !== 'parser.json' && file !== 'tokenizer.json')) {
+        const fixtures = readFixtures('export', file);
+        for (const fixture of fixtures) {
+            // Handlebars accepts AST inputs. Adapt only these temporary fixtures so the real
+            // runner supplies callbacks, globals, runtime options, and exception assertions.
+            fixture.template = fixture.ast;
+            if (fixture.partials) {
+                fixture.partials = Object.fromEntries(Object.keys(fixture.partials)
+                    .map(name => [name, fixture.partialAsts[name]]));
+            }
+        }
+        fixtureCount += fixtures.length;
+        writeFileSync(path.join(directory, 'spec', file), JSON.stringify(fixtures));
+    }
+    assert.ok(fixtureCount > 0);
+
+    const result = spawnSync(process.execPath, [cliPath, 'testRunner'], {
+        cwd: directory,
+        encoding: 'utf8',
+    });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.ok(result.stdout.includes(`Success: ${fixtureCount}\nFailed: 0\nSkipped: 0`), result.stdout);
 });
 
 test('explicit omissions preserve all existing spec and export artifacts', () => {

@@ -383,6 +383,6 @@ function runTestTokenizer(test) {
     catch (e) {
         return checkResult(test, true, e);
     }
-    return checkAssertion(test, () => assert.deepEqual(actual, test.expected));
+    return checkAssertion(test, () => assert.deepStrictEqual(actual, test.expected));
 }
 //# sourceMappingURL=testRunner.js.map

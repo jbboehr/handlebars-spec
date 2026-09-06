@@ -384,5 +384,5 @@ function runTestTokenizer(test: PreparedTest<HandlebarsToken[]>): boolean {
         return checkResult(test, true, e);
     }
 
-    return checkAssertion(test, () => assert.deepEqual(actual, test.expected));
+    return checkAssertion(test, () => assert.deepStrictEqual(actual, test.expected));
 }
