@@ -34,6 +34,7 @@
 		"format": "eslint --fix .",
 		"lint": "eslint .",
 		"generate": "ts-node --files src/cli.ts generate",
+		"test": "npm run build && node --test test/*.test.mjs && node dist/cli.js testRunner",
 		"testRunner": "ts-node --files src/cli.ts testRunner"
 	},
 	"files": [
