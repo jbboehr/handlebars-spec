@@ -6,6 +6,32 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+### Added
+
+- [Fixture format reference](docs/fixture-format.md), including callback encoding,
+  exception matching, and PHP integration requirements. Included in the npm package.
+- PHP translation for the decorator fixture that checks access to root variables.
+
+### Changed
+
+- Updated fixtures and compiler exports to Handlebars.js 4.7.9, including a new
+  case for `#each` with block parameters and strict compilation.
+- Sparse-array values now include `!length` to preserve their full length.
+  Consumers should treat this field as encoding metadata, alongside `!sparsearray`.
+- The npm package now ships fixture data and its format reference with no runtime
+  dependencies. The previously bundled `handlebars-spec` executable and generator
+  sources are no longer included.
+
+### Fixed
+
+- Corrected exported ASTs and opcodes for fixtures using `ignoreStandalone`, so
+  their whitespace matches the expected rendering.
+- Corrected the PHP callback for nested block parameters to produce the expected
+  `13foo` result.
+- PHP callbacks now reject incorrect helper and decorator metadata with
+  `RuntimeException`, including when `zend.assertions` is disabled. Consumers must
+  supply the metadata described in the [PHP callback adapter requirements](docs/fixture-format.md#php-callback-adapter).
+
 ## [104.7.106] - 2020-05-01
 
 ### Fixed
