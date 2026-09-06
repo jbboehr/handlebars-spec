@@ -262,24 +262,16 @@ function prepareTestGeneric(test, suite) {
     spec.data = (0, utils_1.deserialize)(test.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
-    spec.globalHelpers = test.globalHelpers || undefined;
     // Partials
     if (test.partials) {
         spec.partials = Object.fromEntries(Object.entries(test.partials)
             .map(([name, partial]) => [name, (0, utils_1.deserialize)(partial)]));
     }
-    spec.globalPartials = test.globalPartials || undefined;
     // Decorators
     spec.decorators = unstringifyHelpers(test.decorators);
-    spec.globalDecorators = test.globalDecorators || undefined;
     // Options
     spec.runtimeOptions = (0, utils_1.deserialize)(test.runtimeOptions);
     spec.compileOptions = test.compileOptions;
-    if (spec.options && typeof spec.options.data === 'object') {
-        spec.options.data = (0, utils_1.deserialize)(spec.options.data);
-    }
-    // Compat
-    spec.compat = Boolean(test.compat);
     return spec;
 }
 function prepareTestParser(test, suite) {
@@ -350,24 +342,12 @@ function runTestGeneric(test) {
     global.run = false; // for blocks - decorators - should fail when accessing variables from root - 00
     let actual;
     try {
-        // Register global partials
+        // Clear partials left by the previous fixture.
         handlebarsEnv.partials = {};
-        // Object.keys(test.globalPartials || {}).forEach(function (x) {
-        //     handlebarsEnv.registerPartial(x, test.globalPartials[x]);
-        // });
-        // // Register global helpers
-        // Object.keys(test.globalHelpers || {}).forEach(function (x) {
-        //     handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
-        // });
-        // // Register global decorators
-        // Object.keys(test.globalDecorators || {}).forEach(function (x) {
-        //     handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
-        // });
         // Execute
         const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
         const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, test.compileOptions);
-        const runtimeOptions = test.runtimeOptions || test.options || {};
-        //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
+        const runtimeOptions = test.runtimeOptions || {};
         if (test.helpers) {
             runtimeOptions.helpers = test.helpers;
         }

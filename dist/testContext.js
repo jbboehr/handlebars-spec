@@ -23,7 +23,6 @@ class TestContext {
         self.description = this.description;
         self.it = this.it;
         self.key = this.key;
-        self.oldDescription = this.oldDescription;
         return self;
     }
 }

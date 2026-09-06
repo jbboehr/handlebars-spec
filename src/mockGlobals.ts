@@ -75,12 +75,10 @@ export function describe(description: string, next: Function): void {
 
     descriptionStack.push(description);
     testContext.description = globalContext.descriptionStack.join(' - ');
-    testContext.oldDescription = description;
 
     next();
 
     descriptionStack.pop();
-    delete testContext.oldDescription;
     globalContext.beforeFns = beforeFns;
     globalContext.afterFns = afterFns;
 }
@@ -113,12 +111,7 @@ export function expectTemplate(template: string): ExpectTemplate {
 
 function addExpectTemplate(xt: ExpectTemplate): void {
     const { testContext, indices, tests, isParser } = globalContext;
-    const { description, it, extraEquals } = testContext;
-
-    if (extraEquals && Object.keys(extraEquals).length >= 0) {
-        console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
-        delete globalContext.testContext.extraEquals;
-    }
+    const { description, it } = testContext;
 
     // Generate key
     const key = (description + ' - ' + it).toLowerCase();
@@ -289,8 +282,6 @@ export function shouldThrow(cb: Function, a: any, b: any): void {
     const { testContext, isParser } = globalContext;
 
     if (isParser) {
-        testContext.exception = b || true;
-
         let ex = null;
         try {
             cb();
@@ -306,8 +297,6 @@ export function shouldThrow(cb: Function, a: any, b: any): void {
         expectTemplate(template)
             .withInput(undefined)
             .toThrow(a, b);
-
-        delete testContext.exception;
     } else {
         log('shouldThrow called', a, b);
     }

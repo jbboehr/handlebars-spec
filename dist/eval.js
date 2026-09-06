@@ -17,7 +17,6 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.safeEval = safeEval;
-exports.wrappedEval = wrappedEval;
 /*jshint strict: false, unused: false */
 function safeEval(templateSpec) {
     try {
@@ -29,16 +28,5 @@ function safeEval(templateSpec) {
         console.error('SPEC:' + templateSpec);
         throw err;
     }
-}
-function wrappedEval(templateSpec) {
-    return safeEval('function() {' +
-        'try {' +
-        'var fn = (' + templateSpec + ');' +
-        'return fn.apply(this, arguments);' +
-        '} catch(e) {' +
-        'console.log(e, ' + JSON.stringify(templateSpec) + ');' +
-        'throw e;' +
-        '}' +
-        '}');
 }
 //# sourceMappingURL=eval.js.map

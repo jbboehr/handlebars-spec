@@ -147,22 +147,13 @@ interface PreparedTest<Expected = string | HandlebarsToken[]> {
     message?: string;
 }
 
-// These legacy fields are still read by the runner but are not emitted by generation.
-interface GlobalRegistrations {
-    globalHelpers?: CodeDict;
-    globalPartials?: TestSpec['partials'];
-    globalDecorators?: CodeDict;
-}
-
-interface PreparedRenderingTest extends PreparedTest<string>, GlobalRegistrations {
+interface PreparedRenderingTest extends PreparedTest<string> {
     data?: unknown;
     helpers?: { [key: string]: Function | undefined };
     decorators?: { [key: string]: Function | undefined };
     partials?: { [key: string]: unknown };
     runtimeOptions?: { [key: string]: unknown };
-    options?: { [key: string]: unknown };
     compileOptions?: CompileOptions;
-    compat?: boolean;
 }
 
 function exceptionMessage(error: unknown): string | undefined {
@@ -249,7 +240,7 @@ function makePrefix(test: TestSpec, suite: string): string {
     return suite + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
 
-function prepareTestGeneric(test: RenderingFixture & GlobalRegistrations, suite: string): PreparedRenderingTest {
+function prepareTestGeneric(test: RenderingFixture, suite: string): PreparedRenderingTest {
     const spec: PreparedRenderingTest = {
         prefix: makePrefix(test, suite),
         template: test.template,
@@ -262,24 +253,16 @@ function prepareTestGeneric(test: RenderingFixture & GlobalRegistrations, suite:
     spec.data = deserialize(test.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
-    spec.globalHelpers = test.globalHelpers || undefined;
     // Partials
     if (test.partials) {
         spec.partials = Object.fromEntries(Object.entries(test.partials)
             .map(([name, partial]) => [name, deserialize(partial)]));
     }
-    spec.globalPartials = test.globalPartials || undefined;
     // Decorators
     spec.decorators = unstringifyHelpers(test.decorators);
-    spec.globalDecorators = test.globalDecorators || undefined;
     // Options
     spec.runtimeOptions = deserialize(test.runtimeOptions);
     spec.compileOptions = test.compileOptions;
-    if (spec.options && typeof spec.options.data === 'object') {
-        spec.options.data = deserialize(spec.options.data);
-    }
-    // Compat
-    spec.compat = Boolean(test.compat);
     return spec;
 }
 
@@ -356,27 +339,13 @@ function runTestGeneric(test: PreparedRenderingTest): boolean {
 
     let actual;
     try {
-        // Register global partials
+        // Clear partials left by the previous fixture.
         handlebarsEnv.partials = {};
-        // Object.keys(test.globalPartials || {}).forEach(function (x) {
-        //     handlebarsEnv.registerPartial(x, test.globalPartials[x]);
-        // });
-
-        // // Register global helpers
-        // Object.keys(test.globalHelpers || {}).forEach(function (x) {
-        //     handlebarsEnv.registerHelper(x, safeEval(test.globalHelpers[x].javascript));
-        // });
-
-        // // Register global decorators
-        // Object.keys(test.globalDecorators || {}).forEach(function (x) {
-        //     handlebarsEnv.registerDecorator(x, safeEval(test.globalDecorators[x].javascript));
-        // });
 
         // Execute
         const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
         const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, test.compileOptions);
-        const runtimeOptions = test.runtimeOptions || test.options || {};
-        //opts.data = typeof test.data === 'string' ? [test.data] : test.data; // le sigh
+        const runtimeOptions = test.runtimeOptions || {};
         if (test.helpers) {
             runtimeOptions.helpers = test.helpers;
         }

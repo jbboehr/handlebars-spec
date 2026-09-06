@@ -26,7 +26,6 @@ class GlobalContext {
         this.testContext = new testContext_1.TestContext();
         this.indices = {};
         this.patches = {};
-        this.suite = '';
         this.unusedPatches = new Set();
         this.tests = [];
     }

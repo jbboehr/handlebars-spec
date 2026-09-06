@@ -57,14 +57,9 @@ export default class extends Command {
         }
 
         // Patch globals
-        const origGlobals: { [key: string]: any } = {};
-        for (const x in mockGlobals) {
-            origGlobals[x] = (global as any)[x];
-        }
         for (const x in mockGlobals) {
             (global as any)[x] = (mockGlobals as any)[x];
         }
-        mockGlobals.globalContext.suite = suite;
 
         const patchFile = path.resolve('patch', suite + '.json');
         const patches: PatchDict = existsSync(patchFile)

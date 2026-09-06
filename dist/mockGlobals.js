@@ -121,10 +121,8 @@ function describe(description, next) {
     afterFns = [...afterFns];
     descriptionStack.push(description);
     testContext.description = exports.globalContext.descriptionStack.join(' - ');
-    testContext.oldDescription = description;
     next();
     descriptionStack.pop();
-    delete testContext.oldDescription;
     exports.globalContext.beforeFns = beforeFns;
     exports.globalContext.afterFns = afterFns;
 }
@@ -150,11 +148,7 @@ function expectTemplate(template) {
 }
 function addExpectTemplate(xt) {
     const { testContext, indices, tests, isParser } = exports.globalContext;
-    const { description, it, extraEquals } = testContext;
-    if (extraEquals && Object.keys(extraEquals).length >= 0) {
-        console.warn(testContext.key, '|', 'extra equals were called:', extraEquals);
-        delete exports.globalContext.testContext.extraEquals;
-    }
+    const { description, it } = testContext;
     // Generate key
     const key = (description + ' - ' + it).toLowerCase();
     function generateName() {
@@ -303,7 +297,6 @@ function equals(actual, expected) {
 function shouldThrow(cb, a, b) {
     const { testContext, isParser } = exports.globalContext;
     if (isParser) {
-        testContext.exception = b || true;
         let ex = null;
         try {
             cb();
@@ -319,7 +312,6 @@ function shouldThrow(cb, a, b) {
         expectTemplate(template)
             .withInput(undefined)
             .toThrow(a, b);
-        delete testContext.exception;
     }
     else {
         log('shouldThrow called', a, b);

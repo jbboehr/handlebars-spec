@@ -94,14 +94,9 @@ let default_1 = class extends clime_1.Command {
             return process.exit(66);
         }
         // Patch globals
-        const origGlobals = {};
-        for (const x in mockGlobals) {
-            origGlobals[x] = global[x];
-        }
         for (const x in mockGlobals) {
             global[x] = mockGlobals[x];
         }
-        mockGlobals.globalContext.suite = suite;
         const patchFile = path.resolve('patch', suite + '.json');
         const patches = (0, fs_1.existsSync)(patchFile)
             ? JSON.parse((0, fs_1.readFileSync)(patchFile).toString())

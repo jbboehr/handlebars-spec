@@ -153,6 +153,74 @@ test('preserves metadata-shaped context keys and empty named partials through ge
     assert.deepEqual(fixtures[1].partials, { message: '' });
 });
 
+test('preserves fixture identities across repeated assertions and nested suites', () => {
+    const { fixtures, execution } = generateAndRun(`
+        describe('outer', function () {
+            it('repeats an assertion', function () {
+                const assertion = expectTemplate('{{value}}').withInput({ value: 'first' });
+                assertion.toCompileTo('first');
+                assertion.withInput({ value: 'second' }).toCompileTo('second');
+            });
+            describe('nested', function () {
+                it('captures a child suite', function () {
+                    expectTemplate('nested').toCompileTo('nested');
+                });
+            });
+            it('returns to the parent suite', function () {
+                expectTemplate('{{#with child}}{{value}}{{/with}}')
+                    .withInput({ value: 'parent', child: {} })
+                    .withCompileOptions({ compat: true })
+                    .toCompileTo('parent');
+            });
+        });
+    `);
+
+    assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+    assert.match(execution.stdout, /Success: 4\nFailed: 0\nSkipped: 0/);
+    assert.deepEqual(fixtures.map(({ description, it, number, expected }) => [description, it, number, expected]), [
+        ['outer', 'repeats an assertion', undefined, 'first'],
+        ['outer', 'repeats an assertion', '01', 'second'],
+        ['outer - nested', 'captures a child suite', undefined, 'nested'],
+        ['outer', 'returns to the parent suite', undefined, 'parent'],
+    ]);
+    assert.deepEqual(fixtures[3].compileOptions, { compat: true });
+});
+
+test('captures global registrations with local overrides and afterEach cleanup', () => {
+    const { fixtures, execution } = generateAndRun(`
+        describe('global capture', function () {
+            afterEach(function () {
+                handlebarsEnv.unregisterHelper('shared');
+                handlebarsEnv.unregisterPartial('shared');
+                handlebarsEnv.unregisterDecorator('noop');
+            });
+            it('uses registered values', function () {
+                handlebarsEnv.registerHelper('shared', function () { return 'Awesome'; });
+                handlebarsEnv.registerPartial('shared', 'global partial');
+                handlebarsEnv.registerDecorator('noop', function () {});
+                expectTemplate('{{*noop}}{{shared}}|{{> shared}}')
+                    .toCompileTo('Awesome|global partial');
+                expectTemplate('{{*noop}}{{shared}}|{{> shared}}')
+                    .withPartial('shared', 'local partial')
+                    .toCompileTo('Awesome|local partial');
+            });
+            it('starts without earlier registrations', function () {
+                expectTemplate('plain').toCompileTo('plain');
+            });
+        });
+    `);
+
+    assert.equal(execution.status, 0, execution.stdout + execution.stderr);
+    assert.match(execution.stdout, /Success: 3\nFailed: 0\nSkipped: 0/);
+    assert.equal(fixtures[0].helpers.shared['!code'], true);
+    assert.equal(fixtures[0].decorators.noop['!code'], true);
+    assert.deepEqual(fixtures[0].partials, { shared: 'global partial' });
+    assert.deepEqual(fixtures[1].partials, { shared: 'local partial' });
+    assert.equal(fixtures[2].helpers, undefined);
+    assert.equal(fixtures[2].partials, undefined);
+    assert.equal(fixtures[2].decorators, undefined);
+});
+
 test('preserves empty substring and other exception matchers through generation', () => {
     const { fixtures, execution } = generateAndRun(`
         describe('exception capture', function () {
