@@ -30,16 +30,14 @@ The same directories will be available under
 
 ## Data sets
 
-The [`spec/`](spec/) directory contains rendering fixtures. Each file covers one
-part of Handlebars, such as blocks, helpers, partials, strict mode, or whitespace
-control.
+Each JSON file contains an array of fixtures. Most files in [`spec/`](spec/)
+test rendering. Two suites have different expectations:
 
-The [`export/`](export/) directory contains compiler-facing fixtures. These add
-the Handlebars abstract syntax tree and compiler opcodes to the corresponding
-rendering cases.
+- `parser.json` compares the parser's printed tree representation.
+- `tokenizer.json` compares ordered token objects with `name` and `text` fields.
 
-Use `spec/` to test a renderer or runtime. Use `export/` when an implementation
-also needs to reproduce the Handlebars parser or compiler output.
+The [`export/`](export/) files add syntax trees and compiler opcodes to the
+corresponding fixtures. Some cases cannot be compiled and appear only in `spec/`.
 
 ## Fixture format
 
@@ -57,28 +55,12 @@ A basic rendering fixture looks like this:
 }
 ```
 
-Common fields include:
+Fixtures can also supply helpers, partials, decorators, and compile or runtime
+options. Cases expecting failure use `exception` instead of `expected`.
 
-- `description`, `it`, and optional `number` identify the source test.
-- `template` and `data` provide the template and its input context.
-- `expected` contains the rendered output. Tests that should fail use
-  `exception` instead.
-- `compileOptions` and `runtimeOptions` select non-default Handlebars behavior.
-- `helpers`, `partials`, and `decorators` define values required by the test.
-
-Some fixtures need executable helper or decorator code. Those values use a
-tagged object with source for each supported language:
-
-```json
-{
-  "!code": true,
-  "javascript": "function () { return 'value'; }",
-  "php": "function () { return 'value'; }"
-}
-```
-
-Consumers can select the implementation for their language or skip fixtures
-that do not provide one.
+The [fixture-format reference](docs/fixture-format.md) covers fixture identity,
+matching rules, callback translations, sparse arrays, PHP integration, and
+omissions. It is included in the installed npm package.
 
 ## Versioning
 

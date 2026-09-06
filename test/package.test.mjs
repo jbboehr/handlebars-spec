@@ -23,10 +23,15 @@ test('npm package is a data-only fixture distribution', () => {
     assert.deepEqual(topLevelEntries, [
         'LICENSE.md',
         'README.md',
+        'docs',
         'export',
         'package.json',
         'spec',
     ]);
+    assert.deepEqual(
+        packResult.files.map((file) => file.path).filter((file) => file.startsWith('docs/')),
+        ['docs/fixture-format.md'],
+    );
     assert.equal(packageManifest.dependencies, undefined);
     assert.equal(packageManifest.bin, undefined);
     assert.equal(packageManifest.engines, undefined);

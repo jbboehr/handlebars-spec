@@ -37,6 +37,7 @@
 		"testRunner": "ts-node --files src/cli.ts testRunner"
 	},
 	"files": [
+		"docs/fixture-format.md",
 		"export",
 		"spec"
 	]
