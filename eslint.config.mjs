@@ -9,6 +9,7 @@ export default tseslint.config(
             'handlebars.js/**',
             'patch/**',
             'spec/**',
+            'vendor/**',
         ],
     },
     eslint.configs.recommended,

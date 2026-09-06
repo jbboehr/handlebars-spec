@@ -65,6 +65,12 @@ jobs:
           tools: composer:v2
       - name: Validate Composer metadata
         run: composer validate --strict
+      - name: Install contributor guidance
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Check contributor guides
+        run: |
+          test -r vendor/jbboehr/doctrine-of-the-second-sun/RUINENWERT.md
+          test -r vendor/jbboehr/doctrine-of-the-second-sun/MEASURE-OF-WORDS.md
       - name: Test specifications
         run: make test_php
 
