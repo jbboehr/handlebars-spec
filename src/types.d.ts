@@ -15,14 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-interface CodeData {
+type CodeData = {
     '!code': true;
-    'javascript': string;
+    'javascript'?: string;
     'php'?: string;
-}
+    'phpstub'?: string;
+};
+
+type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 
 interface CodeDict {
     [key: string]: CodeData;
+}
+
+interface SerializedHelperMap {
+    [key: string]: string | CodeData;
 }
 
 interface FunctionDict {
@@ -40,48 +47,68 @@ interface PatchDict {
 interface ExpectTemplateInterface {
     template: string;
     helpers: FunctionDict;
-    partials: StringDict;
+    partials: FunctionDict;
     decorators: FunctionDict;
     input?: any;
-    expected?: string;
+    expected?: string | HandlebarsToken[];
     message?: string;
     compileOptions?: CompileOptions;
     runtimeOptions?: RuntimeOptions;
     exception?: true | string | RegExp;
 }
 
-interface TestSpec {
+interface TestSpec<Expected extends string | HandlebarsToken[] = string | HandlebarsToken[]> {
     description: string;
     it: string;
     number?: string;
     template: string;
-    data: any;
-    expected?: string;
-    runtimeOptions?: RuntimeOptions;
+    data?: JsonValue;
+    expected?: Expected;
+    runtimeOptions?: { [key: string]: JsonValue };
     compileOptions?: CompileOptions;
-    partials: StringDict;
-    helpers: CodeDict;
-    decorators: CodeDict;
+    partials?: { [key: string]: string | CodeData };
+    helpers?: SerializedHelperMap;
+    decorators?: CodeDict;
     message?: string;
-    compat?: true;
+    note?: string;
+    compat?: boolean;
     exception?: true | string;
 }
 
+type RenderingFixture = TestSpec<string>;
+type ParserFixture = TestSpec<string>;
+type TokenizerFixture = TestSpec<HandlebarsToken[]>;
+
+type LoadedFixture =
+    | { kind: 'render'; fixture: RenderingFixture }
+    | { kind: 'parser'; fixture: ParserFixture }
+    | { kind: 'tokenizer'; fixture: TokenizerFixture };
+
+interface SerializedAstProgram {
+    type: 'Program';
+    body: JsonValue[];
+    [key: string]: JsonValue;
+}
+
 interface TestSpecWithAst extends TestSpec {
-    ast?: any;
-    opcodes?: any;
-    partialAsts?: any;
-    partialOpcodes?: any;
+    ast?: SerializedAstProgram;
+    opcodes?: unknown;
+    partialAsts?: { [key: string]: SerializedAstProgram };
+    partialOpcodes?: { [key: string]: unknown };
 }
 
 // copied from handlebars since they don't fucking export it
 interface CompileOptions {
+    // The compiler adds this stack to track block parameters in nested programs.
+    blockParams?: (string[] | undefined)[];
     data?: boolean;
     compat?: boolean;
     knownHelpers?: {[key: string]: boolean};
     knownHelpersOnly?: boolean;
     noEscape?: boolean;
     strict?: boolean;
+    stringParams?: boolean;
+    trackIds?: boolean;
     assumeObjects?: boolean;
     preventIndent?: boolean;
     ignoreStandalone?: boolean;

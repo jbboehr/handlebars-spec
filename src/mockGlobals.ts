@@ -251,14 +251,14 @@ function detectGlobalDecorators(): FunctionDict {
     return globalDecorators;
 }
 
-function detectGlobalPartials(): StringDict {
+function detectGlobalPartials(): FunctionDict {
     const { handlebarsEnv } = (global as any);
     // This should never be null, but it is in one case
     if (!handlebarsEnv) {
         return Object.create(null);
     }
 
-    const globalPartials: StringDict = Object.create(null);
+    const globalPartials: FunctionDict = Object.create(null);
 
     Object.keys(handlebarsEnv.partials).forEach((x) => {
         globalPartials[x] = handlebarsEnv.partials[x];

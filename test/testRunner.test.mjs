@@ -144,6 +144,23 @@ test('runs a supported parser suite with parser assertions', () => {
     assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
 });
 
+test('runs a supported tokenizer suite with token-array assertions', () => {
+    const result = runSuites({
+        'tokenizer.json': [{
+            ...validFixture,
+            template: '{{foo}}',
+            expected: [
+                { name: 'OPEN', text: '{{' },
+                { name: 'ID', text: 'foo' },
+                { name: 'CLOSE', text: '}}' },
+            ],
+        }],
+    }, 'tokenizer.json');
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, /Success: 1\nFailed: 0\nSkipped: 0/);
+});
+
 test('allows an empty supported suite alongside fixtures that execute', () => {
     const result = runSuites({ 'basic.json': [], 'bench.json': [validFixture] });
 

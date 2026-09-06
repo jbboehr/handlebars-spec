@@ -15,7 +15,7 @@ export default tseslint.config(
     ...tseslint.configs.recommended,
     importConfigs.recommended,
     {
-        files: ['src/**/*.ts'],
+        files: ['src/**/*.ts', 'test/**/*.ts'],
         settings: {
             'import-x/extensions': ['.js', '.mjs', '.ts'],
             'import-x/parsers': {

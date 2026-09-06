@@ -70,7 +70,7 @@ export default class extends Command {
             : {};
         const omissions = omissionSuites[suite] || {};
         const unusedOmissions = new Set(Object.keys(omissions));
-        const inputData = JSON.parse(readFileSync(inputFile).toString());
+        const inputData: TestSpec[] = JSON.parse(readFileSync(inputFile).toString());
         const tests: TestSpecWithAst[] = [];
 
         for (const test of inputData) {
@@ -112,11 +112,12 @@ export default class extends Command {
         spec.ast = res.ast;
         spec.opcodes = res.opcodes;
 
-        if( test.partials ) {
-            const partialAsts: any = {};
-            const partialOpcodes: any = {};
-            Object.keys(test.partials).forEach((y) => {
-                const res = this.compile(test.partials[y], test.compileOptions || {});
+        const partials = test.partials;
+        if( partials ) {
+            const partialAsts: NonNullable<TestSpecWithAst['partialAsts']> = {};
+            const partialOpcodes: NonNullable<TestSpecWithAst['partialOpcodes']> = {};
+            Object.keys(partials).forEach((y) => {
+                const res = this.compile(partials[y], test.compileOptions || {});
                 partialAsts[y] = res.ast;
                 partialOpcodes[y] = res.opcodes;
             });
@@ -127,7 +128,7 @@ export default class extends Command {
         return spec;
     }
 
-    private compile(input: string, options: CompileOptions): any {
+    private compile(input: string | CodeData, options: CompileOptions): { ast: SerializedAstProgram; opcodes: unknown } {
         options = options || {};
         if (!('data' in options)) {  // jshint ignore:line
             options.data = true;
@@ -136,8 +137,9 @@ export default class extends Command {
             options.useDepths = true;
         }
 
-        const ast = Handlebars.parse(input, options);
-        const astCopy = JSON.parse(JSON.stringify(ast));
+        // The parser rejects callback partials. Preserve its error for omission handling.
+        const ast = Handlebars.parse(input as string, options);
+        const astCopy: SerializedAstProgram = JSON.parse(JSON.stringify(ast));
         const opcodes = new (Handlebars as any).Compiler().compile(ast, options);
         return {
             ast: astCopy,

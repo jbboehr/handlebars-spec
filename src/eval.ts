@@ -17,7 +17,7 @@
 
 /*jshint strict: false, unused: false */
 
-export function safeEval(templateSpec: string): any {
+export function safeEval(templateSpec: string | undefined): any {
     try {
     /* jshint ignore:start */
         return eval('(' + templateSpec + ')');

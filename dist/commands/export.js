@@ -101,11 +101,12 @@ let default_1 = class extends clime_1.Command {
         const res = this.compile(test.template, test.compileOptions || {});
         spec.ast = res.ast;
         spec.opcodes = res.opcodes;
-        if (test.partials) {
+        const partials = test.partials;
+        if (partials) {
             const partialAsts = {};
             const partialOpcodes = {};
-            Object.keys(test.partials).forEach((y) => {
-                const res = this.compile(test.partials[y], test.compileOptions || {});
+            Object.keys(partials).forEach((y) => {
+                const res = this.compile(partials[y], test.compileOptions || {});
                 partialAsts[y] = res.ast;
                 partialOpcodes[y] = res.opcodes;
             });
@@ -122,6 +123,7 @@ let default_1 = class extends clime_1.Command {
         if (options.compat) {
             options.useDepths = true;
         }
+        // The parser rejects callback partials. Preserve its error for omission handling.
         const ast = Handlebars.parse(input, options);
         const astCopy = JSON.parse(JSON.stringify(ast));
         const opcodes = new Handlebars.Compiler().compile(ast, options);

@@ -91,15 +91,16 @@ let default_1 = class extends clime_1.Command {
         function runSpec(spec) {
             const tmp = spec.replace(/\.json$/, '').split('/');
             const suite = tmp[tmp.length - 1];
-            const runTest = getSuiteRunner(suite);
+            const kind = getSuiteKind(suite);
             const data = JSON.parse((0, fs_1.readFileSync)((0, path_1.resolve)(dir, spec)).toString());
-            Object.keys(data).forEach(function (y) {
-                data[y].suite = suite;
-                if (runTest(data[y])) {
-                    successes.push(data[y]);
+            Object.values(data).forEach(function (fixture) {
+                // The suite filename supplies the kind for the trusted fixture JSON.
+                const test = { kind, fixture };
+                if (runTest(test, suite)) {
+                    successes.push(fixture);
                 }
                 else {
-                    failures.push(data[y]);
+                    failures.push(fixture);
                 }
             });
         }
@@ -164,7 +165,8 @@ function unstringifyHelpers(helpers) {
     }
     const ret = {};
     Object.keys(helpers).forEach(function (x) {
-        ret[x] = (0, eval_1.safeEval)(helpers[x].javascript);
+        const helper = helpers[x];
+        ret[x] = (0, eval_1.safeEval)(typeof helper === 'string' ? undefined : helper.javascript);
     });
     return ret;
 }
@@ -235,7 +237,6 @@ function fixSparseArray(data) {
     }
     return data;
 }
-// Test utils
 function exceptionMessage(error) {
     try {
         if (typeof error === 'string') {
@@ -312,15 +313,14 @@ function checkAssertion(test, assertion) {
         return checkResult(test, true, e);
     }
 }
-function makePrefix(test) {
-    return (test.suite) + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
+function makePrefix(test, suite) {
+    return suite + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
-function prepareTestGeneric(test) {
-    const spec = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestGeneric(test, suite) {
+    const spec = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
@@ -348,12 +348,11 @@ function prepareTestGeneric(test) {
     spec.compat = Boolean(test.compat);
     return spec;
 }
-function prepareTestParser(test) {
-    const spec = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestParser(test, suite) {
+    const spec = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
@@ -362,19 +361,18 @@ function prepareTestParser(test) {
     spec.message = test.message;
     return spec;
 }
-function prepareTestTokenizer(test) {
-    const spec = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestTokenizer(test, suite) {
+    const spec = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
     return spec;
 }
-function getSuiteRunner(suite) {
+function getSuiteKind(suite) {
     switch (suite) {
         case 'basic':
         case 'bench':
@@ -389,14 +387,24 @@ function getSuiteRunner(suite) {
         case 'subexpressions':
         case 'track-ids':
         case 'whitespace-control':
-            return test => runTestGeneric(prepareTestGeneric(test));
+            return 'render';
         case 'parser':
-            return test => runTestParser(prepareTestParser(test));
+            return 'parser';
         case 'tokenizer':
-            return test => runTestTokenizer(prepareTestTokenizer(test));
+            return 'tokenizer';
         default:
             throw new clime_1.ExpectedError('Unsupported fixture suite ' + JSON.stringify(suite)
                 + '. Use a supported suite filename such as basic.json, parser.json, or tokenizer.json', 2);
+    }
+}
+function runTest(test, suite) {
+    switch (test.kind) {
+        case 'render':
+            return runTestGeneric(prepareTestGeneric(test.fixture, suite));
+        case 'parser':
+            return runTestParser(prepareTestParser(test.fixture, suite));
+        case 'tokenizer':
+            return runTestTokenizer(prepareTestTokenizer(test.fixture, suite));
     }
 }
 function runTestGeneric(test) {

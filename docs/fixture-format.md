@@ -68,7 +68,7 @@ A basic rendering fixture looks like this:
 | `exception` | An expected failure, using the matching rules below. |
 | `compileOptions` | Options passed when parsing and compiling a rendering fixture, such as `strict`, `compat`, or `ignoreStandalone`. |
 | `runtimeOptions` | Options passed when executing a compiled template, such as the `data` frame used for `@` variables. |
-| `helpers`, `decorators` | Maps from names to tagged callback values. |
+| `helpers`, `decorators` | Maps from names to tagged callback values. Helper maps may also contain unused string values. |
 | `partials` | A map from names to template strings or tagged callback values. |
 | `message`, `note` | Optional explanatory text for diagnostics. These do not change the expected result. |
 

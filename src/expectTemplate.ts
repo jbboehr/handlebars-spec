@@ -20,11 +20,11 @@ import { RuntimeOptions } from 'handlebars';
 export class ExpectTemplate implements ExpectTemplateInterface {
     template: string;
     helpers: FunctionDict = {};
-    partials: StringDict = {};
+    partials: FunctionDict = {};
     decorators: FunctionDict = {};
     cb: Function;
     input: any;
-    expected: any;
+    expected?: string | HandlebarsToken[];
     message?: string;
     compileOptions?: CompileOptions;
     runtimeOptions?: RuntimeOptions;
@@ -48,12 +48,12 @@ export class ExpectTemplate implements ExpectTemplateInterface {
         return this;
     }
 
-    withPartial(name: string, partial: string): ExpectTemplate {
+    withPartial(name: string, partial: Function | string): ExpectTemplate {
         this.partials[name] = partial;
         return this;
     }
 
-    withPartials(partials: StringDict): ExpectTemplate {
+    withPartials(partials: FunctionDict): ExpectTemplate {
         Object.keys(partials).forEach((name) => {
             this.withPartial(name, partials[name]);
         });
@@ -92,7 +92,7 @@ export class ExpectTemplate implements ExpectTemplateInterface {
         return this;
     }
 
-    toCompileTo(expected: any): boolean {
+    toCompileTo(expected: string | HandlebarsToken[]): boolean {
         this.expected = expected;
         this.cb(this);
         delete this.expected; // MEH

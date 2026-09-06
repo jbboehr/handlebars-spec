@@ -55,21 +55,22 @@ export default class extends Command {
         })
             inputFile?: string,
     ): void {
-        const successes = [];
-        const failures = [];
+        const successes: TestSpec[] = [];
+        const failures: TestSpec[] = [];
         let dir = '.';
 
         function runSpec(spec: string): void {
             const tmp = spec.replace(/\.json$/, '').split('/');
             const suite = tmp[tmp.length - 1];
-            const runTest = getSuiteRunner(suite);
-            const data = JSON.parse(readFileSync(resolvePath(dir, spec)).toString());
-            Object.keys(data).forEach(function (y) {
-                data[y].suite = suite;
-                if (runTest(data[y])) {
-                    successes.push(data[y]);
+            const kind = getSuiteKind(suite);
+            const data: TestSpec[] = JSON.parse(readFileSync(resolvePath(dir, spec)).toString());
+            Object.values(data).forEach(function (fixture) {
+                // The suite filename supplies the kind for the trusted fixture JSON.
+                const test = { kind, fixture } as LoadedFixture;
+                if (runTest(test, suite)) {
+                    successes.push(fixture);
                 } else {
-                    failures.push(data[y]);
+                    failures.push(fixture);
                 }
             });
         }
@@ -124,13 +125,14 @@ function tokenize(template: string): HandlebarsToken[] { // borrowed from spec/t
     return out;
 }
 
-function unstringifyHelpers(helpers: any): FunctionDict {
+function unstringifyHelpers(helpers: SerializedHelperMap | undefined): { [key: string]: Function | undefined } {
     if (!helpers || helpers === null || typeof helpers !== 'object') {
         return {};
     }
-    const ret: { [key: string]: any } = {};
+    const ret: { [key: string]: Function | undefined } = {};
     Object.keys(helpers).forEach(function (x) {
-        ret[x] = safeEval(helpers[x].javascript);
+        const helper = helpers[x];
+        ret[x] = safeEval(typeof helper === 'string' ? undefined : helper.javascript);
     });
     return ret;
 }
@@ -212,6 +214,32 @@ function fixSparseArray(data: any): any {
 
 // Test utils
 
+interface PreparedTest<Expected = string | HandlebarsToken[]> {
+    prefix: string;
+    template: string;
+    expected?: Expected;
+    exception?: TestSpec['exception'] | false;
+    message?: string;
+}
+
+// These legacy fields are still read by the runner but are not emitted by generation.
+interface GlobalRegistrations {
+    globalHelpers?: CodeDict;
+    globalPartials?: TestSpec['partials'];
+    globalDecorators?: CodeDict;
+}
+
+interface PreparedRenderingTest extends PreparedTest<string>, GlobalRegistrations {
+    data?: unknown;
+    helpers?: { [key: string]: Function | undefined };
+    decorators?: { [key: string]: Function | undefined };
+    partials?: { [key: string]: unknown };
+    runtimeOptions?: { [key: string]: unknown };
+    options?: { [key: string]: unknown };
+    compileOptions?: CompileOptions;
+    compat?: boolean;
+}
+
 function exceptionMessage(error: unknown): string | undefined {
     try {
         if (typeof error === 'string') {
@@ -227,7 +255,7 @@ function exceptionMessage(error: unknown): string | undefined {
     }
 }
 
-function exceptionMatches(expected: any, error: unknown): boolean {
+function exceptionMatches(expected: unknown, error: unknown): boolean {
     if (expected === true) {
         return true;
     }
@@ -252,7 +280,7 @@ function exceptionMatches(expected: any, error: unknown): boolean {
     }
 }
 
-function checkResult(test: any, didExcept: boolean, e?: unknown): boolean {
+function checkResult(test: PreparedTest, didExcept: boolean, e?: unknown): boolean {
     const shouldExcept = hasExceptionExpectation(test.exception);
     const passed = shouldExcept
         ? didExcept && exceptionMatches(test.exception, e)
@@ -279,7 +307,7 @@ function checkResult(test: any, didExcept: boolean, e?: unknown): boolean {
     }
 }
 
-function checkAssertion(test: any, assertion: () => void): boolean {
+function checkAssertion(test: PreparedTest, assertion: () => void): boolean {
     if (hasExceptionExpectation(test.exception)) {
         return checkResult(test, false);
     }
@@ -292,16 +320,15 @@ function checkAssertion(test: any, assertion: () => void): boolean {
     }
 }
 
-function makePrefix(test: any): string {
-    return (test.suite) + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
+function makePrefix(test: TestSpec, suite: string): string {
+    return suite + ' | ' + test.description + ' - ' + test.it + ' - ' + test.number;
 }
 
-function prepareTestGeneric(test: any): any {
-    const spec: any = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestGeneric(test: RenderingFixture & GlobalRegistrations, suite: string): PreparedRenderingTest {
+    const spec: PreparedRenderingTest = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
@@ -330,12 +357,11 @@ function prepareTestGeneric(test: any): any {
     return spec;
 }
 
-function prepareTestParser(test: any): any {
-    const spec: any = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestParser(test: ParserFixture, suite: string): PreparedTest<string> {
+    const spec: PreparedTest<string> = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
@@ -345,12 +371,11 @@ function prepareTestParser(test: any): any {
     return spec;
 }
 
-function prepareTestTokenizer(test: any): any {
-    const spec: any = {};
-    // Output prefix
-    spec.prefix = makePrefix(test);
-    // Template
-    spec.template = test.template;
+function prepareTestTokenizer(test: TokenizerFixture, suite: string): PreparedTest<HandlebarsToken[]> {
+    const spec: PreparedTest<HandlebarsToken[]> = {
+        prefix: makePrefix(test, suite),
+        template: test.template,
+    };
     // Expected
     spec.expected = test.expected;
     // Exception
@@ -358,7 +383,7 @@ function prepareTestTokenizer(test: any): any {
     return spec;
 }
 
-function getSuiteRunner(suite: string): (test: any) => boolean {
+function getSuiteKind(suite: string): LoadedFixture['kind'] {
     switch (suite) {
     case 'basic':
     case 'bench':
@@ -373,18 +398,29 @@ function getSuiteRunner(suite: string): (test: any) => boolean {
     case 'subexpressions':
     case 'track-ids':
     case 'whitespace-control':
-        return test => runTestGeneric(prepareTestGeneric(test));
+        return 'render';
     case 'parser':
-        return test => runTestParser(prepareTestParser(test));
+        return 'parser';
     case 'tokenizer':
-        return test => runTestTokenizer(prepareTestTokenizer(test));
+        return 'tokenizer';
     default:
         throw new ExpectedError('Unsupported fixture suite ' + JSON.stringify(suite)
             + '. Use a supported suite filename such as basic.json, parser.json, or tokenizer.json', 2);
     }
 }
 
-function runTestGeneric(test: any): boolean {
+function runTest(test: LoadedFixture, suite: string): boolean {
+    switch (test.kind) {
+    case 'render':
+        return runTestGeneric(prepareTestGeneric(test.fixture, suite));
+    case 'parser':
+        return runTestParser(prepareTestParser(test.fixture, suite));
+    case 'tokenizer':
+        return runTestTokenizer(prepareTestTokenizer(test.fixture, suite));
+    }
+}
+
+function runTestGeneric(test: PreparedRenderingTest): boolean {
     const handlebarsEnv = (global as any).handlebarsEnv;
     const CompilerContext = (global as any).CompilerContext;
     const equals = (global as any).equals;
@@ -434,7 +470,7 @@ function runTestGeneric(test: any): boolean {
     return checkAssertion(test, () => equals(actual, test.expected));
 }
 
-function runTestParser(test: any): boolean {
+function runTestParser(test: PreparedTest<string>): boolean {
     let actual;
     try {
         actual = astFor(test.template);
@@ -445,7 +481,7 @@ function runTestParser(test: any): boolean {
     return checkAssertion(test, () => assert.equal(actual, test.expected));
 }
 
-function runTestTokenizer(test: any): boolean {
+function runTestTokenizer(test: PreparedTest<HandlebarsToken[]>): boolean {
     let actual;
     try {
         actual = tokenize(test.template);
