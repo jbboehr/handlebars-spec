@@ -59,10 +59,7 @@ require("./commands/testRunner");
 if (ts_node_1.REGISTER_INSTANCE in process) {
     clime_1.CLI.commandModuleExtension = '.ts';
 }
-// The second parameter is the path to folder that contains command modules.
 const cli = new clime_1.CLI('handlebars-spec', Path.join(__dirname, 'commands'));
-// Clime in its core provides an object-based command-line infrastructure.
-// To have it work as a common CLI, a shim needs to be applied:
 const shim = new clime_1.Shim(cli);
 shim.execute(process.argv);
 //# sourceMappingURL=cli.js.map

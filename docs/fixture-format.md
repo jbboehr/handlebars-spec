@@ -146,7 +146,7 @@ Executable values use a tagged object with source for each available language:
 
 Language fields are optional. For example, `basic.json` includes a PHP-only
 `length` helper to implement string-length access that JavaScript provides
-natively. A tagged value does not necessarily contain both language fields.
+natively.
 
 The language values are source expressions that produce callbacks. Decode
 `!code` values wherever they occur, including inside `data`, nested arrays,

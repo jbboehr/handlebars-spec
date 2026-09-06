@@ -83,7 +83,6 @@ export function jsToCode(fn: Function | string): CodeData {
     const key = normalizeJavascript(str);
     let data: CodeData;
 
-    // Load function patches
     if (!functionPatches) {
         functionPatches = hjsonParse(readFileSync(PATCH_FILE).toString()) || {};
     }
@@ -100,7 +99,6 @@ export function jsToCode(fn: Function | string): CodeData {
             'javascript': str,
         };
         functionPatches[key] = data;
-        // write it out to _functions
         writeFileSync(PATCH_FILE, hjsonStringify(functionPatches, {
             bracesSameLine: true,
             space: '\t'
@@ -264,7 +262,6 @@ function serializeInner(data: any, beneathArray: boolean = false): any {
         break;
     }
 
-    // Handle null
     if (data === null) {
         return null;
     }
@@ -275,7 +272,6 @@ function serializeInner(data: any, beneathArray: boolean = false): any {
         return data;
     }
 
-    // Handle arrays
     if (Array.isArray(data)) {
         if (isSparseArray(data)) {
             const orv: any = {
@@ -310,17 +306,14 @@ function serializeInner(data: any, beneathArray: boolean = false): any {
         }
     }
 
-    // Handle RegExp
     if (data instanceof RegExp) {
         return '' + data;
     }
 
-    // Handle boxed Boolean
     if (data instanceof Boolean) {
         return data.valueOf();
     }
 
-    // Handle objects
     const rv: any = {};
     Object.keys(data).forEach((key) => {
         Object.defineProperty(rv, key, {
@@ -353,7 +346,6 @@ export function deserialize(data: any): any {
         break;
     }
 
-    // Handle null
     if (data === null) {
         return null;
     }
@@ -384,7 +376,6 @@ export function deserialize(data: any): any {
         return newData;
     }
 
-    // Recurse
     const rv: any = Array.isArray(data) ? new Array(data.length) : {};
     Object.keys(data).forEach((key) => {
         Object.defineProperty(rv, key, {

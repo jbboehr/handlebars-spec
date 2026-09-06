@@ -73,11 +73,7 @@ defects. The working tree's fixtures were not modified by these experiments.
 | Change an opcode's text argument | Reference comparison failed for the template opcodes. |
 | Parse an `ignoreStandalone` fixture without its options | Reference comparison failed for the template AST. |
 
-The tests passed again after restoring the copies. Together with the
-tokenizer regression's before/after failure, these checks establish that the
-additions detect incorrect behavior rather than only successful execution.
-An independent read-only test review found no actionable issues and recommended
-keeping the additions.
+The tests passed again after restoring the copies.
 
 ## Status of the earlier work
 
@@ -134,4 +130,4 @@ The report was also linted directly with the repository's Markdown settings.
   coverage audit.
 
 A post-commit `make check` verifies the generated-file guard against the
-committed tree. No additional implementation slice is planned.
+committed tree.

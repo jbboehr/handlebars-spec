@@ -8,8 +8,8 @@ the data consumed by those implementations.
 
 Use Node.js and npm, Git, GNU Make, and a POSIX shell. The Node regression tests
 exercise Make recipes, so Make and the shell are needed even for `npm test`.
-PHP is needed for the PHP checks. Composer 2 installs contributor guidance and
-validates package metadata.
+PHP is needed for the PHP checks. Composer 2 installs
+[contributor guidance](AGENTS.md) and validates package metadata.
 The [CI workflow](.github/workflows/ci.yml) lists the tested runtime versions.
 
 The optional `nix develop` shell supplies Node.js 24, PHP, Composer, and lint
@@ -24,10 +24,8 @@ composer install
 npm test
 ```
 
-The submodule supplies upstream test sources. Install dependencies in this
-repository's root. Composer installs Ruinenwert and The Measure of Words as
-development guidance. Read [AGENTS.md](AGENTS.md) for their scope and installed
-paths. The PHP checks themselves require no Composer dependencies.
+The submodule supplies upstream test sources. The PHP checks require no Composer
+dependencies.
 
 `npm test` builds the TypeScript tooling into `dist/`, runs the Node regression
 tests, and validates the checked-in `spec/` fixtures against Handlebars.js. It

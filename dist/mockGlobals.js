@@ -128,17 +128,13 @@ function describe(description, next) {
 }
 function it(description, next) {
     const { testContext } = exports.globalContext;
-    // Call before fns
     exports.globalContext.beforeFns.forEach((fn) => {
         fn();
     });
-    // Push test spec unto context
     testContext.it = description;
     testContext.description = exports.globalContext.descriptionStack.join(' - ');
     testContext.key = testContext.description + ' - ' + testContext.it;
-    // Test
     next();
-    // Call after fns
     exports.globalContext.afterFns.forEach((fn) => {
         fn();
     });
@@ -149,7 +145,6 @@ function expectTemplate(template) {
 function addExpectTemplate(xt) {
     const { testContext, indices, tests, isParser } = exports.globalContext;
     const { description, it } = testContext;
-    // Generate key
     const key = (description + ' - ' + it).toLowerCase();
     function generateName() {
         for (let i = 0; i < 99; i++) {
@@ -163,7 +158,6 @@ function addExpectTemplate(xt) {
     }
     const [name, number] = generateName();
     indices[name] = name;
-    // Make test spec
     let spec = (0, utils_1.serialize)({
         description,
         it,
@@ -203,20 +197,18 @@ function addExpectTemplate(xt) {
     if (isParser) {
         delete spec.data;
     }
-    // Apply patches and push to tests
     try {
         spec = applyPatches(name, spec);
         tests.push(spec);
     }
     catch (e) {
         if (e instanceof SkipError) {
-            // ok
+            // A null patch intentionally omits this fixture.
         }
         else {
             throw e;
         }
     }
-    // Reset the context
     exports.globalContext.testContext = exports.globalContext.testContext.reset();
 }
 function applyPatches(name, spec) {
@@ -270,7 +262,7 @@ function detectGlobalDecorators() {
 }
 function detectGlobalPartials() {
     const { handlebarsEnv } = global;
-    // This should never be null, but it is in one case
+    // The upstream basic suite starts with a null environment until beforeEach runs.
     if (!handlebarsEnv) {
         return Object.create(null);
     }

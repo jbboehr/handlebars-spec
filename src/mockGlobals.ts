@@ -86,20 +86,16 @@ export function describe(description: string, next: Function): void {
 export function it(description: string, next: Function): void {
     const {testContext} = globalContext;
 
-    // Call before fns
     globalContext.beforeFns.forEach((fn) => {
         fn();
     });
 
-    // Push test spec unto context
     testContext.it = description;
     testContext.description = globalContext.descriptionStack.join(' - ');
     testContext.key = testContext.description + ' - ' + testContext.it;
 
-    // Test
     next();
 
-    // Call after fns
     globalContext.afterFns.forEach((fn: Function) => {
         fn();
     });
@@ -113,7 +109,6 @@ function addExpectTemplate(xt: ExpectTemplate): void {
     const { testContext, indices, tests, isParser } = globalContext;
     const { description, it } = testContext;
 
-    // Generate key
     const key = (description + ' - ' + it).toLowerCase();
     function generateName(): [string, string] {
         for (let i = 0; i < 99; i++) {
@@ -128,7 +123,6 @@ function addExpectTemplate(xt: ExpectTemplate): void {
     const [name, number] = generateName();
     indices[name] = name;
 
-    // Make test spec
     let spec: TestSpec = serialize({
         description,
         it,
@@ -169,19 +163,17 @@ function addExpectTemplate(xt: ExpectTemplate): void {
         delete spec.data;
     }
 
-    // Apply patches and push to tests
     try {
         spec = applyPatches(name, spec);
         tests.push(spec);
     } catch (e) {
         if (e instanceof SkipError) {
-            // ok
+            // A null patch intentionally omits this fixture.
         } else {
             throw e;
         }
     }
 
-    // Reset the context
     globalContext.testContext = globalContext.testContext.reset();
 }
 
@@ -246,7 +238,7 @@ function detectGlobalDecorators(): FunctionDict {
 
 function detectGlobalPartials(): FunctionDict {
     const { handlebarsEnv } = (global as any);
-    // This should never be null, but it is in one case
+    // The upstream basic suite starts with a null environment until beforeEach runs.
     if (!handlebarsEnv) {
         return Object.create(null);
     }

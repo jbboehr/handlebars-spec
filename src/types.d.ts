@@ -114,7 +114,7 @@ interface CompileOptions {
     ignoreStandalone?: boolean;
     explicitPartialContext?: boolean;
 
-    // is this a real option?
+    // Handlebars sets this flag when compat mode is enabled.
     useDepths?: boolean;
 }
 

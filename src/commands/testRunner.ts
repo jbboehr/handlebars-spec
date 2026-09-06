@@ -26,7 +26,6 @@ import * as assert from 'assert';
 
 
 
-// Patch globals
 const handlebarsEnv = Handlebars;
 (global as any).Handlebars = Handlebars;
 (global as any).handlebarsEnv = handlebarsEnv;
@@ -245,22 +244,15 @@ function prepareTestGeneric(test: RenderingFixture, suite: string): PreparedRend
         prefix: makePrefix(test, suite),
         template: test.template,
     };
-    // Expected
     spec.expected = test.expected;
-    // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
-    // Data
     spec.data = deserialize(test.data);
-    // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
-    // Partials
     if (test.partials) {
         spec.partials = Object.fromEntries(Object.entries(test.partials)
             .map(([name, partial]) => [name, deserialize(partial)]));
     }
-    // Decorators
     spec.decorators = unstringifyHelpers(test.decorators);
-    // Options
     spec.runtimeOptions = deserialize(test.runtimeOptions);
     spec.compileOptions = test.compileOptions;
     return spec;
@@ -271,11 +263,8 @@ function prepareTestParser(test: ParserFixture, suite: string): PreparedTest<str
         prefix: makePrefix(test, suite),
         template: test.template,
     };
-    // Expected
     spec.expected = test.expected;
-    // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
-    // Message
     spec.message = test.message;
     return spec;
 }
@@ -285,9 +274,7 @@ function prepareTestTokenizer(test: TokenizerFixture, suite: string): PreparedTe
         prefix: makePrefix(test, suite),
         template: test.template,
     };
-    // Expected
     spec.expected = test.expected;
-    // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
     return spec;
 }
@@ -342,7 +329,6 @@ function runTestGeneric(test: PreparedRenderingTest): boolean {
         // Clear partials left by the previous fixture.
         handlebarsEnv.partials = {};
 
-        // Execute
         const hasPartials = typeof test.partials === 'object' && Object.keys(test.partials).length > 0;
         const template = CompilerContext[hasPartials ? 'compileWithPartial' : 'compile'](test.template, test.compileOptions);
         const runtimeOptions = test.runtimeOptions || {};
