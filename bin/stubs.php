@@ -86,7 +86,6 @@ $inputFile = $argv[1];
 $outputFile = $argc >= 3 ? $argv[2] : null;
 $patchFile = 'patch/' . basename($inputFile);
 $patches = array();
-$indices = array();
 
 if( file_exists($patchFile) ) {
   $patches = json_decode(file_get_contents($patchFile), true);
@@ -101,21 +100,17 @@ $tests = json_decode(file_get_contents($inputFile), true);
 
 foreach( $tests as $test ) {
   // Need to get the name of the test in the patch format
-  $key = strtolower($test['description'] . '-' . $test['it']);
-  for( $i = 0; $i < 99; $i++ ) {
-    $name = $key . '-' . sprintf("%02d", $i);
-    if( !in_array($name, $indices) ) {
-      break;
-    }
-    $name = null;
+  $name = strtolower(
+    $test['description'] . ' - '
+    . $test['it'] . ' - '
+    . ($test['number'] ?? '00')
+  );
+
+  if( array_key_exists($name, $patches) && $patches[$name] === null ) {
+    continue;
   }
-  if( !$name ) {
-    throw new \Exception('Failed to generate index for test: ' . $key);
-  }
-  $indices[] = $name;
 
   $codes = null;
-  $index = 0;
   searchForCode($test, $codes);
 
   if( empty($codes) ) {

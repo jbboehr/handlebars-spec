@@ -24,6 +24,7 @@ const nodeValidationCalls = [
 const phpValidationCalls = [
     'php test/php-lint.test.php',
     'php test/php-helpers.test.php',
+    'php test/php-stubs.test.php',
     'php -d zend.assertions=-1 test/php-assertions.test.php',
     'php -d zend.assertions=1 test/php-assertions.test.php',
     'php bin/lint.php --check-omission-suites spec/one.json spec/two.json',
