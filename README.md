@@ -1,6 +1,8 @@
 # Handlebars Spec
 
 [![CI](https://github.com/jbboehr/handlebars-spec/actions/workflows/ci.yml/badge.svg)](https://github.com/jbboehr/handlebars-spec/actions/workflows/ci.yml)
+[![Built with Nix](https://img.shields.io/badge/built%20with-Nix-5277C3?logo=nixos&logoColor=white)](flake.nix)
+[![AI burn](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjbboehr%2Fdc325b78505bd658e57e0f63f69f981d%2Fraw%2Fagent-badge.json&cacheSeconds=300)](https://github.com/arlegotin/agent-badge)
 
 JSON test fixtures derived from the
 [Handlebars.js](https://github.com/handlebars-lang/handlebars.js) test suite. Use

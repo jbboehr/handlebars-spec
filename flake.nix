@@ -18,6 +18,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     systems.url = "github:nix-systems/default-linux";
+    agent-badge = {
+      url = "github:jbboehr/agent-badge.ts/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +33,7 @@
       self,
       nixpkgs,
       systems,
+      agent-badge,
       git-hooks,
     }:
     let
@@ -87,6 +92,7 @@
         {
           default = pkgs.mkShellNoCC {
             packages = [
+              agent-badge.packages.${system}.default
               pkgs.nodejs_24
               pkgs.php
               pkgs.php.packages.composer
