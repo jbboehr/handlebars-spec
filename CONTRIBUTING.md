@@ -32,6 +32,11 @@ tests, and validates the checked-in `spec/` fixtures against Handlebars.js. It
 stops at the first failing stage. It does not require PHP or perform the full
 fixture regeneration, lint, and consistency checks described below.
 
+`npm run build` uses TypeScript 7 through the `@typescript/native` npm alias.
+The `typescript` alias supplies the TypeScript 6 API required by ESLint,
+ts-node, and the fixture type tests, following
+[TypeScript's migration guidance](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/).
+
 ## Change tooling or fixtures
 
 - Edit TypeScript tooling in `src/`. The generated JavaScript lives in `dist/`.
