@@ -324,6 +324,10 @@ function deserialize(data) {
     if (data === null) {
         return null;
     }
+    // serialize can retain native JSON values until JSON.stringify is called.
+    if (isOpaqueArrayValue(data)) {
+        return data;
+    }
     if ('!undefined' in data) {
         return undefined;
     }
@@ -336,25 +340,24 @@ function deserialize(data) {
             if (!isArrayIndex(key)) {
                 return;
             }
-            const value = data[key];
             Object.defineProperty(newData, Number(key), {
                 configurable: true,
                 enumerable: true,
-                value: value !== null
-                    && typeof value === 'object'
-                    && hasOwn(value, '!sparsearray')
-                    ? deserialize(value)
-                    : value,
+                value: deserialize(data[key]),
                 writable: true,
             });
         });
         return newData;
     }
     // Recurse
-    const rv = {};
+    const rv = Array.isArray(data) ? new Array(data.length) : {};
     Object.keys(data).forEach((key) => {
-        // serialize and append
-        rv[key] = deserialize(data[key]);
+        Object.defineProperty(rv, key, {
+            configurable: true,
+            enumerable: true,
+            value: deserialize(data[key]),
+            writable: true,
+        });
     });
     return rv;
 }

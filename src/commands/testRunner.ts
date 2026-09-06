@@ -18,7 +18,7 @@
 import { Command, ExpectedError, command, param } from 'clime';
 import * as Handlebars from 'handlebars';
 import { safeEval } from '../eval';
-import { hasExceptionExpectation } from '../utils';
+import { deserialize, hasExceptionExpectation } from '../utils';
 import { inspect } from 'util';
 import { resolve as resolvePath } from 'path';
 import { readdirSync, readFileSync } from 'fs';
@@ -136,81 +136,6 @@ function unstringifyHelpers(helpers: SerializedHelperMap | undefined): { [key: s
     });
     return ret;
 }
-
-function unstringifyLambdas(data: any): any {
-    if (!data || data === null) {
-        return data;
-    }
-    for (const x in data) {
-        if (Array.isArray(data[x])) {
-            unstringifyLambdas(data[x]);
-        } else if (typeof data[x] === 'object' && data[x] !== null) {
-            if ('!code' in data[x]) {
-                data[x] = safeEval(data[x].javascript);
-            } else {
-                unstringifyLambdas(data[x]);
-            }
-        }
-    }
-    return data;
-}
-
-function hasOwn(data: object, key: PropertyKey): boolean {
-    return Object.prototype.hasOwnProperty.call(data, key);
-}
-
-function isArrayIndex(key: string): boolean {
-    const index = Number(key);
-    return Number.isInteger(index)
-        && index >= 0
-        && index < 0xffffffff
-        && String(index) === key;
-}
-
-function sparseArrayLength(data: any): number {
-    if (!hasOwn(data, '!length')) {
-        return 0;
-    }
-
-    const length = data['!length'];
-    return typeof length === 'number'
-        && Number.isInteger(length)
-        && length >= 0
-        && length <= 0xffffffff
-        ? length
-        : 0;
-}
-
-function fixSparseArray(data: any): any {
-    if (!data || typeof data !== 'object') {
-        return data;
-    }
-
-    if (hasOwn(data, '!sparsearray')) {
-        const newData = new Array(sparseArrayLength(data));
-        Object.keys(data).forEach((key) => {
-            if (!isArrayIndex(key)) {
-                return;
-            }
-
-            Object.defineProperty(newData, Number(key), {
-                configurable: true,
-                enumerable: true,
-                value: fixSparseArray(data[key]),
-                writable: true,
-            });
-        });
-        data = newData;
-    } else {
-        Object.keys(data).forEach((key) => {
-            data[key] = fixSparseArray(data[key]);
-        });
-    }
-
-    return data;
-}
-
-
 
 // Test utils
 
@@ -334,23 +259,24 @@ function prepareTestGeneric(test: RenderingFixture & GlobalRegistrations, suite:
     // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
     // Data
-    spec.data = fixSparseArray(test.data);
-    unstringifyLambdas(spec.data);
+    spec.data = deserialize(test.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
     spec.globalHelpers = test.globalHelpers || undefined;
     // Partials
-    spec.partials = test.partials;
-    unstringifyLambdas(spec.partials);
+    if (test.partials) {
+        spec.partials = Object.fromEntries(Object.entries(test.partials)
+            .map(([name, partial]) => [name, deserialize(partial)]));
+    }
     spec.globalPartials = test.globalPartials || undefined;
     // Decorators
     spec.decorators = unstringifyHelpers(test.decorators);
     spec.globalDecorators = test.globalDecorators || undefined;
     // Options
-    spec.runtimeOptions = unstringifyLambdas(test.runtimeOptions);
+    spec.runtimeOptions = deserialize(test.runtimeOptions);
     spec.compileOptions = test.compileOptions;
     if (spec.options && typeof spec.options.data === 'object') {
-        unstringifyLambdas(spec.options.data);
+        spec.options.data = deserialize(spec.options.data);
     }
     // Compat
     spec.compat = Boolean(test.compat);

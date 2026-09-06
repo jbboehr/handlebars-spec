@@ -398,6 +398,59 @@ test('round-trips trailing holes in sparse arrays', () => {
     assert.equal(output[0], 'present');
 });
 
+test('decodes dense arrays without changing their shape or encoded input', () => {
+    const input = [null, { values: [false, 0, '', { '!code': true, javascript: 'function () { return "value"; }' }] }];
+    const before = JSON.stringify(input);
+
+    const output = deserialize(input);
+
+    assert.equal(Array.isArray(output), true);
+    assert.equal(Array.isArray(output[1].values), true);
+    assert.deepEqual(output[1].values.slice(0, 3), [false, 0, '']);
+    assert.equal(output[1].values[3](), 'value');
+    assert.equal(output[0], null);
+    assert.equal(JSON.stringify(input), before);
+});
+
+test('decodes all values beneath sparse indices while preserving holes and null entries', () => {
+    const input = {
+        '!sparsearray': true,
+        '!length': 5,
+        1: { '!code': true, javascript: 'function () { return "value"; }' },
+        2: null,
+        3: {
+            values: [{
+                '!sparsearray': true,
+                '!length': 3,
+                1: { '!code': true, javascript: 'function () { return "nested"; }' },
+            }],
+        },
+    };
+    const before = JSON.stringify(input);
+
+    const output = deserialize(input);
+
+    assert.equal(output.length, 5);
+    assert.deepEqual(Object.keys(output), ['1', '2', '3']);
+    assert.equal(typeof output[1], 'function');
+    assert.equal(output[1](), 'value');
+    assert.equal(output[2], null);
+    assert.equal(Array.isArray(output[3].values), true);
+    assert.equal(Array.isArray(output[3].values[0]), true);
+    assert.equal(output[3].values[0].length, 3);
+    assert.deepEqual(Object.keys(output[3].values[0]), ['1']);
+    assert.equal(output[3].values[0][1](), 'nested');
+    assert.equal(JSON.stringify(input), before);
+});
+
+test('preserves an own __proto__ field when decoding ordinary objects', () => {
+    const output = deserialize({ ['__proto__']: { value: 'own data' } });
+
+    assert.equal(Object.getPrototypeOf(output), Object.prototype);
+    assert.equal(Object.hasOwn(output, '__proto__'), true);
+    assert.deepEqual(output.__proto__, { value: 'own data' });
+});
+
 test('round-trips sparse array length when JSON omits the final value', () => {
     const input = new Array(3);
     input[2] = undefined;

@@ -331,6 +331,48 @@ test('preserves trailing holes when restoring a sparse input array', () => {
     assert.equal(result.status, 0, result.stdout + result.stderr);
 });
 
+test('decodes sparse arrays and callbacks in runtime data frames', () => {
+    const result = runTest({
+        template: '{{@items.length}}|{{@items.[1]}}',
+        runtimeOptions: {
+            data: {
+                items: {
+                    '!sparsearray': true,
+                    '!length': 3,
+                    1: { '!code': true, javascript: 'function () { return "value"; }' },
+                },
+            },
+        },
+        expected: '3|value',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('decodes a callback at the root of the input context', () => {
+    const result = runTest({
+        template: '{{this}}',
+        data: { '!code': true, javascript: 'function () { return "value"; }' },
+        expected: 'value',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test('decodes partial values without treating partial names as encoding markers', () => {
+    const result = runTest({
+        template: '{{> [!code]}}|{{> [!sparsearray]}}|{{> [!undefined]}}',
+        partials: {
+            '!code': { '!code': true, javascript: 'function () { return "callback"; }' },
+            '!sparsearray': 'sparse name',
+            '!undefined': 'undefined name',
+        },
+        expected: 'callback|sparse name|undefined name',
+    });
+
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
 test('restores a sparse input array with an own hasOwnProperty field', () => {
     const result = runTest({
         template: '{{array.[0]}}',

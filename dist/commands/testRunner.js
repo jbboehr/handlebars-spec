@@ -170,73 +170,6 @@ function unstringifyHelpers(helpers) {
     });
     return ret;
 }
-function unstringifyLambdas(data) {
-    if (!data || data === null) {
-        return data;
-    }
-    for (const x in data) {
-        if (Array.isArray(data[x])) {
-            unstringifyLambdas(data[x]);
-        }
-        else if (typeof data[x] === 'object' && data[x] !== null) {
-            if ('!code' in data[x]) {
-                data[x] = (0, eval_1.safeEval)(data[x].javascript);
-            }
-            else {
-                unstringifyLambdas(data[x]);
-            }
-        }
-    }
-    return data;
-}
-function hasOwn(data, key) {
-    return Object.prototype.hasOwnProperty.call(data, key);
-}
-function isArrayIndex(key) {
-    const index = Number(key);
-    return Number.isInteger(index)
-        && index >= 0
-        && index < 0xffffffff
-        && String(index) === key;
-}
-function sparseArrayLength(data) {
-    if (!hasOwn(data, '!length')) {
-        return 0;
-    }
-    const length = data['!length'];
-    return typeof length === 'number'
-        && Number.isInteger(length)
-        && length >= 0
-        && length <= 0xffffffff
-        ? length
-        : 0;
-}
-function fixSparseArray(data) {
-    if (!data || typeof data !== 'object') {
-        return data;
-    }
-    if (hasOwn(data, '!sparsearray')) {
-        const newData = new Array(sparseArrayLength(data));
-        Object.keys(data).forEach((key) => {
-            if (!isArrayIndex(key)) {
-                return;
-            }
-            Object.defineProperty(newData, Number(key), {
-                configurable: true,
-                enumerable: true,
-                value: fixSparseArray(data[key]),
-                writable: true,
-            });
-        });
-        data = newData;
-    }
-    else {
-        Object.keys(data).forEach((key) => {
-            data[key] = fixSparseArray(data[key]);
-        });
-    }
-    return data;
-}
 function exceptionMessage(error) {
     try {
         if (typeof error === 'string') {
@@ -326,23 +259,24 @@ function prepareTestGeneric(test, suite) {
     // Exception
     spec.exception = test.exception === undefined ? false : test.exception;
     // Data
-    spec.data = fixSparseArray(test.data);
-    unstringifyLambdas(spec.data);
+    spec.data = (0, utils_1.deserialize)(test.data);
     // Helpers
     spec.helpers = unstringifyHelpers(test.helpers);
     spec.globalHelpers = test.globalHelpers || undefined;
     // Partials
-    spec.partials = test.partials;
-    unstringifyLambdas(spec.partials);
+    if (test.partials) {
+        spec.partials = Object.fromEntries(Object.entries(test.partials)
+            .map(([name, partial]) => [name, (0, utils_1.deserialize)(partial)]));
+    }
     spec.globalPartials = test.globalPartials || undefined;
     // Decorators
     spec.decorators = unstringifyHelpers(test.decorators);
     spec.globalDecorators = test.globalDecorators || undefined;
     // Options
-    spec.runtimeOptions = unstringifyLambdas(test.runtimeOptions);
+    spec.runtimeOptions = (0, utils_1.deserialize)(test.runtimeOptions);
     spec.compileOptions = test.compileOptions;
     if (spec.options && typeof spec.options.data === 'object') {
-        unstringifyLambdas(spec.options.data);
+        spec.options.data = (0, utils_1.deserialize)(spec.options.data);
     }
     // Compat
     spec.compat = Boolean(test.compat);
