@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased]
 
+## [204.7.9] - 2026-09-06
+
 ### Added
 
 - [Fixture format reference](docs/fixture-format.md), including callback encoding,
@@ -65,6 +67,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - `globalPartials`, `globalDecorators`, and `globalHelpers` are now removed and merged into
   `partials`, `decorators`, and `helpers` instead
 
-[Unreleased]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.106...HEAD
+[Unreleased]: https://github.com/jbboehr/handlebars-spec/compare/v204.7.9...HEAD
+[204.7.9]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.106...v204.7.9
 [104.7.106]: https://github.com/jbboehr/handlebars-spec/compare/v104.7.6...v104.7.106
 [104.7.6]: https://github.com/jbboehr/handlebars-spec/compare/v4.0.5-p1...v104.7.6
