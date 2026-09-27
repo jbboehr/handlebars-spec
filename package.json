@@ -18,7 +18,7 @@
 		"@typescript-eslint/parser": "^8.69.0",
 		"@typescript/native": "npm:typescript@^7.0.2",
 		"clime": "^0.5.16",
-		"eslint": "^10.10.0",
+		"eslint": "^10.11.0",
 		"eslint-plugin-import-x": "^4.17.1",
 		"extend": "^3.0.2",
 		"handlebars": "4.7.9",
